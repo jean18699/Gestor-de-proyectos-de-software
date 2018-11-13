@@ -5,27 +5,33 @@ import java.util.Date;
 public class Contrato {
 
 	private String id;
+	private String nombreCliente;
 	private String nombreProyecto;
 	private String idCliente;
 	private Jefe jefeProyecto;
 	private Date fechaInicio;
 	private Date fechaEntrega;
-	private boolean estado;
+	private float sumaSalarios;
+	private float precioContrato;
+	private float precioFinal;
+	private char estado; // F = finalizado, A = Atrasado, I = iniciado 
 	private String categoria;
 	
-	public Contrato(String id, String idCliente,String nombreProyecto, Jefe jefeProyecto, Date fechaEntrega, boolean estado,
-			String categoria) {
+	public Contrato(String id, String nombreProyecto, String idCliente, Jefe jefeProyecto, Date fechaInicio,
+			Date fechaEntrega, float sumaSalarios, float precioContrato, char estado,String categoria) {
 		super();
 		this.id = id;
 		this.nombreProyecto = nombreProyecto;
 		this.idCliente = idCliente;
 		this.jefeProyecto = jefeProyecto;
-		this.fechaInicio = new Date();
+		this.fechaInicio = fechaInicio;
 		this.fechaEntrega = fechaEntrega;
+		this.sumaSalarios = sumaSalarios;
+		this.precioContrato = precioContrato;
 		this.estado = estado;
 		this.categoria = categoria;
 	}
-	
+
 	public void aplazar(Date fecha)
 	{
 		this.fechaEntrega = fecha;
@@ -54,9 +60,6 @@ public class Contrato {
 	public Date getFechaEntrega() {
 		return fechaEntrega;
 	}
-	public boolean isEstado() {
-		return estado;
-	}
 	public String getCategoria() {
 		return categoria;
 	}
@@ -73,13 +76,48 @@ public class Contrato {
 	public void setFechaEntrega(Date fechaEntrega) {
 		this.fechaEntrega = fechaEntrega;
 	}
-	public void setEstado(boolean estado) {
+	
+	
+	
+	public float getSumaSalarios() {
+		
+		return sumaSalarios;
+	}
+
+	public void setSumaSalarios(float sumaSalarios) {
+		this.sumaSalarios = sumaSalarios;
+	}
+
+	public float getPrecioContrato() {
+		return precioContrato;
+	}
+
+	public void setPrecioContrato(float precioContrato) {
+		this.precioContrato = precioContrato;
+	}
+
+	public float getPrecioFinal() {
+		return precioFinal;
+	}
+
+	public void setPrecioFinal(float precioFinal) {
+		this.precioFinal = precioFinal;
+	}
+
+	public char getEstado() {
+		return estado;
+	}
+
+	public void setEstado(char estado) {
 		this.estado = estado;
 	}
+
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
 	
-	
-
 }
