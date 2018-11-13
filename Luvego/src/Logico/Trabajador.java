@@ -8,20 +8,20 @@ abstract class Trabajador {
 	protected String id;
 	private static int cont;
 	private String ceros;
-	
+
 	
 	protected final String nombre;
 	protected final String apellidos;
 	protected final String sexo;
 	protected final int edad;
-	protected final float salario;
+	protected final float salarioHora;
 	protected final String direccion;
 	protected ArrayList<String> proyectos;
 	protected String evaluacionAnual;
 	
 	
 	
-	public Trabajador(String nombre, String apellidos, String sexo, int edad,String direccion, float salario, String evaluacionAnual) {
+	public Trabajador(String nombre, String apellidos, String sexo, int edad,String direccion, float salarioHora, String evaluacionAnual) {
 
 		super();
 		ceros = "";
@@ -37,9 +37,15 @@ abstract class Trabajador {
 		this.edad = edad;
 		this.evaluacionAnual = evaluacionAnual;
 		this.direccion = direccion;
-		this.salario = salario;
+		this.salarioHora = salarioHora;
 	}
 
+	
+	public float getSalarioDia()
+	{
+		return salarioHora * 8;
+	}
+	
 	
 	public String getApellidos() {
 		return apellidos;
@@ -50,6 +56,7 @@ abstract class Trabajador {
 		return direccion;
 	}
 
+	
 
 	public String getEvaluacionAnual() {
 		return evaluacionAnual;
@@ -96,8 +103,8 @@ abstract class Trabajador {
 		return edad;
 	}
 
-	public float getSalario() {
-		return salario;
+	public float getSalarioHora() {
+		return salarioHora;
 	}
 
 	public ArrayList<String> getProyectos() {
