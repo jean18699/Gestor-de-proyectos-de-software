@@ -31,7 +31,7 @@ public class Luvego {
 		empleados.add(empleado);
 	}
 	
-	public boolean nuevoContrato(String idContrato, String idCliente, String nombreProyecto, Jefe jefe,String categoria, Date fechaEntrega)
+	public boolean nuevoContrato(String idContrato, String nombreProyecto, String idCliente, Jefe jefe,String categoria, Date fechaEntrega)
 	{
 		boolean estado = true;
 		if(existeCliente(idCliente) == true)
