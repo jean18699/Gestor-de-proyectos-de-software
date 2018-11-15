@@ -5,7 +5,7 @@ public class Planificador extends Trabajador {
 	private int frecuencia;
 	
 	public Planificador(String nombre, String apellidos, String sexo, int edad, String direccion, float salarioHora,
-			char evaluacionAnual) {
+			String evaluacionAnual) {
 		super(nombre, apellidos, sexo, edad, direccion, salarioHora, evaluacionAnual);
 		// TODO Auto-generated constructor stub
 	}
