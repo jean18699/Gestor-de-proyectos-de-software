@@ -22,6 +22,12 @@ public class Proyecto {
 		this.sumaSalarios = sumaSalarios;
 	}
 
+	/*
+	public float getGanancia()
+	{
+		return
+	}*/
+	
 	public Jefe getJefeProyecto() {
 		return jefeProyecto;
 	}

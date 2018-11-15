@@ -3,14 +3,14 @@ package Logico;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Luvego {
+public class Empresa {
 
 	private ArrayList<Cliente> clientes;
 	private ArrayList<Contrato> contratos;
 	private ArrayList<Trabajador> empleados;
+	private static Empresa empresa;
 	
-	
-	public Luvego() {
+	private Empresa() {
 	
 		clientes = new ArrayList<>();
 		contratos = new ArrayList<>();
@@ -19,6 +19,14 @@ public class Luvego {
 		
 	}
 	
+	public static Empresa getInstance()
+	{
+		if(empresa == null)
+		{
+			empresa = new Empresa();
+		}
+		return empresa;	
+	}
 	
 	
 	public void nuevoEmpleado(Trabajador empleado)
