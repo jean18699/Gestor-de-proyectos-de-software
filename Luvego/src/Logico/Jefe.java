@@ -1,6 +1,6 @@
 package Logico;
 
-public class Jefe extends Trabajador {
+public class Jefe extends Empleado {
 
 
 	public Jefe(String nombre, String apellidos, String sexo, int edad, String direccion, float salarioHora,

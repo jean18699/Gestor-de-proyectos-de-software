@@ -2,7 +2,7 @@ package Logico;
 
 import java.util.ArrayList;
 
-public class Programador extends Trabajador {
+public class Programador extends Empleado {
 	
 	private ArrayList<String> especialidades;
 

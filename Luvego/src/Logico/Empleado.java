@@ -2,7 +2,7 @@ package Logico;
 
 import java.util.ArrayList;
 
-abstract class Trabajador {
+ abstract class Empleado {
 
 	//Para genera el id
 	protected String id;
@@ -21,7 +21,7 @@ abstract class Trabajador {
 	
 	
 	
-	public Trabajador(String nombre, String apellidos, String sexo, int edad,String direccion, float salarioHora, String evaluacionAnual) {
+	public Empleado(String nombre, String apellidos, String sexo, int edad,String direccion, float salarioHora, String evaluacionAnual) {
 
 		super();
 		ceros = "";
@@ -116,7 +116,7 @@ abstract class Trabajador {
 	}
 
 	public static void setCont(int cont) {
-		Trabajador.cont = cont;
+		Empleado.cont = cont;
 	}
 
 	public void setCeros(String ceros) {

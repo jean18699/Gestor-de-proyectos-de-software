@@ -8,11 +8,11 @@ public class Proyecto {
 	private Planificador planificador;
 	private Programador programador1;
 	private Programador programador2;
-	private Trabajador trabajadorAdicional;
+	private Empleado trabajadorAdicional;
 	private float sumaSalarios;
 	
 	public Proyecto(Jefe jefeProyecto, Planificador planificador, Programador programador1, Programador programador2,
-			Trabajador trabajadorAdicional, float sumaSalarios) {
+			Empleado trabajadorAdicional, float sumaSalarios) {
 		super();
 		this.jefeProyecto = jefeProyecto;
 		this.planificador = planificador;
@@ -60,11 +60,11 @@ public class Proyecto {
 		this.programador2 = programador2;
 	}
 
-	public Trabajador getTrabajadorAdicional() {
+	public Empleado getTrabajadorAdicional() {
 		return trabajadorAdicional;
 	}
 
-	public void setTrabajadoresAdicionales(Trabajador trabajadorAdicional) {
+	public void setTrabajadoresAdicionales(Empleado trabajadorAdicional) {
 		this.trabajadorAdicional = trabajadorAdicional;
 	}
 

@@ -7,7 +7,7 @@ public class Empresa {
 
 	private ArrayList<Cliente> clientes;
 	private ArrayList<Contrato> contratos;
-	private ArrayList<Trabajador> empleados;
+	private ArrayList<Empleado> empleados;
 	private static Empresa empresa;
 	
 	private Empresa() {
@@ -29,16 +29,48 @@ public class Empresa {
 	}
 	
 	
-	public void nuevoEmpleado(Trabajador empleado)
+	public void nuevoEmpleado(Empleado empleado)
 	{
 		empleados.add(empleado);
 	}
 	
-	public void registrarCliente(Trabajador empleado)
+	public void registrarCliente(Empleado empleado)
 	{
 		empleados.add(empleado);
 	}
 	
+	public ArrayList<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public ArrayList<Contrato> getContratos() {
+		return contratos;
+	}
+
+	public ArrayList<Empleado> getEmpleados() {
+		return empleados;
+	}
+
+	public static Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setClientes(ArrayList<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+	public void setContratos(ArrayList<Contrato> contratos) {
+		this.contratos = contratos;
+	}
+
+	public void setEmpleados(ArrayList<Empleado> empleados) {
+		this.empleados = empleados;
+	}
+
+	public static void setEmpresa(Empresa empresa) {
+		Empresa.empresa = empresa;
+	}
+
 	public boolean nuevoContrato(String idContrato, String nombreProyecto, Proyecto proyecto, String idCliente, int cantDias, Jefe jefe,String categoria, Date fechaEntrega)
 	{
 		boolean estado = true;
