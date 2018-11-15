@@ -31,16 +31,18 @@ public class Luvego {
 		empleados.add(empleado);
 	}
 	
-	public boolean nuevoContrato(String idContrato, String nombreProyecto, String idCliente, Jefe jefe,String categoria, Date fechaEntrega)
+	public boolean nuevoContrato(String idContrato, String nombreProyecto, Proyecto proyecto, String idCliente, int cantDias, Jefe jefe,String categoria, Date fechaEntrega)
 	{
 		boolean estado = true;
+		float precioContrato = 8 * cantDias * proyecto.getSumaSalarios();
 		if(existeCliente(idCliente) == true)
 		{
 			if(contratos.size() > 5)
 			{
 				estado = false;
 			}
-			Contrato contrato = new Contrato(idContrato, idCliente, nombreProyecto, jefe, fechaEntrega, estado, categoria);
+			//Contrato contrato = new Contrato(idContrato, idCliente, nombreProyecto, jefe, fechaEntrega, estado, categoria);
+			Contrato contrato = new Contrato(idContrato, nombreProyecto, idCliente, proyecto.getJefeProyecto(), fechaEntrega, proyecto.getSumaSalarios(), precioContrato, 'I', categoria);
 			contratos.add(contrato);
 			
 			

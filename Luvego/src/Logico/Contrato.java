@@ -17,14 +17,14 @@ public class Contrato {
 	private char estado; // F = finalizado, A = Atrasado, I = iniciado 
 	private String categoria;
 	
-	public Contrato(String id, String nombreProyecto, String idCliente, Jefe jefeProyecto, Date fechaInicio,
+	public Contrato(String id, String nombreProyecto, String idCliente, Jefe jefeProyecto,
 			Date fechaEntrega, float sumaSalarios, float precioContrato, char estado,String categoria) {
 		super();
 		this.id = id;
 		this.nombreProyecto = nombreProyecto;
 		this.idCliente = idCliente;
 		this.jefeProyecto = jefeProyecto;
-		this.fechaInicio = fechaInicio;
+		this.fechaInicio = new Date();
 		this.fechaEntrega = fechaEntrega;
 		this.sumaSalarios = sumaSalarios;
 		this.precioContrato = precioContrato;
