@@ -17,11 +17,11 @@ abstract class Trabajador {
 	protected final float salarioHora;
 	protected final String direccion;
 	protected ArrayList<String> proyectos;
-	protected String evaluacionAnual;
+	protected char evaluacionAnual;
 	
 	
 	
-	public Trabajador(String nombre, String apellidos, String sexo, int edad,String direccion, float salarioHora, String evaluacionAnual) {
+	public Trabajador(String nombre, String apellidos, String sexo, int edad,String direccion, float salarioHora, char evaluacionAnual) {
 
 		super();
 		ceros = "";
@@ -58,12 +58,12 @@ abstract class Trabajador {
 
 	
 
-	public String getEvaluacionAnual() {
+	public char getEvaluacionAnual() {
 		return evaluacionAnual;
 	}
 
 
-	public void setEvaluacionAnual(String evaluacionAnual) {
+	public void setEvaluacionAnual(char evaluacionAnual) {
 		this.evaluacionAnual = evaluacionAnual;
 	}
 
