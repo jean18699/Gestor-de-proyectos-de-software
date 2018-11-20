@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Proyecto {
 	
+	private String id;
 	private Jefe jefeProyecto;
 	private Planificador planificador;
 	private Programador programador1;
@@ -11,9 +12,10 @@ public class Proyecto {
 	private Empleado trabajadorAdicional;
 	private float sumaSalarios;
 	
-	public Proyecto(Jefe jefeProyecto, Planificador planificador, Programador programador1, Programador programador2,
+	public Proyecto(String id, Jefe jefeProyecto, Planificador planificador, Programador programador1, Programador programador2,
 			Empleado trabajadorAdicional, float sumaSalarios) {
 		super();
+		this.id = id;
 		this.jefeProyecto = jefeProyecto;
 		this.planificador = planificador;
 		this.programador1 = programador1;
@@ -81,6 +83,18 @@ public class Proyecto {
 
 	public void setSumaSalarios(float sumaSalarios) {
 		this.sumaSalarios = sumaSalarios;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setTrabajadorAdicional(Empleado trabajadorAdicional) {
+		this.trabajadorAdicional = trabajadorAdicional;
 	}
 	
 		

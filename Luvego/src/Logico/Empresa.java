@@ -8,6 +8,7 @@ public class Empresa {
 	private ArrayList<Cliente> clientes;
 	private ArrayList<Contrato> contratos;
 	private ArrayList<Empleado> empleados;
+	private ArrayList<Proyecto> proyectos;
 	private static Empresa empresa;
 	
 	private Empresa() {
@@ -15,7 +16,7 @@ public class Empresa {
 		clientes = new ArrayList<>();
 		contratos = new ArrayList<>();
 		empleados = new ArrayList<>();
-	
+		proyectos = new ArrayList<>();	
 		
 	}
 	
@@ -65,6 +66,14 @@ public class Empresa {
 
 	public void setEmpleados(ArrayList<Empleado> empleados) {
 		this.empleados = empleados;
+	}
+
+	public ArrayList<Proyecto> getProyectos() {
+		return proyectos;
+	}
+
+	public void setProyectos(ArrayList<Proyecto> proyectos) {
+		this.proyectos = proyectos;
 	}
 
 	public static void setEmpresa(Empresa empresa) {
