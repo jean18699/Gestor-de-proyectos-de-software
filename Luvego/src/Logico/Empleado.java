@@ -4,12 +4,11 @@ import java.util.ArrayList;
 
  abstract class Empleado {
 
-	//Para genera el id
-	protected String id;
+	//para generar el id
 	private static int cont;
 	private String ceros;
 
-	
+	protected String id;
 	protected final String nombre;
 	protected final String apellidos;
 	protected final String sexo;
