@@ -22,13 +22,19 @@ public class Main {
 		Cliente cliente = new Cliente("123", "jean", "cerro alto");
 		Empresa.getInstance().nuevoCliente(cliente);
 	
-		Proyecto proyecto = new Proyecto("456","quemada",jefe,planificador,programador,programador,programador);
-		
+	//System.out.println(programador.getId());
+		System.out.println(Empresa.getInstance().getEmpleadoById("PRG-0000001").getApellidos());
 		//System.out.println(proyecto.getProgramador1().getEdad());
 		
-		Contrato contrato = new Contrato("123","jean",proyecto,fecha);
-		
-		
+		/*Contrato contrato = new Contrato(proyecto,fecha);
+		Empresa.getInstance().nuevoContrato("123", contrato);
+		Empresa.getInstance().nuevoContrato("123", contrato);
+		Empresa.getInstance().nuevoContrato("123", contrato);
+		Empresa.getInstance().nuevoContrato("123", contrato);
+		Empresa.getInstance().nuevoContrato("123", contrato);
+		Empresa.getInstance().nuevoContrato("123", contrato);
+		System.out.println(Empresa.getInstance().nuevoContrato("123", contrato));
+		*/
 		
 	}
 

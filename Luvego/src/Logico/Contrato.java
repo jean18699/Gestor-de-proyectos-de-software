@@ -5,25 +5,52 @@ import java.util.Date;
 public class Contrato {
 
 	private String id;
+	private static int cont;
 	private Proyecto proyecto;
 	private String nombreCliente;
 	private Date fechaInicio;
 	private Date fechaEntrega;
 	private float precioContrato;
 	private float precioFinal;
+	private Cliente cliente;
 	private char estado; // F = finalizado, A = Atrasado, I = iniciado 
 	
 	
-	public Contrato(String id, String nombreCliente,Proyecto proyecto, Date fechaEntrega) {
+	public Contrato(Proyecto proyecto, Date fechaEntrega) {
 		
-		super();
-		this.id = id;
+		cont++;
+		this.id = Integer.toString(cont);
 		this.proyecto = proyecto;
 		this.fechaInicio = new Date();
 		this.fechaEntrega = fechaEntrega;
 	}
 	
 	
+	public Proyecto getProyecto() {
+		return proyecto;
+	}
+
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+
+	public void setProyecto(Proyecto proyecto) {
+		this.proyecto = proyecto;
+	}
+
+
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
 	public int getDiasRestantes()
 	{
 		int dias = fechaEntrega.getDate() - fechaInicio.getDate();

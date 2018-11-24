@@ -1,10 +1,13 @@
 package Logico;
 
+import java.util.ArrayList;
+
 public class Cliente {
 
 	private String id;
 	private String nombre;
 	private String direccion;
+	private ArrayList<Contrato> contratos;
 	
 	
 	public Cliente(String id, String nombre, String direccion) {
@@ -12,6 +15,7 @@ public class Cliente {
 		this.id = id;
 		this.nombre = nombre;
 		this.direccion = direccion;
+		contratos = new ArrayList<>(5);
 	}
 
 
@@ -32,6 +36,21 @@ public class Cliente {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+
+	public ArrayList<Contrato> getContratos() {
+		return contratos;
+	}
+
+
+	public boolean setContrato(Contrato contrato) {
+		if(contratos.size() <= 5)
+		{
+			contratos.add(contrato);
+			return true;
+		}
+		return false;
 	}
 
 

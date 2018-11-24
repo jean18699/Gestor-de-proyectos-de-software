@@ -41,23 +41,33 @@ public class Empresa {
 		clientes.add(cliente);
 	}
 	
-	public boolean nuevoContrato(String idContrato, String nombreProyecto, Proyecto proyecto, String idCliente, int cantDias, Jefe jefe,String categoria, Date fechaEntrega)
+	public boolean nuevoContrato(String id, Contrato contrato)
 	{
-		boolean estado = true;
-		float precioContrato = 8 * cantDias * proyecto.getSumaSalarios();
-		if(existeCliente(idCliente) == true)
+
+		if(existeCliente(id))
 		{
-			if(contratos.size() > 5)
+			for(int i = 0; i < clientes.size();i++)
 			{
-				estado = false;
+				if(clientes.get(i).getId().equalsIgnoreCase(id))
+				{
+					if(clientes.get(i).setContrato(contrato))
+					{
+						contrato.setCliente(clientes.get(i));
+						return true;	
+					}else
+					{
+					return false;
+				
+					}
+				}
 			}
-			//Contrato contrato = new Contrato(idContrato, idCliente, nombreProyecto, jefe, fechaEntrega, estado, categoria);
-			//Contrato contrato = new Contrato(idContrato, proyecto, fechaEntrega, proyecto.getSumaSalarios());
-			//contratos.add(contrato);		
+		}else
+		{
+			return false;
 		}
+		
 		return false;
 	}
-	
 	
 	public boolean cancelarContrato(String idContrato)
 	{
@@ -99,7 +109,22 @@ public class Empresa {
 		
 		return cliente;
 	}
-			
+		
+	public Empleado getEmpleadoById(String id)
+	{
+		Empleado emp = null;
+		boolean encontrado = false;
+		for(int i = 0; i < empleados.size() && !encontrado;i++)
+		{
+			if(empleados.get(i).getId().equalsIgnoreCase(id))
+			{
+				emp = empleados.get(i);
+				encontrado = true;
+			}
+		}
+		return emp;
+	}
+	
 	
 	public ArrayList<Cliente> getClientes() {
 		return clientes;

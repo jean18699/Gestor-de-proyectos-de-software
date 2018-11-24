@@ -2,7 +2,7 @@ package Logico;
 
 import java.util.ArrayList;
 
- abstract class Empleado {
+ public abstract class Empleado {
 
 	//para generar el id
 	private static int cont;

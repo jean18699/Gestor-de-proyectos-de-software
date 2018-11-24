@@ -12,10 +12,11 @@ public class Proyecto {
 	private Programador programador2;
 	private Empleado adicional;
 	private float sumaSalarios;
+	private String clasificacion;
 	
 	public Proyecto(String id, String nombre, Empleado jefe, Empleado planificador, Empleado programador, Empleado programador2,
-			Empleado adicional) {
-		super();
+			Empleado adicional, String clasificacion) {
+		
 		this.id = id;
 		this.nombre = nombre;
 		this.jefeProyecto = (Jefe) jefe;
@@ -24,6 +25,7 @@ public class Proyecto {
 		this.programador2 = (Programador) programador2;
 		this.adicional = adicional;
 		this.sumaSalarios = getSumaSalarios();
+		this.clasificacion = clasificacion;
 	}
 
 	/*
@@ -32,6 +34,14 @@ public class Proyecto {
 		return
 	}*/
 	
+	public String getClasificacion() {
+		return clasificacion;
+	}
+
+	public void setClasificacion(String clasificacion) {
+		this.clasificacion = clasificacion;
+	}
+
 	public Jefe getJefeProyecto() {
 		return jefeProyecto;
 	}
