@@ -27,8 +27,7 @@ public class Main {
 		//System.out.println(proyecto.getProgramador1().getEdad());
 		
 		Contrato contrato = new Contrato("123","jean",proyecto,fecha);
-		System.out.println(contrato.getPrecioFinal());
-		System.out.println(contrato.getEstado());
+		
 		
 		
 	}

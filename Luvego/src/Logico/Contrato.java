@@ -12,7 +12,7 @@ public class Contrato {
 	private float precioContrato;
 	private float precioFinal;
 	private char estado; // F = finalizado, A = Atrasado, I = iniciado 
-	private String categoria;
+	
 	
 	public Contrato(String id, String nombreCliente,Proyecto proyecto, Date fechaEntrega) {
 		
@@ -21,10 +21,8 @@ public class Contrato {
 		this.proyecto = proyecto;
 		this.fechaInicio = new Date();
 		this.fechaEntrega = fechaEntrega;
-		this.estado = estado;
-		this.categoria = categoria;
-		
 	}
+	
 	
 	public int getDiasRestantes()
 	{
@@ -47,19 +45,12 @@ public class Contrato {
 	public Date getFechaEntrega() {
 		return fechaEntrega;
 	}
-	public String getCategoria() {
-		return categoria;
-	}
+
 	
 	public void setFechaEntrega(Date fechaEntrega) {
 		this.fechaEntrega = fechaEntrega;
 	}
 	
-
-	public void setPrecioContrato(float precioContrato) {
-		this.precioContrato = precioContrato;
-	}
-
 	public float getPrecioFinal() {
 		
 		return (8 * getDiasRestantes() * proyecto.getSumaSalarios());
