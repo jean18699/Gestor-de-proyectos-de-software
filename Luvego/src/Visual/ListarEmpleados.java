@@ -52,7 +52,7 @@ public class ListarEmpleados extends JDialog {
 	 */
 	public ListarEmpleados() {
 		setTitle("Lista de proyectos");
-		setBounds(100, 100, 1000, 300);
+		setBounds(100, 100, 1000, 400);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new BorderLayout(0,0));
@@ -94,6 +94,7 @@ public class ListarEmpleados extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 					}
 				});
+				btnDetalles.setEnabled(false);
 				btnDetalles.setActionCommand("OK");
 				buttonPane.add(btnDetalles);
 				getRootPane().setDefaultButton(btnDetalles);

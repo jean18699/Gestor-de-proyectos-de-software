@@ -52,7 +52,7 @@ public class ListarProyectos extends JDialog {
 	 */
 	public ListarProyectos() {
 		setTitle("Lista de proyectos");
-		setBounds(100, 100, 700, 300);
+		setBounds(100, 100, 700, 350);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new BorderLayout(0,0));
