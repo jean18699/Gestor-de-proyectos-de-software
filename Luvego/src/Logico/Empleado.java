@@ -16,11 +16,11 @@ import java.util.ArrayList;
 	protected final float salarioHora;
 	protected final String direccion;
 	protected ArrayList<String> proyectos;
-	protected String evaluacionAnual;
+	protected char evaluacionAnual;
 	
 	
 	
-	public Empleado(String nombre, String apellidos, String sexo, int edad,String direccion, float salarioHora, String evaluacionAnual) {
+	public Empleado(String nombre, String apellidos, String sexo, int edad,String direccion, float salarioHora) {
 
 		super();
 		ceros = "";
@@ -29,12 +29,11 @@ import java.util.ArrayList;
 		generarCeros();
 		id = ceros+=id;
 		
-		
+		this.evaluacionAnual = 'E';
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.sexo = sexo;
 		this.edad = edad;
-		this.evaluacionAnual = evaluacionAnual;
 		this.direccion = direccion;
 		this.salarioHora = salarioHora;
 	}
@@ -57,12 +56,12 @@ import java.util.ArrayList;
 
 	
 
-	public String getEvaluacionAnual() {
+	public char getEvaluacionAnual() {
 		return evaluacionAnual;
 	}
 
 
-	public void setEvaluacionAnual(String evaluacionAnual) {
+	public void setEvaluacionAnual(char evaluacionAnual) {
 		this.evaluacionAnual = evaluacionAnual;
 	}
 

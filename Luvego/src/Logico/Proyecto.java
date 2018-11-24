@@ -10,20 +10,20 @@ public class Proyecto {
 	private Planificador planificador;
 	private Programador programador1;
 	private Programador programador2;
-	private Empleado trabajadorAdicional;
+	private Empleado adicional;
 	private float sumaSalarios;
 	
-	public Proyecto(String id, String nombre, Jefe jefeProyecto, Planificador planificador, Programador programador1, Programador programador2,
-			Empleado trabajadorAdicional, float sumaSalarios) {
+	public Proyecto(String id, String nombre, Empleado jefe, Empleado planificador, Empleado programador, Empleado programador2,
+			Empleado adicional) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.jefeProyecto = jefeProyecto;
-		this.planificador = planificador;
-		this.programador1 = programador1;
-		this.programador2 = programador2;
-		this.trabajadorAdicional = trabajadorAdicional;
-		this.sumaSalarios = sumaSalarios;
+		this.jefeProyecto = (Jefe) jefe;
+		this.planificador = (Planificador) planificador;
+		this.programador1 = (Programador) programador;
+		this.programador2 = (Programador) programador2;
+		this.adicional = adicional;
+		this.sumaSalarios = getSumaSalarios();
 	}
 
 	/*
@@ -73,11 +73,11 @@ public class Proyecto {
 	}
 
 	public Empleado getTrabajadorAdicional() {
-		return trabajadorAdicional;
+		return adicional;
 	}
 
 	public void setTrabajadoresAdicionales(Empleado trabajadorAdicional) {
-		this.trabajadorAdicional = trabajadorAdicional;
+		this.adicional = trabajadorAdicional;
 	}
 
 	public float getSumaSalarios() {
@@ -86,7 +86,7 @@ public class Proyecto {
 		float salaPlani = planificador.getSalarioDia();
 		float salaP1 = programador1.getSalarioDia();
 		float salaP2 = programador2.getSalarioDia();
-		float salaTrabaAdicional = trabajadorAdicional.getSalarioDia();
+		float salaTrabaAdicional = adicional.getSalarioDia();
 		
 		return (salaJefe + salaPlani + salaP1 + salaP2 + salaTrabaAdicional);
 	}
@@ -104,7 +104,7 @@ public class Proyecto {
 	}
 
 	public void setTrabajadorAdicional(Empleado trabajadorAdicional) {
-		this.trabajadorAdicional = trabajadorAdicional;
+		this.adicional = trabajadorAdicional;
 	}
 	
 		

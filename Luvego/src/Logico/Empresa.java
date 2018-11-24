@@ -35,51 +35,12 @@ public class Empresa {
 		empleados.add(empleado);
 	}
 	
-	public void registrarCliente(Empleado empleado)
+	
+	public void nuevoCliente(Cliente cliente)
 	{
-		empleados.add(empleado);
+		clientes.add(cliente);
 	}
 	
-	public ArrayList<Cliente> getClientes() {
-		return clientes;
-	}
-
-	public ArrayList<Contrato> getContratos() {
-		return contratos;
-	}
-
-	public ArrayList<Empleado> getEmpleados() {
-		return empleados;
-	}
-
-	public static Empresa getEmpresa() {
-		return empresa;
-	}
-
-	public void setClientes(ArrayList<Cliente> clientes) {
-		this.clientes = clientes;
-	}
-
-	public void setContratos(ArrayList<Contrato> contratos) {
-		this.contratos = contratos;
-	}
-
-	public void setEmpleados(ArrayList<Empleado> empleados) {
-		this.empleados = empleados;
-	}
-
-	public ArrayList<Proyecto> getProyectos() {
-		return proyectos;
-	}
-
-	public void setProyectos(ArrayList<Proyecto> proyectos) {
-		this.proyectos = proyectos;
-	}
-
-	public static void setEmpresa(Empresa empresa) {
-		Empresa.empresa = empresa;
-	}
-
 	public boolean nuevoContrato(String idContrato, String nombreProyecto, Proyecto proyecto, String idCliente, int cantDias, Jefe jefe,String categoria, Date fechaEntrega)
 	{
 		boolean estado = true;
@@ -91,13 +52,12 @@ public class Empresa {
 				estado = false;
 			}
 			//Contrato contrato = new Contrato(idContrato, idCliente, nombreProyecto, jefe, fechaEntrega, estado, categoria);
-			Contrato contrato = new Contrato(idContrato, nombreProyecto, idCliente, proyecto.getJefeProyecto(), fechaEntrega, proyecto.getSumaSalarios(), precioContrato, 'I', categoria);
-			contratos.add(contrato);
-			
-			
+			//Contrato contrato = new Contrato(idContrato, proyecto, fechaEntrega, proyecto.getSumaSalarios());
+			//contratos.add(contrato);		
 		}
 		return false;
 	}
+	
 	
 	public boolean cancelarContrato(String idContrato)
 	{
@@ -124,5 +84,56 @@ public class Empresa {
 		return false;
 	}
 	
+	public Cliente getClienteById(String id)
+	{
+		Cliente cliente = null;
+		boolean encontrado = false;
+		for(int i = 0; i < clientes.size() && !encontrado;i++)
+		{
+			if(clientes.get(i).getId().equalsIgnoreCase(id))
+			{
+					cliente = clientes.get(i);
+					encontrado = true;
+			}
+		}
+		
+		return cliente;
+	}
+			
+	
+	public ArrayList<Cliente> getClientes() {
+		return clientes;
+	}
 
+	public ArrayList<Contrato> getContratos() {
+		return contratos;
+	}
+
+	public ArrayList<Empleado> getEmpleados() {
+		return empleados;
+	}
+
+	public void setClientes(ArrayList<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+	public void setContratos(ArrayList<Contrato> contratos) {
+		this.contratos = contratos;
+	}
+
+	public void setEmpleados(ArrayList<Empleado> empleados) {
+		this.empleados = empleados;
+	}
+
+	public ArrayList<Proyecto> getProyectos() {
+		return proyectos;
+	}
+
+	public void setProyectos(ArrayList<Proyecto> proyectos) {
+		this.proyectos = proyectos;
+	}
+
+	public static void setEmpresa(Empresa empresa) {
+		Empresa.empresa = empresa;
+	}
 }
