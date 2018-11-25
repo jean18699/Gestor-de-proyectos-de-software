@@ -69,6 +69,11 @@ public class Empresa {
 		return false;
 	}
 	
+	public void nuevoProyecto(Proyecto proyecto)
+	{
+		proyectos.add(proyecto);
+	}
+	
 	public boolean cancelarContrato(String idContrato)
 	{
 		for(int i = 0; i < clientes.size(); i++)
