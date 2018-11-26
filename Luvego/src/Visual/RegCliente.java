@@ -69,6 +69,7 @@ public class RegCliente extends JDialog {
 	private JLabel lblPrecioContrato;
 	private JTextField txtPrecioContrato;
 	private int caretPosition;
+	private JTextField txtPrecioFinal;
 
 
 	/**
@@ -117,28 +118,28 @@ public class RegCliente extends JDialog {
 		
 		txtIdContrato = new JTextField();
 		txtIdContrato.setEditable(false);
-		txtIdContrato.setBounds(127, 34, 197, 22);
+		txtIdContrato.setBounds(127, 34, 243, 22);
 		panel_contrato.add(txtIdContrato);
 		txtIdContrato.setColumns(10);
 		
 		lblNombreProyecto = new JLabel("Nombre proyecto: ");
-		lblNombreProyecto.setBounds(12, 66, 116, 16);
+		lblNombreProyecto.setBounds(12, 98, 116, 16);
 		panel_contrato.add(lblNombreProyecto);
 		
 		txtNombreProyecto = new JTextField();
 		txtNombreProyecto.setEditable(false);
-		txtNombreProyecto.setBounds(127, 66, 197, 22);
+		txtNombreProyecto.setBounds(127, 95, 243, 22);
 		panel_contrato.add(txtNombreProyecto);
 		txtNombreProyecto.setColumns(10);
 		
 		lblFechaEntrega = new JLabel("Fecha entrega:");
-		lblFechaEntrega.setBounds(12, 95, 116, 16);
+		lblFechaEntrega.setBounds(12, 158, 103, 16);
 		panel_contrato.add(lblFechaEntrega);
 		
 		Date date = new Date();
 		SpinnerDateModel sdm = new SpinnerDateModel(date, null, null, Calendar.MINUTE);
 		spnFecha = new JSpinner(sdm);
-		spnFecha.setBounds(127, 92, 197, 22);
+		spnFecha.setBounds(127, 155, 243, 22);
 		JSpinner.DateEditor DateEdit = new JSpinner.DateEditor(spnFecha, patron);
 		DateEdit.getTextField().setEditable(true);
 		spnFecha.setEditor(DateEdit);
@@ -185,13 +186,24 @@ public class RegCliente extends JDialog {
 		});
 		
 		lblPrecioContrato = new JLabel("Precio contrato:");
-		lblPrecioContrato.setBounds(12, 124, 116, 16);
+		lblPrecioContrato.setBounds(12, 233, 116, 16);
 		panel_contrato.add(lblPrecioContrato);
 		
 		txtPrecioContrato = new JTextField();
+		txtPrecioContrato.setEditable(false);
 		txtPrecioContrato.setColumns(10);
-		txtPrecioContrato.setBounds(127, 121, 197, 22);
+		txtPrecioContrato.setBounds(127, 230, 157, 22);
 		panel_contrato.add(txtPrecioContrato);
+		
+		JLabel lblPrecioFinal = new JLabel("Precio final:");
+		lblPrecioFinal.setBounds(319, 233, 116, 16);
+		panel_contrato.add(lblPrecioFinal);
+		
+		txtPrecioFinal = new JTextField();
+		txtPrecioFinal.setEditable(false);
+		txtPrecioFinal.setColumns(10);
+		txtPrecioFinal.setBounds(411, 230, 157, 22);
+		panel_contrato.add(txtPrecioFinal);
 		
 		panel_proyecto = new JPanel();
 		panel_proyecto.setVisible(false);
@@ -334,21 +346,23 @@ public class RegCliente extends JDialog {
 						ventana--;
 					}
 					if(ventana == 0) {
+						btnSiguiente.setText("Siguiente");
 						panel_infoPersonal.setVisible(true);
 						panel_proyecto.setVisible(false);
 						panel_contrato.setVisible(false);
 					}
 					if(ventana == 1) {
+						btnSiguiente.setText("Siguiente");
 						panel_infoPersonal.setVisible(false);
 						panel_proyecto.setVisible(true);
 						panel_contrato.setVisible(false);
 					}
 					if(ventana == 2) {
+						btnSiguiente.setText("Terminar");
 						panel_infoPersonal.setVisible(false);
 						panel_proyecto.setVisible(false);
 						panel_contrato.setVisible(true);
 					}
-					System.out.println(ventana);
 				}
 			});
 			buttonPane.add(btnAnterior);
@@ -362,21 +376,23 @@ public class RegCliente extends JDialog {
 						ventana++;
 					}
 					if(ventana == 0) {
+						btnSiguiente.setText("Siguiente");
 						panel_infoPersonal.setVisible(true);
 						panel_proyecto.setVisible(false);
 						panel_contrato.setVisible(false);
 					}
 					if(ventana == 1) {
+						btnSiguiente.setText("Siguiente");
 						panel_infoPersonal.setVisible(false);
 						panel_proyecto.setVisible(true);
 						panel_contrato.setVisible(false);
 					}
 					if(ventana == 2){
+						btnSiguiente.setText("Terminar");
 						panel_infoPersonal.setVisible(false);
 						panel_proyecto.setVisible(false);
 						panel_contrato.setVisible(true);
 					}
-					System.out.println(ventana);
 				}
 			});
 			btnSiguiente.setActionCommand("OK");
