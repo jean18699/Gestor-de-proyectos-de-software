@@ -4,14 +4,26 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
+import javax.swing.JTable;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
+import javax.swing.table.DefaultTableModel;
+
+import Logico.Disegnador;
+import Logico.Empresa;
+import Logico.Jefe;
+import Logico.Planificador;
+import Logico.Programador;
 
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -70,6 +82,45 @@ public class RegCliente extends JDialog {
 	private JTextField txtPrecioContrato;
 	private int caretPosition;
 	private JTextField txtPrecioFinal;
+	private JLabel lblIdProyecto;
+	private JTextField textField;
+	private JPanel panel_InfoEmpleado;
+	private JPanel panelFotoEmpleado;
+	private JButton btnFotoEmpleado;
+	private JLabel lblId_1;
+	private JLabel lblNombre_1;
+	private JLabel lblOcupacin;
+	private JLabel lblSalariohora;
+	private JLabel lblCondicin;
+	private JLabel lblNewLabel;
+	private JLabel lblOcupacionEmpleado;
+	private JLabel lblNombreEmpleado;
+	private JLabel lbl_IdEmpleado;
+	private JLabel lblCondicion;
+	private JLabel lblCategoria;
+	private JComboBox cbxCategoria;
+	private JPanel panelEquipo;
+	private JLabel lblEquipoDeTrabajo;
+	private JTextField txtJefe;
+	private JTextField txtPlanificador;
+	private JTextField txtProgramador1;
+	private JTextField txtProgramador2;
+	private JTextField txtAuxiliar;
+	private JButton btnCargarPlanif;
+	private JButton btnCargarProgram1;
+	private JButton btnCargarProgram2;
+	private JComboBox cbxOcupacionAuxiliar;
+	private JButton btnInfoJefe;
+	private JButton btnInfoPlanif;
+	private JButton btnInfoProgram1;
+	private JButton btnProgram2;
+	private JButton btnInfoAuxiliar;
+	private JScrollPane scrollListaEmpleados;
+	private JLabel lblSeleccionarEmpleado;
+	private static DefaultTableModel model;
+	private static Object fila[];
+	private JTable table;
+	private JLabel lblFotoEmpresa;
 
 
 	/**
@@ -89,7 +140,7 @@ public class RegCliente extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegCliente() {
-		setBounds(100, 100, 607, 368);
+		setBounds(100, 100, 924, 404);
 		setResizable(false);
 		setTitle("Registrar cliente");
 		setLocationRelativeTo(null);
@@ -105,10 +156,10 @@ public class RegCliente extends JDialog {
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 		
 		panel_contrato = new JPanel();
-		panel_contrato.setVisible(false);
+		//panel_contrato.setVisible(false);
 		panel_contrato.setBorder(new TitledBorder(null, "Informacion contrato", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		((javax.swing.border.TitledBorder) panel_contrato.getBorder()).setTitleFont(new Font("Tahoma", Font.BOLD, 16));
-		panel_contrato.setBounds(12, 23, 580, 262);
+		panel_contrato.setBounds(12, 23, 894, 288);
 		contentPanel.add(panel_contrato);
 		panel_contrato.setLayout(null);
 		
@@ -118,17 +169,17 @@ public class RegCliente extends JDialog {
 		
 		txtIdContrato = new JTextField();
 		txtIdContrato.setEditable(false);
-		txtIdContrato.setBounds(127, 34, 243, 22);
+		txtIdContrato.setBounds(93, 34, 126, 22);
 		panel_contrato.add(txtIdContrato);
 		txtIdContrato.setColumns(10);
 		
 		lblNombreProyecto = new JLabel("Nombre proyecto: ");
-		lblNombreProyecto.setBounds(12, 98, 116, 16);
+		lblNombreProyecto.setBounds(12, 102, 116, 16);
 		panel_contrato.add(lblNombreProyecto);
 		
 		txtNombreProyecto = new JTextField();
 		txtNombreProyecto.setEditable(false);
-		txtNombreProyecto.setBounds(127, 95, 243, 22);
+		txtNombreProyecto.setBounds(140, 99, 189, 22);
 		panel_contrato.add(txtNombreProyecto);
 		txtNombreProyecto.setColumns(10);
 		
@@ -139,7 +190,7 @@ public class RegCliente extends JDialog {
 		Date date = new Date();
 		SpinnerDateModel sdm = new SpinnerDateModel(date, null, null, Calendar.MINUTE);
 		spnFecha = new JSpinner(sdm);
-		spnFecha.setBounds(127, 155, 243, 22);
+		spnFecha.setBounds(124, 155, 243, 22);
 		JSpinner.DateEditor DateEdit = new JSpinner.DateEditor(spnFecha, patron);
 		DateEdit.getTextField().setEditable(true);
 		spnFecha.setEditor(DateEdit);
@@ -205,11 +256,21 @@ public class RegCliente extends JDialog {
 		txtPrecioFinal.setBounds(411, 230, 157, 22);
 		panel_contrato.add(txtPrecioFinal);
 		
+		lblIdProyecto = new JLabel("Id Proyecto:");
+		lblIdProyecto.setBounds(311, 37, 69, 16);
+		panel_contrato.add(lblIdProyecto);
+		
+		textField = new JTextField();
+		textField.setEditable(false);
+		textField.setBounds(392, 34, 176, 22);
+		panel_contrato.add(textField);
+		textField.setColumns(10);
+		
 		panel_proyecto = new JPanel();
-		panel_proyecto.setVisible(false);
+		//panel_proyecto.setVisible(false);
 		panel_proyecto.setBorder(new TitledBorder(null, "Informacion proyecto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		((javax.swing.border.TitledBorder) panel_proyecto.getBorder()).setTitleFont(new Font("Tahoma", Font.BOLD, 16));
-		panel_proyecto.setBounds(12, 23, 580, 262);
+		panel_proyecto.setBounds(12, 23, 894, 288);
 		contentPanel.add(panel_proyecto);
 		panel_proyecto.setLayout(null);
 
@@ -217,9 +278,13 @@ public class RegCliente extends JDialog {
 		panel_infoPersonal = new JPanel();
 		panel_infoPersonal.setBorder(new TitledBorder(null, "Informacion personal", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		((javax.swing.border.TitledBorder) panel_infoPersonal.getBorder()).setTitleFont(new Font("Tahoma", Font.BOLD, 16));
-		panel_infoPersonal.setBounds(12, 23, 580, 262);
+		panel_infoPersonal.setBounds(12, 23, 525, 288);
 		contentPanel.add(panel_infoPersonal);
 		panel_infoPersonal.setLayout(null);
+		
+		lblFotoEmpresa = new JLabel("New label");
+		lblFotoEmpresa.setBounds(537, 0, 362, 288);
+		panel_infoPersonal.add(lblFotoEmpresa);
 		
 		lblId = new JLabel("Id cliente:");
 		lblId.setBounds(12, 36, 70, 16);
@@ -249,47 +314,185 @@ public class RegCliente extends JDialog {
 		txtId.setBounds(80, 33, 243, 22);
 		panel_infoPersonal.add(txtId);
 		
-		lblJefeDeProyecto = new JLabel("Jefe de proyecto: ");
-		lblJefeDeProyecto.setBounds(12, 95, 116, 16);
-		panel_proyecto.add(lblJefeDeProyecto);
+		panel_InfoEmpleado = new JPanel();
+		panel_InfoEmpleado.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel_InfoEmpleado.setBounds(15, 25, 233, 248);
+		panel_proyecto.add(panel_InfoEmpleado);
+		panel_InfoEmpleado.setLayout(null);
 		
-		JComboBox cbxJefes = new JComboBox();
-		cbxJefes.setBounds(127, 92, 197, 22);
-		panel_proyecto.add(cbxJefes);
+		panelFotoEmpleado = new JPanel();
+		panelFotoEmpleado.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panelFotoEmpleado.setBounds(0, 0, 233, 91);
+		panel_InfoEmpleado.add(panelFotoEmpleado);
+		panelFotoEmpleado.setLayout(new BorderLayout(0, 0));
+		
+		btnFotoEmpleado = new JButton("");
+		btnFotoEmpleado.setEnabled(false);
+		btnFotoEmpleado.setIcon(new ImageIcon(RegProyecto.class.getResource("/img/Nuevo Proyecto.png")));
+		panelFotoEmpleado.add(btnFotoEmpleado, BorderLayout.CENTER);
+		
+		lblId_1 = new JLabel("Id: ");
+		lblId_1.setBounds(10, 104, 29, 16);
+		panel_InfoEmpleado.add(lblId_1);
+		
+		lblNombre_1 = new JLabel("Nombre: ");
+		lblNombre_1.setBounds(10, 134, 56, 16);
+		panel_InfoEmpleado.add(lblNombre_1);
+		
+		lblOcupacin = new JLabel("Ocupaci\u00F3n:");
+		lblOcupacin.setBounds(10, 163, 74, 16);
+		panel_InfoEmpleado.add(lblOcupacin);
+		
+		lblSalariohora = new JLabel("Salario/Hora:");
+		lblSalariohora.setBounds(10, 192, 84, 16);
+		panel_InfoEmpleado.add(lblSalariohora);
+		
+		lblCondicin = new JLabel("Condici\u00F3n: ");
+		lblCondicin.setBounds(10, 219, 74, 16);
+		panel_InfoEmpleado.add(lblCondicin);
+		
+		lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(106, 192, 115, 16);
+		panel_InfoEmpleado.add(lblNewLabel);
+		
+		lblOcupacionEmpleado = new JLabel("New label");
+		lblOcupacionEmpleado.setBounds(106, 163, 115, 16);
+		panel_InfoEmpleado.add(lblOcupacionEmpleado);
+		
+		lblNombreEmpleado = new JLabel("New label");
+		lblNombreEmpleado.setBounds(106, 134, 115, 16);
+		panel_InfoEmpleado.add(lblNombreEmpleado);
+		
+		lbl_IdEmpleado = new JLabel("New label");
+		lbl_IdEmpleado.setBounds(106, 104, 115, 16);
+		panel_InfoEmpleado.add(lbl_IdEmpleado);
+		
+		lblCondicion = new JLabel("New label");
+		lblCondicion.setBounds(106, 219, 115, 16);
+		panel_InfoEmpleado.add(lblCondicion);
+		
+		panelEquipo = new JPanel();
+		panelEquipo.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panelEquipo.setBounds(260, 118, 412, 155);
+		panel_proyecto.add(panelEquipo);
+		panelEquipo.setLayout(null);
+		
+		
+		lblJefeDeProyecto = new JLabel("Jefe de proyecto: ");
+		lblJefeDeProyecto.setBounds(12, 13, 103, 16);
+		panelEquipo.add(lblJefeDeProyecto);
+		
+		JTextField txtJefe = new JTextField();
+		txtJefe.setBounds(127, 9, 111, 25);
+		panelEquipo.add(txtJefe);
 		
 		JLabel lblPlanificador = new JLabel("Planificador: ");
-		lblPlanificador.setBounds(12, 124, 91, 16);
-		panel_proyecto.add(lblPlanificador);
+		lblPlanificador.setBounds(12, 42, 91, 16);
+		panelEquipo.add(lblPlanificador);
 		
-		cbxPlanificadores = new JComboBox();
-		cbxPlanificadores.setBounds(127, 121, 197, 22);
-		panel_proyecto.add(cbxPlanificadores);
+		txtPlanificador = new JTextField();
+		txtPlanificador.setBounds(127, 38, 111, 25);
+		panelEquipo.add(txtPlanificador);
 		
 		lblProgramador1 = new JLabel("Programador 1:");
-		lblProgramador1.setBounds(12, 153, 91, 16);
-		panel_proyecto.add(lblProgramador1);
+		lblProgramador1.setBounds(12, 71, 91, 16);
+		panelEquipo.add(lblProgramador1);
 		
-		cbxProgram1 = new JComboBox();
-		cbxProgram1.setBounds(127, 150, 197, 22);
-		panel_proyecto.add(cbxProgram1);
+		txtProgramador1 = new JTextField();
+		txtProgramador1.setBounds(127, 67, 111, 25);
+		panelEquipo.add(txtProgramador1);
 		
 		lblProgramador2 = new JLabel("Programador 2:");
-		lblProgramador2.setBounds(12, 182, 91, 16);
-		panel_proyecto.add(lblProgramador2);
+		lblProgramador2.setBounds(12, 100, 91, 16);
+		panelEquipo.add(lblProgramador2);
 		
-		cbxProgram2 = new JComboBox();
-		cbxProgram2.setBounds(127, 179, 197, 22);
-		panel_proyecto.add(cbxProgram2);
+		txtProgramador2 = new JTextField();
+		txtProgramador2.setBounds(127, 96, 111, 25);
+		panelEquipo.add(txtProgramador2);
 		
 		lblAuxiliar = new JLabel("Auxiliar:");
-		lblAuxiliar.setBounds(12, 211, 91, 16);
-		panel_proyecto.add(lblAuxiliar);
+		lblAuxiliar.setBounds(12, 129, 91, 16);
+		panelEquipo.add(lblAuxiliar);
 		
-		cbxAuxiliar = new JComboBox();
-		cbxAuxiliar.setBounds(127, 208, 197, 22);
-		panel_proyecto.add(cbxAuxiliar);
+		txtAuxiliar = new JTextField();
+		txtAuxiliar.setBounds(127, 125, 111, 22);
+		panelEquipo.add(txtAuxiliar);
 		
-		lblBuscarPorId = new JLabel("Buscar por Id:");
+		JButton btnCargarJefe = new JButton("Cargar");
+		btnCargarJefe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cargarJefes();
+			}
+		});
+		btnCargarJefe.setBounds(240, 9, 93, 25);
+		panelEquipo.add(btnCargarJefe);
+		
+		btnCargarPlanif = new JButton("Cargar");
+		btnCargarPlanif.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cargarPlanificadores();
+			}
+		});
+		btnCargarPlanif.setBounds(240, 38, 93, 25);
+		panelEquipo.add(btnCargarPlanif);
+		
+		btnCargarProgram1 = new JButton("Cargar");
+		btnCargarProgram1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cargarProgramadores();
+			}
+		});
+		btnCargarProgram1.setBounds(240, 67, 93, 25);
+		panelEquipo.add(btnCargarProgram1);
+		
+		btnCargarProgram2 = new JButton("Cargar");
+		btnCargarProgram2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cargarProgramadores();
+			}
+		});
+		btnCargarProgram2.setBounds(240, 96, 93, 25);
+		panelEquipo.add(btnCargarProgram2);
+		
+		cbxOcupacionAuxiliar = new JComboBox();
+		cbxOcupacionAuxiliar.setModel(new DefaultComboBoxModel(new String[] {"<Ocupacion>", "Planificador", "Programador", "Dise\u00F1ador"}));
+		cbxOcupacionAuxiliar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(cbxOcupacionAuxiliar.getSelectedIndex() == 1) {
+					cargarPlanificadores();
+				}
+				else if(cbxOcupacionAuxiliar.getSelectedIndex() == 2) {
+					cargarProgramadores();
+				}
+				else if(cbxOcupacionAuxiliar.getSelectedIndex() == 3) {
+					cargarDisegnadores();
+				}
+			}
+		});
+		cbxOcupacionAuxiliar.setBounds(240, 125, 103, 23);
+		panelEquipo.add(cbxOcupacionAuxiliar);
+		
+		btnInfoJefe = new JButton("Info");
+		btnInfoJefe.setBounds(346, 9, 58, 25);
+		panelEquipo.add(btnInfoJefe);
+		
+		btnInfoPlanif = new JButton("Info");
+		btnInfoPlanif.setBounds(346, 38, 58, 25);
+		panelEquipo.add(btnInfoPlanif);
+		
+		btnInfoProgram1 = new JButton("Info");
+		btnInfoProgram1.setBounds(346, 67, 58, 25);
+		panelEquipo.add(btnInfoProgram1);
+		
+		btnProgram2 = new JButton("Info");
+		btnProgram2.setBounds(346, 96, 58, 25);
+		panelEquipo.add(btnProgram2);
+		
+		btnInfoAuxiliar = new JButton("Info");
+		btnInfoAuxiliar.setBounds(346, 125, 58, 25);
+		panelEquipo.add(btnInfoAuxiliar);
+		
+		/*lblBuscarPorId = new JLabel("Buscar por Id:");
 		lblBuscarPorId.setBounds(391, 66, 139, 16);
 		panel_proyecto.add(lblBuscarPorId);
 		
@@ -326,38 +529,72 @@ public class RegCliente extends JDialog {
 		txtIdProyecto.setEditable(false);
 		txtIdProyecto.setColumns(10);
 		txtIdProyecto.setBounds(127, 34, 197, 22);
-		panel_proyecto.add(txtIdProyecto);
+		panel_proyecto.add(txtIdProyecto);*/
 		
 		lblNombreProyecto = new JLabel("Nombre Proyecto: ");
-		lblNombreProyecto.setBounds(12, 66, 116, 16);
+		lblNombreProyecto.setBounds(260, 25, 116, 16);
 		panel_proyecto.add(lblNombreProyecto);
 		
 		txtNombreProyecto = new JTextField();
 		txtNombreProyecto.setColumns(10);
-		txtNombreProyecto.setBounds(127, 63, 197, 22);
+		txtNombreProyecto.setBounds(372, 22, 197, 22);
 		panel_proyecto.add(txtNombreProyecto);
 		
+		lblCategoria = new JLabel("Categoria:");
+		lblCategoria.setBounds(260, 54, 72, 16);
+		panel_proyecto.add(lblCategoria);
+		
+		cbxCategoria = new JComboBox();
+		cbxCategoria.setBounds(372, 54, 197, 22);
+		panel_proyecto.add(cbxCategoria);
+		
+		lblEquipoDeTrabajo = new JLabel("Equipo de trabajo");
+		lblEquipoDeTrabajo.setBounds(260, 89, 121, 16);
+		panel_proyecto.add(lblEquipoDeTrabajo);
+		
+		panel_contrato.setVisible(false);
+		panel_infoPersonal.setVisible(false);
+		panel_proyecto.setVisible(false);
+		
+		table = new JTable();
+		model = new DefaultTableModel();
+		
+		model.setColumnIdentifiers(new String [] {"Id"});
+		table.setModel(model);
+		
+		scrollListaEmpleados = new JScrollPane();
+		scrollListaEmpleados.setBounds(706, 54, 176, 219);
+		panel_proyecto.add(scrollListaEmpleados);
+		scrollListaEmpleados.setViewportView(table);
+		
+		lblSeleccionarEmpleado = new JLabel("Seleccionar empleado:");
+		lblSeleccionarEmpleado.setBounds(706, 25, 143, 16);
+		panel_proyecto.add(lblSeleccionarEmpleado);
 			
 		{
 			btnAnterior = new JButton("Anterior");
+			btnAnterior.setEnabled(false);
 			btnAnterior.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(ventana > 0) {
 						ventana--;
 					}
 					if(ventana == 0) {
+						btnAnterior.setEnabled(false);
 						btnSiguiente.setText("Siguiente");
 						panel_infoPersonal.setVisible(true);
 						panel_proyecto.setVisible(false);
 						panel_contrato.setVisible(false);
 					}
 					if(ventana == 1) {
+						btnAnterior.setEnabled(true);
 						btnSiguiente.setText("Siguiente");
 						panel_infoPersonal.setVisible(false);
 						panel_proyecto.setVisible(true);
 						panel_contrato.setVisible(false);
 					}
 					if(ventana == 2) {
+						btnAnterior.setEnabled(true);
 						btnSiguiente.setText("Terminar");
 						panel_infoPersonal.setVisible(false);
 						panel_proyecto.setVisible(false);
@@ -376,18 +613,21 @@ public class RegCliente extends JDialog {
 						ventana++;
 					}
 					if(ventana == 0) {
+						btnAnterior.setEnabled(false);
 						btnSiguiente.setText("Siguiente");
 						panel_infoPersonal.setVisible(true);
 						panel_proyecto.setVisible(false);
 						panel_contrato.setVisible(false);
 					}
 					if(ventana == 1) {
+						btnAnterior.setEnabled(true);
 						btnSiguiente.setText("Siguiente");
 						panel_infoPersonal.setVisible(false);
 						panel_proyecto.setVisible(true);
 						panel_contrato.setVisible(false);
 					}
 					if(ventana == 2){
+						btnAnterior.setEnabled(true);
 						btnSiguiente.setText("Terminar");
 						panel_infoPersonal.setVisible(false);
 						panel_proyecto.setVisible(false);
@@ -409,6 +649,69 @@ public class RegCliente extends JDialog {
 			btnCancelar.setActionCommand("Cancel");
 			buttonPane.add(btnCancelar);
 		}
+		
+	}
+	
+	private void cargarJefes() {
+		model.setRowCount(0);
+		fila = new Object[model.getColumnCount()];
+		for(int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
+			if(Empresa.getInstance().getEmpleados().get(i) instanceof Jefe)
+			{
+				fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
+				
+			}
+			model.addRow(fila);
+		}
+		
+		table.getColumnModel().getColumn(0).setMinWidth(100);
+	}
+	
+	private void cargarPlanificadores() {
+		model.setRowCount(0);
+		fila = new Object[model.getColumnCount()];
+		for(int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
+			if(Empresa.getInstance().getEmpleados().get(i) instanceof Planificador)
+			{
+				fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
+				
+			}
+			model.addRow(fila);
+		}
+		
+		table.getColumnModel().getColumn(0).setMinWidth(100);
+		
+	}
+	
+	private void cargarProgramadores() {
+		model.setRowCount(0);
+		fila = new Object[model.getColumnCount()];
+		for(int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
+			if(Empresa.getInstance().getEmpleados().get(i) instanceof Programador)
+			{
+				fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
+				
+			}
+			model.addRow(fila);
+		}
+		
+		table.getColumnModel().getColumn(0).setMinWidth(100);
+		
+	}
+	
+	private void cargarDisegnadores() {
+		model.setRowCount(0);
+		fila = new Object[model.getColumnCount()];
+		for(int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
+			if(Empresa.getInstance().getEmpleados().get(i) instanceof Disegnador)
+			{
+				fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
+				
+			}
+			model.addRow(fila);
+		}
+		
+		table.getColumnModel().getColumn(0).setMinWidth(100);
 		
 	}
 }
