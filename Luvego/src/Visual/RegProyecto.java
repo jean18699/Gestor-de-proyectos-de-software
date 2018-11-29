@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.JSpinner;
@@ -20,6 +21,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import Logico.Cliente;
 import Logico.Disegnador;
 import Logico.Empleado;
 import Logico.Empresa;
@@ -149,6 +151,9 @@ public class RegProyecto extends JDialog {
 		ArrayList<String> esp = new ArrayList<>();
 		esp.add("C");
 		esp.add("Java");
+		
+		Cliente c = new Cliente("123","jean","cerro alto");
+		
 		Empleado p = new Planificador("jeasn","j","hombre",19,"cerro alto",15);
 		Empleado p2 = new Planificador("jeasn","j","hombre",19,"cerro alto",15);
 		Empleado p3= new Planificador("jeasn","j","hombre",19,"cerro alto",15);
@@ -167,12 +172,28 @@ public class RegProyecto extends JDialog {
 		Empresa.getInstance().nuevoEmpleado(chef);
 		Empresa.getInstance().nuevoEmpleado(p2);
 		Empresa.getInstance().nuevoEmpleado(p3);
+		Empresa.getInstance().nuevoCliente(c);
 		
-		model = new DefaultTableModel();
+		model = new DefaultTableModel() {
+
+			@Override
+			public boolean isCellEditable(int row, int column)
+			{
+				return false;
+			}
+		};
+		
 		String[] titulos = {"ID"};
 		model.setColumnIdentifiers(titulos);
 		
-		modelClientes = new DefaultTableModel();
+		modelClientes = new DefaultTableModel(){
+
+			@Override
+			public boolean isCellEditable(int row, int column)
+			{
+				return false;
+			}
+		};;
 		String[] cols = {"ID","Nombre","Direccion","Proyectos activos","Total proyectos solicitados"};
 		modelClientes.setColumnIdentifiers(cols);
 		
@@ -180,34 +201,6 @@ public class RegProyecto extends JDialog {
 		panelProyecto.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(panelProyecto, BorderLayout.CENTER);
 		panelProyecto.setLayout(null);
-		
-		panelClientes = new JPanel();
-		panelClientes.setVisible(false);
-		panelClientes.setBounds(0, -1, 753, 327);
-		panelProyecto.add(panelClientes);
-		panelClientes.setLayout(null);
-		
-		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 11, 733, 213);
-		panelClientes.add(scrollPane_1);
-		
-		tablaClientes = new JTable();
-		tablaClientes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int index = tablaClientes.getSelectedRow();
-				if(index >= 0)
-				{
-					
-					select = table.getValueAt(index, 0).toString();
-					System.out.println(select);
-					btnSiguiente2.setEnabled(true);
-				}
-				
-			}
-		});
-		scrollPane_1.setViewportView(tablaClientes);
-		tablaClientes.setModel(modelClientes);
 		{
 			panel = new JPanel();
 			panel.setBounds(182, 11, 437, 316);
@@ -615,6 +608,8 @@ public class RegProyecto extends JDialog {
 			btnSiguiente2 = new JButton("Siguiente");
 			btnSiguiente2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
+					Cliente cliente = Empresa.getInstance().getClienteById(select);
 					RegContrato reg = new RegContrato();
 					reg.setLocationRelativeTo(null);
 					reg.setModal(true);
@@ -635,16 +630,13 @@ public class RegProyecto extends JDialog {
 			});
 		}
 		
-		
-		
-		getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panelProyecto, panel_2, lblNombre, lblId, lblOcupacion, lblSalariohora, lblEstado, lblIdempleado, panel_3, button, lblNombreEmpleado, lblOcupacionEmpleado, lblSalarioempleado, lblCondicionempleado, panel, lblNombreDelProyecto, txtNombre, lblEquipo, panel_1, lblProgramador, lblPlanificador, lblJefeDelProyecto, lblProgramador_1, txtJefe, btnCargarJefe, txtIdPlanificador, txtIdProgramador1, txtIdProgramador2, btnCargarPlanificador, btnCargarProgramador, btnCargarProgramador2, btnNewButton, btnNewButton_1, btnNewButton_2, btnNewButton_3, cmbOcupacion, txtIdAdicional, /*btnCargarAdicional, */btnNewButton_4, lblAdicional, lblCategoria, cmbCategoria, scrollPane_1, table, buttonPane, btnSiguiente, cancelButton}));
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(627, 11, 115, 170);
 		panelProyecto.add(scrollPane);
 		
 		//TABLA
 		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		table.setShowVerticalLines(false);
 		
@@ -654,9 +646,7 @@ public class RegProyecto extends JDialog {
 
 				int index = table.getSelectedRow();
 				if(index >= 0)
-				{
-					
-					
+				{	
 						//Jefe j = new Jefe("dasd", "d", "hombre", 8, "si", 5);
 						//Empresa.getInstance().nuevoEmpleado(j);
 						select = table.getValueAt(index, 0).toString();
@@ -700,6 +690,41 @@ public class RegProyecto extends JDialog {
 		
 		
 		scrollPane.setViewportView(table);
+		
+		panelClientes = new JPanel();
+		panelClientes.setVisible(false);
+		panelClientes.setBounds(0, -1, 753, 327);
+		panelProyecto.add(panelClientes);
+		panelClientes.setLayout(null);
+		
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 11, 733, 213);
+		panelClientes.add(scrollPane_1);
+		
+		tablaClientes = new JTable();
+		tablaClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tablaClientes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		tablaClientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int index = tablaClientes.getSelectedRow();
+				if(index >= 0)
+				{
+					select = tablaClientes.getValueAt(index, 0).toString();
+					btnSiguiente2.setEnabled(true);
+				}else
+				{
+					btnSiguiente2.setEnabled(false);
+				}
+			}
+		});
+		
+		scrollPane_1.setViewportView(tablaClientes);
+		tablaClientes.setModel(modelClientes);
+		
+		
+		
+		getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panelProyecto, panel_2, lblNombre, lblId, lblOcupacion, lblSalariohora, lblEstado, lblIdempleado, panel_3, button, lblNombreEmpleado, lblOcupacionEmpleado, lblSalarioempleado, lblCondicionempleado, panel, lblNombreDelProyecto, txtNombre, lblEquipo, panel_1, lblProgramador, lblPlanificador, lblJefeDelProyecto, lblProgramador_1, txtJefe, btnCargarJefe, txtIdPlanificador, txtIdProgramador1, txtIdProgramador2, btnCargarPlanificador, btnCargarProgramador, btnCargarProgramador2, btnNewButton, btnNewButton_1, btnNewButton_2, btnNewButton_3, cmbOcupacion, txtIdAdicional, /*btnCargarAdicional, */btnNewButton_4, lblAdicional, lblCategoria, cmbCategoria, scrollPane_1, table, buttonPane, btnSiguiente, cancelButton}));
 	}
 	
 	private void cargarJefes() {
