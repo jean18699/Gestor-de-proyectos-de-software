@@ -92,7 +92,7 @@ public class RegProyecto extends JDialog {
 	private JButton btnNewButton_1;
 	private JButton btnNewButton_2;
 	private JButton btnNewButton_3;
-	private JButton btnCargarAdicional;
+	//private JButton btnCargarAdicional;
 	private JButton btnNewButton_4;
 	private JLabel lblAdicional;
 	private JLabel lblCategoria;
@@ -269,7 +269,7 @@ public class RegProyecto extends JDialog {
 					btnCargarProgramador2.setEnabled(true);
 					btnCargarJefe.setEnabled(false);
 					btnCargarPlanificador.setEnabled(true);
-					btnCargarAdicional.setEnabled(true);
+					//btnCargarAdicional.setEnabled(true);
 				}
 			});
 			btnCargarJefe.setBounds(251, 7, 93, 23);
@@ -301,7 +301,7 @@ public class RegProyecto extends JDialog {
 					btnCargarProgramador2.setEnabled(true);
 					btnCargarJefe.setEnabled(true);
 					btnCargarPlanificador.setEnabled(false);
-					btnCargarAdicional.setEnabled(true);
+					//btnCargarAdicional.setEnabled(true);
 				}
 			});
 			btnCargarPlanificador.setBounds(251, 32, 93, 23);
@@ -314,7 +314,7 @@ public class RegProyecto extends JDialog {
 					btnCargarProgramador.setEnabled(false);
 					btnCargarJefe.setEnabled(true);
 					btnCargarPlanificador.setEnabled(true);
-					btnCargarAdicional.setEnabled(true);
+					//btnCargarAdicional.setEnabled(true);
 					btnCargarProgramador2.setEnabled(true);
 				}
 			});
@@ -329,7 +329,7 @@ public class RegProyecto extends JDialog {
 					btnCargarProgramador2.setEnabled(false);
 					btnCargarJefe.setEnabled(true);
 					btnCargarPlanificador.setEnabled(true);
-					btnCargarAdicional.setEnabled(true);
+					//btnCargarAdicional.setEnabled(true);
 				}
 			});
 			btnCargarProgramador2.setBounds(251, 82, 93, 23);
@@ -351,7 +351,7 @@ public class RegProyecto extends JDialog {
 			btnNewButton_3.setBounds(348, 82, 58, 23);
 			panel_1.add(btnNewButton_3);
 			
-			cmbOcupacion = new JComboBox();
+			/*cmbOcupacion = new JComboBox();
 			cmbOcupacion.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -360,6 +360,45 @@ public class RegProyecto extends JDialog {
 					btnCargarProgramador.setEnabled(true);
 					btnCargarProgramador2.setEnabled(true);
 					btnCargarPlanificador.setEnabled(true);
+					
+					int indexOcupacion = cmbOcupacion.getSelectedIndex();
+					System.out.println(indexOcupacion);
+					if(indexOcupacion == 1) {
+						cargarPlanificadores();
+					}
+					else if(indexOcupacion == 2) {
+						cargarProgramadores();
+					}
+					else if(indexOcupacion == 3) {
+						cargarDisegnadores();
+					}
+					
+				}
+			});*/
+			
+			cmbOcupacion = new JComboBox();
+			cmbOcupacion.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+
+					//btnCargarAdicional.setEnabled(true);
+					btnCargarJefe.setEnabled(true);
+					btnCargarProgramador.setEnabled(true);
+					btnCargarProgramador2.setEnabled(true);
+					btnCargarPlanificador.setEnabled(true);
+					
+					int indexOcupacion = cmbOcupacion.getSelectedIndex();
+					System.out.println(indexOcupacion);
+					if(indexOcupacion == 1) {
+						cargarPlanificadores();
+					}
+					else if(indexOcupacion == 2) {
+						cargarProgramadores();
+					}
+					else if(indexOcupacion == 3) {
+						cargarDisegnadores();
+					}
 					
 				}
 			});
@@ -374,7 +413,7 @@ public class RegProyecto extends JDialog {
 			panel_1.add(txtIdAdicional);
 			txtIdAdicional.setColumns(10);
 			
-			btnCargarAdicional = new JButton("Cargar");
+			/*btnCargarAdicional = new JButton("Cargar");
 			btnCargarAdicional.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				
@@ -400,7 +439,7 @@ public class RegProyecto extends JDialog {
 			
 			
 			btnCargarAdicional.setBounds(105, 142, 65, 23);
-			panel_1.add(btnCargarAdicional);
+			panel_1.add(btnCargarAdicional);*/
 			
 			btnNewButton_4 = new JButton("Info");
 			btnNewButton_4.setBounds(348, 109, 58, 23);
@@ -598,7 +637,7 @@ public class RegProyecto extends JDialog {
 		
 		
 		
-		getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panelProyecto, panel_2, lblNombre, lblId, lblOcupacion, lblSalariohora, lblEstado, lblIdempleado, panel_3, button, lblNombreEmpleado, lblOcupacionEmpleado, lblSalarioempleado, lblCondicionempleado, panel, lblNombreDelProyecto, txtNombre, lblEquipo, panel_1, lblProgramador, lblPlanificador, lblJefeDelProyecto, lblProgramador_1, txtJefe, btnCargarJefe, txtIdPlanificador, txtIdProgramador1, txtIdProgramador2, btnCargarPlanificador, btnCargarProgramador, btnCargarProgramador2, btnNewButton, btnNewButton_1, btnNewButton_2, btnNewButton_3, cmbOcupacion, txtIdAdicional, btnCargarAdicional, btnNewButton_4, lblAdicional, lblCategoria, cmbCategoria, scrollPane_1, table, buttonPane, btnSiguiente, cancelButton}));
+		getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panelProyecto, panel_2, lblNombre, lblId, lblOcupacion, lblSalariohora, lblEstado, lblIdempleado, panel_3, button, lblNombreEmpleado, lblOcupacionEmpleado, lblSalarioempleado, lblCondicionempleado, panel, lblNombreDelProyecto, txtNombre, lblEquipo, panel_1, lblProgramador, lblPlanificador, lblJefeDelProyecto, lblProgramador_1, txtJefe, btnCargarJefe, txtIdPlanificador, txtIdProgramador1, txtIdProgramador2, btnCargarPlanificador, btnCargarProgramador, btnCargarProgramador2, btnNewButton, btnNewButton_1, btnNewButton_2, btnNewButton_3, cmbOcupacion, txtIdAdicional, /*btnCargarAdicional, */btnNewButton_4, lblAdicional, lblCategoria, cmbCategoria, scrollPane_1, table, buttonPane, btnSiguiente, cancelButton}));
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(627, 11, 115, 170);
@@ -621,6 +660,10 @@ public class RegProyecto extends JDialog {
 						//Jefe j = new Jefe("dasd", "d", "hombre", 8, "si", 5);
 						//Empresa.getInstance().nuevoEmpleado(j);
 						select = table.getValueAt(index, 0).toString();
+						
+						if(btnCargarJefe.isEnabled() && btnCargarProgramador.isEnabled() && btnCargarProgramador2.isEnabled() && btnCargarPlanificador.isEnabled()) {
+							txtIdAdicional.setText(select);
+						}
 				
 						if(!btnCargarJefe.isEnabled())
 						{
@@ -638,10 +681,10 @@ public class RegProyecto extends JDialog {
 						{
 							txtIdPlanificador.setText(select);
 						}
-						if(!btnCargarAdicional.isEnabled())
+						/*if(!btnCargarAdicional.isEnabled())
 						{
 							txtIdAdicional.setText(select);
-						}
+						}*/
 						
 						lblNombreEmpleado.setText(Empresa.getInstance().getEmpleadoById(select).getNombre());
 						lblIdempleado.setText(select.toString());
