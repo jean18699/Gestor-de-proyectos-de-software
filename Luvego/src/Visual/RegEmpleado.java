@@ -15,6 +15,14 @@ import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.ButtonGroup;
+import javax.swing.border.TitledBorder;
+
+import Logico.Empleado;
+import Logico.Empresa;
+import Logico.Planificador;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class RegEmpleado extends JDialog {
 
@@ -22,8 +30,12 @@ public class RegEmpleado extends JDialog {
 	private JTextField txtNombre;
 	private JTextField txtApellido;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JTextField textField;
-
+	private JTextField txtDireccion;
+	private JTextField txtSalario;
+	private JTextField txtFrecuencia;
+	private JRadioButton radHombre;
+	private JRadioButton radMujer;
+	private JSpinner spnEdad;
 	/**
 	 * Launch the application.
 	 */
@@ -41,7 +53,7 @@ public class RegEmpleado extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegEmpleado() {
-		setBounds(100, 100, 598, 448);
+		setBounds(100, 100, 619, 380);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.DARK_GRAY);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -49,7 +61,7 @@ public class RegEmpleado extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JPanel panel = new JPanel();
-			panel.setBounds(111, 11, 461, 354);
+			panel.setBounds(111, 11, 492, 295);
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			{
@@ -76,21 +88,21 @@ public class RegEmpleado extends JDialog {
 			lblGenero.setBounds(10, 78, 46, 14);
 			panel.add(lblGenero);
 			
-			JRadioButton rdbtnHombre = new JRadioButton("Hombre");
-			buttonGroup.add(rdbtnHombre);
-			rdbtnHombre.setBounds(66, 74, 63, 23);
-			panel.add(rdbtnHombre);
+			radHombre = new JRadioButton("Hombre");
+			buttonGroup.add(radHombre);
+			radHombre.setBounds(66, 74, 63, 23);
+			panel.add(radHombre);
 			
-			JRadioButton rdbtnMujer = new JRadioButton("Mujer");
-			buttonGroup.add(rdbtnMujer);
-			rdbtnMujer.setBounds(131, 74, 53, 23);
-			panel.add(rdbtnMujer);
+			radMujer = new JRadioButton("Mujer");
+			buttonGroup.add(radMujer);
+			radMujer.setBounds(131, 74, 53, 23);
+			panel.add(radMujer);
 			
 			JLabel lblEdad = new JLabel("Edad:");
 			lblEdad.setBounds(10, 112, 46, 14);
 			panel.add(lblEdad);
 			
-			JSpinner spnEdad = new JSpinner();
+			spnEdad = new JSpinner();
 			spnEdad.setModel(new SpinnerNumberModel(18, 18, 70, 1));
 			spnEdad.setBounds(66, 109, 46, 20);
 			panel.add(spnEdad);
@@ -99,10 +111,38 @@ public class RegEmpleado extends JDialog {
 			lblNewLabel.setBounds(10, 148, 63, 14);
 			panel.add(lblNewLabel);
 			
-			textField = new JTextField();
-			textField.setBounds(10, 173, 208, 54);
-			panel.add(textField);
-			textField.setColumns(10);
+			txtDireccion = new JTextField();
+			txtDireccion.setBounds(10, 173, 208, 54);
+			panel.add(txtDireccion);
+			txtDireccion.setColumns(10);
+			
+			JLabel lblSalarioPorHora = new JLabel("Salario por hora a pagar:");
+			lblSalarioPorHora.setBounds(10, 253, 152, 14);
+			panel.add(lblSalarioPorHora);
+			
+			txtSalario = new JTextField();
+			txtSalario.setBounds(132, 250, 107, 20);
+			panel.add(txtSalario);
+			txtSalario.setColumns(10);
+			
+			JLabel lblRd = new JLabel("RD$");
+			lblRd.setBounds(249, 253, 46, 14);
+			panel.add(lblRd);
+			
+			JPanel panel_1 = new JPanel();
+			panel_1.setBorder(new TitledBorder(null, "Informacion adicional", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel_1.setBounds(249, 11, 233, 216);
+			panel.add(panel_1);
+			panel_1.setLayout(null);
+			
+			JLabel lblFrecuencia = new JLabel("Frecuencia:");
+			lblFrecuencia.setBounds(10, 31, 75, 14);
+			panel_1.add(lblFrecuencia);
+			
+			txtFrecuencia = new JTextField();
+			txtFrecuencia.setBounds(88, 28, 86, 20);
+			panel_1.add(txtFrecuencia);
+			txtFrecuencia.setColumns(10);
 		}
 		{
 			JPanel panel = new JPanel();
@@ -133,10 +173,26 @@ public class RegEmpleado extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				JButton btnRegistrar = new JButton("Registrar");
+				btnRegistrar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						String genero = null;
+						if(radHombre.isSelected())
+						{
+							genero = radHombre.getLabel();
+						}else if(radMujer.isSelected())
+						{
+							genero = radMujer.getLabel();
+						}
+						
+						Empleado emp = new Planificador(txtNombre.getText(),txtApellido.getText(),genero, Integer.parseInt(spnEdad.getValue().toString()),txtDireccion.getText(),Float.parseFloat(txtSalario.getText()));
+						Empresa.getInstance().nuevoEmpleado(emp);
+					}
+				});
+				btnRegistrar.setActionCommand("OK");
+				buttonPane.add(btnRegistrar);
+				getRootPane().setDefaultButton(btnRegistrar);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");

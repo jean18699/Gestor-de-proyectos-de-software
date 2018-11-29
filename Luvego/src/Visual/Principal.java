@@ -65,6 +65,7 @@ public class Principal extends JFrame {
 		mntmRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListarProyectos listar = new ListarProyectos();
+				listar.setLocationRelativeTo(null);
 				listar.setModal(true);
 				listar.setVisible(true);
 			}
@@ -78,6 +79,18 @@ public class Principal extends JFrame {
 		mnEmpleados.setIcon(new ImageIcon(Principal.class.getResource("/img/empleados.png")));
 		menuBar.add(mnEmpleados);
 		
+		JMenuItem mntmNuevo_1 = new JMenuItem("Nuevo");
+		mntmNuevo_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegEmpleado reg = new RegEmpleado();
+				reg.setLocationRelativeTo(null);
+				reg.setModal(true);
+				reg.setVisible(true);
+				
+			}
+		});
+		mnEmpleados.add(mntmNuevo_1);
+		
 		JMenuItem mntmGestionar = new JMenuItem("Gestionar");
 		mnEmpleados.add(mntmGestionar);
 		
@@ -86,6 +99,14 @@ public class Principal extends JFrame {
 		menuBar.add(mnClientes);
 		
 		JMenuItem mntmRegistrar = new JMenuItem("Registrar");
+		mntmRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegCliente reg = new RegCliente();
+				reg.setLocationRelativeTo(null);
+				reg.setModal(true);
+				reg.setVisible(true);
+			}
+		});
 		mnClientes.add(mntmRegistrar);
 		
 		JMenu mnConsulta_1 = new JMenu("Consulta");

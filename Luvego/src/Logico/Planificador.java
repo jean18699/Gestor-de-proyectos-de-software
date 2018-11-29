@@ -6,13 +6,25 @@ public class Planificador extends Empleado {
 	
 	public Planificador(String nombre, String apellidos, String sexo, int edad, String direccion, float salarioHora) {
 		super(nombre, apellidos, sexo, edad, direccion, salarioHora);
-		// TODO Auto-generated constructor stub
+		
+	}
+
+	public int getFrecuencia() {
+		return frecuencia;
+	}
+
+	public void setFrecuencia(int frecuencia) {
+		this.frecuencia = frecuencia;
 	}
 
 	@Override
 	String identificador() {
-		// TODO Auto-generated method stub
 		return "PLN-";
+	}
+
+	@Override
+	protected String getOcupacion() {
+		return "Planificador";
 	}
 
 }

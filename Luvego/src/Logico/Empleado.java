@@ -17,7 +17,7 @@ import java.util.ArrayList;
 	protected final String direccion;
 	protected ArrayList<String> proyectos;
 	protected char evaluacionAnual;
-	
+	private String ocupacion;
 	
 	
 	public Empleado(String nombre, String apellidos, String sexo, int edad,String direccion, float salarioHora) {
@@ -126,5 +126,12 @@ import java.util.ArrayList;
 		this.proyectos = proyectos;
 	}
 	
-
+	public String getCargo()
+	{
+		return getOcupacion();
+	}
+	
+	protected abstract String getOcupacion(); 
+	
+	
 }

@@ -8,6 +8,7 @@ public class Cliente {
 	private String nombre;
 	private String direccion;
 	private ArrayList<Contrato> contratos;
+	private int totalContratos;
 	
 	
 	public Cliente(String id, String nombre, String direccion) {
@@ -16,6 +17,22 @@ public class Cliente {
 		this.nombre = nombre;
 		this.direccion = direccion;
 		contratos = new ArrayList<>(5);
+		totalContratos = 0;
+	}
+
+
+	public int getTotalContratos() {
+		return totalContratos;
+	}
+
+
+	public void setContratos(ArrayList<Contrato> contratos) {
+		this.contratos = contratos;
+	}
+
+
+	public void setTotalContratos(int totalContratos) {
+		this.totalContratos = totalContratos;
 	}
 
 
@@ -48,6 +65,7 @@ public class Cliente {
 		if(contratos.size() <= 5)
 		{
 			contratos.add(contrato);
+			totalContratos++;
 			return true;
 		}
 		return false;

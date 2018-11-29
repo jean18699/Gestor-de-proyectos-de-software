@@ -217,6 +217,14 @@ public class ListarProyectos extends JDialog {
 		}
 		{
 			JButton btnNuevoProyecto = new JButton("Nuevo proyecto");
+			btnNuevoProyecto.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					RegProyecto reg = new RegProyecto();
+					reg.setLocationRelativeTo(null);
+					reg.setModal(true);
+					reg.setVisible(true);
+				}
+			});
 			btnNuevoProyecto.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 			btnNuevoProyecto.setBounds(0, 0, 155, 53);
 			contentPanel.add(btnNuevoProyecto);
