@@ -40,6 +40,8 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Color;
 
 public class RegProyecto extends JDialog {
 
@@ -103,6 +105,7 @@ public class RegProyecto extends JDialog {
 	private JTable tablaClientes;
 	private JButton btnAgregarCliente;
 	private JButton btnAnterior;
+	private JButton btnSiguiente2;
 
 
 	/**
@@ -177,6 +180,34 @@ public class RegProyecto extends JDialog {
 		panelProyecto.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(panelProyecto, BorderLayout.CENTER);
 		panelProyecto.setLayout(null);
+		
+		panelClientes = new JPanel();
+		panelClientes.setVisible(false);
+		panelClientes.setBounds(0, -1, 753, 327);
+		panelProyecto.add(panelClientes);
+		panelClientes.setLayout(null);
+		
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 11, 733, 213);
+		panelClientes.add(scrollPane_1);
+		
+		tablaClientes = new JTable();
+		tablaClientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int index = tablaClientes.getSelectedRow();
+				if(index >= 0)
+				{
+					
+					select = table.getValueAt(index, 0).toString();
+					System.out.println(select);
+					btnSiguiente2.setEnabled(true);
+				}
+				
+			}
+		});
+		scrollPane_1.setViewportView(tablaClientes);
+		tablaClientes.setModel(modelClientes);
 		{
 			panel = new JPanel();
 			panel.setBounds(182, 11, 437, 316);
@@ -321,23 +352,18 @@ public class RegProyecto extends JDialog {
 			panel_1.add(btnNewButton_3);
 			
 			cmbOcupacion = new JComboBox();
-			cmbOcupacion.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					if(cmbOcupacion.getSelectedItem().toString().equalsIgnoreCase("Programador"))
-					{
-						cargarProgramadores();
-					}
-					if(cmbOcupacion.getSelectedItem().toString().equalsIgnoreCase("Planificador"))
-					{
-						cargarPlanificadores();
-					}
-					if(cmbOcupacion.getSelectedItem().toString().equalsIgnoreCase("Diseñador"))
-					{
-						cargarDisegnadores();
-					}
+			cmbOcupacion.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					btnCargarAdicional.setEnabled(true);
+					btnCargarJefe.setEnabled(true);
+					btnCargarProgramador.setEnabled(true);
+					btnCargarProgramador2.setEnabled(true);
+					btnCargarPlanificador.setEnabled(true);
 					
 				}
 			});
+			
 			cmbOcupacion.setModel(new DefaultComboBoxModel(new String[] {"<Ocupacion>", "Planificador", "Programador", "Dise\u00F1ador"}));
 			cmbOcupacion.setBounds(251, 110, 93, 20);
 			panel_1.add(cmbOcupacion);
@@ -349,7 +375,31 @@ public class RegProyecto extends JDialog {
 			txtIdAdicional.setColumns(10);
 			
 			btnCargarAdicional = new JButton("Cargar");
-			btnCargarAdicional.setBounds(251, 141, 65, 23);
+			btnCargarAdicional.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				
+					
+					if(cmbOcupacion.getSelectedItem().toString().equalsIgnoreCase("Programador"))
+					{
+						btnCargarAdicional.setEnabled(false);
+						cargarProgramadores();
+					}
+					if(cmbOcupacion.getSelectedItem().toString().equalsIgnoreCase("Planificador"))
+					{
+						btnCargarAdicional.setEnabled(false);
+						cargarPlanificadores();
+					}
+					if(cmbOcupacion.getSelectedItem().toString().equalsIgnoreCase("Diseñador"))
+					{
+						btnCargarAdicional.setEnabled(false);
+						cargarDisegnadores();
+					}
+					
+				}
+				});
+			
+			
+			btnCargarAdicional.setBounds(105, 142, 65, 23);
 			panel_1.add(btnCargarAdicional);
 			
 			btnNewButton_4 = new JButton("Info");
@@ -434,6 +484,7 @@ public class RegProyecto extends JDialog {
 		}
 		{
 			buttonPane = new JPanel();
+			buttonPane.setBackground(Color.LIGHT_GRAY);
 			buttonPane.setBounds(0, 324, 753, 39);
 			panelProyecto.add(buttonPane);
 			buttonPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -445,7 +496,9 @@ public class RegProyecto extends JDialog {
 					
 						btnAgregarCliente.setVisible(true);
 						btnAnterior.setVisible(true);
-						btnSiguiente.setEnabled(false);
+						btnSiguiente.setVisible(false);
+						btnSiguiente2.setVisible(true);
+						btnSiguiente2.setEnabled(false);
 						panel.setVisible(false);
 						panel_1.setVisible(false);
 						panel_2.setVisible(false);
@@ -495,7 +548,42 @@ public class RegProyecto extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 			
+			btnAnterior = new JButton("Anterior");
+			btnAnterior.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					btnAgregarCliente.setVisible(false);
+					btnAnterior.setVisible(false);
+					btnSiguiente.setVisible(true);
+					btnSiguiente.setEnabled(true);
+					btnSiguiente2.setVisible(false);
+					panel.setVisible(true);
+					panel_1.setVisible(true);
+					panel_2.setVisible(true);
+					scrollPane_1.setVisible(false);
+					panelClientes.setVisible(false);
+				}
+			});
+			btnAnterior.setVisible(false);
+			btnAnterior.setBounds(496, 7, 89, 23);
+			buttonPane.add(btnAnterior);
+			
 			btnAgregarCliente = new JButton("Nuevo cliente");
+			btnAgregarCliente.setBounds(10, 2, 133, 33);
+			buttonPane.add(btnAgregarCliente);
+			btnAgregarCliente.setIcon(new ImageIcon(RegProyecto.class.getResource("/img/Cliente 32x32.png")));
+			
+			btnSiguiente2 = new JButton("Siguiente");
+			btnSiguiente2.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					RegContrato reg = new RegContrato();
+					reg.setLocationRelativeTo(null);
+					reg.setModal(true);
+					reg.setVisible(true);
+				}
+			});
+			btnSiguiente2.setBounds(589, 7, 77, 23);
+			buttonPane.add(btnSiguiente2);
 			btnAgregarCliente.setVisible(false);
 			btnAgregarCliente.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -506,59 +594,11 @@ public class RegProyecto extends JDialog {
 					cargarClientes();
 				}
 			});
-			btnAgregarCliente.setBounds(10, 4, 113, 29);
-			buttonPane.add(btnAgregarCliente);
-			
-			btnAnterior = new JButton("Anterior");
-			btnAnterior.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-					btnAgregarCliente.setVisible(false);
-					btnAnterior.setVisible(false);
-					btnSiguiente.setEnabled(true);
-					panel.setVisible(true);
-					panel_1.setVisible(true);
-					panel_2.setVisible(true);
-					scrollPane_1.setVisible(false);
-					panelClientes.setVisible(false);
-				}
-			});
-			btnAnterior.setVisible(false);
-			btnAnterior.setBounds(497, 7, 89, 23);
-			buttonPane.add(btnAnterior);
 		}
 		
 		
 		
 		getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panelProyecto, panel_2, lblNombre, lblId, lblOcupacion, lblSalariohora, lblEstado, lblIdempleado, panel_3, button, lblNombreEmpleado, lblOcupacionEmpleado, lblSalarioempleado, lblCondicionempleado, panel, lblNombreDelProyecto, txtNombre, lblEquipo, panel_1, lblProgramador, lblPlanificador, lblJefeDelProyecto, lblProgramador_1, txtJefe, btnCargarJefe, txtIdPlanificador, txtIdProgramador1, txtIdProgramador2, btnCargarPlanificador, btnCargarProgramador, btnCargarProgramador2, btnNewButton, btnNewButton_1, btnNewButton_2, btnNewButton_3, cmbOcupacion, txtIdAdicional, btnCargarAdicional, btnNewButton_4, lblAdicional, lblCategoria, cmbCategoria, scrollPane_1, table, buttonPane, btnSiguiente, cancelButton}));
-		
-		panelClientes = new JPanel();
-		panelClientes.setVisible(false);
-		panelClientes.setBounds(0, -1, 753, 327);
-		panelProyecto.add(panelClientes);
-		panelClientes.setLayout(null);
-		
-		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 11, 733, 213);
-		panelClientes.add(scrollPane_1);
-		
-		tablaClientes = new JTable();
-		tablaClientes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int index = tablaClientes.getSelectedRow();
-				if(index >= 0)
-				{
-					
-					select = table.getValueAt(index, 0).toString();
-					System.out.println(select);
-					btnSiguiente.setEnabled(true);
-				}
-				
-			}
-		});
-		scrollPane_1.setViewportView(tablaClientes);
-		tablaClientes.setModel(modelClientes);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(627, 11, 115, 170);
@@ -566,6 +606,7 @@ public class RegProyecto extends JDialog {
 		
 		//TABLA
 		table = new JTable();
+		table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		table.setShowVerticalLines(false);
 		
 		table.addMouseListener(new MouseAdapter() {

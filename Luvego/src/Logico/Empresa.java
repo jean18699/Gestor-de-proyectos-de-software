@@ -130,6 +130,23 @@ public class Empresa {
 		return emp;
 	}
 	
+	//Funcion que recibira una lista de empleados para asignarles el mismo proyecto
+	public void asignarProyecto(ArrayList<Empleado> empleado, Proyecto proyecto)
+	{
+		for(int i = 0; i < empleado.size();i++)
+		{
+			
+			if(empleado.get(i).getProyectos().size() < 3)
+			{
+				
+				empleado.get(i).setProyecto(proyecto);
+			}else
+			{
+				System.out.println("excedido");
+			}
+		}	
+	}
+	
 	
 	public ArrayList<Cliente> getClientes() {
 		return clientes;

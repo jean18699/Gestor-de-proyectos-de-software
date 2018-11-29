@@ -15,7 +15,7 @@ import java.util.ArrayList;
 	protected final int edad;
 	protected final float salarioHora;
 	protected final String direccion;
-	protected ArrayList<String> proyectos;
+	protected ArrayList<Proyecto> proyectos;
 	protected char evaluacionAnual;
 	private String ocupacion;
 	
@@ -36,6 +36,7 @@ import java.util.ArrayList;
 		this.edad = edad;
 		this.direccion = direccion;
 		this.salarioHora = salarioHora;
+		proyectos = new ArrayList<>();
 	}
 
 	
@@ -105,7 +106,7 @@ import java.util.ArrayList;
 		return salarioHora;
 	}
 
-	public ArrayList<String> getProyectos() {
+	public ArrayList<Proyecto> getProyectos() {
 		return proyectos;
 	}
 
@@ -122,8 +123,8 @@ import java.util.ArrayList;
 	}
 
 	
-	public void setProyectos(ArrayList<String> proyectos) {
-		this.proyectos = proyectos;
+	public void setProyecto(Proyecto proyecto) {
+		this.proyectos.add(proyecto);
 	}
 	
 	public String getCargo()

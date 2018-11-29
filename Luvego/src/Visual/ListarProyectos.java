@@ -30,6 +30,9 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.border.EtchedBorder;
+import java.awt.Component;
+import javax.swing.SwingConstants;
+import java.awt.Cursor;
 
 public class ListarProyectos extends JDialog {
 
@@ -63,7 +66,7 @@ public class ListarProyectos extends JDialog {
 	public ListarProyectos() {
 		
 		setTitle("Lista de proyectos");
-		setBounds(100, 100, 700, 377);
+		setBounds(100, 100, 743, 329);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.LIGHT_GRAY);
@@ -73,7 +76,7 @@ public class ListarProyectos extends JDialog {
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		scrollPane.setBounds(158, 65, 408, 243);
+		scrollPane.setBounds(160, 11, 448, 243);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		contentPanel.add(scrollPane);
 		{
@@ -87,8 +90,8 @@ public class ListarProyectos extends JDialog {
 					}
 				}
 			});
-			table.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			table.getTableHeader().setFont(new Font("Tahoma", Font.ITALIC, 18));
+			table.setFont(new Font("Tahoma", Font.PLAIN, 12));
+			table.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 12));
 			
 			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			model = new DefaultTableModel();
@@ -102,7 +105,7 @@ public class ListarProyectos extends JDialog {
 			panel.setLayout(null);
 			panel.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(0, 0, 0), null, null, null));
 			panel.setBackground(new Color(211, 211, 211));
-			panel.setBounds(0, 65, 155, 243);
+			panel.setBounds(0, 10, 155, 243);
 			contentPanel.add(panel);
 			{
 				JPanel panel_1 = new JPanel();
@@ -188,11 +191,12 @@ public class ListarProyectos extends JDialog {
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-			buttonPane.setBounds(0, 308, 684, 34);
+			buttonPane.setBounds(0, 256, 741, 34);
 			contentPanel.add(buttonPane);
 			{
 				btnVerDetalles = new JButton("Ver detalles");
-				btnVerDetalles.setBounds(515, 5, 106, 23);
+				btnVerDetalles.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				btnVerDetalles.setBounds(547, 5, 106, 23);
 				btnVerDetalles.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					}
@@ -205,7 +209,8 @@ public class ListarProyectos extends JDialog {
 			}
 			{
 				JButton btnSalir = new JButton("Salir");
-				btnSalir.setBounds(626, 5, 53, 23);
+				btnSalir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				btnSalir.setBounds(663, 5, 53, 23);
 				btnSalir.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
@@ -214,53 +219,75 @@ public class ListarProyectos extends JDialog {
 				btnSalir.setActionCommand("Cancel");
 				buttonPane.add(btnSalir);
 			}
-		}
-		{
-			JButton btnNuevoProyecto = new JButton("Nuevo proyecto");
-			btnNuevoProyecto.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					RegProyecto reg = new RegProyecto();
-					reg.setLocationRelativeTo(null);
-					reg.setModal(true);
-					reg.setVisible(true);
-				}
-			});
-			btnNuevoProyecto.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-			btnNuevoProyecto.setBounds(0, 0, 155, 53);
-			contentPanel.add(btnNuevoProyecto);
-			btnNuevoProyecto.setFont(new Font("Tahoma", Font.BOLD, 11));
-			btnNuevoProyecto.setIcon(new ImageIcon(ListarProyectos.class.getResource("/img/nuevo archivo.png")));
-		}
-		{
-			JButton btnRegistroDeContratos = new JButton("Registro de contratos");
-			btnRegistroDeContratos.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-			btnRegistroDeContratos.setIcon(new ImageIcon(ListarProyectos.class.getResource("/img/Contratos/contratos.png")));
-			btnRegistroDeContratos.setFont(new Font("Tahoma", Font.BOLD, 11));
-			btnRegistroDeContratos.setBounds(152, 0, 183, 53);
-			contentPanel.add(btnRegistroDeContratos);
-		}
-		{
-			JButton button = new JButton("");
-			button.setIcon(new ImageIcon(ListarProyectos.class.getResource("/img/Contratos/Aplazo de contratos.png")));
-			button.setFont(new Font("Tahoma", Font.BOLD, 11));
-			button.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-			button.setBounds(567, 136, 115, 75);
-			contentPanel.add(button);
-		}
-		{
-			JButton button = new JButton("");
-			button.setIcon(new ImageIcon(ListarProyectos.class.getResource("/img/Contratos/Contratos 64x64.png")));
-			button.setFont(new Font("Tahoma", Font.BOLD, 11));
-			button.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-			button.setBounds(567, 65, 115, 75);
-			contentPanel.add(button);
+			{
+				JButton btnNuevoProyecto = new JButton("Nuevo proyecto");
+				btnNuevoProyecto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				btnNuevoProyecto.setBounds(0, 5, 155, 23);
+				buttonPane.add(btnNuevoProyecto);
+				btnNuevoProyecto.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						RegProyecto reg = new RegProyecto();
+						reg.setLocationRelativeTo(null);
+						reg.setModal(true);
+						reg.setVisible(true);
+					}
+				});
+				btnNuevoProyecto.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+				btnNuevoProyecto.setFont(new Font("Tahoma", Font.BOLD, 11));
+				btnNuevoProyecto.setIcon(new ImageIcon(ListarProyectos.class.getResource("/img/nuevo archivo.png")));
+			}
+			{
+				JButton btnRegistroDeContratos = new JButton("Registro de contratos");
+				btnRegistroDeContratos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				btnRegistroDeContratos.setBounds(165, 3, 183, 26);
+				buttonPane.add(btnRegistroDeContratos);
+				btnRegistroDeContratos.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+				btnRegistroDeContratos.setIcon(new ImageIcon(ListarProyectos.class.getResource("/img/Contratos/contratos.png")));
+				btnRegistroDeContratos.setFont(new Font("Tahoma", Font.BOLD, 11));
+			}
 		}
 		{
 			JPanel panel = new JPanel();
 			panel.setBackground(Color.LIGHT_GRAY);
 			panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-			panel.setBounds(567, 65, 115, 243);
+			panel.setBounds(610, 11, 121, 243);
 			contentPanel.add(panel);
+			panel.setLayout(null);
+			{
+				JButton btnX = new JButton("");
+				btnX.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				btnX.setHorizontalTextPosition(SwingConstants.CENTER);
+				btnX.setToolTipText("Eliminar");
+				btnX.setAlignmentX(Component.CENTER_ALIGNMENT);
+				btnX.setBackground(Color.RED);
+				btnX.setForeground(Color.WHITE);
+				
+				btnX.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				btnX.setBounds(0, 160, 115, 83);
+				panel.add(btnX);
+			}
+			{
+				JButton button = new JButton("");
+				button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				button.setToolTipText("Ver contrato");
+				button.setBackground(Color.GRAY);
+				button.setBounds(0, 0, 115, 83);
+				panel.add(button);
+				button.setIcon(new ImageIcon(ListarProyectos.class.getResource("/img/Contratos/Contratos 64x64.png")));
+				button.setFont(new Font("Tahoma", Font.BOLD, 11));
+				button.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+			}
+			{
+				JButton button = new JButton("");
+				button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				button.setToolTipText("Aplazar proyecto");
+				button.setBackground(Color.GRAY);
+				button.setBounds(0, 83, 115, 78);
+				panel.add(button);
+				button.setIcon(new ImageIcon(ListarProyectos.class.getResource("/img/Contratos/Aplazo de contratos.png")));
+				button.setFont(new Font("Tahoma", Font.BOLD, 11));
+				button.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+			}
 		}
 		cargarProyectos();
 	}
