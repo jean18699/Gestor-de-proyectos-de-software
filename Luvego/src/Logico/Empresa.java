@@ -183,4 +183,82 @@ public class Empresa {
 	public static void setEmpresa(Empresa empresa) {
 		Empresa.empresa = empresa;
 	}
+	
+	public boolean ValidadorNombre(String str) {
+		boolean verdad = true;
+		
+		int i = 0;
+		if(str.equalsIgnoreCase("")/* || Integer.valueOf(str.charAt(0)) == 32*/) {
+			return false;	
+		}
+		
+		while(i < str.length() && verdad != false) {
+			if(!((Integer.valueOf(str.charAt(i)) >= 65 && Integer.valueOf(str.charAt(i)) <= 90) || (Integer.valueOf(str.charAt(i)) >= 97 && Integer.valueOf(str.charAt(i)) <= 122)/*  || Integer.valueOf(str.charAt(i)) == 32*/)) {
+				verdad = false;
+				return verdad;
+			}
+			
+			i++;
+		}
+		return verdad;
+	}
+	
+	public boolean ValidadorCaracteres(String str) {
+		boolean verdad = true;
+		
+		int i = 0;
+		if(str.equalsIgnoreCase("") || Integer.valueOf(str.charAt(0)) == 32) {
+			return false;	
+		}
+		
+		while(i < str.length() && verdad != false) {
+			if(!((Integer.valueOf(str.charAt(i)) >= 65 && Integer.valueOf(str.charAt(i)) <= 90) || (Integer.valueOf(str.charAt(i)) >= 97 && Integer.valueOf(str.charAt(i)) <= 122)  || Integer.valueOf(str.charAt(i)) == 32)) {
+				verdad = false;
+				return verdad;
+			}
+			
+			i++;
+		}
+		return verdad;
+	}
+	
+	public boolean ValidadorNumeros(String str) {
+		boolean verdad = true;
+		
+		int i = 0;
+		if(str.equalsIgnoreCase("")) {
+			verdad = false;
+		}
+		while(i < str.length() && verdad != false) {
+			if(Integer.valueOf(str.charAt(i)) < 46 || Integer.valueOf(str.charAt(i)) > 57) {
+				verdad = false;
+				return verdad;
+			}
+			i++;
+
+		}
+		return verdad;
+	}
+	
+	public boolean ValidadorCedula(String str) {
+		boolean verdad = true;
+		
+		int i = 0;
+		int cantGuiones = 0;
+		if(str.equalsIgnoreCase("")) {
+			return false;
+		}
+		while(i < str.length() && verdad != false) {
+			if(Integer.valueOf(str.charAt(i)) == 45) {
+				cantGuiones++;
+			}
+			if((Integer.valueOf(str.charAt(i)) != 45 && Integer.valueOf(str.charAt(i)) < 48 || Integer.valueOf(str.charAt(i)) > 57) || cantGuiones > 2) {
+				verdad = false;
+				return verdad;
+			}
+			i++;
+
+		}
+		return verdad;
+	}
 }
