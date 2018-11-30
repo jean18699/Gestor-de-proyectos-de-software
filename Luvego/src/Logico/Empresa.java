@@ -6,6 +6,7 @@ import java.util.Date;
 public class Empresa {
 
 	private ArrayList<Cliente> clientes;
+	private static Cliente loginCliente;
 	private ArrayList<Contrato> contratos;
 	private ArrayList<Empleado> empleados;
 	private ArrayList<Proyecto> proyectos;
@@ -260,5 +261,17 @@ public class Empresa {
 
 		}
 		return verdad;
+	}
+	
+	public boolean confirmLogin(String Id, String Contrasena) {
+		boolean login = false;
+		for(int i = 0; i < clientes.size(); i++) {
+			if(clientes.get(i).getId().equals(Id) && clientes.get(i).getPass().equals(Id)) {
+				loginCliente = clientes.get(i);
+				login = true;
+				break;
+			}
+		}
+		return login;
 	}
 }

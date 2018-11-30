@@ -155,7 +155,7 @@ public class RegCliente extends JDialog {
 						}else
 						{
 						
-							Cliente cliente = new Cliente(txtId.getText(),txtNombre.getText(),txtDireccion.getText());
+							Cliente cliente = new Cliente(txtId.getText(),txtNombre.getText(),txtDireccion.getText(), "1234");
 							Empresa.getInstance().nuevoCliente(cliente);
 							dispose();
 						}

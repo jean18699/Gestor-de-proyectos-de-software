@@ -9,13 +9,15 @@ public class Cliente {
 	private String direccion;
 	private ArrayList<Contrato> contratos;
 	private int totalContratos;
+	private String pass;
 	
 	
-	public Cliente(String id, String nombre, String direccion) {
+	public Cliente(String id, String nombre, String direccion, String pass) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.direccion = direccion;
+		this.pass = pass;
 		contratos = new ArrayList<>(5);
 		totalContratos = 0;
 	}
@@ -84,6 +86,16 @@ public class Cliente {
 
 	public Cliente() {
 		
+	}
+
+
+	public String getPass() {
+		return pass;
+	}
+
+
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 
 }
