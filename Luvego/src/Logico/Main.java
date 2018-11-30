@@ -9,6 +9,7 @@ public class Main {
 	
 		ArrayList<String> esp = new ArrayList<>();
 		esp.add("Java");
+		esp.add("Python");
 		
 		Empleado pro2 = new Programador("123","j","hombre",19,"cerro alto",156,esp);
 		System.out.println(pro2.getId());
@@ -19,21 +20,23 @@ public class Main {
 		Empleado dsg = new Disegnador("jeane","j","hombre",19,"cerro alto",15);
 		Empleado dsg2 = new Disegnador("jeane","j","hombre",19,"cerro alto",15);
 		
-		Empleado chef = new Jefe("jeanff","j","hombre",19,"cerro alto",15);
+		Empleado chef = new Jefe("jeanff","j","hombre",19,"cerro alto",1556);
 		Empleado p = new Planificador("jeasn","j","hombre",19,"cerro alto",15);
 		
 		ArrayList<Empleado> grupo = new ArrayList<>();
-		grupo.add(pro);
-		grupo.add(pro3);
 		grupo.add(chef);
 		grupo.add(p);
+		grupo.add(pro);
+		grupo.add(pro3);
 		grupo.add(dsg);
 		
 		
-		Proyecto pr = new Proyecto("123","Globos",chef,p,pro,pro2,dsg,"Web");
-		Empresa.getInstance().asignarProyecto(grupo, pr);
-		Empresa.getInstance().asignarProyecto(grupo, pr);
-		Empresa.getInstance().asignarProyecto(grupo, pr);
+		Proyecto pr = new Proyecto("123","Globos",grupo,"Web");
+		System.out.println(pr.getSumaSalarios());
+		
+		//Empresa.getInstance().asignarProyecto(grupo, pr);
+		//Empresa.getInstance().asignarProyecto(grupo, pr);
+		//Empresa.getInstance().asignarProyecto(grupo, pr);
 		//Empresa.getInstance().asignarProyecto(grupo, pr);
 		//Empresa.getInstance().asignarProyecto(grupo, pr);
 		//Empresa.getInstance().asignarProyecto(grupo, pr);

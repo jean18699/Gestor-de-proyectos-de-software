@@ -363,11 +363,26 @@ public class RegProyecto extends JDialog {
 			btnSiguiente2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
+					
+					ArrayList<Empleado> grupoTrabajo = new ArrayList<>();
+					grupoTrabajo.add(Empresa.getInstance().getEmpleadoById(txtJefe.getText()));
+					grupoTrabajo.add(Empresa.getInstance().getEmpleadoById(txtIdProgramador1.getText()));
+					grupoTrabajo.add(Empresa.getInstance().getEmpleadoById(txtIdProgramador2.getText()));
+					grupoTrabajo.add(Empresa.getInstance().getEmpleadoById(txtIdPlanificador.getText()));
+					grupoTrabajo.add(Empresa.getInstance().getEmpleadoById(txtIdAdicional.getText()));
+					
+					
+					Proyecto proyecto = new Proyecto("123", txtNombre.getText(), grupoTrabajo, cmbCategoria.getSelectedItem().toString());
 					Cliente cliente = Empresa.getInstance().getClienteById(select);
-					RegContrato reg = new RegContrato();
+					
+					
+					RegContrato reg = new RegContrato(proyecto,cliente);
 					reg.setLocationRelativeTo(null);
 					reg.setModal(true);
 					reg.setVisible(true);
+				
+					
+					
 				}
 			});
 			btnSiguiente2.setBounds(589, 7, 77, 23);
@@ -703,7 +718,10 @@ public class RegProyecto extends JDialog {
 					if(index >= 0)
 					{
 						select = tablaClientes.getValueAt(index, 0).toString();
-						System.out.println(select);
+						btnSiguiente2.setEnabled(true);
+					}else
+					{
+						btnSiguiente2.setEnabled(false);
 					}
 				}
 			});
