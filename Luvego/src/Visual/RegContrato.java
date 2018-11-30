@@ -27,6 +27,10 @@ import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.TitledBorder;
 
 public class RegContrato extends JDialog {
 	private JTextField textField;
@@ -54,7 +58,7 @@ public class RegContrato extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegContrato(Proyecto proyecto, Cliente cliente) {
-		setBounds(100, 100, 519, 346);
+		setBounds(100, 100, 519, 345);
 		getContentPane().setLayout(null);
 		{
 			JPanel panel = new JPanel();
@@ -89,34 +93,6 @@ public class RegContrato extends JDialog {
 				panel.add(txtNombreProyecto);
 				txtNombreProyecto.setColumns(10);
 				txtNombreProyecto.setText(proyecto.getNombre());
-			}
-			{
-				JLabel lblIdentificadorDelCliente = new JLabel("Identificador del cliente:");
-				lblIdentificadorDelCliente.setBounds(207, 129, 157, 14);
-				lblIdentificadorDelCliente.setFont(new Font("Tahoma", Font.BOLD, 12));
-				panel.add(lblIdentificadorDelCliente);
-			}
-			{
-				txtIdCliente = new JTextField();
-				txtIdCliente.setBounds(367, 128, 124, 18);
-				txtIdCliente.setEnabled(false);
-				panel.add(txtIdCliente);
-				txtIdCliente.setColumns(10);
-				txtIdCliente.setText(cliente.getId());
-			}
-			{
-				JLabel lblNombreDelCliente = new JLabel("Nombre del cliente:");
-				lblNombreDelCliente.setFont(new Font("Tahoma", Font.BOLD, 12));
-				lblNombreDelCliente.setBounds(233, 154, 124, 14);
-				panel.add(lblNombreDelCliente);
-			}
-			{
-				txtNombreCliente = new JTextField();
-				txtNombreCliente.setBounds(367, 152, 124, 20);
-				txtNombreCliente.setEnabled(false);
-				panel.add(txtNombreCliente);
-				txtNombreCliente.setColumns(10);
-				txtNombreCliente.setText(cliente.getNombre());
 			}
 			
 			//JSpinner spnFecha = new JSpinner((SpinnerModel) null);
@@ -214,6 +190,48 @@ public class RegContrato extends JDialog {
 					panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 					panel_2.setBounds(176, 0, 328, 228);
 					panel.add(panel_2);
+					panel_2.setLayout(null);
+					{
+						JPanel panel_3 = new JPanel();
+						panel_3.setBorder(new TitledBorder(null, "Datos preliminares del proyecto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+						panel_3.setBounds(0, 0, 328, 117);
+						panel_2.add(panel_3);
+					}
+					{
+						JPanel panel_3 = new JPanel();
+						panel_3.setBorder(new TitledBorder(null, "Datos preliminares del cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+						panel_3.setBounds(0, 118, 328, 110);
+						panel_2.add(panel_3);
+						panel_3.setLayout(null);
+						{
+							JLabel lblNombreDelCliente = new JLabel("Nombre del cliente:");
+							lblNombreDelCliente.setBounds(58, 63, 124, 14);
+							panel_3.add(lblNombreDelCliente);
+							lblNombreDelCliente.setFont(new Font("Tahoma", Font.BOLD, 12));
+						}
+						{
+							txtNombreCliente = new JTextField();
+							txtNombreCliente.setBounds(192, 61, 124, 20);
+							panel_3.add(txtNombreCliente);
+							txtNombreCliente.setEnabled(false);
+							txtNombreCliente.setColumns(10);
+							txtNombreCliente.setText(cliente.getNombre());
+						}
+						{
+							JLabel lblIdentificadorDelCliente = new JLabel("Identificador del cliente:");
+							lblIdentificadorDelCliente.setBounds(31, 38, 157, 14);
+							panel_3.add(lblIdentificadorDelCliente);
+							lblIdentificadorDelCliente.setFont(new Font("Tahoma", Font.BOLD, 12));
+						}
+						{
+							txtIdCliente = new JTextField();
+							txtIdCliente.setBounds(192, 37, 124, 18);
+							panel_3.add(txtIdCliente);
+							txtIdCliente.setEnabled(false);
+							txtIdCliente.setColumns(10);
+							txtIdCliente.setText(cliente.getId());
+						}
+					}
 				}
 			}
 		}
@@ -225,7 +243,7 @@ public class RegContrato extends JDialog {
 			panel.setLayout(null);
 			{
 				JPanel buttonPane = new JPanel();
-				buttonPane.setBounds(0, 272, 503, 37);
+				buttonPane.setBounds(0, 271, 503, 37);
 				panel.add(buttonPane);
 				buttonPane.setBackground(Color.LIGHT_GRAY);
 				buttonPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
