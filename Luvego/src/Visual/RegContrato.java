@@ -27,6 +27,8 @@ import javax.swing.SpinnerDateModel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
@@ -70,6 +72,22 @@ public class RegContrato extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegContrato(Proyecto proyecto, Cliente cliente) {
+		
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (InstantiationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IllegalAccessException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		setBounds(100, 100, 677, 345);
 		getContentPane().setLayout(null);
 		{
@@ -117,17 +135,17 @@ public class RegContrato extends JDialog {
 					DateEdit.getTextField().setEditable(true);
 					spnFecha.setEditor(DateEdit);
 					
-					JButton btnNewButton = new JButton("New button");
-					btnNewButton.setBounds(10, 36, 91, 23);
-					btnNewButton.addActionListener(new ActionListener() {
+					JButton btnAceptarFecha = new JButton("Aceptar y obtener precio");
+					btnAceptarFecha.setBounds(20, 36, 171, 23);
+					btnAceptarFecha.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							fechaEntrega = (Date) spnFecha.getValue();
-							System.out.println(fechaEntrega);
-							//Contrato contrato = new Contrato(proyecto,fechaEntrega);
 							
+							Contrato contrato = new Contrato(proyecto,fechaEntrega);
+							txtPrecioContrato.setText(Float.toString(contrato.getPrecioFinal()));
 						}
 					});
-					panel_2.add(btnNewButton);
+					panel_2.add(btnAceptarFecha);
 					
 					JPanel panel_3 = new JPanel();
 					panel_3.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
