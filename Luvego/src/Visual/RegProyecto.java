@@ -64,20 +64,7 @@ public class RegProyecto extends JDialog {
 	private String selectCliente;
 	private int index;
 	private JLabel lblIdEmpleado;
-	private JLabel lblNombreEmpleado;
 	private JLabel lblSalarioEmpleado;
-	private JLabel lblOcupacionEmpleado;
-	private JLabel lblSalarioempleado;
-	private JLabel lblCondicionempleado;
-	private JPanel panel_2;
-	private JLabel lblNombre;
-	private JLabel lblId;
-	private JLabel lblOcupacion;
-	private JLabel lblSalariohora;
-	private JLabel lblEstado;
-	private JLabel lblIdempleado;
-	private JPanel panel_3;
-	private JButton button;
 	private JPanel panel;
 	private JLabel lblNombreDelProyecto;
 	private JLabel lblEquipo;
@@ -109,6 +96,7 @@ public class RegProyecto extends JDialog {
 	private JScrollPane scrollPane_1;
 	private JPanel panelClientes;
 	private JScrollPane scrollPane;
+	private JPanel panel_4;
 
 
 	/**
@@ -144,7 +132,7 @@ public class RegProyecto extends JDialog {
 		}
 
 		
-		setBounds(100, 100, 769, 402);
+		setBounds(100, 100, 1043, 290);
 		getContentPane().setLayout(new BorderLayout());
 
 		
@@ -184,7 +172,7 @@ public class RegProyecto extends JDialog {
 			}
 		};
 		
-		String[] titulos = {"ID"};
+		String[] titulos = {"ID","Nombre","Ocupacion","Salario","Condicion"};
 		model.setColumnIdentifiers(titulos);
 		
 		modelClientes = new DefaultTableModel(){
@@ -195,86 +183,81 @@ public class RegProyecto extends JDialog {
 				return false;
 			}
 		};;
-		String[] cols = {"ID","Nombre","Direccion","Proyectos activos","Total proyectos solicitados"};
-		modelClientes.setColumnIdentifiers(cols);
 		
 		
-		panelProyecto.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panelProyecto.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		getContentPane().add(panelProyecto, BorderLayout.CENTER);
 		panelProyecto.setLayout(null);
-		{
-			panel_2 = new JPanel();
-			panel_2.setBounds(569, 11, 170, 295);
-			panelProyecto.add(panel_2);
-			panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-			panel_2.setLayout(null);
-			
-			lblNombre = new JLabel("Nombre:");
-			lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblNombre.setBounds(10, 175, 64, 14);
-			panel_2.add(lblNombre);
-			
-			lblId = new JLabel("Identificador:");
-			lblId.setFont(new Font("Sitka Text", Font.BOLD, 11));
-			lblId.setBounds(10, 150, 78, 14);
-			panel_2.add(lblId);
-			
-			lblOcupacion = new JLabel("Ocupacion:");
-			lblOcupacion.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblOcupacion.setBounds(10, 200, 78, 14);
-			panel_2.add(lblOcupacion);
-			
-			lblSalariohora = new JLabel("Salario/Hora:");
-			lblSalariohora.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblSalariohora.setBounds(10, 225, 78, 14);
-			panel_2.add(lblSalariohora);
-			
-			lblEstado = new JLabel("Condicion:");
-			lblEstado.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lblEstado.setBounds(10, 250, 64, 14);
-			panel_2.add(lblEstado);
-			
-			lblIdempleado = new JLabel("");
-			lblIdempleado.setBounds(93, 149, 81, 14);
-			panel_2.add(lblIdempleado);
-			
-			panel_3 = new JPanel();
-			panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-			panel_3.setBounds(0, 0, 174, 116);
-			panel_2.add(panel_3);
-			panel_3.setLayout(new BorderLayout(0, 0));
-			
-			button = new JButton("");
-			button.setEnabled(false);
-			button.setIcon(new ImageIcon(RegProyecto.class.getResource("/img/Nuevo Proyecto.png")));
-			panel_3.add(button, BorderLayout.CENTER);
-			
-			lblNombreEmpleado = new JLabel("");
-			lblNombreEmpleado.setBounds(66, 175, 98, 14);
-			panel_2.add(lblNombreEmpleado);
-			
-			lblOcupacionEmpleado = new JLabel("");
-			lblOcupacionEmpleado.setBounds(76, 200, 91, 14);
-			panel_2.add(lblOcupacionEmpleado);
-			
-			lblSalarioempleado = new JLabel("");
-			lblSalarioempleado.setBounds(93, 225, 81, 14);
-			panel_2.add(lblSalarioempleado);
-			
-			lblCondicionempleado = new JLabel("");
-			lblCondicionempleado.setBounds(76, 250, 98, 14);
-			panel_2.add(lblCondicionempleado);
-		}
-		getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panelProyecto, panel_2, lblNombre, lblId, lblOcupacion, lblSalariohora, lblEstado, lblIdempleado, panel_3, button, lblNombreEmpleado, lblOcupacionEmpleado, lblSalarioempleado, lblCondicionempleado, panel, lblNombreDelProyecto, txtNombre, lblEquipo, panel_1, lblProgramador, lblPlanificador, lblJefeDelProyecto, lblProgramador_1, txtJefe, btnCargarJefe, txtIdPlanificador, txtIdProgramador1, txtIdProgramador2, btnCargarPlanificador, btnCargarProgramador, btnCargarProgramador2, btnNewButton, btnNewButton_1, btnNewButton_2, btnNewButton_3, cmbOcupacion, txtIdAdicional, btnNewButton_4, lblAdicional, lblCategoria, cmbCategoria, table, buttonPane, btnSiguiente, cancelButton}));
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		scrollPane.setBackground(Color.WHITE);
+		scrollPane.setBounds(442, 0, 585, 213);
+		panelProyecto.add(scrollPane);
+		
+		//TABLA
+
+		String[] cols = {"ID","Nombre","Direccion","Proyectos activos","Total proyectos solicitados"};
+		modelClientes.setColumnIdentifiers(cols);
+		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		table.setShowVerticalLines(false);
+		
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				int index = table.getSelectedRow();
+				if(index >= 0)
+				{	
+						//Jefe j = new Jefe("dasd", "d", "hombre", 8, "si", 5);
+						//Empresa.getInstance().nuevoEmpleado(j);
+						select = table.getValueAt(index, 0).toString();
+						
+						if(btnCargarJefe.isEnabled() && btnCargarProgramador.isEnabled() && btnCargarProgramador2.isEnabled() && btnCargarPlanificador.isEnabled()) {
+							txtIdAdicional.setText(select);
+						}
+				
+						if(!btnCargarJefe.isEnabled())
+						{
+							txtJefe.setText(select);
+						}
+						if(!btnCargarProgramador.isEnabled())
+						{
+							txtIdProgramador1.setText(select);
+						}
+						if(!btnCargarProgramador2.isEnabled())
+						{
+							txtIdProgramador2.setText(select);
+						}
+						if(!btnCargarPlanificador.isEnabled())
+						{
+							txtIdPlanificador.setText(select);
+						}
+						/*if(!btnCargarAdicional.isEnabled())
+						{
+							txtIdAdicional.setText(select);
+						}*/
+						
+				}
+
+			}
+		});
+		table.setModel(model);
+		
+		
+		
+		scrollPane.setViewportView(table);
 		{
 			buttonPane = new JPanel();
-			buttonPane.setBounds(0, 324, 753, 39);
+			buttonPane.setBounds(0, 213, 1027, 39);
 			buttonPane.setBackground(Color.LIGHT_GRAY);
 			panelProyecto.add(buttonPane);
 			buttonPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 			{
 				btnSiguiente = new JButton("Siguiente");
-				btnSiguiente.setBounds(589, 7, 77, 23);
+				btnSiguiente.setBounds(855, 7, 77, 23);
 				btnSiguiente.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					
@@ -285,7 +268,7 @@ public class RegProyecto extends JDialog {
 						btnSiguiente2.setEnabled(false);
 						panel.setVisible(false);
 						panel_1.setVisible(false);
-						panel_2.setVisible(false);
+						
 						scrollPane.setVisible(false);
 						scrollPane_1.setVisible(true);
 						panelClientes.setVisible(true);
@@ -328,7 +311,7 @@ public class RegProyecto extends JDialog {
 						dispose();
 					}
 				});
-				cancelButton.setBounds(671, 7, 75, 23);
+				cancelButton.setBounds(942, 7, 75, 23);
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
@@ -344,14 +327,14 @@ public class RegProyecto extends JDialog {
 					btnSiguiente2.setVisible(false);
 					panel.setVisible(true);
 					panel_1.setVisible(true);
-					panel_2.setVisible(true);
+				
 					scrollPane.setVisible(true);
 					scrollPane_1.setVisible(false);
 					panelClientes.setVisible(false);
 				}
 			});
 			btnAnterior.setVisible(false);
-			btnAnterior.setBounds(496, 7, 89, 23);
+			btnAnterior.setBounds(756, 7, 89, 23);
 			buttonPane.add(btnAnterior);
 			
 			btnAgregarCliente = new JButton("Nuevo cliente");
@@ -385,11 +368,12 @@ public class RegProyecto extends JDialog {
 					
 				}
 			});
-			btnSiguiente2.setBounds(589, 7, 77, 23);
+			btnSiguiente2.setBounds(855, 7, 77, 23);
 			buttonPane.add(btnSiguiente2);
 			{
 				panel = new JPanel();
-				panel.setBounds(10, 11, 431, 309);
+				panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+				panel.setBounds(0, 0, 441, 213);
 				panelProyecto.add(panel);
 				panel.setLayout(null);
 				
@@ -404,7 +388,7 @@ public class RegProyecto extends JDialog {
 				}
 				{
 					lblEquipo = new JLabel("Equipo de trabajo");
-					lblEquipo.setBounds(10, 42, 133, 14);
+					lblEquipo.setBounds(10, 40, 133, 14);
 					panel.add(lblEquipo);
 				}
 				
@@ -471,8 +455,9 @@ public class RegProyecto extends JDialog {
 				panel.add(cmbCategoria);
 				
 				panel_1 = new JPanel();
+				panel_1.setBackground(Color.WHITE);
 				panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-				panel_1.setBounds(0, 56, 426, 242);
+				panel_1.setBounds(0, 65, 441, 147);
 				panel.add(panel_1);
 				panel_1.setLayout(null);
 				
@@ -637,66 +622,11 @@ public class RegProyecto extends JDialog {
 				lblAdicional.setBounds(49, 113, 46, 14);
 				panel_1.add(lblAdicional);
 				
-				scrollPane = new JScrollPane();
-				scrollPane.setBounds(444, 126, 115, 182);
-				panelProyecto.add(scrollPane);
-				
-				//TABLA
-				table = new JTable();
-				table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				table.setShowVerticalLines(false);
-				
-				table.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-
-						int index = table.getSelectedRow();
-						if(index >= 0)
-						{	
-								//Jefe j = new Jefe("dasd", "d", "hombre", 8, "si", 5);
-								//Empresa.getInstance().nuevoEmpleado(j);
-								select = table.getValueAt(index, 0).toString();
-								
-								if(btnCargarJefe.isEnabled() && btnCargarProgramador.isEnabled() && btnCargarProgramador2.isEnabled() && btnCargarPlanificador.isEnabled()) {
-									txtIdAdicional.setText(select);
-								}
-						
-								if(!btnCargarJefe.isEnabled())
-								{
-									txtJefe.setText(select);
-								}
-								if(!btnCargarProgramador.isEnabled())
-								{
-									txtIdProgramador1.setText(select);
-								}
-								if(!btnCargarProgramador2.isEnabled())
-								{
-									txtIdProgramador2.setText(select);
-								}
-								if(!btnCargarPlanificador.isEnabled())
-								{
-									txtIdPlanificador.setText(select);
-								}
-								/*if(!btnCargarAdicional.isEnabled())
-								{
-									txtIdAdicional.setText(select);
-								}*/
-								
-								lblNombreEmpleado.setText(Empresa.getInstance().getEmpleadoById(select).getNombre());
-								lblIdempleado.setText(select.toString());
-								lblOcupacionEmpleado.setText(Empresa.getInstance().getEmpleadoById(select).getCargo());
-								lblCondicionempleado.setText(Character.toString(Empresa.getInstance().getEmpleadoById(select).getEvaluacionAnual()));
-								lblSalarioempleado.setText(Float.toString(Empresa.getInstance().getEmpleadoById(select).getSalarioHora()));
-						}
-
-					}
-				});
-				table.setModel(model);
-				
-				
-				
-				scrollPane.setViewportView(table);
+				panel_4 = new JPanel();
+				panel_4.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+				panel_4.setBackground(Color.LIGHT_GRAY);
+				panel_4.setBounds(0, 31, 104, 35);
+				panel.add(panel_4);
 			}
 			
 			panelClientes = new JPanel();
@@ -726,6 +656,7 @@ public class RegProyecto extends JDialog {
 				}
 			});
 			scrollPane_1.setViewportView(tablaClientes);
+			getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panelProyecto, table}));
 			btnAgregarCliente.setVisible(false);
 			btnAgregarCliente.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -746,8 +677,11 @@ public class RegProyecto extends JDialog {
 			if(Empresa.getInstance().getEmpleados().get(i) instanceof Jefe)
 			{
 				fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
-				//fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
-				//fila[2] = Empresa.getInstance().getEmpleados().get(i).getApellidos();
+				fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
+				fila[2] = Empresa.getInstance().getEmpleados().get(i).getCargo();
+				fila[3] = Empresa.getInstance().getEmpleados().get(i).getSalarioHora();
+				fila[4] = Empresa.getInstance().getEmpleados().get(i).getEvaluacionAnual();
+				
 				model.addRow(fila);	
 			}
 		}
@@ -762,10 +696,12 @@ public class RegProyecto extends JDialog {
 		for(int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
 			if(Empresa.getInstance().getEmpleados().get(i) instanceof Programador)
 			{
-				fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
-				//fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
-				//fila[2] = Empresa.getInstance().getEmpleados().get(i).getApellidos();
-				model.addRow(fila);
+			fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
+			fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
+			fila[2] = Empresa.getInstance().getEmpleados().get(i).getCargo();
+			fila[3] = Empresa.getInstance().getEmpleados().get(i).getSalarioHora();
+			fila[4] = Empresa.getInstance().getEmpleados().get(i).getEvaluacionAnual();
+			model.addRow(fila);
 			}
 		}
 		
@@ -780,8 +716,10 @@ public class RegProyecto extends JDialog {
 			if(Empresa.getInstance().getEmpleados().get(i) instanceof Planificador)
 			{
 				fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
-				//fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
-				//fila[2] = Empresa.getInstance().getEmpleados().get(i).getApellidos();
+				fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
+				fila[2] = Empresa.getInstance().getEmpleados().get(i).getCargo();
+				fila[3] = Empresa.getInstance().getEmpleados().get(i).getSalarioHora();
+				fila[4] = Empresa.getInstance().getEmpleados().get(i).getEvaluacionAnual();
 				model.addRow(fila);	
 			}
 			
@@ -798,8 +736,10 @@ public class RegProyecto extends JDialog {
 			if(Empresa.getInstance().getEmpleados().get(i) instanceof Disegnador)
 			{
 				fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
-				//fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
-				//fila[2] = Empresa.getInstance().getEmpleados().get(i).getApellidos();
+				fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
+				fila[2] = Empresa.getInstance().getEmpleados().get(i).getCargo();
+				fila[3] = Empresa.getInstance().getEmpleados().get(i).getSalarioHora();
+				fila[4] = Empresa.getInstance().getEmpleados().get(i).getEvaluacionAnual();
 				model.addRow(fila);
 		
 			}
