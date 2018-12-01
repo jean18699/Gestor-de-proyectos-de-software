@@ -113,7 +113,16 @@ public class Empresa implements Serializable{
 		return empresa;
 	}
 
-
+	public void eliminarEmpleado(String id)
+	{
+		for(int i = 0; i < empleados.size();i++)
+		{
+			if(empleados.get(i).getId().equalsIgnoreCase(id))
+			{
+				empleados.remove(i);
+			}
+		}
+	}
 
 
 

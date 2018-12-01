@@ -139,34 +139,7 @@ public class RegProyecto extends JDialog {
 
 		setLocationRelativeTo(null);
 		
-		//Prueba
-		ArrayList<String> esp = new ArrayList<>();
-		esp.add("C");
-		esp.add("Java");
-		
-		Cliente c = new Cliente("123","jean","cerro alto", "2222");
-		
-		Empleado p = new Planificador("jeasn","j","hombre",19,"cerro alto",15, 0);
-		Empleado p2 = new Planificador("jeasn","j","hombre",19,"cerro alto",15, 0);
-		Empleado p3= new Planificador("jeasn","j","hombre",19,"cerro alto",15, 0);
-		
-		Empleado pro = new Programador("jeaasdfn","j","hombre",19,"cerro alto",156,esp);
-		Empleado pro2 = new Programador("jeaasdfn","j","hombre",19,"cerro alto",156,esp);
-		Empleado pro3 = new Programador("jeaasdfn","j","hombre",19,"cerro alto",156,esp);
-		Empleado dsg = new Disegnador("jeane","j","hombre",19,"cerro alto",15);
-		Empleado chef = new Jefe("jeanff","j","hombre",19,"cerro alto",15);
-		
-		Empresa.getInstance().nuevoEmpleado(p);
-		Empresa.getInstance().nuevoEmpleado(pro);
-		Empresa.getInstance().nuevoEmpleado(pro2);
-		Empresa.getInstance().nuevoEmpleado(pro3);
-		Empresa.getInstance().nuevoEmpleado(dsg);
-		Empresa.getInstance().nuevoEmpleado(chef);
-		Empresa.getInstance().nuevoEmpleado(p2);
-		Empresa.getInstance().nuevoEmpleado(p3);
-		Empresa.getInstance().nuevoCliente(c);
-		
-		model = new DefaultTableModel() {
+				model = new DefaultTableModel() {
 
 			@Override
 			public boolean isCellEditable(int row, int column)
