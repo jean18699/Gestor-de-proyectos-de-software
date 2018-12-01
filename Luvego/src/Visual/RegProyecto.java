@@ -153,7 +153,7 @@ public class RegProyecto extends JDialog {
 		esp.add("C");
 		esp.add("Java");
 		
-		Cliente c = new Cliente("123","jean","cerro alto");
+		Cliente c = new Cliente("123","jean","cerro alto", "2222");
 		
 		Empleado p = new Planificador("jeasn","j","hombre",19,"cerro alto",15);
 		Empleado p2 = new Planificador("jeasn","j","hombre",19,"cerro alto",15);

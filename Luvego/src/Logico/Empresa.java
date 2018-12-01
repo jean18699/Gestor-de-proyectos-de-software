@@ -1,25 +1,44 @@
 package Logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Empresa {
+public class Empresa implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Cliente> clientes;
+	private static Cliente loginUser;
 	private ArrayList<Contrato> contratos;
 	private ArrayList<Empleado> empleados;
 	private ArrayList<Proyecto> proyectos;
 	private static Empresa empresa;
+	
 	
 	private Empresa() {
 	
 		clientes = new ArrayList<>();
 		contratos = new ArrayList<>();
 		empleados = new ArrayList<>();
-		proyectos = new ArrayList<>();	
-		
+		proyectos = new ArrayList<>();
 	}
 	
+	
+	
+	
+	
+	public static Cliente getLoginUser() {
+		return loginUser;
+	}
+
+	public static void setLoginUser(Cliente loginUser) {
+		Empresa.loginUser = loginUser;
+	}
+
+
+
+
+
 	public static Empresa getInstance()
 	{
 		if(empresa == null)
@@ -260,5 +279,15 @@ public class Empresa {
 
 		}
 		return verdad;
+	}
+	
+	public boolean confirmLogin(String Id, String Contrasena) {
+		boolean login = false;
+		
+		if(loginUser.getId().equals("Admin") && loginUser.getPass().equals("0000")) {
+			login = true;
+		}
+		
+		return login;
 	}
 }
