@@ -36,7 +36,7 @@ public class Main {
 		
 
 		
-		
+		 
 		
 		Date date = new Date("12/2/2018");
 		Proyecto pr = new Proyecto("123","Globos",grupo,"Web");
