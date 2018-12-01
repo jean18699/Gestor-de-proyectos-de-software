@@ -5,7 +5,10 @@ import java.util.ArrayList;
 
 public class Cliente implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1232268027012908569L;
 	private String id;
 	private String nombre;
 	private String direccion;

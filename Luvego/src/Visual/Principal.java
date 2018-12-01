@@ -150,6 +150,14 @@ public class Principal extends JFrame {
 		mnEmpleados.add(mntmNuevo_1);
 		
 		JMenuItem mntmGestionar = new JMenuItem("Gestionar");
+		mntmGestionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarEmpleados list = new ListarEmpleados();
+				list.setLocationRelativeTo(null);
+				list.setModal(true);
+				list.setVisible(true);
+			}
+		});
 		mnEmpleados.add(mntmGestionar);
 		
 		JMenu mnClientes = new JMenu("Clientes");

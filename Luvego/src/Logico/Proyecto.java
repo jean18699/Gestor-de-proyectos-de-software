@@ -5,11 +5,14 @@ import java.util.ArrayList;
 
 public class Proyecto implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5346260584819546609L;
 	private String id;
 	private String nombre;
 	private ArrayList<Empleado> grupoTrabajo;
-	private float sumaSalarios;
+	//private float sumaSalarios;
 	private String clasificacion;
 
 	public Proyecto(String id, String nombre, ArrayList<Empleado> grupoTrabajo, String clasificacion) {

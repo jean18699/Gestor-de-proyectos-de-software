@@ -5,7 +5,10 @@ import java.util.ArrayList;
 
 public class Programador extends Empleado implements Serializable{
 	
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3863844485627270214L;
 	private ArrayList<String> especialidades;
 	
 	public Programador(String nombre, String apellidos, String sexo, int edad, String direccion, float salarioHora, ArrayList<String> especialidades) {

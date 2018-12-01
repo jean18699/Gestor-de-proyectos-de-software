@@ -5,8 +5,11 @@ import java.util.ArrayList;
 
  public abstract class Empleado implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2167295889165009446L;
 	//para generar el id
-	 private static final long serialVersionUID = 1L;
 	private static int cont;
 	private String ceros;
 

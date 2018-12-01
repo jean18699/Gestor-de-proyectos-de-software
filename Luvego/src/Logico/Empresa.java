@@ -2,11 +2,14 @@ package Logico;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 public class Empresa implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6921637127266475472L;
 	private ArrayList<Cliente> clientes;
 	private static Cliente loginUser;
 	private ArrayList<Contrato> contratos;
@@ -106,7 +109,7 @@ public class Empresa implements Serializable{
 		return false;
 	}
 	
-	public static Empresa getEmpresa() {
+	public Empresa getEmpresa() {
 		return empresa;
 	}
 

@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 public class Disegnador extends Empleado implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6590451886139742299L;
 	private String ocupacion;//Puse esta variable para fines de obtener datos de este empleado de manera facil
 	
 	public Disegnador(String nombre, String apellidos, String sexo, int edad, String direccion, float salarioHora) {

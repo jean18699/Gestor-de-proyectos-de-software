@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 public class Planificador extends Empleado implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7389099020093531489L;
 	private int frecuencia;
 	
 	public Planificador(String nombre, String apellidos, String sexo, int edad, String direccion, float salarioHora, int frecuencia) {
