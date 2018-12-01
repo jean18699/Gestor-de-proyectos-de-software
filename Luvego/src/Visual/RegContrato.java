@@ -120,27 +120,20 @@ public class RegContrato extends JDialog {
 						lblFechaDeEntrega.setFont(new Font("Tahoma", Font.BOLD, 11));
 					}
 					spnFecha = new JSpinner(sdm);
-					spnFecha.setBounds(121, 7, 88, 22);
-					spnFecha.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							fechaEntrega = (Date) spnFecha.getValue();
-							System.out.println(fechaEntrega);
-							//Contrato contrato = new Contrato(proyecto,fechaEntrega);
-							
-						}
-					});
+					spnFecha.setBounds(121, 7, 88, 22);	
 					panel_2.add(spnFecha);
 					JSpinner.DateEditor DateEdit = new JSpinner.DateEditor(spnFecha, patron);
 					DateEdit.getTextField().setEditable(true);
+					
 					spnFecha.setEditor(DateEdit);
+					
 					
 					JButton btnAceptarFecha = new JButton("Aceptar y obtener precio");
 					btnAceptarFecha.setBounds(20, 36, 171, 23);
 					btnAceptarFecha.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
+							
 							fechaEntrega = (Date) spnFecha.getValue();
-							 
 							Contrato contrato = new Contrato(proyecto,fechaEntrega);
 							txtPrecioContrato.setText(Float.toString(contrato.getPrecioFinal()));
 						}

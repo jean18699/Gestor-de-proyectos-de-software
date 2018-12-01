@@ -3,6 +3,8 @@ package Logico;
 import java.text.DateFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -39,9 +41,10 @@ public class Main {
 		 
 		
 		Date date = new Date("12/2/2018");
+		//Date date2 = new Date("15/2/2018");
+		
 		Proyecto pr = new Proyecto("123","Globos",grupo,"Web");
 		Contrato contrato = new Contrato(pr,date);
-		System.out.println(contrato.getDiasRestantes());
 		
 		
 		//System.out.println(pr.getSumaSalarios());

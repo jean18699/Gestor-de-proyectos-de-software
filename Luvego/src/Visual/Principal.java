@@ -9,7 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
+import Logico.Empleado;
 import Logico.Empresa;
+import Logico.Proyecto;
 
 import java.awt.event.WindowEvent;
 
@@ -19,10 +21,13 @@ import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -49,27 +54,49 @@ public class Principal extends JFrame {
 	}
 
 	
-	private void escribirArchivo() throws IOException {
-		FileOutputStream f = new FileOutputStream(new File("empresa.dat"));
-		ObjectOutputStream o = new ObjectOutputStream(f);
-		o.writeObject(Empresa.getInstance());
-		f.close();
-		o.close();
-	}
-	
 	public Principal() {
 		
-		this.addWindowListener(new java.awt.event.WindowAdapter() {
+		addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-		        try {
-					escribirArchivo();
+		    	try {
+					FileOutputStream fichero = new FileOutputStream("registro.bin");
+					ObjectOutputStream guardar = new ObjectOutputStream(fichero);
+					guardar.writeObject(Empresa.getInstance().getEmpresa());
+					fichero.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+		    	System.exit(0);
+		    
 		    }
 		});
+			
+	
+		try {
+			File arch = new File("registro.bin");
+			if(!arch.exists())
+			{
+				arch.createNewFile();
+			}
+			FileInputStream archivo = new FileInputStream(arch);
+			ObjectInputStream cargar = new ObjectInputStream(archivo);
+			Empresa.getInstance().setEmpresa((Empresa)cargar.readObject());
+			archivo.close();
+			
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		dim = super.getToolkit().getScreenSize();

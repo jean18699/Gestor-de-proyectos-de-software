@@ -106,6 +106,14 @@ public class Empresa implements Serializable{
 		return false;
 	}
 	
+	public static Empresa getEmpresa() {
+		return empresa;
+	}
+
+
+
+
+
 	private boolean existeCliente(String id)
 	{
 		for(int i = 0; i < clientes.size(); i++)
@@ -199,7 +207,7 @@ public class Empresa implements Serializable{
 		this.proyectos = proyectos;
 	}
 
-	public static void setEmpresa(Empresa empresa) {
+	public void setEmpresa(Empresa empresa) {
 		Empresa.empresa = empresa;
 	}
 	
