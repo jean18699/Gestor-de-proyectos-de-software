@@ -341,7 +341,7 @@ public class RegProyecto extends JDialog {
 			table.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-
+//
 					int index = table.getSelectedRow();
 					if(index >= 0)
 					{	
