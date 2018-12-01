@@ -140,7 +140,7 @@ public class RegContrato extends JDialog {
 					btnAceptarFecha.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							fechaEntrega = (Date) spnFecha.getValue();
-							
+							 
 							Contrato contrato = new Contrato(proyecto,fechaEntrega);
 							txtPrecioContrato.setText(Float.toString(contrato.getPrecioFinal()));
 						}
