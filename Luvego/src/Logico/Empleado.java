@@ -1,10 +1,12 @@
 package Logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
- public abstract class Empleado {
+ public abstract class Empleado implements Serializable{
 
 	//para generar el id
+	 private static final long serialVersionUID = 1L;
 	private static int cont;
 	private String ceros;
 

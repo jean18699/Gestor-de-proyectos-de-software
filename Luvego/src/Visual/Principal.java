@@ -18,6 +18,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -48,26 +49,26 @@ public class Principal extends JFrame {
 	}
 
 	
+	private void escribirArchivo() throws IOException {
+		FileOutputStream f = new FileOutputStream(new File("empresa.dat"));
+		ObjectOutputStream o = new ObjectOutputStream(f);
+		o.writeObject(Empresa.getInstance());
+		f.close();
+		o.close();
+	}
+	
 	public Principal() {
 		
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				FileOutputStream empresa_Out;
-				ObjectOutputStream empresaWrite;
-				try {
-					empresa_Out = new  FileOutputStream("empresa.dat");
-					empresaWrite = new ObjectOutputStream(empresa_Out);
-					empresaWrite.writeObject(Empresa.getInstance());
-				} catch (FileNotFoundException e1) {
+		this.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		        try {
+					escribirArchivo();
+				} catch (IOException e) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					e.printStackTrace();
 				}
-				
-			}
+		    }
 		});
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
