@@ -1,0 +1,166 @@
+package Visual;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+
+
+import Logico.Empleado;
+
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+
+public class InfoEmpleado extends JDialog {
+
+	private final JPanel contentPanel = new JPanel();
+	private JTextField txtNombre;
+	private JTextField txtApellido;
+	private JTextField txtSalario;
+	private JTextField txtDireccion;
+	private JTextField textOcupacion;
+	private JTextField txtEvaluacion;
+	private JTextField txtProyectos;
+	
+	public InfoEmpleado(Empleado empleado) {
+		setResizable(false);
+		setTitle("Informacion");
+		setBounds(100, 100, 486, 246);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(new BorderLayout(0, 0));
+		{
+			JPanel panel = new JPanel();
+			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informacion de empleado", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			contentPanel.add(panel, BorderLayout.CENTER);
+			panel.setLayout(null);
+			
+			JLabel lblNombre = new JLabel("Nombre:");
+			lblNombre.setBounds(20, 47, 59, 14);
+			lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
+			panel.add(lblNombre);
+			
+			txtNombre = new JTextField(empleado.getNombre());
+			txtNombre.setEnabled(false);
+			txtNombre.setBounds(79, 44, 143, 20);
+			panel.add(txtNombre);
+			txtNombre.setColumns(10);
+			txtNombre.setText(empleado.getNombre());
+			
+			JLabel lbl = new JLabel("Apellido:");
+			lbl.setBounds(20, 78, 59, 14);
+			lbl.setFont(new Font("Tahoma", Font.BOLD, 11));
+			panel.add(lbl);
+			
+			txtApellido = new JTextField(empleado.getApellidos());
+			txtApellido.setEnabled(false);
+			txtApellido.setBounds(79, 75, 143, 20);
+			panel.add(txtApellido);
+			txtApellido.setColumns(10);
+			txtApellido.setText(empleado.getApellidos());
+			
+			JLabel lblSalarioHora = new JLabel("Salario/Hora:");
+			lblSalarioHora.setBounds(258, 47, 88, 14);
+			lblSalarioHora.setFont(new Font("Tahoma", Font.BOLD, 11));
+			panel.add(lblSalarioHora);
+			
+			txtSalario = new JTextField();
+			txtSalario.setEnabled(false);
+			txtSalario.setBounds(342, 44, 118, 20);
+			panel.add(txtSalario);
+			txtSalario.setColumns(10);
+			txtSalario.setText(Float.toString(empleado.getSalarioHora()));
+			
+			JLabel lblDireccion = new JLabel("Direccion:");
+			lblDireccion.setBounds(268, 78, 68, 14);
+			lblDireccion.setFont(new Font("Tahoma", Font.BOLD, 11));
+			panel.add(lblDireccion);
+			
+			txtDireccion = new JTextField();
+			txtDireccion.setEnabled(false);
+			txtDireccion.setBounds(342, 75, 118, 20);
+			panel.add(txtDireccion);
+			txtDireccion.setColumns(10);
+			txtDireccion.setText(empleado.getDireccion());
+			
+			JLabel lblOcupacion = new JLabel("Ocupacion:");
+			lblOcupacion.setFont(new Font("Tahoma", Font.BOLD, 11));
+			lblOcupacion.setBounds(10, 144, 83, 14);
+			panel.add(lblOcupacion);
+			
+			textOcupacion = new JTextField();
+			textOcupacion.setEnabled(false);
+			textOcupacion.setBounds(79, 141, 143, 20);
+			panel.add(textOcupacion);
+			textOcupacion.setColumns(10);
+			textOcupacion.setText(empleado.getCargo());
+			//txtGenero.setText();
+			
+			JLabel lblEdads = new JLabel("Edad:");
+			lblEdads.setFont(new Font("Tahoma", Font.BOLD, 11));
+			lblEdads.setBounds(33, 119, 46, 14);
+			panel.add(lblEdads);
+			
+			JLabel lblEdad = new JLabel("");
+			lblEdad.setBounds(79, 118, 46, 14);
+			lblEdad.setText(Integer.toString(empleado.getEdad()));
+			panel.add(lblEdad);
+			
+			JLabel lblEvaluacion = new JLabel("Evaluacion:");
+			lblEvaluacion.setFont(new Font("Tahoma", Font.BOLD, 11));
+			lblEvaluacion.setBounds(268, 108, 68, 14);
+			panel.add(lblEvaluacion);
+			
+			txtEvaluacion = new JTextField();
+			txtEvaluacion.setEnabled(false);
+			txtEvaluacion.setBounds(342, 106, 118, 20);
+			panel.add(txtEvaluacion);
+			txtEvaluacion.setColumns(10);
+			txtEvaluacion.setText(Character.toString(empleado.getEvaluacionAnual()));
+			
+			JLabel lblCantidadDeProyectos = new JLabel("Cantidad de proyectos:");
+			lblCantidadDeProyectos.setFont(new Font("Tahoma", Font.BOLD, 11));
+			lblCantidadDeProyectos.setBounds(243, 144, 143, 14);
+			panel.add(lblCantidadDeProyectos);
+			
+			txtProyectos = new JTextField();
+			txtProyectos.setEnabled(false);
+			txtProyectos.setBounds(383, 141, 77, 20);
+			panel.add(txtProyectos);
+			txtProyectos.setColumns(10);
+			txtProyectos.setText(Integer.toString(empleado.getProyectos().size()));
+		}
+		{
+			JPanel buttonPane = new JPanel();
+			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			{
+				JButton btnAceptar = new JButton("Aceptar");
+				btnAceptar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						dispose();
+					}
+				});
+				btnAceptar.setActionCommand("OK");
+				buttonPane.add(btnAceptar);
+				getRootPane().setDefaultButton(btnAceptar);
+			}
+			{
+				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.setActionCommand("Cancel");
+				buttonPane.add(btnCancelar);
+			}
+		}
+	}
+}
