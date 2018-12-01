@@ -44,6 +44,7 @@ import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Color;
+import javax.swing.border.EtchedBorder;
 
 public class RegProyecto extends JDialog {
 
@@ -77,12 +78,6 @@ public class RegProyecto extends JDialog {
 	private JButton btnCargarPlanificador;
 	private JButton btnCargarProgramador;
 	private JButton btnCargarProgramador2;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
-	private JButton btnNewButton_2;
-	private JButton btnNewButton_3;
-	//private JButton btnCargarAdicional;
-	private JButton btnNewButton_4;
 	private JLabel lblAdicional;
 	private JLabel lblCategoria;
 	private JPanel buttonPane;
@@ -97,6 +92,12 @@ public class RegProyecto extends JDialog {
 	private JPanel panelClientes;
 	private JScrollPane scrollPane;
 	private JPanel panel_4;
+	private JButton btnInfoJefe;
+	private JButton btnInfoPlanificador;
+	private JButton btnInfoProgramador;
+	private JButton btnInfoProgramador2;
+	private JButton btnInfoAdicional;
+	private JPanel panel_2;
 
 
 	/**
@@ -115,6 +116,7 @@ public class RegProyecto extends JDialog {
 
 	
 	public RegProyecto() {
+		setResizable(false);
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException e) {
@@ -132,9 +134,10 @@ public class RegProyecto extends JDialog {
 		}
 
 		
-		setBounds(100, 100, 1043, 290);
+		setBounds(100, 100, 1032, 276);
 		getContentPane().setLayout(new BorderLayout());
 
+		setLocationRelativeTo(null);
 		
 		//Prueba
 		ArrayList<String> esp = new ArrayList<>();
@@ -189,66 +192,25 @@ public class RegProyecto extends JDialog {
 		getContentPane().add(panelProyecto, BorderLayout.CENTER);
 		panelProyecto.setLayout(null);
 		
-		scrollPane = new JScrollPane();
-		scrollPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		scrollPane.setBackground(Color.WHITE);
-		scrollPane.setBounds(442, 0, 585, 213);
-		panelProyecto.add(scrollPane);
-		
 		//TABLA
 
 		String[] cols = {"ID","Nombre","Direccion","Proyectos activos","Total proyectos solicitados"};
 		modelClientes.setColumnIdentifiers(cols);
-		table = new JTable();
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		table.setShowVerticalLines(false);
 		
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				int index = table.getSelectedRow();
-				if(index >= 0)
-				{	
-						//Jefe j = new Jefe("dasd", "d", "hombre", 8, "si", 5);
-						//Empresa.getInstance().nuevoEmpleado(j);
-						select = table.getValueAt(index, 0).toString();
-						
-						if(btnCargarJefe.isEnabled() && btnCargarProgramador.isEnabled() && btnCargarProgramador2.isEnabled() && btnCargarPlanificador.isEnabled()) {
-							txtIdAdicional.setText(select);
-						}
-				
-						if(!btnCargarJefe.isEnabled())
-						{
-							txtJefe.setText(select);
-						}
-						if(!btnCargarProgramador.isEnabled())
-						{
-							txtIdProgramador1.setText(select);
-						}
-						if(!btnCargarProgramador2.isEnabled())
-						{
-							txtIdProgramador2.setText(select);
-						}
-						if(!btnCargarPlanificador.isEnabled())
-						{
-							txtIdPlanificador.setText(select);
-						}
-						/*if(!btnCargarAdicional.isEnabled())
-						{
-							txtIdAdicional.setText(select);
-						}*/
-						
-				}
-
+		btnAgregarCliente = new JButton("Nuevo cliente");
+		btnAgregarCliente.setBounds(293, 180, 139, 25);
+		panelProyecto.add(btnAgregarCliente);
+		btnAgregarCliente.setIcon(new ImageIcon(RegProyecto.class.getResource("/img/Cliente 32x32.png")));
+		btnAgregarCliente.setVisible(false);
+		btnAgregarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegCliente reg = new RegCliente();
+				reg.setLocationRelativeTo(null);
+				reg.setModal(true);
+				reg.setVisible(true);
+				cargarClientes();
 			}
 		});
-		table.setModel(model);
-		
-		
-		
-		scrollPane.setViewportView(table);
 		{
 			buttonPane = new JPanel();
 			buttonPane.setBounds(0, 213, 1027, 39);
@@ -337,11 +299,6 @@ public class RegProyecto extends JDialog {
 			btnAnterior.setBounds(756, 7, 89, 23);
 			buttonPane.add(btnAnterior);
 			
-			btnAgregarCliente = new JButton("Nuevo cliente");
-			btnAgregarCliente.setBounds(10, 2, 133, 33);
-			buttonPane.add(btnAgregarCliente);
-			btnAgregarCliente.setIcon(new ImageIcon(RegProyecto.class.getResource("/img/Cliente 32x32.png")));
-			
 			btnSiguiente2 = new JButton("Siguiente");
 			btnSiguiente2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -370,6 +327,62 @@ public class RegProyecto extends JDialog {
 			});
 			btnSiguiente2.setBounds(855, 7, 77, 23);
 			buttonPane.add(btnSiguiente2);
+			
+			scrollPane = new JScrollPane();
+			scrollPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+			scrollPane.setBackground(Color.WHITE);
+			scrollPane.setBounds(442, 0, 585, 213);
+			panelProyecto.add(scrollPane);
+			table = new JTable();
+			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			table.setShowVerticalLines(false);
+			
+			table.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+
+					int index = table.getSelectedRow();
+					if(index >= 0)
+					{	
+							//Jefe j = new Jefe("dasd", "d", "hombre", 8, "si", 5);
+							//Empresa.getInstance().nuevoEmpleado(j);
+							select = table.getValueAt(index, 0).toString();
+							
+							if(btnCargarJefe.isEnabled() && btnCargarProgramador.isEnabled() && btnCargarProgramador2.isEnabled() && btnCargarPlanificador.isEnabled()) {
+								txtIdAdicional.setText(select);
+							}
+					
+							if(!btnCargarJefe.isEnabled())
+							{
+								txtJefe.setText(select);
+							}
+							if(!btnCargarProgramador.isEnabled())
+							{
+								txtIdProgramador1.setText(select);
+							}
+							if(!btnCargarProgramador2.isEnabled())
+							{
+								txtIdProgramador2.setText(select);
+							}
+							if(!btnCargarPlanificador.isEnabled())
+							{
+								txtIdPlanificador.setText(select);
+							}
+							/*if(!btnCargarAdicional.isEnabled())
+							{
+								txtIdAdicional.setText(select);
+							}*/
+							
+					}
+
+				}
+			});
+			table.setModel(model);
+			
+			
+			
+			scrollPane.setViewportView(table);
 			{
 				panel = new JPanel();
 				panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -462,10 +475,12 @@ public class RegProyecto extends JDialog {
 				panel_1.setLayout(null);
 				
 				lblProgramador = new JLabel("Programador 1:");
+				lblProgramador.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				lblProgramador.setBounds(24, 61, 93, 14);
 				panel_1.add(lblProgramador);
 				
 				lblPlanificador = new JLabel("Planificador:");
+				lblPlanificador.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				lblPlanificador.setBounds(42, 36, 75, 14);
 				panel_1.add(lblPlanificador);
 				
@@ -473,21 +488,24 @@ public class RegProyecto extends JDialog {
 				
 				{
 					lblJefeDelProyecto = new JLabel("Jefe del proyecto:");
+					lblJefeDelProyecto.setFont(new Font("Tahoma", Font.PLAIN, 12));
 					lblJefeDelProyecto.setBounds(10, 11, 114, 14);
 					panel_1.add(lblJefeDelProyecto);
 				}
 				
 				lblProgramador_1 = new JLabel("Programador 2:");
+				lblProgramador_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				lblProgramador_1.setBounds(24, 86, 93, 14);
 				panel_1.add(lblProgramador_1);
 				
 				txtJefe = new JTextField();
 				txtJefe.setEnabled(false);
-				txtJefe.setBounds(105, 8, 144, 20);
+				txtJefe.setBounds(117, 9, 140, 20);
 				panel_1.add(txtJefe);
 				txtJefe.setColumns(10);
 				
 				btnCargarJefe = new JButton("Cargar");
+				btnCargarJefe.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				btnCargarJefe.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						cargarJefes();
@@ -498,28 +516,29 @@ public class RegProyecto extends JDialog {
 						//btnCargarAdicional.setEnabled(true);
 					}
 				});
-				btnCargarJefe.setBounds(251, 7, 93, 23);
+				btnCargarJefe.setBounds(267, 7, 93, 23);
 				panel_1.add(btnCargarJefe);
 				
 				txtIdPlanificador = new JTextField();
 				txtIdPlanificador.setEnabled(false);
-				txtIdPlanificador.setBounds(105, 33, 144, 20);
+				txtIdPlanificador.setBounds(117, 33, 140, 20);
 				panel_1.add(txtIdPlanificador);
 				txtIdPlanificador.setColumns(10);
 				
 				txtIdProgramador1 = new JTextField();
 				txtIdProgramador1.setEnabled(false);
-				txtIdProgramador1.setBounds(105, 58, 144, 20);
+				txtIdProgramador1.setBounds(117, 58, 140, 20);
 				panel_1.add(txtIdProgramador1);
 				txtIdProgramador1.setColumns(10);
 				
 				txtIdProgramador2 = new JTextField();
 				txtIdProgramador2.setEnabled(false);
-				txtIdProgramador2.setBounds(105, 83, 144, 20);
+				txtIdProgramador2.setBounds(117, 83, 140, 20);
 				panel_1.add(txtIdProgramador2);
 				txtIdProgramador2.setColumns(10);
 				
 				btnCargarPlanificador = new JButton("Cargar");
+				btnCargarPlanificador.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				btnCargarPlanificador.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						cargarPlanificadores();
@@ -530,10 +549,11 @@ public class RegProyecto extends JDialog {
 						//btnCargarAdicional.setEnabled(true);
 					}
 				});
-				btnCargarPlanificador.setBounds(251, 32, 93, 23);
+				btnCargarPlanificador.setBounds(267, 32, 93, 23);
 				panel_1.add(btnCargarPlanificador);
 				
 				btnCargarProgramador = new JButton("Cargar");
+				btnCargarProgramador.setFont(new Font("Tahoma", Font.PLAIN, 11));
 				btnCargarProgramador.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						cargarProgramadores();
@@ -544,10 +564,11 @@ public class RegProyecto extends JDialog {
 						btnCargarProgramador2.setEnabled(true);
 					}
 				});
-				btnCargarProgramador.setBounds(251, 57, 93, 23);
+				btnCargarProgramador.setBounds(267, 58, 93, 23);
 				panel_1.add(btnCargarProgramador);
 				
 				btnCargarProgramador2 = new JButton("Cargar");
+				btnCargarProgramador2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				btnCargarProgramador2.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						cargarProgramadores();
@@ -558,26 +579,11 @@ public class RegProyecto extends JDialog {
 						//btnCargarAdicional.setEnabled(true);
 					}
 				});
-				btnCargarProgramador2.setBounds(251, 82, 93, 23);
+				btnCargarProgramador2.setBounds(267, 82, 93, 23);
 				panel_1.add(btnCargarProgramador2);
 				
-				btnNewButton = new JButton("Info");
-				btnNewButton.setBounds(348, 7, 58, 23);
-				panel_1.add(btnNewButton);
-				
-				btnNewButton_1 = new JButton("Info");
-				btnNewButton_1.setBounds(348, 32, 58, 23);
-				panel_1.add(btnNewButton_1);
-				
-				btnNewButton_2 = new JButton("Info");
-				btnNewButton_2.setBounds(348, 57, 58, 23);
-				panel_1.add(btnNewButton_2);
-				
-				btnNewButton_3 = new JButton("Info");
-				btnNewButton_3.setBounds(348, 82, 58, 23);
-				panel_1.add(btnNewButton_3);
-				
 				cmbOcupacion = new JComboBox();
+				cmbOcupacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
 				cmbOcupacion.addActionListener(new ActionListener() {
 					
 					@Override
@@ -605,22 +611,95 @@ public class RegProyecto extends JDialog {
 				});
 				
 				cmbOcupacion.setModel(new DefaultComboBoxModel(new String[] {"<Ocupacion>", "Planificador", "Programador", "Dise\u00F1ador"}));
-				cmbOcupacion.setBounds(251, 110, 93, 20);
+				cmbOcupacion.setBounds(259, 110, 101, 20);
 				panel_1.add(cmbOcupacion);
 				
 				txtIdAdicional = new JTextField();
 				txtIdAdicional.setEnabled(false);
-				txtIdAdicional.setBounds(105, 111, 144, 20);
+				txtIdAdicional.setBounds(117, 111, 133, 20);
 				panel_1.add(txtIdAdicional);
 				txtIdAdicional.setColumns(10);
 				
-				btnNewButton_4 = new JButton("Info");
-				btnNewButton_4.setBounds(348, 109, 58, 23);
-				panel_1.add(btnNewButton_4);
-				
 				lblAdicional = new JLabel("Adicional:");
-				lblAdicional.setBounds(49, 113, 46, 14);
+				lblAdicional.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				lblAdicional.setBounds(59, 111, 58, 14);
 				panel_1.add(lblAdicional);
+				
+				btnInfoJefe = new JButton("\u00A1");
+				btnInfoJefe.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Empleado emp = Empresa.getInstance().getEmpleadoById(txtJefe.getText());
+						InfoEmpleado info = new InfoEmpleado(emp);
+						info.setLocationRelativeTo(null);
+						info.setModal(true);
+						info.setVisible(true);
+						
+					}
+				});
+				btnInfoJefe.setFont(new Font("Tahoma", Font.BOLD, 12));
+				btnInfoJefe.setBounds(370, 8, 50, 23);
+				panel_1.add(btnInfoJefe);
+				
+				btnInfoPlanificador = new JButton("\u00A1");
+				btnInfoPlanificador.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Empleado emp = Empresa.getInstance().getEmpleadoById(txtIdPlanificador.getText());
+						InfoEmpleado info = new InfoEmpleado(emp);
+						info.setLocationRelativeTo(null);
+						info.setModal(true);
+						info.setVisible(true);
+						
+					}
+				});
+				btnInfoPlanificador.setFont(new Font("Tahoma", Font.BOLD, 12));
+				btnInfoPlanificador.setBounds(370, 33, 50, 23);
+				panel_1.add(btnInfoPlanificador);
+				
+				btnInfoProgramador = new JButton("\u00A1");
+				btnInfoProgramador.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Empleado emp = Empresa.getInstance().getEmpleadoById(txtIdProgramador1.getText());
+						InfoEmpleado info = new InfoEmpleado(emp);
+						info.setLocationRelativeTo(null);
+						info.setModal(true);
+						info.setVisible(true);
+						
+					
+					}
+				});
+				btnInfoProgramador.setFont(new Font("Tahoma", Font.BOLD, 12));
+				btnInfoProgramador.setBounds(370, 58, 50, 23);
+				panel_1.add(btnInfoProgramador);
+				
+				btnInfoProgramador2 = new JButton("\u00A1");
+				btnInfoProgramador2.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Empleado emp = Empresa.getInstance().getEmpleadoById(txtIdProgramador2.getText());
+						InfoEmpleado info = new InfoEmpleado(emp);
+						info.setLocationRelativeTo(null);
+						info.setModal(true);
+						info.setVisible(true);
+						
+					}
+				});
+				btnInfoProgramador2.setFont(new Font("Tahoma", Font.BOLD, 12));
+				btnInfoProgramador2.setBounds(370, 83, 50, 23);
+				panel_1.add(btnInfoProgramador2);
+				
+				btnInfoAdicional = new JButton("\u00A1");
+				btnInfoAdicional.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Empleado emp = Empresa.getInstance().getEmpleadoById(txtIdAdicional.getText());
+						InfoEmpleado info = new InfoEmpleado(emp);
+						info.setLocationRelativeTo(null);
+						info.setModal(true);
+						info.setVisible(true);
+						
+					}
+				});
+				btnInfoAdicional.setFont(new Font("Tahoma", Font.BOLD, 12));
+				btnInfoAdicional.setBounds(370, 110, 50, 23);
+				panel_1.add(btnInfoAdicional);
 				
 				panel_4 = new JPanel();
 				panel_4.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -629,17 +708,25 @@ public class RegProyecto extends JDialog {
 				panel.add(panel_4);
 			}
 			
+			panel_2 = new JPanel();
+			panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+			panel_2.setBounds(0, 0, 279, 213);
+			panelProyecto.add(panel_2);
+			
 			panelClientes = new JPanel();
-			panelClientes.setBounds(0, 0, 739, 174);
+			panelClientes.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+			panelClientes.setBounds(279, 0, 748, 213);
 			panelProyecto.add(panelClientes);
 			panelClientes.setLayout(null);
 			panelClientes.setVisible(false);
 			
 			scrollPane_1 = new JScrollPane();
-			scrollPane_1.setBounds(10, 11, 729, 163);
+			scrollPane_1.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+			scrollPane_1.setBounds(13, 11, 711, 163);
 			panelClientes.add(scrollPane_1);
 			
 			tablaClientes = new JTable();
+			tablaClientes.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			tablaClientes.setModel(modelClientes);
 			tablaClientes.addMouseListener(new MouseAdapter() {
 				@Override
@@ -657,16 +744,6 @@ public class RegProyecto extends JDialog {
 			});
 			scrollPane_1.setViewportView(tablaClientes);
 			getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{panelProyecto, table}));
-			btnAgregarCliente.setVisible(false);
-			btnAgregarCliente.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					RegCliente reg = new RegCliente();
-					reg.setLocationRelativeTo(null);
-					reg.setModal(true);
-					reg.setVisible(true);
-					cargarClientes();
-				}
-			});
 		}
 	}
 	
