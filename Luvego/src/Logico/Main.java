@@ -27,7 +27,7 @@ public class Main {
 		Empleado dsg2 = new Disegnador("jeane","j","hombre",19,"cerro alto",15);
 		
 		Empleado chef = new Jefe("jeanff","j","hombre",19,"cerro alto",1556);
-		Empleado p = new Planificador("jeasn","j","hombre",19,"cerro alto",15);
+		Empleado p = new Planificador("jeasn","j","hombre",19,"cerro alto",15, 0);
 		
 		ArrayList<Empleado> grupo = new ArrayList<>();
 		grupo.add(chef);
