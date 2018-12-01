@@ -289,6 +289,28 @@ public class Empresa implements Serializable{
 		return verdad;
 	}
 	
+	public boolean ValidadorFlotantes(String str) {
+		boolean verdad = true;
+		
+		int i = 0;
+		int cantPuntosDecimales = 0;
+		if(str.equalsIgnoreCase("")) {
+			verdad = false;
+		}
+		while(i < str.length() && verdad != false) {
+			if(Integer.valueOf(str.charAt(i)) == 46) {
+				cantPuntosDecimales++;
+			}
+			if(Integer.valueOf(str.charAt(i)) < 46 || Integer.valueOf(str.charAt(i)) > 57 || Integer.valueOf(str.charAt(i)) == 47 || cantPuntosDecimales > 1) {
+				verdad = false;
+				return verdad;
+			}
+			i++;
+
+		}
+		return verdad;
+	}
+	
 	public boolean confirmLogin(String Id, String Contrasena) {
 		boolean login = false;
 		

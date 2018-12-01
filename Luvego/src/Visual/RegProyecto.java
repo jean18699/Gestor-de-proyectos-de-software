@@ -146,9 +146,9 @@ public class RegProyecto extends JDialog {
 		
 		Cliente c = new Cliente("123","jean","cerro alto", "2222");
 		
-		Empleado p = new Planificador("jeasn","j","hombre",19,"cerro alto",15);
-		Empleado p2 = new Planificador("jeasn","j","hombre",19,"cerro alto",15);
-		Empleado p3= new Planificador("jeasn","j","hombre",19,"cerro alto",15);
+		Empleado p = new Planificador("jeasn","j","hombre",19,"cerro alto",15, 0);
+		Empleado p2 = new Planificador("jeasn","j","hombre",19,"cerro alto",15, 0);
+		Empleado p3= new Planificador("jeasn","j","hombre",19,"cerro alto",15, 0);
 		
 		Empleado pro = new Programador("jeaasdfn","j","hombre",19,"cerro alto",156,esp);
 		Empleado pro2 = new Programador("jeaasdfn","j","hombre",19,"cerro alto",156,esp);
