@@ -1,5 +1,8 @@
 package Logico;
 
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -7,7 +10,7 @@ public class Main {
 
 	public static void main(String[] args) {
 	
-		ArrayList<String> esp = new ArrayList<>();
+	/*	ArrayList<String> esp = new ArrayList<>();
 		esp.add("Java");
 		esp.add("Python");
 		
@@ -40,6 +43,12 @@ public class Main {
 		//Empresa.getInstance().asignarProyecto(grupo, pr);
 		//Empresa.getInstance().asignarProyecto(grupo, pr);
 		//Empresa.getInstance().asignarProyecto(grupo, pr);
+		
+		*/
+		
+		Date date = new Date("1/1/1");
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
+		System.out.println(formato.format(date));
 		
 		
 	}

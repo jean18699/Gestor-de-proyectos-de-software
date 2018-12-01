@@ -15,7 +15,7 @@ public class Proyecto {
 		this.id = id;
 		this.nombre = nombre;
 		this.grupoTrabajo = grupoTrabajo;
-		this.sumaSalarios = getSumaSalarios();
+		//this.sumaSalarios = getSumaSalarios();
 		this.clasificacion = clasificacion;
 	}
 
