@@ -5,12 +5,13 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Main {
 
 	public static void main(String[] args) {
 	
-	/*	ArrayList<String> esp = new ArrayList<>();
+		ArrayList<String> esp = new ArrayList<>();
 		esp.add("Java");
 		esp.add("Python");
 		
@@ -33,9 +34,17 @@ public class Main {
 		grupo.add(pro3);
 		grupo.add(dsg);
 		
+
 		
+		
+		
+		Date date = new Date("12/2/2018");
 		Proyecto pr = new Proyecto("123","Globos",grupo,"Web");
-		System.out.println(pr.getSumaSalarios());
+		Contrato contrato = new Contrato(pr,date);
+		System.out.println(contrato.getDiasRestantes());
+		
+		
+		//System.out.println(pr.getSumaSalarios());
 		
 		//Empresa.getInstance().asignarProyecto(grupo, pr);
 		//Empresa.getInstance().asignarProyecto(grupo, pr);
@@ -43,14 +52,7 @@ public class Main {
 		//Empresa.getInstance().asignarProyecto(grupo, pr);
 		//Empresa.getInstance().asignarProyecto(grupo, pr);
 		//Empresa.getInstance().asignarProyecto(grupo, pr);
-		
-		*/
-		
-		Date date = new Date("1/1/1");
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
-		System.out.println(formato.format(date));
-		
-		
+	
 	}
 
 }

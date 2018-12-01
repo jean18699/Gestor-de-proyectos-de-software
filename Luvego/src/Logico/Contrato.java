@@ -51,10 +51,14 @@ public class Contrato {
 	}
 
 
+	private int daysBetween(Date d1, Date d2){
+        return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+	}
+
+	
 	public int getDiasRestantes()
 	{
-		int dias = fechaEntrega.getDate() - fechaInicio.getDate();
-		return dias;
+		return daysBetween(fechaInicio, fechaEntrega);
 	}
 
 	public void aplazar(Date fecha)
