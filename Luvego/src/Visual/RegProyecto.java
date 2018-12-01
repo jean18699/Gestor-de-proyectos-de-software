@@ -795,7 +795,7 @@ public class RegProyecto extends JDialog {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		for(int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
-			if(Empresa.getInstance().getEmpleados().get(i) instanceof Jefe)
+			if(Empresa.getInstance().getEmpleados().get(i) instanceof Disegnador)
 			{
 				fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
 				//fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
