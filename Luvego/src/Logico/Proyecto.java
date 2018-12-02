@@ -14,6 +14,19 @@ public class Proyecto implements Serializable{
 	private ArrayList<Empleado> grupoTrabajo;
 	//private float sumaSalarios;
 	private String clasificacion;
+	private String estado;
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 
 	public Proyecto(String id, String nombre, ArrayList<Empleado> grupoTrabajo, String clasificacion) {
 

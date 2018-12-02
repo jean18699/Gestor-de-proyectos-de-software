@@ -63,14 +63,14 @@ public class Empresa implements Serializable{
 		clientes.add(cliente);
 	}
 	
-	public boolean nuevoContrato(String id, Contrato contrato)
+	public boolean nuevoContrato(String idCliente, Contrato contrato)
 	{
 
-		if(existeCliente(id))
+		if(existeCliente(idCliente))
 		{
 			for(int i = 0; i < clientes.size();i++)
 			{
-				if(clientes.get(i).getId().equalsIgnoreCase(id))
+				if(clientes.get(i).getId().equalsIgnoreCase(idCliente))
 				{
 					if(clientes.get(i).setContrato(contrato))
 					{

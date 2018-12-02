@@ -23,11 +23,11 @@ import java.util.ArrayList;
 	protected ArrayList<Proyecto> proyectos;
 	protected char evaluacionAnual;
 	private String ocupacion;
-	
+	private boolean seleccionado;
 	
 	public Empleado(String nombre, String apellidos, String sexo, int edad,String direccion, float salarioHora) {
 
-		super();
+		
 		ceros = "";
 		cont++;
 		id = Integer.toString(cont);
@@ -42,6 +42,7 @@ import java.util.ArrayList;
 		this.direccion = direccion;
 		this.salarioHora = salarioHora;
 		proyectos = new ArrayList<>();
+		this.seleccionado = false;
 	}
 
 	
@@ -137,7 +138,28 @@ import java.util.ArrayList;
 		return getOcupacion();
 	}
 	
-	protected abstract String getOcupacion(); 
-	
+	protected abstract String getOcupacion();
+
+
+	public boolean isSeleccionado() {
+		return seleccionado;
+	}
+
+
+	public void setProyectos(ArrayList<Proyecto> proyectos) {
+		this.proyectos = proyectos;
+	}
+
+
+	public void setOcupacion(String ocupacion) {
+		this.ocupacion = ocupacion;
+	}
+
+
+	public void setSeleccionado(boolean seleccionado) {
+		this.seleccionado = seleccionado;
+	}
+
+
 	
 }

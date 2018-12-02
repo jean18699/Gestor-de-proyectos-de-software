@@ -89,7 +89,7 @@ public class ListarEmpleados extends JDialog {
 					if(index >= 0)
 					{
 						select = table.getValueAt(index, 0).toString();
-						System.out.println(select);
+						
 					}
 				}
 			});

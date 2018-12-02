@@ -19,6 +19,7 @@ import javax.swing.event.CaretListener;
 import Logico.Cliente;
 import Logico.Contrato;
 import Logico.Empleado;
+import Logico.Empresa;
 import Logico.Proyecto;
 
 import javax.swing.JLabel;
@@ -317,8 +318,10 @@ public class RegContrato extends JDialog {
 					btnAceptar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							//fechaEntrega = (Date) spnFecha.getValue();
-							//Contrato contrato = new Contrato(proyecto,fechaEntrega);
-							
+							Contrato contrato = new Contrato(proyecto,fechaEntrega);
+							//Empresa.getInstance().asignarProyecto(proyecto.getGrupoTrabajo(), proyecto);
+							Empresa.getInstance().nuevoContrato(cliente.getId(), contrato);
+							//Empresa.getInstance().
 						}
 					});
 					{
