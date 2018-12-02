@@ -98,6 +98,7 @@ public class RegProyecto extends JDialog {
 	private JButton btnInfoProgramador2;
 	private JButton btnInfoAdicional;
 	private JPanel panel_2;
+	private JButton btnResetear;
 
 	/**
 	 * Launch the application.
@@ -288,7 +289,7 @@ public class RegProyecto extends JDialog {
 					grupoTrabajo.add(Empresa.getInstance().getEmpleadoById(txtIdPlanificador.getText()));
 					grupoTrabajo.add(Empresa.getInstance().getEmpleadoById(txtIdAdicional.getText()));
 
-					Proyecto proyecto = new Proyecto("123", txtNombre.getText(), grupoTrabajo,
+					Proyecto proyecto = new Proyecto(txtNombre.getText(), grupoTrabajo,
 							cmbCategoria.getSelectedItem().toString());
 					Cliente cliente = Empresa.getInstance().getClienteById(select);
 
@@ -296,12 +297,29 @@ public class RegProyecto extends JDialog {
 					reg.setLocationRelativeTo(null);
 					reg.setModal(true);
 					reg.setVisible(true);
-					btnAnterior.setSelected(true);
+					if (proyecto.isRealizado()) {
+						dispose();
+					} else {
+						btnAnterior.setSelected(true);
+					}
 
 				}
 			});
 			btnSiguiente2.setBounds(855, 7, 77, 23);
 			buttonPane.add(btnSiguiente2);
+			
+			btnResetear = new JButton("Resetear");
+			btnResetear.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					txtJefe.setText("");
+					txtIdPlanificador.setText("");
+					txtIdProgramador1.setText("");
+					txtIdProgramador2.setText("");
+					txtIdAdicional.setText("");
+				}
+			});
+			btnResetear.setBounds(10, 7, 89, 23);
+			buttonPane.add(btnResetear);
 
 			scrollPane = new JScrollPane();
 			scrollPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -319,51 +337,33 @@ public class RegProyecto extends JDialog {
 //
 					int index = table.getSelectedRow();
 					if (index >= 0) {
-						// Jefe j = new Jefe("dasd", "d", "hombre", 8, "si", 5);
-						// Empresa.getInstance().nuevoEmpleado(j);
+						
 						select = table.getValueAt(index, 0).toString();
 
 						if (btnCargarJefe.isEnabled() && btnCargarProgramador.isEnabled()
 								&& btnCargarProgramador2.isEnabled() && btnCargarPlanificador.isEnabled()) {
-							txtIdAdicional.setText(select);
-
-							Empresa.getInstance().getEmpleadoById(txtIdAdicional.getText()).setSeleccionado(true);
-
+							
+								txtIdAdicional.setText(select);
 						}
 
 						if (!btnCargarJefe.isEnabled()) {
+							
 							txtJefe.setText(select);
-							Empresa.getInstance().getEmpleadoById(txtJefe.getText()).setSeleccionado(true);
-							seleccionUnica(txtJefe.getText());
-							
 							cargarJefes();
-							
+
 						}
 						if (!btnCargarProgramador.isEnabled()) {
 							txtIdProgramador1.setText(select);
-
-							Empresa.getInstance().getEmpleadoById(txtIdProgramador1.getText()).setSeleccionado(true);
-							seleccionUnica(txtIdProgramador1.getText());
 							cargarProgramadores();
 						}
 						if (!btnCargarProgramador2.isEnabled()) {
 							txtIdProgramador2.setText(select);
-
-							Empresa.getInstance().getEmpleadoById(txtIdProgramador2.getText()).setSeleccionado(true);
-							seleccionUnica(txtIdProgramador2.getText());
 							cargarProgramadores();
 						}
 						if (!btnCargarPlanificador.isEnabled()) {
 							txtIdPlanificador.setText(select);
-
-							Empresa.getInstance().getEmpleadoById(txtIdPlanificador.getText()).setSeleccionado(true);
-							seleccionUnica(txtIdPlanificador.getText());
 							cargarPlanificadores();
 						}
-						/*
-						 * if(!btnCargarAdicional.isEnabled()) { txtIdAdicional.setText(select); }
-						 */
-
 					}
 
 				}
@@ -711,8 +711,7 @@ public class RegProyecto extends JDialog {
 					}
 				}
 			});
-			
-			
+
 			scrollPane_1.setViewportView(tablaClientes);
 			getContentPane()
 					.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { panelProyecto, table }));
@@ -724,7 +723,8 @@ public class RegProyecto extends JDialog {
 		fila = new Object[model.getColumnCount()];
 		for (int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
 			if (Empresa.getInstance().getEmpleados().get(i) instanceof Jefe
-					&& !Empresa.getInstance().getEmpleados().get(i).isSeleccionado()) {
+					&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtJefe.getText())
+				&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdAdicional.getText())){
 				fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
 				fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
 				fila[2] = Empresa.getInstance().getEmpleados().get(i).getCargo();
@@ -744,7 +744,11 @@ public class RegProyecto extends JDialog {
 		fila = new Object[model.getColumnCount()];
 		for (int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
 			if (Empresa.getInstance().getEmpleados().get(i) instanceof Programador
-					&& !Empresa.getInstance().getEmpleados().get(i).isSeleccionado()) {
+					&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdProgramador1.getText())
+							&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdProgramador2.getText())
+							&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdAdicional.getText()))
+			{
+
 				fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
 				fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
 				fila[2] = Empresa.getInstance().getEmpleados().get(i).getCargo();
@@ -764,7 +768,9 @@ public class RegProyecto extends JDialog {
 		fila = new Object[model.getColumnCount()];
 		for (int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
 			if (Empresa.getInstance().getEmpleados().get(i) instanceof Planificador
-					&& !Empresa.getInstance().getEmpleados().get(i).isSeleccionado()) {
+					&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdPlanificador.getText()) 
+				&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdAdicional.getText())) {
+					
 				fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
 				fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
 				fila[2] = Empresa.getInstance().getEmpleados().get(i).getCargo();
@@ -785,7 +791,7 @@ public class RegProyecto extends JDialog {
 		fila = new Object[model.getColumnCount()];
 		for (int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
 			if (Empresa.getInstance().getEmpleados().get(i) instanceof Disegnador
-					&& !Empresa.getInstance().getEmpleados().get(i).isSeleccionado()) {
+					&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdAdicional.getText())) {
 				fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
 				fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
 				fila[2] = Empresa.getInstance().getEmpleados().get(i).getCargo();
@@ -814,14 +820,6 @@ public class RegProyecto extends JDialog {
 		}
 	}
 
-	private void seleccionUnica(String id) {
-		for (int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
-			if(!Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(id))
-			{
-				Empresa.getInstance().getEmpleados().get(i).setSeleccionado(false);
-			}
-			
-		}
-	}
+
 
 }

@@ -1,6 +1,6 @@
 package Visual;
 
-import java.awt.BorderLayout;
+/*import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.io.File;
@@ -27,7 +27,7 @@ import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
 
-	private final JPanel contentPanel = new JPanel();
+/*	private final JPanel contentPanel = new JPanel();
 	private JTextField txtId;
 	private JTextField txtContrasena;
 
@@ -78,7 +78,7 @@ public class Login extends JFrame {
 		});
 	}*/
 	
-	private void leerArchivo() throws IOException, ClassNotFoundException {
+	/*private void leerArchivo() throws IOException, ClassNotFoundException {
 		File archivoEmpresa = new File("empresa.dat");
 		if(!archivoEmpresa.exists()) {
 			FileOutputStream f = new FileOutputStream(new File("empresa.dat"));
@@ -166,7 +166,7 @@ public class Login extends JFrame {
 		});
 	}*/
 	
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -185,7 +185,7 @@ public class Login extends JFrame {
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 */
-	public Login() throws ClassNotFoundException, IOException {
+	/*public Login() throws ClassNotFoundException, IOException {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -229,7 +229,7 @@ public class Login extends JFrame {
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "Id o contraseña", "Advertencia", JOptionPane.WARNING_MESSAGE);
-					}*/
+					
 				}
 			});
 			btnIngresar.setBounds(26, 190, 97, 25);
@@ -238,3 +238,4 @@ public class Login extends JFrame {
 	}
 
 }
+*/

@@ -44,7 +44,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class RegContrato extends JDialog {
-	private JTextField textField;
+	private JTextField txtIdContrato;
 	private JTextField txtIdProyecto;
 	private JTextField txtNombreProyecto;
 	private JTextField txtIdCliente;
@@ -89,6 +89,9 @@ public class RegContrato extends JDialog {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		Contrato contrato = new Contrato(proyecto,fechaEntrega);
+		
 		setBounds(100, 100, 677, 345);
 		getContentPane().setLayout(null);
 		{
@@ -151,10 +154,10 @@ public class RegContrato extends JDialog {
 						lblIdentificadorDelContrato.setFont(new Font("Tahoma", Font.BOLD, 11));
 					}
 					{
-						textField = new JTextField();
-						panel_3.add(textField);
-						textField.setEnabled(false);
-						textField.setColumns(10);
+						txtIdContrato = new JTextField(contrato.getId());
+						panel_3.add(txtIdContrato);
+						txtIdContrato.setEnabled(false);
+						txtIdContrato.setColumns(10);
 					}
 					//fechaEntrega = new Date(spnFecha.getValue().toString());
 					
@@ -251,6 +254,10 @@ public class RegContrato extends JDialog {
 							JButton btnVerEquipo = new JButton("Ver equipo");
 							btnVerEquipo.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
+									InfoEquipo info = new InfoEquipo(proyecto.getGrupoTrabajo());
+									info.setLocationRelativeTo(null);
+									info.setModal(true);
+									info.setVisible(true);
 								}
 							});
 							btnVerEquipo.setBounds(317, 64, 110, 23);
@@ -317,26 +324,24 @@ public class RegContrato extends JDialog {
 					JButton btnAceptar = new JButton("Realizar contrato");
 					btnAceptar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							Contrato contrato = new Contrato(proyecto,fechaEntrega);
+							contrato.setFechaEntrega(fechaEntrega);
 							Empresa.getInstance().nuevoContrato(cliente.getId(), contrato);
+							proyecto.setRealizado(true);
 							dispose();
+							
 						}
 					});
-					{
-						JButton btnEditar = new JButton("Editar");
-						btnEditar.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								dispose();
-							}
-						});
-						buttonPane.add(btnEditar);
-					}
 					btnAceptar.setActionCommand("OK");
 					buttonPane.add(btnAceptar);
 					getRootPane().setDefaultButton(btnAceptar);
 				}
 				{
 					JButton btnCancelar = new JButton("Cancelar");
+					btnCancelar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							dispose();
+						}
+					});
 					btnCancelar.setActionCommand("Cancel");
 					buttonPane.add(btnCancelar);
 				}

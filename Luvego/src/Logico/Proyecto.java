@@ -10,11 +10,13 @@ public class Proyecto implements Serializable{
 	 */
 	private static final long serialVersionUID = 5346260584819546609L;
 	private String id;
+	private static int cont;
 	private String nombre;
 	private ArrayList<Empleado> grupoTrabajo;
 	//private float sumaSalarios;
 	private String clasificacion;
 	private String estado;
+	private boolean realizado;
 
 	public String getEstado() {
 		return estado;
@@ -28,19 +30,29 @@ public class Proyecto implements Serializable{
 		this.estado = estado;
 	}
 
-	public Proyecto(String id, String nombre, ArrayList<Empleado> grupoTrabajo, String clasificacion) {
+	public Proyecto(String nombre, ArrayList<Empleado> grupoTrabajo, String clasificacion) {
 
-		this.id = id;
+		cont++;
+		this.id = Integer.toString(cont);
 		this.nombre = nombre;
 		this.grupoTrabajo = grupoTrabajo;
 		//this.sumaSalarios = getSumaSalarios();
 		this.clasificacion = clasificacion;
 		this.estado = "Normal";
+		this.realizado = false; //atributo que solo se utilizara para saber si se creo un proyecto o no en regProyecto
 	}
 
 	/*
 	 * public float getGanancia() { return }
 	 */
+
+	public boolean isRealizado() {
+		return realizado;
+	}
+
+	public void setRealizado(boolean realizado) {
+		this.realizado = realizado;
+	}
 
 	public ArrayList<Empleado> getGrupoTrabajo() {
 		return grupoTrabajo;

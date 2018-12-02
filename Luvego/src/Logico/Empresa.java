@@ -51,6 +51,23 @@ public class Empresa implements Serializable{
 		return empresa;	
 	}
 	
+
+	public void nuevoProyecto(Proyecto proyecto)
+	{
+		proyectos.add(proyecto);
+	}
+	
+	public void nuevoCliente(Cliente cliente)
+	{
+		clientes.add(cliente);
+	}
+	
+	public void nuevoEmpleado(Empleado empleado)
+	{
+		empleados.add(empleado);
+	}
+
+	
 	public Cliente getClienteByIdProyecto(String id)
 	{
 		Cliente cliente = null;
@@ -69,11 +86,6 @@ public class Empresa implements Serializable{
 		return cliente;
 	}
 	
-	
-	public void nuevoEmpleado(Empleado empleado)
-	{
-		empleados.add(empleado);
-	}
 	
 	public int getCantDesktop()
 	{
@@ -152,13 +164,7 @@ public class Empresa implements Serializable{
 		}
 		return proyecto;
 	}
-	
-	
-	public void nuevoCliente(Cliente cliente)
-	{
-		clientes.add(cliente);
-	}
-	
+		
 	public boolean nuevoContrato(String idCliente, Contrato contrato)
 	{
 
@@ -171,6 +177,7 @@ public class Empresa implements Serializable{
 					if(clientes.get(i).setContrato(contrato))
 					{
 						contrato.setCliente(clientes.get(i));
+						contratos.add(contrato);
 						nuevoProyecto(contrato.getProyecto());
 						asignarProyecto(contrato.getProyecto().getGrupoTrabajo(), contrato.getProyecto());
 						return true;	
@@ -189,17 +196,25 @@ public class Empresa implements Serializable{
 		return false;
 	}
 	
-	public void nuevoProyecto(Proyecto proyecto)
+	private void eliminarProyecto(String id)
 	{
-		proyectos.add(proyecto);
+		for(int i = 0; i < proyectos.size();i++)
+		{
+			if(proyectos.get(i).getId().equalsIgnoreCase(id))
+			{
+				proyectos.remove(i);
+			}
+		}
 	}
 	
 	public boolean cancelarContrato(String idContrato)
 	{
-		for(int i = 0; i < clientes.size(); i++)
+		for(int i = 0; i < contratos.size(); i++)
 		{
+			
 			if(contratos.get(i).getId().equalsIgnoreCase(idContrato))
 			{
+				eliminarProyecto(contratos.get(i).getProyecto().getId());
 				contratos.remove(i);
 				return true;
 			}
@@ -234,6 +249,21 @@ public class Empresa implements Serializable{
 			}
 		}
 		return false;
+	}
+	
+	public Contrato getContratoByIdProyecto(String idProyecto)
+	{
+		Contrato contrato = null;
+		boolean encontrado = false;
+		for(int i = 0; i < contratos.size() && !encontrado ;i++)
+		{
+			if(contratos.get(i).getProyecto().getId().equalsIgnoreCase(idProyecto))
+			{
+				contrato = contratos.get(i);
+				encontrado = true;
+			}
+		}
+		return contrato;
 	}
 	
 	public Cliente getClienteById(String id)
@@ -281,6 +311,9 @@ public class Empresa implements Serializable{
 			}
 		}
 	}
+	
+
+	
 	
 	
 	public ArrayList<Cliente> getClientes() {

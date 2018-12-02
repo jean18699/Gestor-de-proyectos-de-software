@@ -17,17 +17,23 @@ public class Main {
 		esp.add("Java");
 		esp.add("Python");
 		
-		Empleado pro2 = new Programador("123","j","hombre",19,"cerro alto",156,esp);
+		Empleado pro = new Programador("123","j","hombre",19,"cerro alto",156,esp);
 		
-		Empresa.getInstance().nuevoEmpleado(pro2);
+		Empresa.getInstance().nuevoEmpleado(pro);
 		Empleado pro3 = Empresa.getInstance().getEmpleadoById("PRG-0000001");
 		
-		Empleado pro = new Programador("jeaasdfn","j","hombre",19,"cerro alto",156,esp);
+		Empleado pro2 = new Programador("jeaasdfn","j","hombre",19,"cerro alto",156,esp);
 		Empleado dsg = new Disegnador("jeane","j","hombre",19,"cerro alto",15);
 		Empleado dsg2 = new Disegnador("jeane","j","hombre",19,"cerro alto",15);
 		
+		
+	
+		
 		Empleado chef = new Jefe("jeanff","j","hombre",19,"cerro alto",1556);
 		Empleado p = new Planificador("jeasn","j","hombre",19,"cerro alto",15, 0);
+	
+		System.out.println(pro.getId());
+		System.out.println(dsg.getId());
 		
 		ArrayList<Empleado> grupo = new ArrayList<>();
 		grupo.add(chef);
@@ -43,7 +49,7 @@ public class Main {
 		Date date = new Date("12/2/2018");
 		//Date date2 = new Date("15/2/2018");
 		
-		Proyecto pr = new Proyecto("523","Globos",grupo,"Web");
+		/*Proyecto pr = new Proyecto("523","Globos",grupo,"Web");
 		Proyecto pr2 = new Proyecto("123","Globos",grupo,"Movil");
 		Proyecto pr3 = new Proyecto("123","Globos",grupo,"Movil");
 		
@@ -56,6 +62,8 @@ public class Main {
 		Empresa.getInstance().nuevoCliente(cl);
 		Empresa.getInstance().nuevoContrato("456", contrato);
 
+		//System.out.println(Empresa.getInstance().getContratoByIdProyecto("523").getCliente().getNombre());
+		*/
 		
 		//System.out.println(Empresa.getInstance().getClientes().get(0).getContratos().get(0).getProyecto().getId());
 		//System.out.println(Empresa.getInstance().getClienteByIdProyecto("523").getId());
@@ -75,6 +83,8 @@ public class Main {
 		//Empresa.getInstance().asignarProyecto(grupo, pr);
 		//Empresa.getInstance().asignarProyecto(grupo, pr);
 	
+		
+		
 	}
 
 }

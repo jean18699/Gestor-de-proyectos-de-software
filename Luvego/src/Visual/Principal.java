@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.border.BevelBorder;
+import java.awt.Color;
 
 public class Principal extends JFrame {
 
@@ -80,6 +82,7 @@ public class Principal extends JFrame {
 	
 		try {
 			File arch = new File("registro.bin");
+			
 			if(!arch.exists())
 			{
 				arch.createNewFile();
@@ -98,12 +101,13 @@ public class Principal extends JFrame {
 		}
 		
 		
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		dim = super.getToolkit().getScreenSize();
 		super.setSize((dim.width),(dim.height-50));
 		setExtendedState(JFrame.MAXIMIZED_BOTH); //Fullscreen
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBackground(new Color(176, 196, 222));
+		menuBar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		setJMenuBar(menuBar);
 		
 		
@@ -189,5 +193,10 @@ public class Principal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 255, 255));
+		panel.setBounds(10, 287, 434, 356);
+		contentPane.add(panel);
 	}
 }

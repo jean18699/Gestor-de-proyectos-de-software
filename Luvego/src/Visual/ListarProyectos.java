@@ -299,6 +299,14 @@ public class ListarProyectos extends JDialog {
 			}
 			{
 				JButton btnRegistroDeContratos = new JButton("Registro de contratos");
+				btnRegistroDeContratos.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						ListarContratos list = new ListarContratos();
+						list.setLocationRelativeTo(null);
+						list.setModal(true);
+						list.setVisible(true);
+					}
+				});
 				btnRegistroDeContratos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				btnRegistroDeContratos.setBounds(165, 3, 183, 26);
 				buttonPane.add(btnRegistroDeContratos);
@@ -317,7 +325,7 @@ public class ListarProyectos extends JDialog {
 			panel.setLayout(null);
 			{
 				JPanel panel_2 = new JPanel();
-				panel_2.setBounds(851, 57, 91, 236);
+				panel_2.setBounds(851, 134, 91, 159);
 				panel.add(panel_2);
 				panel_2.setBackground(Color.LIGHT_GRAY);
 				panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -333,6 +341,7 @@ public class ListarProyectos extends JDialog {
 							info.setLocationRelativeTo(null);
 							info.setModal(true);
 							info.setVisible(true);
+							cargarProyectos();
 						}
 					});
 					btnContratoInfo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -351,30 +360,12 @@ public class ListarProyectos extends JDialog {
 					btnAplazar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 					btnAplazar.setToolTipText("Aplazar proyecto");
 					btnAplazar.setBackground(Color.WHITE);
-					btnAplazar.setBounds(0, 83, 87, 78);
+					btnAplazar.setBounds(0, 81, 87, 78);
 					panel_2.add(btnAplazar);
 					btnAplazar.setIcon(
 							new ImageIcon(ListarProyectos.class.getResource("/img/Contratos/Aplazo de contratos.png")));
 					btnAplazar.setFont(new Font("Tahoma", Font.BOLD, 11));
 					btnAplazar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-				}
-				{
-					JPanel panel_1 = new JPanel();
-					panel_1.setBackground(Color.RED);
-					panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-					panel_1.setBounds(0, 161, 87, 71);
-					panel_2.add(panel_1);
-					panel_1.setLayout(null);
-					{
-						JLabel lblX = new JLabel("X");
-						lblX.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-						lblX.setBackground(Color.RED);
-						lblX.setForeground(Color.WHITE);
-						lblX.setHorizontalAlignment(SwingConstants.CENTER);
-						lblX.setFont(new Font("Tahoma", Font.BOLD, 50));
-						lblX.setBounds(0, 0, 87, 71);
-						panel_1.add(lblX);
-					}
 				}
 			}
 		}
@@ -406,7 +397,7 @@ public class ListarProyectos extends JDialog {
 			if (Empresa.getInstance().getProyectos().get(i).getClasificacion().equalsIgnoreCase("Movil")) {
 				fila[0] = Empresa.getInstance().getProyectos().get(i).getId();
 				fila[1] = Empresa.getInstance().getProyectos().get(i).getNombre();
-				fila[2] = Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getApellidos();
+				fila[2] = Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getNombre() +" "+ Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getApellidos();
 
 				model.addRow(fila);
 			}
@@ -427,7 +418,7 @@ public class ListarProyectos extends JDialog {
 			if (Empresa.getInstance().getProyectos().get(i).getClasificacion().equalsIgnoreCase("Web")) {
 				fila[0] = Empresa.getInstance().getProyectos().get(i).getId();
 				fila[1] = Empresa.getInstance().getProyectos().get(i).getNombre();
-				fila[2] = Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getApellidos();
+				fila[2] = Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getNombre() +" "+ Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getApellidos();
 
 				model.addRow(fila);
 			}
@@ -448,7 +439,7 @@ public class ListarProyectos extends JDialog {
 			if (Empresa.getInstance().getProyectos().get(i).getClasificacion().equalsIgnoreCase("Escritorio")) {
 				fila[0] = Empresa.getInstance().getProyectos().get(i).getId();
 				fila[1] = Empresa.getInstance().getProyectos().get(i).getNombre();
-				fila[2] = Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getApellidos();
+				fila[2] = Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getNombre() +" "+ Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getApellidos();
 				fila[3] = Empresa.getInstance().getProyectos().get(i).getEstado();
 
 				model.addRow(fila);
@@ -469,7 +460,7 @@ public class ListarProyectos extends JDialog {
 			if (Empresa.getInstance().getProyectos().get(i).getNombre().equalsIgnoreCase(nombre)) {
 				fila[0] = Empresa.getInstance().getProyectos().get(i).getId();
 				fila[1] = Empresa.getInstance().getProyectos().get(i).getNombre();
-				fila[2] = Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getApellidos();
+				fila[2] = Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getNombre() +" "+ Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getApellidos();
 				fila[3] = Empresa.getInstance().getProyectos().get(i).getEstado();
 
 				model.addRow(fila);
@@ -490,7 +481,7 @@ public class ListarProyectos extends JDialog {
 			if (Empresa.getInstance().getProyectos().get(i).getId().equalsIgnoreCase(id)) {
 				fila[0] = Empresa.getInstance().getProyectos().get(i).getId();
 				fila[1] = Empresa.getInstance().getProyectos().get(i).getNombre();
-				fila[2] = Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getApellidos();
+				fila[2] = Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getNombre() +" "+ Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getApellidos();
 				fila[3] = Empresa.getInstance().getProyectos().get(i).getEstado();
 
 				model.addRow(fila);
