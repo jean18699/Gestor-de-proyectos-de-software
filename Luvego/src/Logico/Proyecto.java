@@ -35,6 +35,7 @@ public class Proyecto implements Serializable{
 		this.grupoTrabajo = grupoTrabajo;
 		//this.sumaSalarios = getSumaSalarios();
 		this.clasificacion = clasificacion;
+		this.estado = "Normal";
 	}
 
 	/*

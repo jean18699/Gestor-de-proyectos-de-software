@@ -19,6 +19,8 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.border.BevelBorder;
+import java.awt.Window.Type;
 
 public class InfoEmpleado extends JDialog {
 
@@ -32,15 +34,17 @@ public class InfoEmpleado extends JDialog {
 	private JTextField txtProyectos;
 	
 	public InfoEmpleado(Empleado empleado) {
+		setType(Type.UTILITY);
 		setResizable(false);
 		setTitle("Informacion");
 		setBounds(100, 100, 486, 246);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
+			panel.setBackground(Color.WHITE);
 			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informacion de empleado", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
@@ -142,6 +146,8 @@ public class InfoEmpleado extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+			buttonPane.setBackground(Color.LIGHT_GRAY);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

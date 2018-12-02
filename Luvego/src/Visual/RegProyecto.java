@@ -296,6 +296,7 @@ public class RegProyecto extends JDialog {
 					reg.setLocationRelativeTo(null);
 					reg.setModal(true);
 					reg.setVisible(true);
+					btnAnterior.setSelected(true);
 
 				}
 			});

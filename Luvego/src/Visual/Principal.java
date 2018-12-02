@@ -55,6 +55,7 @@ public class Principal extends JFrame {
 
 	
 	public Principal() {
+		setTitle("Luvego");
 		
 		addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override
@@ -104,6 +105,7 @@ public class Principal extends JFrame {
 		setExtendedState(JFrame.MAXIMIZED_BOTH); //Fullscreen
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
+		
 		
 		JMenu mnProyectos = new JMenu("Proyectos");
 		mnProyectos.setIcon(new ImageIcon(Principal.class.getResource("/img/Nuevo Proyecto 32x32.png")));

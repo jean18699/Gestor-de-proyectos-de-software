@@ -30,6 +30,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.ImageIcon;
+import java.awt.Window.Type;
 
 public class ListarEmpleados extends JDialog {
 
@@ -66,8 +67,10 @@ public class ListarEmpleados extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListarEmpleados() {
-		setTitle("Lista de proyectos");
-		setBounds(100, 100, 807, 310);
+		setType(Type.UTILITY);
+		setResizable(false);
+		setTitle("Registro de empleados");
+		setBounds(100, 100, 797, 298);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

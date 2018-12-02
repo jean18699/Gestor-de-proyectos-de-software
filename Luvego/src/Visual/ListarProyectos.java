@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.ScrollPane;
 import java.awt.event.MouseAdapter;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -18,7 +19,10 @@ import javax.swing.table.DefaultTableModel;
 
 import com.sun.glass.events.MouseEvent;
 
+import Logico.Cliente;
+import Logico.Empleado;
 import Logico.Empresa;
+import Logico.Proyecto;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -34,6 +38,7 @@ import java.awt.Component;
 import javax.swing.SwingConstants;
 import java.awt.Cursor;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.border.LineBorder;
 
 public class ListarProyectos extends JDialog {
 
@@ -41,12 +46,15 @@ public class ListarProyectos extends JDialog {
 	private JScrollPane scrollPane;
 	private static JTable table;
 	private int index;
-	private JButton btnVerDetalles;
+	private JButton btnVerEquipo;
 	private static DefaultTableModel model;
 	private static Object[] fila;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtNombre;
+	private JTextField txtId;
 	JComboBox<String> cmbCategoria;
+	private String select;
+	private JButton btnContratoInfo;
+	private JButton btnAplazar;
 
 	/**
 	 * Launch the application.
@@ -65,9 +73,10 @@ public class ListarProyectos extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListarProyectos() {
+		setResizable(false);
 
 		setTitle("Lista de proyectos");
-		setBounds(100, 100, 957, 372);
+		setBounds(100, 100, 943, 359);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(Color.WHITE);
@@ -82,15 +91,28 @@ public class ListarProyectos extends JDialog {
 		contentPanel.add(scrollPane);
 		{
 			table = new JTable();
-			table.setRowHeight(25);
 			table.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-					index = table.getSelectedRow();
-					if (index >= 0) {
-						btnVerDetalles.setEnabled(true);
+				@Override
+				public void mouseClicked(java.awt.event.MouseEvent e) {
+				
+					int index = table.getSelectedRow();
+					if(index >= 0)
+					{
+						select = table.getValueAt(index, 0).toString();
+						btnAplazar.setEnabled(true);
+						btnContratoInfo.setEnabled(true);
+						btnVerEquipo.setEnabled(true);
+					}else
+					{
+						btnAplazar.setEnabled(false);
+						btnContratoInfo.setEnabled(false);
+						btnVerEquipo.setEnabled(false);
 					}
 				}
 			});
+			table.setRowHeight(25);
+			
+			
 			table.setFont(new Font("Tahoma", Font.PLAIN, 12));
 			table.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 12));
 
@@ -102,6 +124,7 @@ public class ListarProyectos extends JDialog {
 			model.setColumnIdentifiers(columnnames);
 			table.setModel(model);
 			scrollPane.setViewportView(table);
+		
 		}
 		{
 			JPanel panel = new JPanel();
@@ -118,16 +141,21 @@ public class ListarProyectos extends JDialog {
 				panel_1.setBounds(0, 0, 155, 78);
 				panel.add(panel_1);
 				{
-					textField = new JTextField();
-					textField.setColumns(10);
-					textField.setBounds(10, 20, 135, 20);
-					panel_1.add(textField);
+					txtNombre = new JTextField();
+					txtNombre.setColumns(10);
+					txtNombre.setBounds(10, 20, 135, 20);
+					panel_1.add(txtNombre);
 				}
 				{
-					JButton button = new JButton("Consultar");
-					button.setBackground(new Color(220, 220, 220));
-					button.setBounds(38, 45, 79, 23);
-					panel_1.add(button);
+					JButton btnCargarPorNombre = new JButton("Consultar");
+					btnCargarPorNombre.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							cargarPorNombre(txtNombre.getText());
+						}
+					});
+					btnCargarPorNombre.setBackground(new Color(220, 220, 220));
+					btnCargarPorNombre.setBounds(38, 45, 79, 23);
+					panel_1.add(btnCargarPorNombre);
 				}
 				{
 					JLabel lblBuscarPorNombre = new JLabel("Buscar por nombre");
@@ -145,16 +173,21 @@ public class ListarProyectos extends JDialog {
 				panel_1.setBounds(0, 78, 155, 86);
 				panel.add(panel_1);
 				{
-					textField_1 = new JTextField();
-					textField_1.setColumns(10);
-					textField_1.setBounds(10, 20, 135, 20);
-					panel_1.add(textField_1);
+					txtId = new JTextField();
+					txtId.setColumns(10);
+					txtId.setBounds(10, 20, 135, 20);
+					panel_1.add(txtId);
 				}
 				{
-					JButton button = new JButton("Consultar");
-					button.setBackground(new Color(220, 220, 220));
-					button.setBounds(38, 45, 79, 23);
-					panel_1.add(button);
+					JButton btnCargarPorId = new JButton("Consultar");
+					btnCargarPorId.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							cargarPorId(txtId.getText());
+						}
+					});
+					btnCargarPorId.setBackground(new Color(220, 220, 220));
+					btnCargarPorId.setBounds(38, 45, 79, 23);
+					panel_1.add(btnCargarPorId);
 				}
 				{
 					JLabel lblBuscarPorId = new JLabel("Buscar por ID");
@@ -214,26 +247,31 @@ public class ListarProyectos extends JDialog {
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBackground(Color.LIGHT_GRAY);
 			buttonPane.setBorder(new BevelBorder(BevelBorder.RAISED, Color.GRAY, null, null, null));
-			buttonPane.setBounds(0, 299, 969, 34);
+			buttonPane.setBounds(0, 299, 937, 34);
 			contentPanel.add(buttonPane);
 			{
-				btnVerDetalles = new JButton("Ver detalles");
-				btnVerDetalles.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				btnVerDetalles.setBounds(790, 5, 106, 23);
-				btnVerDetalles.addActionListener(new ActionListener() {
+				btnVerEquipo = new JButton("Ver equipo");
+				btnVerEquipo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				btnVerEquipo.setBounds(758, 5, 106, 23);
+				btnVerEquipo.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						ArrayList<Empleado> equipo = Empresa.getInstance().getProyectoById(select).getGrupoTrabajo();
+						InfoEquipo info = new  InfoEquipo(equipo);
+						info.setLocationRelativeTo(null);
+						info.setModal(true);
+						info.setVisible(true);
 					}
 				});
 				buttonPane.setLayout(null);
-				btnVerDetalles.setEnabled(false);
-				btnVerDetalles.setActionCommand("OK");
-				buttonPane.add(btnVerDetalles);
-				getRootPane().setDefaultButton(btnVerDetalles);
+				btnVerEquipo.setEnabled(false);
+				btnVerEquipo.setActionCommand("OK");
+				buttonPane.add(btnVerEquipo);
+				getRootPane().setDefaultButton(btnVerEquipo);
 			}
 			{
 				JButton btnSalir = new JButton("Salir");
 				btnSalir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				btnSalir.setBounds(906, 5, 53, 23);
+				btnSalir.setBounds(874, 5, 53, 23);
 				btnSalir.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
@@ -272,41 +310,53 @@ public class ListarProyectos extends JDialog {
 		}
 		{
 			JPanel panel = new JPanel();
-			panel.setBackground(Color.GRAY);
+			panel.setBackground(new Color(112, 128, 144));
 			panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 			panel.setBounds(0, 0, 969, 300);
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			{
 				JPanel panel_2 = new JPanel();
-				panel_2.setBounds(851, 57, 106, 236);
+				panel_2.setBounds(851, 57, 91, 236);
 				panel.add(panel_2);
 				panel_2.setBackground(Color.LIGHT_GRAY);
 				panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 				panel_2.setLayout(null);
 				{
-					JButton button = new JButton("");
-					button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-					button.setToolTipText("Ver contrato");
-					button.setBackground(Color.GRAY);
-					button.setBounds(0, 0, 87, 83);
-					panel_2.add(button);
-					button.setIcon(
+				    btnContratoInfo = new JButton("");
+					btnContratoInfo.setEnabled(false);
+					btnContratoInfo.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							Proyecto proyecto = Empresa.getInstance().getProyectoById(select);
+							Cliente cliente = Empresa.getInstance().getClienteByIdProyecto(proyecto.getId());
+							InfoContrato info = new InfoContrato(proyecto, cliente);
+							info.setLocationRelativeTo(null);
+							info.setModal(true);
+							info.setVisible(true);
+						}
+					});
+					btnContratoInfo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					btnContratoInfo.setToolTipText("Ver contrato");
+					btnContratoInfo.setBackground(Color.WHITE);
+					btnContratoInfo.setBounds(0, 0, 87, 83);
+					panel_2.add(btnContratoInfo);
+					btnContratoInfo.setIcon(
 							new ImageIcon(ListarProyectos.class.getResource("/img/Contratos/Contratos 64x64.png")));
-					button.setFont(new Font("Tahoma", Font.BOLD, 11));
-					button.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+					btnContratoInfo.setFont(new Font("Tahoma", Font.BOLD, 11));
+					btnContratoInfo.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 				}
 				{
-					JButton button = new JButton("");
-					button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-					button.setToolTipText("Aplazar proyecto");
-					button.setBackground(Color.GRAY);
-					button.setBounds(0, 83, 87, 78);
-					panel_2.add(button);
-					button.setIcon(
+					btnAplazar = new JButton("");
+					btnAplazar.setEnabled(false);
+					btnAplazar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					btnAplazar.setToolTipText("Aplazar proyecto");
+					btnAplazar.setBackground(Color.WHITE);
+					btnAplazar.setBounds(0, 83, 87, 78);
+					panel_2.add(btnAplazar);
+					btnAplazar.setIcon(
 							new ImageIcon(ListarProyectos.class.getResource("/img/Contratos/Aplazo de contratos.png")));
-					button.setFont(new Font("Tahoma", Font.BOLD, 11));
-					button.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+					btnAplazar.setFont(new Font("Tahoma", Font.BOLD, 11));
+					btnAplazar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 				}
 				{
 					JPanel panel_1 = new JPanel();
@@ -317,6 +367,7 @@ public class ListarProyectos extends JDialog {
 					panel_1.setLayout(null);
 					{
 						JLabel lblX = new JLabel("X");
+						lblX.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 						lblX.setBackground(Color.RED);
 						lblX.setForeground(Color.WHITE);
 						lblX.setHorizontalAlignment(SwingConstants.CENTER);
@@ -410,4 +461,47 @@ public class ListarProyectos extends JDialog {
 		table.getColumnModel().getColumn(1).setMinWidth(200);
 		table.getColumnModel().getColumn(1).setMaxWidth(200);
 	}
+	
+	private void cargarPorNombre(String nombre) {
+		model.setRowCount(0);
+		fila = new Object[model.getColumnCount()];
+		for (int i = 0; i < Empresa.getInstance().getProyectos().size(); i++) {
+			if (Empresa.getInstance().getProyectos().get(i).getNombre().equalsIgnoreCase(nombre)) {
+				fila[0] = Empresa.getInstance().getProyectos().get(i).getId();
+				fila[1] = Empresa.getInstance().getProyectos().get(i).getNombre();
+				fila[2] = Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getApellidos();
+				fila[3] = Empresa.getInstance().getProyectos().get(i).getEstado();
+
+				model.addRow(fila);
+			}
+		}
+
+		table.getColumnModel().getColumn(0).setMinWidth(200);
+		table.getColumnModel().getColumn(0).setMaxWidth(200);
+
+		table.getColumnModel().getColumn(1).setMinWidth(200);
+		table.getColumnModel().getColumn(1).setMaxWidth(200);
+	}
+	
+	private void cargarPorId(String id) {
+		model.setRowCount(0);
+		fila = new Object[model.getColumnCount()];
+		for (int i = 0; i < Empresa.getInstance().getProyectos().size(); i++) {
+			if (Empresa.getInstance().getProyectos().get(i).getId().equalsIgnoreCase(id)) {
+				fila[0] = Empresa.getInstance().getProyectos().get(i).getId();
+				fila[1] = Empresa.getInstance().getProyectos().get(i).getNombre();
+				fila[2] = Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getApellidos();
+				fila[3] = Empresa.getInstance().getProyectos().get(i).getEstado();
+
+				model.addRow(fila);
+			}
+		}
+
+		table.getColumnModel().getColumn(0).setMinWidth(200);
+		table.getColumnModel().getColumn(0).setMaxWidth(200);
+
+		table.getColumnModel().getColumn(1).setMinWidth(200);
+		table.getColumnModel().getColumn(1).setMaxWidth(200);
+	}
+	
 }

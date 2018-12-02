@@ -18,7 +18,7 @@ public class Main {
 		esp.add("Python");
 		
 		Empleado pro2 = new Programador("123","j","hombre",19,"cerro alto",156,esp);
-		System.out.println(pro2.getId());
+		
 		Empresa.getInstance().nuevoEmpleado(pro2);
 		Empleado pro3 = Empresa.getInstance().getEmpleadoById("PRG-0000001");
 		
@@ -43,10 +43,29 @@ public class Main {
 		Date date = new Date("12/2/2018");
 		//Date date2 = new Date("15/2/2018");
 		
-		Proyecto pr = new Proyecto("123","Globos",grupo,"Web");
+		Proyecto pr = new Proyecto("523","Globos",grupo,"Web");
+		Proyecto pr2 = new Proyecto("123","Globos",grupo,"Movil");
+		Proyecto pr3 = new Proyecto("123","Globos",grupo,"Movil");
+		
 		Contrato contrato = new Contrato(pr,date);
+		Contrato contrato2 = new Contrato(pr2,date);
+		Contrato contrato3 = new Contrato(pr3,date);
 		
+		Cliente cl = new Cliente("456","asdasd","fafasf","null");
 		
+		Empresa.getInstance().nuevoCliente(cl);
+		Empresa.getInstance().nuevoContrato("456", contrato);
+
+		
+		//System.out.println(Empresa.getInstance().getClientes().get(0).getContratos().get(0).getProyecto().getId());
+		//System.out.println(Empresa.getInstance().getClienteByIdProyecto("523").getId());
+		//System.out.println(Empresa.getInstance().getPr);
+		
+	//	System.out.println(Empresa.getInstance().getMejorCategoria());
+		
+		//	System.out.println(Empresa.getInstance().getProyectos().size());
+		
+		//System.out.println(Empresa.getInstance().getProyectos().size());
 		//System.out.println(pr.getSumaSalarios());
 		
 		//Empresa.getInstance().asignarProyecto(grupo, pr);

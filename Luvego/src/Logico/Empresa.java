@@ -51,10 +51,106 @@ public class Empresa implements Serializable{
 		return empresa;	
 	}
 	
+	public Cliente getClienteByIdProyecto(String id)
+	{
+		Cliente cliente = null;
+		boolean encontrado = false;
+		for(int i = 0; i < clientes.size() && !encontrado;i++)
+		{
+			for(int j = 0; j < clientes.get(i).getContratos().size();j++)
+			{
+				if(clientes.get(i).getContratos().get(j).getProyecto().getId().equalsIgnoreCase(id))
+				{
+					cliente = clientes.get(i);
+					encontrado = true;
+				}
+			}
+		}
+		return cliente;
+	}
+	
 	
 	public void nuevoEmpleado(Empleado empleado)
 	{
 		empleados.add(empleado);
+	}
+	
+	public int getCantDesktop()
+	{
+		int cont = 0;
+		for(int i = 0; i < proyectos.size();i++)
+		{	
+			if(proyectos.get(i).getClasificacion().equalsIgnoreCase("Escritorio"))
+			{
+				cont++;
+			}
+			
+		}
+		return cont;
+	}
+	
+
+	public int getCantWeb()
+	{
+		int cont = 0;
+		for(int i = 0; i < proyectos.size();i++)
+		{	
+			if(proyectos.get(i).getClasificacion().equalsIgnoreCase("Web"))
+			{
+				cont++;
+			}
+			
+		}
+		return cont;
+	}
+
+	public int getCantMovil()
+	{
+		int cont = 0;
+		for(int i = 0; i < proyectos.size();i++)
+		{	
+			if(proyectos.get(i).getClasificacion().equalsIgnoreCase("Movil"))
+			{
+				cont++;
+			}
+			
+		}
+		return cont;
+	}
+	
+	
+	
+	public String getMejorCategoria()
+	{
+		if(getCantDesktop() > getCantMovil() && getCantDesktop() > getCantWeb())
+		{
+			return "Escritorio";
+		}
+		if(getCantWeb() > getCantDesktop() && getCantWeb() > getCantMovil())
+		{
+			return "Web";
+		}
+		if(getCantMovil() > getCantWeb() && getCantMovil() > getCantDesktop())
+		{
+			return "Movil";
+		}
+		
+		return null;	
+	}
+	
+	public Proyecto getProyectoById(String id)
+	{
+		Proyecto proyecto = null;
+		boolean encontrado = false;
+		for(int i = 0; i < proyectos.size() && !encontrado;i++)
+		{
+			if(proyectos.get(i).getId().equalsIgnoreCase(id))
+			{
+					proyecto = proyectos.get(i);
+					encontrado = true;
+			}
+		}
+		return proyecto;
 	}
 	
 	
@@ -75,6 +171,8 @@ public class Empresa implements Serializable{
 					if(clientes.get(i).setContrato(contrato))
 					{
 						contrato.setCliente(clientes.get(i));
+						nuevoProyecto(contrato.getProyecto());
+						asignarProyecto(contrato.getProyecto().getGrupoTrabajo(), contrato.getProyecto());
 						return true;	
 					}else
 					{
@@ -175,15 +273,13 @@ public class Empresa implements Serializable{
 		for(int i = 0; i < empleado.size();i++)
 		{
 			
-			if(empleado.get(i).getProyectos().size() < 3)
+			if(empleado.get(i).getProyectos().size() <= 3)
 			{
 				
 				empleado.get(i).setProyecto(proyecto);
-			}else
-			{
-				System.out.println("excedido");
+		
 			}
-		}	
+		}
 	}
 	
 	
