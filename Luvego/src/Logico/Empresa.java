@@ -19,7 +19,7 @@ public class Empresa implements Serializable{
 	
 	
 	private Empresa() {
-	
+	//
 		clientes = new ArrayList<>();
 		contratos = new ArrayList<>();
 		empleados = new ArrayList<>();

@@ -70,7 +70,7 @@ public class Principal extends JFrame {
 			}
 		});
 	}
-
+//
 	
 	public Principal() {
 		setTitle("Luvego");
