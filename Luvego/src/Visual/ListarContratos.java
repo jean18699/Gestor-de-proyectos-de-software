@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.ScrollPane;
 import java.awt.event.MouseAdapter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -296,9 +297,12 @@ public class ListarContratos extends JDialog {
 		fila = new Object[model.getColumnCount()];
 		for (int i = 0; i < Empresa.getInstance().getContratos().size(); i++) {
 			fila[0] = Empresa.getInstance().getContratos().get(i).getId();
-			fila[1] = Empresa.getInstance().getContratos().get(i).getCliente();
-			fila[2] = Empresa.getInstance().getContratos().get(i).getFechaInicio();
-			fila[3] = Empresa.getInstance().getContratos().get(i).getFechaEntrega();
+			fila[1] = Empresa.getInstance().getContratos().get(i).getCliente().getNombre();
+
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+			fila[2] = format.format(Empresa.getInstance().getContratos().get(i).getFechaInicio());
+
+			fila[3] = format.format(Empresa.getInstance().getContratos().get(i).getFechaEntrega());
 			fila[4] =  Empresa.getInstance().getContratos().get(i).getPrecioFinal();
 
 			model.addRow(fila);

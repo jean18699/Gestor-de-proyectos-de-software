@@ -13,6 +13,9 @@ import java.util.ArrayList;
 	private static int cont;
 	private String ceros;
 
+	protected String cedula;
+	protected String telefono1;
+	protected String telefono2;
 	protected String id;
 	protected final String nombre;
 	protected final String apellidos;
@@ -24,7 +27,7 @@ import java.util.ArrayList;
 	protected char evaluacionAnual;
 	private String ocupacion;
 	
-	public Empleado(String nombre, String apellidos, String sexo, int edad,String direccion, float salarioHora) {
+	public Empleado(String cedula,String nombre, String apellidos, String sexo, int edad,String telefono1,String telefono2,String direccion, float salarioHora) {
 
 		
 		ceros = "";
@@ -34,6 +37,7 @@ import java.util.ArrayList;
 		id = ceros+=id;
 		
 		this.evaluacionAnual = 'E';
+		this.cedula = cedula;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.sexo = sexo;
@@ -41,10 +45,42 @@ import java.util.ArrayList;
 		this.direccion = direccion;
 		this.salarioHora = salarioHora;
 		proyectos = new ArrayList<>();
-
+		this.telefono1 = telefono1;
+		this.telefono1 = telefono2;
+		
 	}
 
 	
+	public String getCedula() {
+		return cedula;
+	}
+
+
+	public String getTelefono1() {
+		return telefono1;
+	}
+
+
+	public String getTelefono2() {
+		return telefono2;
+	}
+
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+
+
+	public void setTelefono1(String telefono1) {
+		this.telefono1 = telefono1;
+	}
+
+
+	public void setTelefono2(String telefono2) {
+		this.telefono2 = telefono2;
+	}
+
+
 	public float getSalarioDia()
 	{
 		return salarioHora * 8;

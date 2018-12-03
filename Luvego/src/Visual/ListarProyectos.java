@@ -54,7 +54,6 @@ public class ListarProyectos extends JDialog {
 	JComboBox<String> cmbCategoria;
 	private String select;
 	private JButton btnContratoInfo;
-	private JButton btnAplazar;
 
 	/**
 	 * Launch the application.
@@ -99,12 +98,12 @@ public class ListarProyectos extends JDialog {
 					if(index >= 0)
 					{
 						select = table.getValueAt(index, 0).toString();
-						btnAplazar.setEnabled(true);
+						//btnAplazar.setEnabled(true);
 						btnContratoInfo.setEnabled(true);
 						btnVerEquipo.setEnabled(true);
 					}else
 					{
-						btnAplazar.setEnabled(false);
+						//btnAplazar.setEnabled(false);
 						btnContratoInfo.setEnabled(false);
 						btnVerEquipo.setEnabled(false);
 					}
@@ -325,13 +324,15 @@ public class ListarProyectos extends JDialog {
 			panel.setLayout(null);
 			{
 				JPanel panel_2 = new JPanel();
-				panel_2.setBounds(851, 134, 91, 159);
+				panel_2.setBounds(850, 11, 91, 289);
 				panel.add(panel_2);
 				panel_2.setBackground(Color.LIGHT_GRAY);
 				panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 				panel_2.setLayout(null);
 				{
 				    btnContratoInfo = new JButton("");
+				    btnContratoInfo.setBounds(0, 0, 87, 83);
+				    panel_2.add(btnContratoInfo);
 					btnContratoInfo.setEnabled(false);
 					btnContratoInfo.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
@@ -347,25 +348,10 @@ public class ListarProyectos extends JDialog {
 					btnContratoInfo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 					btnContratoInfo.setToolTipText("Ver contrato");
 					btnContratoInfo.setBackground(Color.WHITE);
-					btnContratoInfo.setBounds(0, 0, 87, 83);
-					panel_2.add(btnContratoInfo);
 					btnContratoInfo.setIcon(
 							new ImageIcon(ListarProyectos.class.getResource("/img/Contratos/Contratos 64x64.png")));
 					btnContratoInfo.setFont(new Font("Tahoma", Font.BOLD, 11));
 					btnContratoInfo.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-				}
-				{
-					btnAplazar = new JButton("");
-					btnAplazar.setEnabled(false);
-					btnAplazar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-					btnAplazar.setToolTipText("Aplazar proyecto");
-					btnAplazar.setBackground(Color.WHITE);
-					btnAplazar.setBounds(0, 81, 87, 78);
-					panel_2.add(btnAplazar);
-					btnAplazar.setIcon(
-							new ImageIcon(ListarProyectos.class.getResource("/img/Contratos/Aplazo de contratos.png")));
-					btnAplazar.setFont(new Font("Tahoma", Font.BOLD, 11));
-					btnAplazar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 				}
 			}
 		}

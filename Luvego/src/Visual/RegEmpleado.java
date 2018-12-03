@@ -32,6 +32,7 @@ import javax.swing.border.BevelBorder;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import java.awt.Component;
 
 public class RegEmpleado extends JDialog {
 
@@ -58,6 +59,12 @@ public class RegEmpleado extends JDialog {
 	private JLabel lblOcupacion;
 	private JLabel lblInformacionPersonal;
 	private JLabel lblNewLabel;
+	private JLabel lblTelefono;
+	private JTextField txtTelefono2;
+	private JTextField txtCorreo;
+	private JLabel lblCedula;
+	private JTextField txtCedula;
+	private JTextField txtTelefono;
 	
 
 	/**
@@ -77,18 +84,18 @@ public class RegEmpleado extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegEmpleado() {
-		setBounds(100, 100, 587, 510);
+		setBounds(100, 100, 747, 509);
 		setResizable(false);
 		setTitle("Registrar empleado");
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		setLocationRelativeTo(null);
 		contentPanel.setLayout(null);
 		
 		JPanel panel_InfoPersonal = new JPanel();
 		panel_InfoPersonal.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel_InfoPersonal.setBounds(12, 13, 560, 193);
+		panel_InfoPersonal.setBounds(173, 11, 560, 246);
 		contentPanel.add(panel_InfoPersonal);
 		panel_InfoPersonal.setLayout(null);
 		{
@@ -97,52 +104,52 @@ public class RegEmpleado extends JDialog {
 			lblInformacionPersonal.setFont(new Font("Tahoma", Font.BOLD, 13));
 			lblInformacionPersonal.setHorizontalAlignment(SwingConstants.CENTER);
 			lblInformacionPersonal.setBorder(new LineBorder(new Color(0, 0, 0)));
-			lblInformacionPersonal.setBounds(0, 0, 644, 28);
+			lblInformacionPersonal.setBounds(0, 0, 560, 28);
 			panel_InfoPersonal.add(lblInformacionPersonal);
 		}
 		{
 			JLabel lblNombre = new JLabel("Nombre: ");
-			lblNombre.setBounds(12, 52, 56, 16);
+			lblNombre.setBounds(22, 89, 56, 16);
 			panel_InfoPersonal.add(lblNombre);
 		}
 		{
 			JLabel lblApellidos = new JLabel("Apellidos:");
-			lblApellidos.setBounds(294, 52, 56, 16);
+			lblApellidos.setBounds(22, 119, 56, 16);
 			panel_InfoPersonal.add(lblApellidos);
 		}
 		{
-			JLabel lblSexo = new JLabel("Sexo: ");
-			lblSexo.setBounds(12, 97, 56, 16);
+			JLabel lblSexo = new JLabel("Genero:");
+			lblSexo.setBounds(32, 167, 46, 16);
 			panel_InfoPersonal.add(lblSexo);
 		}
 		{
 			JLabel lblEdad = new JLabel("Edad: ");
-			lblEdad.setBounds(294, 97, 56, 16);
+			lblEdad.setBounds(33, 203, 56, 16);
 			panel_InfoPersonal.add(lblEdad);
 		}
 		{
-			JLabel lblDireccion = new JLabel("Direccion");
-			lblDireccion.setBounds(12, 141, 56, 16);
+			JLabel lblDireccion = new JLabel("Direccion:");
+			lblDireccion.setBounds(273, 179, 70, 16);
 			panel_InfoPersonal.add(lblDireccion);
 		}
 		{
 			txtDireccion = new JTextField();
-			txtDireccion.setBounds(78, 139, 172, 43);
+			txtDireccion.setBounds(339, 179, 172, 43);
 			panel_InfoPersonal.add(txtDireccion);
 			txtDireccion.setColumns(10);
 		}
 		{
-			Empleado jefe = new Jefe("", "", "", 0, "", 0);
+			
 		}
 		{
 			txtNombre = new JTextField();
-			txtNombre.setBounds(80, 49, 172, 22);
+			txtNombre.setBounds(80, 82, 172, 22);
 			panel_InfoPersonal.add(txtNombre);
 			txtNombre.setColumns(10);
 		}
 		{
 			txtApellidos = new JTextField();
-			txtApellidos.setBounds(360, 49, 157, 22);
+			txtApellidos.setBounds(80, 116, 172, 22);
 			panel_InfoPersonal.add(txtApellidos);
 			txtApellidos.setColumns(10);
 		}
@@ -160,7 +167,7 @@ public class RegEmpleado extends JDialog {
 			}
 		});
 		rdbtnHombre.setSelected(true);
-		rdbtnHombre.setBounds(74, 97, 25, 25);
+		rdbtnHombre.setBounds(84, 167, 25, 25);
 		panel_InfoPersonal.add(rdbtnHombre);
 		
 		rdbtnMujer = new JRadioButton("");
@@ -173,33 +180,73 @@ public class RegEmpleado extends JDialog {
 				}
 			}
 		});
-		rdbtnMujer.setBounds(159, 97, 25, 25);
+		rdbtnMujer.setBounds(159, 167, 25, 25);
 		panel_InfoPersonal.add(rdbtnMujer);
 		
 		spnEdad = new JSpinner();
 		spnEdad.setModel(new SpinnerNumberModel(new Integer(18), new Integer(18), null, new Integer(1)));
-		spnEdad.setBounds(360, 94, 46, 22);
+		spnEdad.setBounds(80, 200, 46, 22);
 		panel_InfoPersonal.add(spnEdad);
 		{
 			lblFotoMujer = new JLabel("");
 			lblFotoMujer.setIcon(new ImageIcon(RegEmpleado.class.getResource("/img/empleada.png")));
-			lblFotoMujer.setBounds(190, 81, 62, 54);
+			lblFotoMujer.setBounds(190, 138, 62, 54);
 			panel_InfoPersonal.add(lblFotoMujer);
 		}
 		{
 			lblFotoHombre = new JLabel("");
 			lblFotoHombre.setIcon(new ImageIcon(RegEmpleado.class.getResource("/img/empleado.png")));
-			lblFotoHombre.setBounds(107, 79, 46, 54);
+			lblFotoHombre.setBounds(107, 138, 46, 54);
 			panel_InfoPersonal.add(lblFotoHombre);
+		}
+		{
+			lblTelefono = new JLabel("Telefono 1:");
+			lblTelefono.setBounds(275, 53, 68, 14);
+			panel_InfoPersonal.add(lblTelefono);
+		}
+		
+		JLabel lblTelefono_1 = new JLabel("Telefono 2:");
+		lblTelefono_1.setBounds(274, 86, 69, 14);
+		panel_InfoPersonal.add(lblTelefono_1);
+		
+		txtTelefono2 = new JTextField();
+		txtTelefono2.setBounds(339, 83, 172, 22);
+		panel_InfoPersonal.add(txtTelefono2);
+		txtTelefono2.setColumns(10);
+		
+		JLabel lblCorreo = new JLabel("Correo:");
+		lblCorreo.setBounds(287, 120, 46, 14);
+		panel_InfoPersonal.add(lblCorreo);
+		
+		txtCorreo = new JTextField();
+		txtCorreo.setBounds(339, 117, 172, 21);
+		panel_InfoPersonal.add(txtCorreo);
+		txtCorreo.setColumns(10);
+		{
+			lblCedula = new JLabel("Cedula:");
+			lblCedula.setBounds(22, 53, 46, 14);
+			panel_InfoPersonal.add(lblCedula);
+		}
+		{
+			txtCedula = new JTextField();
+			txtCedula.setBounds(80, 50, 172, 20);
+			panel_InfoPersonal.add(txtCedula);
+			txtCedula.setColumns(10);
+		}
+		{
+			txtTelefono = new JTextField();
+			txtTelefono.setColumns(10);
+			txtTelefono.setBounds(339, 50, 172, 22);
+			panel_InfoPersonal.add(txtTelefono);
 		}
 		{
 			JPanel panelOcupacion = new JPanel();
 			panelOcupacion.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-			panelOcupacion.setBounds(12, 216, 560, 109);
+			panelOcupacion.setBounds(173, 256, 560, 109);
 			contentPanel.add(panelOcupacion);
 			{
 				rdbtnJefe = new JRadioButton("Jefe");
-				rdbtnJefe.setBounds(8, 43, 90, 25);
+				rdbtnJefe.setBounds(64, 43, 90, 25);
 				rdbtnJefe.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -227,7 +274,7 @@ public class RegEmpleado extends JDialog {
 			}
 			{
 				rdbtnProgramador = new JRadioButton("Programador");
-				rdbtnProgramador.setBounds(102, 43, 127, 25);
+				rdbtnProgramador.setBounds(156, 43, 127, 25);
 				rdbtnProgramador.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -254,7 +301,7 @@ public class RegEmpleado extends JDialog {
 			}
 			{
 				rdbtnPlanificador = new JRadioButton("Planificador");
-				rdbtnPlanificador.setBounds(233, 43, 127, 25);
+				rdbtnPlanificador.setBounds(285, 43, 127, 25);
 				rdbtnPlanificador.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					
@@ -280,7 +327,7 @@ public class RegEmpleado extends JDialog {
 			}
 			{
 				rdbtnDisegnador = new JRadioButton("Dise\u00F1ador");
-				rdbtnDisegnador.setBounds(364, 43, 127, 25);
+				rdbtnDisegnador.setBounds(414, 43, 127, 25);
 				rdbtnDisegnador.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -306,18 +353,18 @@ public class RegEmpleado extends JDialog {
 				panelOcupacion.add(rdbtnDisegnador);
 			}
 			{
-				lblOcupacion = new JLabel("Ocupacion");
+				lblOcupacion = new JLabel("Puesto de trabajo a ocupar");
 				lblOcupacion.setBorder(new LineBorder(new Color(0, 0, 0)));
 				lblOcupacion.setHorizontalAlignment(SwingConstants.CENTER);
 				lblOcupacion.setFont(new Font("Tahoma", Font.BOLD, 13));
-				lblOcupacion.setBounds(0, 0, 644, 25);
+				lblOcupacion.setBounds(0, 0, 560, 25);
 				panelOcupacion.add(lblOcupacion);
 			}
 		}
 		{
 			JPanel panel_InfoAdicional = new JPanel();
-			panel_InfoAdicional.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-			panel_InfoAdicional.setBounds(12, 336, 560, 109);
+			panel_InfoAdicional.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+			panel_InfoAdicional.setBounds(173, 364, 560, 81);
 			contentPanel.add(panel_InfoAdicional);
 			panel_InfoAdicional.setLayout(null);
 			{
@@ -369,10 +416,21 @@ public class RegEmpleado extends JDialog {
 				lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 				lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 				lblNewLabel.setBorder(new LineBorder(new Color(0, 0, 0)));
-				lblNewLabel.setBounds(0, 0, 644, 25);
+				lblNewLabel.setBounds(0, 0, 560, 25);
 				panel_InfoAdicional.add(lblNewLabel);
 			}
 		}
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel.setBounds(0, 0, 172, 445);
+		contentPanel.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setIcon(new ImageIcon(RegEmpleado.class.getResource("/img/Empleados/empleados_ventana.jpg")));
+		lblNewLabel_1.setBounds(0, 0, 172, 445);
+		panel.add(lblNewLabel_1);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBackground(Color.LIGHT_GRAY);
@@ -384,9 +442,14 @@ public class RegEmpleado extends JDialog {
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
+						String cedula = txtCedula.getText();
+						String telefono = txtTelefono.getText();
+						String telefono2 = txtTelefono2.getText();
+						String correo = txtCorreo.getText();
 						String nombre = txtNombre.getText();
 						String apellidos = txtApellidos.getText();
 						String sexo;
+						
 						if(rdbtnHombre.isSelected()) {
 							sexo = "Hombre";
 						}
@@ -414,7 +477,8 @@ public class RegEmpleado extends JDialog {
 						
 						int frecuancia = (int) spnFrecuencia.getValue();
 						
-						if(!Empresa.getInstance().ValidadorNombre(nombre) || !Empresa.getInstance().ValidadorNombre(apellidos) || salarioHora == 0 || direccion.equals("")) {
+						if(!Empresa.getInstance().ValidadorNombre(nombre) || !Empresa.getInstance().ValidadorNombre(apellidos) ||!Empresa.getInstance().ValidadorNumeros(cedula)  ||!Empresa.getInstance().ValidadorNumeros(telefono)
+								||!Empresa.getInstance().ValidadorNombre(nombre)|| salarioHora == 0 || direccion.equals("")) {
 							
 							JOptionPane.showMessageDialog(null, "Por favor, llene correctamente todos los campos", "Advertencia", JOptionPane.WARNING_MESSAGE);
 							if(!Empresa.getInstance().ValidadorNombre(nombre)) {
@@ -438,24 +502,24 @@ public class RegEmpleado extends JDialog {
 							else {
 							
 								if(rdbtnJefe.isSelected()) {
-									Empleado jefe = new Jefe(nombre, apellidos, sexo, edad, direccion, salarioHora);
+									Empleado jefe = new Jefe(cedula,nombre, apellidos, sexo, edad,telefono,telefono2, direccion, salarioHora);
 									Empresa.getInstance().nuevoEmpleado(jefe);
 									JOptionPane.showMessageDialog(null, "Identificador asignado: "+jefe.getId(), "Registro completo", JOptionPane.INFORMATION_MESSAGE);
 								}
 								else if(rdbtnProgramador.isSelected()) {
-									Empleado programador = new Programador(nombre, apellidos, sexo, edad, direccion, salarioHora, especialidades);
+									Empleado programador = new Programador(cedula,nombre, apellidos, sexo, edad,telefono,telefono2, direccion, salarioHora, especialidades);
 									Empresa.getInstance().nuevoEmpleado(programador);
 
 									JOptionPane.showMessageDialog(null, "Identificador asignado: "+programador.getId(), "Registro completo", JOptionPane.INFORMATION_MESSAGE);
 								}
 								else if(rdbtnPlanificador.isSelected()) {
-									Empleado planificador = new Planificador(nombre, apellidos, sexo, edad, direccion, salarioHora, frecuancia);
+									Empleado planificador = new Planificador(cedula,nombre, apellidos, sexo, edad,telefono,telefono2, direccion, salarioHora, frecuancia);
 									Empresa.getInstance().nuevoEmpleado(planificador);
 
 									JOptionPane.showMessageDialog(null, "Identificador asignado: "+planificador.getId(), "Registro completo", JOptionPane.INFORMATION_MESSAGE);
 								}
 								else if(rdbtnDisegnador.isSelected()) {
-									Empleado disegnador = new Disegnador(nombre, apellidos, sexo, edad, direccion, salarioHora);
+									Empleado disegnador = new Disegnador(cedula,nombre, apellidos, sexo, edad,telefono,telefono2, direccion, salarioHora);
 									Empresa.getInstance().nuevoEmpleado(disegnador);
 									JOptionPane.showMessageDialog(null, "Identificador asignado: "+disegnador.getId(), "Registro completo", JOptionPane.INFORMATION_MESSAGE);
 								}
@@ -483,7 +547,10 @@ public class RegEmpleado extends JDialog {
 	
 	private void cleanFields() {
 		
-		
+		txtCedula.setText("");
+		txtTelefono.setText("");
+		txtTelefono2.setText("");
+		txtCorreo.setText("");
 		txtNombre.setText("");
 		txtApellidos.setText("");
 		rdbtnHombre.setSelected(true);
@@ -505,6 +572,9 @@ public class RegEmpleado extends JDialog {
 		txtNombre.setForeground(Color.BLACK);
 		txtApellidos.setForeground(Color.BLACK);
 		txtSalarioHora.setForeground(Color.BLACK);
-		
+		txtCorreo.setForeground(Color.black);
+		txtCedula.setForeground(Color.BLACK);
+		txtTelefono.setForeground(Color.BLACK);
+		txtTelefono2.setForeground(Color.BLACK);
 	}
 }

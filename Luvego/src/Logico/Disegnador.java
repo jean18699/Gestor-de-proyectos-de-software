@@ -10,12 +10,15 @@ public class Disegnador extends Empleado implements Serializable{
 	private static final long serialVersionUID = -6590451886139742299L;
 	private String ocupacion;//Puse esta variable para fines de obtener datos de este empleado de manera facil
 	
-	public Disegnador(String nombre, String apellidos, String sexo, int edad, String direccion, float salarioHora) {
-		super(nombre, apellidos, sexo, edad, direccion, salarioHora);
-		ocupacion = "Diseñador";
+
+	public Disegnador(String cedula, String nombre, String apellidos, String sexo, int edad, String telefono1,
+			String telefono2, String direccion, float salarioHora) {
+		super(cedula, nombre, apellidos, sexo, edad, telefono1, telefono2, direccion, salarioHora);
+		this.ocupacion = "Diseñador";
+		// TODO Auto-generated constructor stub
 	}
 
-	
+
 
 	@Override
 	public String identificador() {

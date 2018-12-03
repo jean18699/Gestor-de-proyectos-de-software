@@ -13,7 +13,7 @@ public class Main {
 
 	public static void main(String[] args) {
 	
-		ArrayList<String> esp = new ArrayList<>();
+		/*ArrayList<String> esp = new ArrayList<>();
 		esp.add("Java");
 		esp.add("Python");
 		
@@ -31,8 +31,8 @@ public class Main {
 		
 		Empleado chef = new Jefe("jeanff","j","hombre",19,"cerro alto",1556);
 		Empleado p = new Planificador("jeasn","j","hombre",19,"cerro alto",15, 0);
-	
-		System.out.println(pro.getId());
+	*/
+	/*	System.out.println(pro.getId());
 		System.out.println(dsg.getId());
 		
 		ArrayList<Empleado> grupo = new ArrayList<>();
@@ -42,7 +42,7 @@ public class Main {
 		grupo.add(pro3);
 		grupo.add(dsg);
 		
-
+*/
 		
 		 
 		

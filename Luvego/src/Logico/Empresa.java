@@ -452,13 +452,13 @@ public class Empresa implements Serializable{
 		return verdad;
 	}
 	
-	public boolean confirmLogin(String Id, String Contrasena) {
+	/*public boolean confirmLogin(String Id, String Contrasena) {
 		boolean login = false;
 		
 		if(loginUser.getId().equals("Admin") && loginUser.getPass().equals("0000")) {
 			login = true;
 		}
-		
+	
 		return login;
-	}
+	}*/
 }

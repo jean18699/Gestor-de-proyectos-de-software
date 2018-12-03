@@ -11,10 +11,12 @@ public class Jefe extends Empleado implements Serializable{
 	private static final long serialVersionUID = 655412545224648646L;
 	private int cantTrabajadores;
 	
-	public Jefe(String nombre, String apellidos, String sexo, int edad, String direccion, float salarioHora) {
-		super(nombre, apellidos, sexo, edad, direccion, salarioHora);
-		
+	public Jefe(String cedula, String nombre, String apellidos, String sexo, int edad, String telefono1,
+			String telefono2, String direccion, float salarioHora) {
+		super(cedula, nombre, apellidos, sexo, edad, telefono1, telefono2, direccion, salarioHora);
+		// TODO Auto-generated constructor stub
 	}
+
 
 	public int getCantTrabajadores() {
 		return cantTrabajadores;

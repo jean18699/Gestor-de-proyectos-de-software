@@ -45,6 +45,7 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Color;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
 
 public class RegProyecto extends JDialog {
 
@@ -99,6 +100,7 @@ public class RegProyecto extends JDialog {
 	private JButton btnInfoAdicional;
 	private JPanel panel_2;
 	private JButton btnResetear;
+	private JLabel imagen;
 
 	/**
 	 * Launch the application.
@@ -165,21 +167,51 @@ public class RegProyecto extends JDialog {
 
 		String[] cols = { "ID", "Nombre", "Direccion", "Proyectos activos", "Total proyectos solicitados" };
 		modelClientes.setColumnIdentifiers(cols);
-
-		btnAgregarCliente = new JButton("Nuevo cliente");
-		btnAgregarCliente.setBounds(293, 180, 139, 25);
-		panelProyecto.add(btnAgregarCliente);
-		btnAgregarCliente.setIcon(new ImageIcon(RegProyecto.class.getResource("/img/Cliente 32x32.png")));
-		btnAgregarCliente.setVisible(false);
-		btnAgregarCliente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RegCliente reg = new RegCliente();
-				reg.setLocationRelativeTo(null);
-				reg.setModal(true);
-				reg.setVisible(true);
-				cargarClientes();
-			}
-		});
+					
+							btnAgregarCliente = new JButton("Registrar nuevo cliente");
+							btnAgregarCliente.setBounds(293, 180, 179, 25);
+							panelProyecto.add(btnAgregarCliente);
+							btnAgregarCliente.setIcon(null);
+							btnAgregarCliente.setVisible(false);
+							btnAgregarCliente.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									RegCliente reg = new RegCliente();
+									reg.setLocationRelativeTo(null);
+									reg.setModal(true);
+									reg.setVisible(true);
+									cargarClientes();
+								}
+							});
+		
+					panelClientes = new JPanel();
+					panelClientes.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+					panelClientes.setBounds(279, 0, 748, 213);
+					panelProyecto.add(panelClientes);
+					panelClientes.setLayout(null);
+					panelClientes.setVisible(false);
+					
+								scrollPane_1 = new JScrollPane();
+								scrollPane_1.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+								scrollPane_1.setBounds(13, 11, 711, 163);
+								panelClientes.add(scrollPane_1);
+								
+											tablaClientes = new JTable();
+											tablaClientes.setFont(new Font("Tahoma", Font.PLAIN, 14));
+											tablaClientes.setModel(modelClientes);
+											tablaClientes.addMouseListener(new MouseAdapter() {
+												@Override
+												public void mouseClicked(MouseEvent e) {
+													int index = tablaClientes.getSelectedRow();
+													if (index >= 0) {
+														select = tablaClientes.getValueAt(index, 0).toString();
+														btnSiguiente2.setEnabled(true);
+													} else {
+														btnSiguiente2.setEnabled(false);
+													}
+												}
+											});
+											
+														scrollPane_1.setViewportView(tablaClientes);
 		{
 			buttonPane = new JPanel();
 			buttonPane.setBounds(0, 213, 1027, 39);
@@ -199,7 +231,9 @@ public class RegProyecto extends JDialog {
 						btnSiguiente2.setEnabled(false);
 						panel.setVisible(false);
 						panel_1.setVisible(false);
-
+						panel_2.setVisible(true);
+						btnResetear.setVisible(false);
+						
 						scrollPane.setVisible(false);
 						scrollPane_1.setVisible(true);
 						panelClientes.setVisible(true);
@@ -268,6 +302,8 @@ public class RegProyecto extends JDialog {
 					btnSiguiente2.setVisible(false);
 					panel.setVisible(true);
 					panel_1.setVisible(true);
+					panel_2.setVisible(false);
+					btnResetear.setVisible(true);
 
 					scrollPane.setVisible(true);
 					scrollPane_1.setVisible(false);
@@ -371,6 +407,22 @@ public class RegProyecto extends JDialog {
 			table.setModel(model);
 
 			scrollPane.setViewportView(table);
+
+		
+			panel_2 = new JPanel();
+			panel_2.setBackground(Color.WHITE);
+			panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+			panel_2.setBounds(0, 0, 279, 213);
+			panelProyecto.add(panel_2);
+			panel_2.setLayout(null);
+			panel_2.setVisible(false);
+			
+			imagen = new JLabel("");
+			imagen.setBorder(new LineBorder(new Color(0, 0, 0)));
+			imagen.setBackground(Color.WHITE);
+			imagen.setIcon(new ImageIcon(RegProyecto.class.getResource("/img/Cliente/clientes 3.png")));
+			imagen.setBounds(10, 11, 259, 191);
+			panel_2.add(imagen);
 			{
 				panel = new JPanel();
 				panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -678,41 +730,6 @@ public class RegProyecto extends JDialog {
 				panel_4.setBounds(0, 31, 104, 35);
 				panel.add(panel_4);
 			}
-
-			panel_2 = new JPanel();
-			panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-			panel_2.setBounds(0, 0, 279, 213);
-			panelProyecto.add(panel_2);
-
-			panelClientes = new JPanel();
-			panelClientes.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-			panelClientes.setBounds(279, 0, 748, 213);
-			panelProyecto.add(panelClientes);
-			panelClientes.setLayout(null);
-			panelClientes.setVisible(false);
-
-			scrollPane_1 = new JScrollPane();
-			scrollPane_1.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-			scrollPane_1.setBounds(13, 11, 711, 163);
-			panelClientes.add(scrollPane_1);
-
-			tablaClientes = new JTable();
-			tablaClientes.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			tablaClientes.setModel(modelClientes);
-			tablaClientes.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					int index = tablaClientes.getSelectedRow();
-					if (index >= 0) {
-						select = tablaClientes.getValueAt(index, 0).toString();
-						btnSiguiente2.setEnabled(true);
-					} else {
-						btnSiguiente2.setEnabled(false);
-					}
-				}
-			});
-
-			scrollPane_1.setViewportView(tablaClientes);
 			getContentPane()
 					.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { panelProyecto, table }));
 		}
