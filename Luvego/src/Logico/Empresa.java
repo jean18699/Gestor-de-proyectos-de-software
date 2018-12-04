@@ -12,6 +12,7 @@ public class Empresa implements Serializable{
 	private static final long serialVersionUID = 6921637127266475472L;
 	private ArrayList<Cliente> clientes;
 	private static Cliente loginUser;
+	private static String pass;
 	private ArrayList<Contrato> contratos;
 	private ArrayList<Empleado> empleados;
 	private ArrayList<Proyecto> proyectos;
@@ -26,12 +27,24 @@ public class Empresa implements Serializable{
 		empleados = new ArrayList<>();
 		proyectos = new ArrayList<>();
 		ganancias = 0;
+		loginUser = new Cliente();
+		loginUser.setId("Admin");
+		pass = new String("0000");
+		
 	}
 	
 	
 	
 	
 	
+	public static String getPass() {
+		return pass;
+	}
+
+
+
+
+
 	public long getGanancias() {
 		return ganancias;
 	}
