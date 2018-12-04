@@ -100,11 +100,10 @@ public class ListarEmpleados extends JDialog {
 			
 		
 			table.setFont(new Font("Tahoma", Font.PLAIN, 12));
-			table.getTableHeader().setFont(new Font("Tahoma", Font.ITALIC, 18));
 			
 			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			model = new DefaultTableModel();
-			String[] columnnames = {"Código", "Nombre", "Apellidos", "Posición"};
+			String[] columnnames = {"Código", "Nombre", "Apellidos", "Posición","Proyectos activos","Evaluacion"};
 			model.setColumnIdentifiers(columnnames);
 			table.setModel(model);
 			scrollPane.setViewportView(table);
@@ -248,21 +247,17 @@ public class ListarEmpleados extends JDialog {
 			else {
 				fila[3] = "Planificador";
 			}
+			fila[4] = Empresa.getInstance().getEmpleados().get(i).getProyectos().size();
+			
+			if(Empresa.getInstance().getEmpleados().get(i).getEvaluacionAnual() == 'E')
+			{
+				fila[5] = "Excelente";
+			}
+			
 			
 			model.addRow(fila);
 		}
 		
-		table.getColumnModel().getColumn(0).setMinWidth(200);
-		table.getColumnModel().getColumn(0).setMaxWidth(200);
-		
-		table.getColumnModel().getColumn(1).setMinWidth(250);
-		table.getColumnModel().getColumn(1).setMaxWidth(250);
-		
-		table.getColumnModel().getColumn(1).setMinWidth(250);
-		table.getColumnModel().getColumn(1).setMaxWidth(250);
-		
-		table.getColumnModel().getColumn(1).setMinWidth(250);
-		table.getColumnModel().getColumn(1).setMaxWidth(250);
 
 	}
 

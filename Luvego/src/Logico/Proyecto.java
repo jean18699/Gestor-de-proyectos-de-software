@@ -13,9 +13,19 @@ public class Proyecto implements Serializable{
 	private static int cont;
 	private String nombre;
 	private ArrayList<Empleado> grupoTrabajo;
+	private Contrato contrato;
 	//private float sumaSalarios;
 	private String clasificacion;
 	private String estado;
+	
+	public Contrato getContrato() {
+		return contrato;
+	}
+
+	public void setContrato(Contrato contrato) {
+		this.contrato = contrato;
+	}
+
 	private boolean realizado;
 
 	public String getEstado() {

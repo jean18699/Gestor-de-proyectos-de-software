@@ -16,7 +16,7 @@ public class Programador extends Empleado implements Serializable{
 			String telefono2, String direccion, float salarioHora, ArrayList<String> especialidades) {
 		
 			super(cedula, nombre, apellidos, sexo, edad, telefono1, telefono2, direccion, salarioHora);
-			this.especialidades = especialidades;
+				this.especialidades = especialidades;
 	}
 
 		public ArrayList<String> getEspecialidades() {

@@ -7,6 +7,7 @@ import java.awt.ScrollPane;
 import java.awt.event.MouseAdapter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -21,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import com.sun.glass.events.MouseEvent;
 
 import Logico.Cliente;
+import Logico.ColorTabla;
 import Logico.Empleado;
 import Logico.Empresa;
 import Logico.Proyecto;
@@ -54,6 +56,7 @@ public class ListarContratos extends JDialog {
 	private JTextField txtId;
 	private String select;
 	private JButton btnAplazar;
+	private Date fechaActual;
 
 	/**
 	 * Launch the application.
@@ -74,6 +77,8 @@ public class ListarContratos extends JDialog {
 	public ListarContratos() {
 		setResizable(false);
 
+		fechaActual = new Date();
+		
 		setTitle("Lista de proyectos");
 		setBounds(100, 100, 943, 359);
 		setLocationRelativeTo(null);
@@ -294,6 +299,7 @@ public class ListarContratos extends JDialog {
 
 	private void cargarContratos() {
 		model.setRowCount(0);
+		fechaActual = new Date();
 		fila = new Object[model.getColumnCount()];
 		for (int i = 0; i < Empresa.getInstance().getContratos().size(); i++) {
 			fila[0] = Empresa.getInstance().getContratos().get(i).getId();
@@ -305,6 +311,14 @@ public class ListarContratos extends JDialog {
 			fila[3] = format.format(Empresa.getInstance().getContratos().get(i).getFechaEntrega());
 			fila[4] =  Empresa.getInstance().getContratos().get(i).getPrecioFinal();
 
+			
+			
+			if(Empresa.getInstance().getContratos().get(i).getFechaInicio().before(fechaActual))
+			{
+				Empresa.getInstance().getProyectoById(Empresa.getInstance().getContratos().get(i).getProyecto().getId()).setEstado("Atrasado");
+				//ColorTabla.indice(i);
+			}
+			
 			model.addRow(fila);
 		}
 	}

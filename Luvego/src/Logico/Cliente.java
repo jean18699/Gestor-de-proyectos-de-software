@@ -145,6 +145,7 @@ public class Cliente implements Serializable{
 	}
 
 
+	
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}

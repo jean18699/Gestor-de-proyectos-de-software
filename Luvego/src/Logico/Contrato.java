@@ -12,40 +12,41 @@ public class Contrato implements Serializable{
 	private static final long serialVersionUID = -6827733299844793709L;
 	private String id;
 	private static int cont;
-	private Proyecto proyecto;
-	private String nombreCliente;
+	//private Proyecto proyecto;
 	private Date fechaInicio;
 	private Date fechaEntrega;
 	private float precioContrato;
 	private float precioFinal;
 	private Cliente cliente;
 	private char estado; // F = finalizado, A = Atrasado, I = iniciado 
+	private float sumaSalarios;
 	
 	
 	public Contrato(Proyecto proyecto, Date fechaEntrega) {
 		
 		cont++;
 		this.id = Integer.toString(cont);
-		this.proyecto = proyecto;
+		//this.proyecto = proyecto;
 		this.fechaInicio = new Date();
 		this.fechaEntrega = fechaEntrega;
+		sumaSalarios = proyecto.getSumaSalarios();
 	}
 	
-	
+/*	
 	public Proyecto getProyecto() {
 		return proyecto;
 	}
-
+*/
 
 	public Cliente getCliente() {
 		return cliente;
 	}
 
-
+/*
 	public void setProyecto(Proyecto proyecto) {
 		this.proyecto = proyecto;
 	}
-
+*/
 
 	public void setFechaInicio(Date fechaInicio) {
 		this.fechaInicio = fechaInicio;
@@ -90,9 +91,9 @@ public class Contrato implements Serializable{
 	
 	public float getPrecioFinal() {
 		
-		return (8 * getDiasRestantes() * proyecto.getSumaSalarios());
+		return (8 * getDiasRestantes() * sumaSalarios);//proyecto.getSumaSalarios());
+	
 	}
-
 	public void setPrecioFinal(float precioFinal) {
 		this.precioFinal = precioFinal;
 	}

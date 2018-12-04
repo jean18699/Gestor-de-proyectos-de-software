@@ -16,6 +16,7 @@ public class Empresa implements Serializable{
 	private ArrayList<Empleado> empleados;
 	private ArrayList<Proyecto> proyectos;
 	private static Empresa empresa;
+	private long ganancias;
 	
 	
 	private Empresa() {
@@ -24,12 +25,29 @@ public class Empresa implements Serializable{
 		contratos = new ArrayList<>();
 		empleados = new ArrayList<>();
 		proyectos = new ArrayList<>();
+		ganancias = 0;
 	}
 	
 	
 	
 	
 	
+	public long getGanancias() {
+		return ganancias;
+	}
+
+
+
+
+
+	public void setGanancias(long ganancias) {
+		this.ganancias = ganancias;
+	}
+
+
+
+
+
 	public static Cliente getLoginUser() {
 		return loginUser;
 	}
@@ -37,10 +55,6 @@ public class Empresa implements Serializable{
 	public static void setLoginUser(Cliente loginUser) {
 		Empresa.loginUser = loginUser;
 	}
-
-
-
-
 
 	public static Empresa getInstance()
 	{
@@ -150,6 +164,16 @@ public class Empresa implements Serializable{
 		return null;	
 	}
 	
+	public void agregarProyecto(Proyecto proyecto, Contrato contrato)
+	{
+		Proyecto newProyecto = proyecto;
+		newProyecto.setContrato(contrato);
+		proyectos.add(proyecto);
+		contratos.add(contrato);
+	     
+		
+	}
+	
 	public Proyecto getProyectoById(String id)
 	{
 		Proyecto proyecto = null;
@@ -209,12 +233,17 @@ public class Empresa implements Serializable{
 	
 	public boolean cancelarContrato(String idContrato)
 	{
+		String idProyect = getContratoByIdProyecto(idContrato).getProyecto().getId();
 		for(int i = 0; i < contratos.size(); i++)
 		{
 			
 			if(contratos.get(i).getId().equalsIgnoreCase(idContrato))
 			{
-				eliminarProyecto(contratos.get(i).getProyecto().getId());
+				for(i = 0; i < getContratoByIdProyecto(idContrato).getProyecto().getGrupoTrabajo().size(); i++) {
+					getContratoByIdProyecto(idContrato).getProyecto().getGrupoTrabajo().get(i).eliminarDelProyecto(idProyect);
+				}
+					
+				//eliminarProyecto(contratos.get(i).getProyecto().getId());
 				contratos.remove(i);
 				return true;
 			}
@@ -314,6 +343,19 @@ public class Empresa implements Serializable{
 	
 
 	
+	public void finalizarProyecto(String idProyecto)
+	{
+		
+		Contrato contrato = getContratoByIdProyecto(idProyecto);
+		for(int i = 0; i < contratos.size();i++)
+		{
+			if(contrato.equals(contratos.get(i)))
+			{
+				ganancias+=contrato.getPrecioFinal();
+			}
+		}
+		
+	}
 	
 	
 	public ArrayList<Cliente> getClientes() {

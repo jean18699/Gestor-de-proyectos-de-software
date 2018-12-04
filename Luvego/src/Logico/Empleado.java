@@ -26,7 +26,44 @@ import java.util.ArrayList;
 	protected ArrayList<Proyecto> proyectos;
 	protected char evaluacionAnual;
 	private String ocupacion;
+	protected int proyectosActivos;
 	
+	
+	public void eliminarDelProyecto(String idProyecto) {
+		int index = getProyectoIndex(idProyecto);
+		if(index != -1) {
+			proyectos.remove(index);
+			proyectosActivos--;
+		}
+	}
+	
+	public int getProyectoIndex(String idProyecto)
+	{
+		int index = -1;
+		for(int i = 0 ; i < proyectos.size();i++)
+		{
+			if(proyectos.get(i).getId().equalsIgnoreCase(idProyecto))
+			{
+				index = i;
+				break;
+			}
+		}
+		
+		return index;
+	
+	}
+	
+	
+	public int getProyectosActivos() {
+		return proyectosActivos;
+	}
+
+
+	public void setProyectosActivos(int proyectosActivos) {
+		this.proyectosActivos = proyectosActivos;
+	}
+
+
 	public Empleado(String cedula,String nombre, String apellidos, String sexo, int edad,String telefono1,String telefono2,String direccion, float salarioHora) {
 
 		
@@ -45,6 +82,7 @@ import java.util.ArrayList;
 		this.direccion = direccion;
 		this.salarioHora = salarioHora;
 		proyectos = new ArrayList<>();
+		proyectosActivos = 0;
 		this.telefono1 = telefono1;
 		this.telefono1 = telefono2;
 		
@@ -166,6 +204,7 @@ import java.util.ArrayList;
 	
 	public void setProyecto(Proyecto proyecto) {
 		this.proyectos.add(proyecto);
+		proyectosActivos++;
 	}
 	
 	public String getCargo()

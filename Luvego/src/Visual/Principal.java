@@ -48,12 +48,17 @@ import javax.swing.JTextField;
 
 public class Principal extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1995139449296392536L;
 	private JPanel contentPane;
 	private Dimension dim;
 	private JTable tablaProyectos;
 	private DefaultTableModel model;
 	private static Object[] fila;
 	private JTextField txtCantidadProyectos;
+	private JTextField txtGanancias;
 	/**
 	 * Launch the application.
 	 */
@@ -61,7 +66,9 @@ public class Principal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+		
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+					
 					Principal frame = new Principal();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -74,7 +81,6 @@ public class Principal extends JFrame {
 	
 	public Principal() {
 		setTitle("Luvego");
-		
 		addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -95,7 +101,7 @@ public class Principal extends JFrame {
 		    }
 		});
 			
-	
+		
 		try {
 			File arch = new File("registro.bin");
 			
@@ -103,9 +109,12 @@ public class Principal extends JFrame {
 			{
 				arch.createNewFile();
 			}
+		
 			FileInputStream archivo = new FileInputStream(arch);
+			
 			ObjectInputStream cargar = new ObjectInputStream(archivo);
 			Empresa.getInstance().setEmpresa((Empresa)cargar.readObject());
+			
 			archivo.close();
 			
 		} catch (FileNotFoundException e1) {
@@ -116,6 +125,8 @@ public class Principal extends JFrame {
 			e1.printStackTrace();
 		}
 		
+		//cargarProyectos();
+		//Empresa.getInstance().setGanancias(0);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		dim = super.getToolkit().getScreenSize();
@@ -130,6 +141,7 @@ public class Principal extends JFrame {
 		JMenu mnProyectos = new JMenu("Proyectos");
 		mnProyectos.setIcon(new ImageIcon(Principal.class.getResource("/img/Nuevo Proyecto 32x32.png")));
 		menuBar.add(mnProyectos);
+		
 		
 		JMenuItem mntmNuevo = new JMenuItem("Nuevo proyecto");
 		mntmNuevo.addActionListener(new ActionListener() {
@@ -220,9 +232,9 @@ public class Principal extends JFrame {
 		contentPane.add(panelProyectosSolicitados);
 		
 		DefaultPieDataset data = new DefaultPieDataset();
-        data.setValue("Escritorio", Empresa.getInstance().getCantDesktop());
+        data.setValue("Escritorio",Empresa.getInstance().getCantDesktop());
         data.setValue("Web", Empresa.getInstance().getCantWeb());
-        data.setValue("Movil", Empresa.getInstance().getCantMovil());
+        data.setValue("Movil",Empresa.getInstance().getCantMovil());
 
         
         // Creando el Grafico
@@ -281,6 +293,12 @@ public class Principal extends JFrame {
         panel_1.setBackground(new Color(112, 128, 144));
         panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
         contentPane.add(panel_1);
+        
+        txtGanancias = new JTextField();
+        txtGanancias.setBounds(10, 612, 124, 20);
+        contentPane.add(txtGanancias);
+        txtGanancias.setColumns(10);
+        txtGanancias.setText(Long.toString(Empresa.getInstance().getGanancias()));
         btnGestionar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		ListarProyectos list = new ListarProyectos();
@@ -294,15 +312,16 @@ public class Principal extends JFrame {
 	private void cargarProyectos() {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
+		
+		
 		for (int i = 0; i < Empresa.getInstance().getProyectos().size(); i++) {
-			fila[0] = Empresa.getInstance().getProyectos().get(i).getId();
-			fila[1] = Empresa.getInstance().getProyectos().get(i).getNombre();
-			fila[2] = Empresa.getInstance().getProyectos().get(i).getEstado();
+		 	fila[0] = Empresa.getInstance().getProyectos().get(i).getId();
+		    fila[1] = Empresa.getInstance().getProyectos().get(i).getNombre();
+		 	fila[2] = Empresa.getInstance().getProyectos().get(i).getEstado();
 
 			model.addRow(fila);
 		}
 
 		
 	}
-
 }
