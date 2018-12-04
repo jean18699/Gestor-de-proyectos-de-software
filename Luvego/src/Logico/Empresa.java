@@ -81,7 +81,7 @@ public class Empresa implements Serializable{
 		empleados.add(empleado);
 	}
 
-	
+/*	
 	public Cliente getClienteByIdProyecto(String id)
 	{
 		Cliente cliente = null;
@@ -100,7 +100,7 @@ public class Empresa implements Serializable{
 		return cliente;
 	}
 	
-	
+	*/
 	public int getCantDesktop()
 	{
 		int cont = 0;
@@ -164,16 +164,53 @@ public class Empresa implements Serializable{
 		return null;	
 	}
 	
-	public void agregarProyecto(Proyecto proyecto, Contrato contrato)
+	private void eliminarContrato(String idProyecto)
+	{
+		
+		for(int i = 0; i < contratos.size();i++)
+		{
+			if(proyectos.get(getProyectoIndex(idProyecto)).getContrato().equals(contratos.get(i)))
+			{
+				contratos.remove(i);
+				break;
+			}
+		}
+	}
+	
+	public void agregarProyecto(Proyecto proyecto)
 	{
 		Proyecto newProyecto = proyecto;
-		newProyecto.setContrato(contrato);
 		proyectos.add(proyecto);
-		contratos.add(contrato);
-	     
+		contratos.add(proyecto.getContrato());
+	
+	/*	for(int i = 0; i < empleados.size();i++)
+		{
+			for(int j = 0; j < proyecto.getGrupoTrabajo().size();j++)
+			{
+				if(empleados.get(i).equals(proyecto.getGrupoTrabajo().get(j)))
+				{
+					empleados.get(i).setProyectosActivos(empleados.get(i).getProyectosActivos()+1);
+				}
+			}
+		}
+		*/
+		for(int i = 0; i < proyecto.getGrupoTrabajo().size(); i++) {
+			proyecto.getGrupoTrabajo().get(i).setProyectosActivos(proyecto.getGrupoTrabajo().get(i).getProyectosActivos()+1);
+		}
+	}
+	
+	public void cancelarProyecto(String idProyecto)
+	{
+		for(int i = 0; i < proyectos.get(getProyectoIndex(idProyecto)).getGrupoTrabajo().size(); i++) {
+			proyectos.get(getProyectoIndex(idProyecto)).getGrupoTrabajo().get(i).setProyectosActivos(
+					proyectos.get(getProyectoIndex(idProyecto)).getGrupoTrabajo().get(i).getProyectosActivos()-1);
+		}
+		eliminarContrato(idProyecto);
+		proyectos.remove(getProyectoIndex(idProyecto));
 		
 	}
 	
+
 	public Proyecto getProyectoById(String id)
 	{
 		Proyecto proyecto = null;
@@ -188,8 +225,25 @@ public class Empresa implements Serializable{
 		}
 		return proyecto;
 	}
-		
-	public boolean nuevoContrato(String idCliente, Contrato contrato)
+
+	//mod
+	public int getProyectoIndex(String idProyecto)
+	{
+		int index = -1;
+		for(int i = 0; i < proyectos.size();i++)
+		{
+			if(proyectos.get(i).getId().equalsIgnoreCase(idProyecto))
+			{
+				index = i;
+			}
+		}
+		return index;
+	}
+	
+
+	
+	
+	/*public boolean nuevoContrato(String idCliente, Contrato contrato)
 	{
 
 		if(existeCliente(idCliente))
@@ -219,18 +273,9 @@ public class Empresa implements Serializable{
 		
 		return false;
 	}
+	*/
 	
-	private void eliminarProyecto(String id)
-	{
-		for(int i = 0; i < proyectos.size();i++)
-		{
-			if(proyectos.get(i).getId().equalsIgnoreCase(id))
-			{
-				proyectos.remove(i);
-			}
-		}
-	}
-	
+	/*
 	public boolean cancelarContrato(String idContrato)
 	{
 		String idProyect = getContratoByIdProyecto(idContrato).getProyecto().getId();
@@ -250,7 +295,7 @@ public class Empresa implements Serializable{
 		}
 		return false;
 	}
-	
+	*/
 	public Empresa getEmpresa() {
 		return empresa;
 	}
@@ -279,7 +324,7 @@ public class Empresa implements Serializable{
 		}
 		return false;
 	}
-	
+	/*
 	public Contrato getContratoByIdProyecto(String idProyecto)
 	{
 		Contrato contrato = null;
@@ -294,7 +339,7 @@ public class Empresa implements Serializable{
 		}
 		return contrato;
 	}
-	
+	*/
 	public Cliente getClienteById(String id)
 	{
 		Cliente cliente = null;
@@ -326,7 +371,7 @@ public class Empresa implements Serializable{
 		return emp;
 	}
 	
-	//Funcion que recibira una lista de empleados para asignarles el mismo proyecto
+/*	//Funcion que recibira una lista de empleados para asignarles el mismo proyecto
 	public void asignarProyecto(ArrayList<Empleado> empleado, Proyecto proyecto)
 	{
 		for(int i = 0; i < empleado.size();i++)
@@ -339,10 +384,10 @@ public class Empresa implements Serializable{
 		
 			}
 		}
-	}
+	}*/
 	
 
-	
+	/*
 	public void finalizarProyecto(String idProyecto)
 	{
 		
@@ -356,7 +401,7 @@ public class Empresa implements Serializable{
 		}
 		
 	}
-	
+	*/
 	
 	public ArrayList<Cliente> getClientes() {
 		return clientes;

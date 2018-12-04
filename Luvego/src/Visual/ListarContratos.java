@@ -279,7 +279,7 @@ public class ListarContratos extends JDialog {
 						lblX.addMouseListener(new MouseAdapter() {
 							@Override
 							public void mouseClicked(java.awt.event.MouseEvent e) {
-								Empresa.getInstance().cancelarContrato(select);
+								//Empresa.getInstance().cancelarContrato(select);
 								cargarContratos();
 							}
 						});
@@ -315,7 +315,7 @@ public class ListarContratos extends JDialog {
 			
 			if(Empresa.getInstance().getContratos().get(i).getFechaInicio().before(fechaActual))
 			{
-				Empresa.getInstance().getProyectoById(Empresa.getInstance().getContratos().get(i).getProyecto().getId()).setEstado("Atrasado");
+				//Empresa.getInstance().getProyectoById(Empresa.getInstance().getContratos().get(i).getProyecto().getId()).setEstado("Atrasado");
 				//ColorTabla.indice(i);
 			}
 			

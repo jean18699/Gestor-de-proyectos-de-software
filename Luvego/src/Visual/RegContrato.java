@@ -325,7 +325,9 @@ public class RegContrato extends JDialog {
 					btnAceptar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							contrato.setFechaEntrega(fechaEntrega);
-							Empresa.getInstance().agregarProyecto(proyecto, contrato);
+							proyecto.setContrato(contrato);
+							proyecto.getContrato().setCliente(cliente);
+							Empresa.getInstance().agregarProyecto(proyecto);
 							//Empresa.getInstance().nuevoContrato(cliente.getId(), contrato);
 							proyecto.setRealizado(true);
 							dispose();

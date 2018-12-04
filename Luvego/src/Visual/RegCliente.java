@@ -207,6 +207,7 @@ public class RegCliente extends JDialog {
 					Empresa.getInstance().nuevoCliente(cliente);
 					dispose();
 				}
+				
 			});
 			btnAceptar.setBorder(new LineBorder(new Color(112, 128, 144)));
 			btnAceptar.setBounds(269, 5, 72, 26);

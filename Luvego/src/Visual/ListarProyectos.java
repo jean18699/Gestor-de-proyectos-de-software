@@ -339,9 +339,10 @@ public class ListarProyectos extends JDialog {
 					btnContratoInfo.setEnabled(false);
 					btnContratoInfo.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							Proyecto proyecto = Empresa.getInstance().getProyectoById(select);
-							Cliente cliente = Empresa.getInstance().getClienteByIdProyecto(proyecto.getId());
-							InfoContrato info = new InfoContrato(proyecto, cliente);
+							//Proyecto proyecto = Empresa.getInstance().getProyectoById(select);
+							//Cliente cliente = Empresa.getInstance().getClienteByIdProyecto(proyecto.getId());
+							Proyecto proyecto = Empresa.getInstance().getProyectos().get(Empresa.getInstance().getProyectoIndex(select));
+							InfoContrato info = new InfoContrato(proyecto);
 							info.setLocationRelativeTo(null);
 							info.setModal(true);
 							info.setVisible(true);
@@ -369,7 +370,7 @@ public class ListarProyectos extends JDialog {
 				label.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(java.awt.event.MouseEvent e) {
-						Empresa.getInstance().finalizarProyecto(select);
+						//Empresa.getInstance().finalizarProyecto(select);
 						label.setEnabled(true);
 					}
 				});

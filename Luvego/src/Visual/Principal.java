@@ -125,6 +125,7 @@ public class Principal extends JFrame {
 			e1.printStackTrace();
 		}
 		
+		
 		//cargarProyectos();
 		//Empresa.getInstance().setGanancias(0);
 		
@@ -190,6 +191,7 @@ public class Principal extends JFrame {
 			}
 		});
 		mnEmpleados.add(mntmGestionar);
+
 		
 		JMenu mnClientes = new JMenu("Clientes");
 		mnClientes.setIcon(new ImageIcon(Principal.class.getResource("/img/cliente a color 32x32.png")));

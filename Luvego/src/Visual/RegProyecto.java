@@ -234,6 +234,7 @@ public class RegProyecto extends JDialog {
 						panel_2.setVisible(true);
 						btnResetear.setVisible(false);
 						
+						
 						scrollPane.setVisible(false);
 						scrollPane_1.setVisible(true);
 						panelClientes.setVisible(true);

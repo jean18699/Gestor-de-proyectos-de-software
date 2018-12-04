@@ -44,7 +44,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class InfoContrato extends JDialog {
-	private JTextField textField;
+	private JTextField txtIdContrato;
 	private JTextField txtIdProyecto;
 	private JTextField txtNombreProyecto;
 	private JTextField txtIdCliente;
@@ -61,7 +61,7 @@ public class InfoContrato extends JDialog {
 			ArrayList<Empleado> grupoTrabajo = null;
 		//	Cliente cliente = new Cliente();
 		//	Proyecto proyecto = new Proyecto("jean", "nombre", grupoTrabajo, "Web");
-			InfoContrato dialog = new InfoContrato(null, null);
+			InfoContrato dialog = new InfoContrato(null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -72,7 +72,7 @@ public class InfoContrato extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public InfoContrato(Proyecto proyecto, Cliente cliente) {
+	public InfoContrato(Proyecto proyecto) {
 		setTitle("Informacion del contrato");
 		setResizable(false);
 		
@@ -141,10 +141,11 @@ public class InfoContrato extends JDialog {
 						lblIdentificadorDelContrato.setFont(new Font("Tahoma", Font.BOLD, 11));
 					}
 					{
-						textField = new JTextField();
-						panel_3.add(textField);
-						textField.setEnabled(false);
-						textField.setColumns(10);
+						txtIdContrato = new JTextField();
+						panel_3.add(txtIdContrato);
+						txtIdContrato.setEnabled(false);
+						txtIdContrato.setColumns(10);
+						txtIdContrato.setText(proyecto.getContrato().getId());
 					}
 					//fechaEntrega = new Date(spnFecha.getValue().toString());
 					
@@ -194,7 +195,7 @@ public class InfoContrato extends JDialog {
 						panel_2.add(txtPrecioContrato);
 						txtPrecioContrato.setEditable(false);
 						txtPrecioContrato.setColumns(10);
-						//txtPrecioContrato.setText(proyecto.getS);
+						txtPrecioContrato.setText(Float.toString(proyecto.getContrato().getPrecioFinal()));
 					}
 				}
 				{
@@ -270,7 +271,7 @@ public class InfoContrato extends JDialog {
 							panel_3.add(txtNombreCliente);
 							txtNombreCliente.setEnabled(false);
 							txtNombreCliente.setColumns(10);
-							txtNombreCliente.setText(cliente.getNombre());
+							txtNombreCliente.setText(proyecto.getContrato().getCliente().getNombre());
 						}
 						{
 							JLabel lblIdentificadorDelCliente = new JLabel("Identificador del cliente:");
@@ -284,7 +285,7 @@ public class InfoContrato extends JDialog {
 							panel_3.add(txtIdCliente);
 							txtIdCliente.setEnabled(false);
 							txtIdCliente.setColumns(10);
-							txtIdCliente.setText(cliente.getId());
+							txtIdCliente.setText(proyecto.getContrato().getCliente().getId());
 						}
 						{
 							JButton btnNewButton_2 = new JButton("Informacion");
@@ -319,8 +320,9 @@ public class InfoContrato extends JDialog {
 						JButton btnCancelarContrato = new JButton("Cancelar contrato");
 						btnCancelarContrato.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
-								Contrato contrato = Empresa.getInstance().getContratoByIdProyecto(proyecto.getId());
-								Empresa.getInstance().cancelarContrato(contrato.getId());
+								
+								//Contrato contrato = proyecto.getContrato();//Empresa.getInstance().getContratoByIdProyecto(proyecto.getId());
+								//Empresa.getInstance().cancelarContrato(contrato.getId());
 								dispose();
 							}
 						});

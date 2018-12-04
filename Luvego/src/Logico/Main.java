@@ -13,23 +13,54 @@ public class Main {
 
 	public static void main(String[] args) {
 	
-		/*ArrayList<String> esp = new ArrayList<>();
+		ArrayList<String> esp = new ArrayList<>();
 		esp.add("Java");
 		esp.add("Python");
 		
-		Empleado pro = new Programador("123","j","hombre",19,"cerro alto",156,esp);
+		Empleado pro = new Programador("456","123","j","hombre",19,"8094848","61468464","cerroalto",156,esp);
+		Empleado pro2 = new Programador("456","123","j","hombre",19,"8094848","61468464","cerroalto",156,esp);
+		Empleado dsg = new Disegnador("111","jeane","j","hombre",19,"684684","64684","cerro alto",15);
+		Empleado chef = new Jefe("456","123","j","hombre",19,"8094848","61468464","cerroalto",156);
 		
+
 		Empresa.getInstance().nuevoEmpleado(pro);
-		Empleado pro3 = Empresa.getInstance().getEmpleadoById("PRG-0000001");
+		Empresa.getInstance().nuevoEmpleado(pro2);
+		Empresa.getInstance().nuevoEmpleado(dsg);
+		Empresa.getInstance().nuevoEmpleado(chef);
+		Empresa.getInstance().nuevoEmpleado(dsg);
 		
+		ArrayList<Empleado> grupo = new ArrayList<>();
+		grupo.add(chef);
+		grupo.add(pro);
+		grupo.add(pro2);
+		grupo.add(dsg);
+		grupo.add(dsg);
+		
+		Date fecha = new Date();
+		
+		Proyecto proyecto = new Proyecto("prueba",grupo,"Movil");
+		Contrato contrato = new Contrato(proyecto,fecha);
+		proyecto.setContrato(contrato);
+		Empresa.getInstance().agregarProyecto(proyecto);
+		Empresa.getInstance().agregarProyecto(proyecto);
+		
+		System.out.println(Empresa.getInstance().getContratos().get(0).getCliente());
+		
+		//System.out.println(Empresa.getInstance().getProyectos().size());
+		//System.out.println(Empresa.getInstance().getEmpleados().get(0).getProyectosActivos());
+		//	System.out.println(Empresa.getInstance().getEmpleados().get(3).getProyectosActivos());
+		//System.out.println(Empresa.getInstance().getProyectos().get(0).getGrupoTrabajo().get(0).getApellidos());
+		
+		
+		/*
 		Empleado pro2 = new Programador("jeaasdfn","j","hombre",19,"cerro alto",156,esp);
 		Empleado dsg = new Disegnador("jeane","j","hombre",19,"cerro alto",15);
 		Empleado dsg2 = new Disegnador("jeane","j","hombre",19,"cerro alto",15);
 		
-		
+		*/
 	
 		
-		Empleado chef = new Jefe("jeanff","j","hombre",19,"cerro alto",1556);
+	/*	Empleado chef = new Jefe("jeanff","j","hombre",19,"cerro alto",1556);
 		Empleado p = new Planificador("jeasn","j","hombre",19,"cerro alto",15, 0);
 	*/
 	/*	System.out.println(pro.getId());
@@ -45,8 +76,6 @@ public class Main {
 */
 		
 		 
-		
-		Date date = new Date("12/2/2018");
 		//Date date2 = new Date("15/2/2018");
 		
 		/*Proyecto pr = new Proyecto("523","Globos",grupo,"Web");
