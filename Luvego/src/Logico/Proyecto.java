@@ -138,4 +138,10 @@ public class Proyecto implements Serializable{
 		return id;
 	}
 
+	public static int getCont() {
+		return cont;
+	}
+	
+	
+
 }

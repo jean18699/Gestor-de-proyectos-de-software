@@ -17,6 +17,7 @@ import org.jfree.data.general.DefaultPieDataset;
 
 import Logico.Empleado;
 import Logico.Empresa;
+import Logico.Jefe;
 import Logico.Proyecto;
 
 import java.awt.event.WindowEvent;
@@ -80,6 +81,22 @@ public class Principal extends JFrame {
 //
 	
 	public Principal() {
+		
+		Empleado emp1 = new Jefe("0", "Pepe", "Aguilar", "M", 12, "88", "47", "VV1", (float)748);
+		
+		ArrayList<Empleado> emps = new ArrayList<>();
+		emps.add(emp1);
+		
+		/*System.out.println(Proyecto.getCont());
+		Proyecto p1 = new Proyecto("p1", emps, "klv");
+		System.out.println(Proyecto.getCont());
+		Proyecto p2 = new Proyecto("p2", emps, "oq");
+		System.out.println(Proyecto.getCont());
+		
+		Empresa.getInstance().agregarProyecto(p1);
+		Empresa.getInstance().agregarProyecto(p2);*/
+		
+		
 		setTitle("Luvego");
 		addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override
@@ -126,8 +143,7 @@ public class Principal extends JFrame {
 		}
 		
 		
-		//cargarProyectos();
-		//Empresa.getInstance().setGanancias(0);
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		dim = super.getToolkit().getScreenSize();
@@ -263,6 +279,11 @@ public class Principal extends JFrame {
         lblEstadoDeProyectos.setBounds(20, 11, 160, 14);
         panel.add(lblEstadoDeProyectos);
         
+        for (int i = 0; i < Empresa.getInstance().getProyectos().size(); i++) {
+		 	System.out.println(Empresa.getInstance().getProyectos().get(i).getId());
+
+		}
+        
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(20, 36, 452, 112);
         panel.add(scrollPane);
@@ -312,6 +333,7 @@ public class Principal extends JFrame {
 	}
 	
 	private void cargarProyectos() {
+		System.out.println(Empresa.getInstance().getProyectos().size());
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		
