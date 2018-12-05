@@ -85,9 +85,17 @@ public class Login2 extends JFrame {
 			JButton btnIngresar = new JButton("Ingresar");
 			btnIngresar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 				//	String id = Empresa.getInstance().getLoginUser().getId();
 					//String pass = Empresa.getInstance().getPass();
 					/*if(txtId.getText().equalsIgnoreCase(id) && contrasenaCorrecta(txtContrasena.getPassword())) {
+=======
+					Empresa.getInstance();
+					String id = Empresa.getLoginUser().getId();
+					Empresa.getInstance();
+					String pass = Empresa.getPass();
+					if(txtId.getText().equalsIgnoreCase(id) && contrasenaCorrecta(txtContrasena.getPassword())) {
+>>>>>>> branch 'master' of https://github.com/jean18699/ProyectoFinalP1.git
 						Principal frame = new Principal();
 						dispose();
 						frame.setVisible(true);
