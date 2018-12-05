@@ -192,19 +192,21 @@ public class RegCliente extends JDialog {
 			JButton btnAceptar = new JButton("Aceptar");
 			btnAceptar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
 					String genero  = null;
 					if(rdbtnHombre.isSelected())
 					{
 						genero = "Hombre";
 						
-					}
-					if(rdbtnMujer.isSelected())
+					}else if(rdbtnMujer.isSelected())
 					{
 						genero = "Mujer";
 					}
+					
 					Cliente cliente = new Cliente(txtCedula.getText(),txtNombre.getText(),txtCorreo.getText(),txtTelefono.getText(),txtTelefono2.getText(),
 							txtDireccion.getText(),genero);
 					Empresa.getInstance().nuevoCliente(cliente);
+					
 					dispose();
 				}
 				

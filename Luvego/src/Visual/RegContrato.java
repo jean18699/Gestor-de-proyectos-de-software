@@ -138,8 +138,10 @@ public class RegContrato extends JDialog {
 						public void actionPerformed(ActionEvent e) {
 							
 							fechaEntrega = (Date) spnFecha.getValue();
-							Contrato contrato = new Contrato(proyecto,fechaEntrega);
+							contrato.setProyecto(proyecto);
+							contrato.setFechaEntrega(fechaEntrega);
 							txtPrecioContrato.setText(Float.toString(contrato.getPrecioFinal()));
+							txtIdContrato.setText(contrato.getId());
 						}
 					});
 					panel_2.add(btnAceptarFecha);
@@ -326,17 +328,52 @@ public class RegContrato extends JDialog {
 						public void actionPerformed(ActionEvent e) {
 							
 							Date fecha = new Date();
+							/*contrato.setProyecto(null);
 							contrato.setFechaEntrega(fechaEntrega);
 							contrato.setFechaInicio(fecha);
+							contrato.setCliente(cliente);
 							proyecto.setContrato(contrato);
-							proyecto.getContrato().setCliente(cliente);
-							Empresa.getInstance().agregarProyecto(proyecto);
-							
-							Empresa.getInstance().getClienteById(cliente.getId()).setContrato(contrato);
+							*/
+							//System.out.println(cliente.getCedula());
+							//Empresa.getInstance().agregarProyecto(proyecto);
+							//Empresa.getInstance().getClienteById(cliente.getId()).setContrato(contrato);
 							//Empresa.getInstance().getClientes().get(Empresa.getInstance().getClienteIndex(cliente.getId())).setContrato(contrato);
 							//System.out.println(Empresa.getInstance().get);
 							
 							//Empresa.getInstance().nuevoContrato(cliente.getId(), contrato);
+							//contrato.setFechaInicio(fecha);
+							
+							
+							proyecto.setContrato(contrato);
+							contrato.setId(contrato.getId());
+							proyecto.getContrato().setCliente(cliente);
+							if(proyecto.getClasificacion().equalsIgnoreCase("Escritorio"))
+								Empresa.getInstance().setCantDesktop(Empresa.getInstance().getCantDesktop()+1);
+								
+							if(proyecto.getClasificacion().equalsIgnoreCase("Web"))
+								Empresa.getInstance().setCantDesktop(Empresa.getInstance().getCantWeb()+1);
+
+							if(proyecto.getClasificacion().equalsIgnoreCase("Movil"))
+								Empresa.getInstance().setCantDesktop(Empresa.getInstance().getCantMovil()+1);
+
+							
+							if(proyecto.getLenguaje().equalsIgnoreCase("C++"))
+								Empresa.getInstance().setCantCP(Empresa.getInstance().getCantCP()+1);
+								
+							if(proyecto.getClasificacion().equalsIgnoreCase("Java"))
+								Empresa.getInstance().setCantJava(Empresa.getInstance().getCantJava()+1);
+
+							if(proyecto.getClasificacion().equalsIgnoreCase("C#"))
+								Empresa.getInstance().setCantCSharp(Empresa.getInstance().getCantCSharp()+1);
+							
+							if(proyecto.getClasificacion().equalsIgnoreCase("Python"))
+								Empresa.getInstance().setCantCSharp(Empresa.getInstance().getCantCSharp()+1);
+							
+							if(proyecto.getClasificacion().equalsIgnoreCase("HTML/Javascript"))
+								Empresa.getInstance().setCantHtml(Empresa.getInstance().getCantHtml()+1);
+							
+							Empresa.getInstance().agregarProyecto(proyecto);
+							
 							proyecto.setRealizado(true);
 							dispose();
 							

@@ -23,6 +23,7 @@ import com.sun.glass.events.MouseEvent;
 
 import Logico.Cliente;
 import Logico.ColorTabla;
+import Logico.Contrato;
 import Logico.Empleado;
 import Logico.Empresa;
 import Logico.Proyecto;
@@ -49,7 +50,6 @@ public class ListarContratos extends JDialog {
 	private JScrollPane scrollPane;
 	private static JTable table;
 	private int index;
-	private JButton btnVerEquipo;
 	private static DefaultTableModel model;
 	private static Object[] fila;
 	private JTextField txtNombre;
@@ -105,12 +105,11 @@ public class ListarContratos extends JDialog {
 						select = table.getValueAt(index, 0).toString();
 						btnAplazar.setEnabled(true);
 						//btnContratoInfo.setEnabled(true);
-						btnVerEquipo.setEnabled(true);
+						
 					}else
 					{
 						btnAplazar.setEnabled(false);
 						//btnContratoInfo.setEnabled(false);
-						btnVerEquipo.setEnabled(false);
 					}
 				}
 			});
@@ -209,23 +208,7 @@ public class ListarContratos extends JDialog {
 			buttonPane.setBounds(0, 299, 937, 34);
 			contentPanel.add(buttonPane);
 			{
-				btnVerEquipo = new JButton("Ver equipo");
-				btnVerEquipo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				btnVerEquipo.setBounds(758, 5, 106, 23);
-				btnVerEquipo.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						ArrayList<Empleado> equipo = Empresa.getInstance().getProyectoById(select).getGrupoTrabajo();
-						InfoEquipo info = new  InfoEquipo(equipo);
-						info.setLocationRelativeTo(null);
-						info.setModal(true);
-						info.setVisible(true);
-					}
-				});
 				buttonPane.setLayout(null);
-				btnVerEquipo.setEnabled(false);
-				btnVerEquipo.setActionCommand("OK");
-				buttonPane.add(btnVerEquipo);
-				getRootPane().setDefaultButton(btnVerEquipo);
 			}
 			{
 				JButton btnSalir = new JButton("Salir");
@@ -239,6 +222,11 @@ public class ListarContratos extends JDialog {
 				btnSalir.setActionCommand("Cancel");
 				buttonPane.add(btnSalir);
 			}
+			{
+				JButton btnCancelarContrato = new JButton("Cancelar contrato");
+				btnCancelarContrato.setBounds(736, 5, 128, 23);
+				buttonPane.add(btnCancelarContrato);
+			}
 		}
 		{
 			JPanel panel = new JPanel();
@@ -249,13 +237,31 @@ public class ListarContratos extends JDialog {
 			panel.setLayout(null);
 			{
 				JPanel panel_2 = new JPanel();
-				panel_2.setBounds(851, 145, 91, 148);
+				panel_2.setBounds(851, 215, 91, 78);
 				panel.add(panel_2);
 				panel_2.setBackground(Color.LIGHT_GRAY);
 				panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 				panel_2.setLayout(null);
 				{
 					btnAplazar = new JButton("");
+					btnAplazar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							Contrato contrato = null;
+							for(int i = 0; i < Empresa.getInstance().getContratos().size();i++)
+							{
+								if(Empresa.getInstance().getContratos().get(i).getId().equalsIgnoreCase(select))
+								{
+									contrato = Empresa.getInstance().getContratos().get(i);
+								}
+							}
+							AplazarContrato aplazo = new AplazarContrato(contrato);
+							aplazo.setLocationRelativeTo(null);
+							aplazo.setModal(true);
+							aplazo.setVisible(true);
+							cargarContratos();
+							
+						}
+					});
 					btnAplazar.setEnabled(false);
 					btnAplazar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 					btnAplazar.setToolTipText("Aplazar proyecto");
@@ -266,31 +272,6 @@ public class ListarContratos extends JDialog {
 							new ImageIcon(ListarContratos.class.getResource("/img/Contratos/Aplazo de contratos.png")));
 					btnAplazar.setFont(new Font("Tahoma", Font.BOLD, 11));
 					btnAplazar.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-				}
-				{
-					JPanel panel_1 = new JPanel();
-					panel_1.setBackground(Color.RED);
-					panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-					panel_1.setBounds(0, 75, 87, 71);
-					panel_2.add(panel_1);
-					panel_1.setLayout(null);
-					{
-						JLabel lblX = new JLabel("X");
-						lblX.addMouseListener(new MouseAdapter() {
-							@Override
-							public void mouseClicked(java.awt.event.MouseEvent e) {
-								//Empresa.getInstance().cancelarContrato(select);
-								//cargarContratos();
-							}
-						});
-						lblX.setBounds(0, 0, 87, 71);
-						panel_1.add(lblX);
-						lblX.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-						lblX.setBackground(Color.RED);
-						lblX.setForeground(Color.WHITE);
-						lblX.setHorizontalAlignment(SwingConstants.CENTER);
-						lblX.setFont(new Font("Tahoma", Font.BOLD, 50));
-					}
 				}
 			}
 		}
@@ -305,17 +286,17 @@ public class ListarContratos extends JDialog {
 		fechaActual = new Date();
 		fila = new Object[model.getColumnCount()];
 		
-	//	for(int i = 0; i < Empresa.getInstance().getContratos().size();i++)
-		//{
-			fila[0] = Empresa.getInstance().getContratos().get(2).getId();
-			fila[1] = Empresa.getInstance().getContratos().get(2).getCliente().getNombre();
-			fila[2] = format.format(Empresa.getInstance().getContratos().get(2).getFechaInicio());
+		for(int i = 0; i < Empresa.getInstance().getContratos().size();i++)
+		{
+			fila[0] = Empresa.getInstance().getContratos().get(i).getId();
+			fila[1] = Empresa.getInstance().getContratos().get(i).getCliente().getNombre();
+			fila[2] = format.format(Empresa.getInstance().getContratos().get(i).getFechaInicio());
 			
-			fila[3] = format.format(Empresa.getInstance().getContratos().get(2).getFechaEntrega());
-			fila[4] =  Empresa.getInstance().getContratos().get(2).getPrecioFinal();
+			fila[3] = format.format(Empresa.getInstance().getContratos().get(i).getFechaEntrega());
+			fila[4] =  Empresa.getInstance().getContratos().get(i).getPrecioFinal();
 
 			model.addRow(fila);
-		//}
+		}
 		
 		/*for (int i = 0; i < Empresa.getInstance().getContratos().size(); i++) {
 			fila[0] = Empresa.getInstance().getContratos().get(i).getId();

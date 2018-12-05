@@ -10,6 +10,8 @@ public class Jefe extends Empleado implements Serializable{
 	 */
 	private static final long serialVersionUID = 655412545224648646L;
 	private int cantTrabajadores;
+	private int proyectosCompletados;
+	
 	
 	public Jefe(String cedula, String nombre, String apellidos, String sexo, int edad, String telefono1,
 			String telefono2, String direccion, float salarioHora) {

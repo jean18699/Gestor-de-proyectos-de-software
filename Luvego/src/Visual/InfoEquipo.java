@@ -170,7 +170,7 @@ public class InfoEquipo extends JDialog {
 				panel.add(label);
 			}
 			{
-				txtIdPlanificador = new JTextField(equipo.get(3).getId());
+				txtIdPlanificador = new JTextField(equipo.get(1).getId());
 				txtIdPlanificador.setEditable(false);
 				txtIdPlanificador.setColumns(10);
 				txtIdPlanificador.setBounds(98, 36, 118, 20);
@@ -218,7 +218,7 @@ public class InfoEquipo extends JDialog {
 				panel.add(label);
 			}
 			{
-				txtIdProgramador2 = new JTextField(equipo.get(1).getId());
+				txtIdProgramador2 = new JTextField(equipo.get(3).getId());
 				txtIdProgramador2.setEditable(false);
 				txtIdProgramador2.setColumns(10);
 				txtIdProgramador2.setBounds(100, 36, 118, 20);

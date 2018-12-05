@@ -17,9 +17,11 @@ public class Main {
 		esp.add("Java");
 		esp.add("Python");
 		
-		Empleado pro = new Programador("456","123","j","hombre",19,"8094848","61468464","cerroalto",156,esp);
-		Empleado pro2 = new Programador("456","123","j","hombre",19,"8094848","61468464","cerroalto",156,esp);
-		Empleado dsg = new Disegnador("111","jeane","j","hombre",19,"684684","64684","cerro alto",15);
+		
+		Empleado pln = new Planificador("456","Pedro","j","hombre",19,"8094848","61468464","cerroalto",156,5);
+		Empleado pro = new Programador("789","123","j","hombre",19,"8094848","61468464","cerroalto",156,esp);
+		Empleado pro2 = new Programador("101","123","j","hombre",19,"8094848","61468464","cerroalto",156,esp);
+		Empleado dsg = new Disegnador("112","jeane","j","hombre",19,"684684","64684","cerro alto",15);
 		Empleado chef = new Jefe("456","123","j","hombre",19,"8094848","61468464","cerroalto",156);
 		
 
@@ -27,100 +29,69 @@ public class Main {
 		Empresa.getInstance().nuevoEmpleado(pro2);
 		Empresa.getInstance().nuevoEmpleado(dsg);
 		Empresa.getInstance().nuevoEmpleado(chef);
-		Empresa.getInstance().nuevoEmpleado(dsg);
+		Empresa.getInstance().nuevoEmpleado(pln);
 		
 		ArrayList<Empleado> grupo = new ArrayList<>();
 		grupo.add(chef);
+		grupo.add(pln);
 		grupo.add(pro);
 		grupo.add(pro2);
 		grupo.add(dsg);
-		grupo.add(dsg);
 		
-		Date fecha = new Date();
+		Date fecha = new Date("7/12/2018");
 		
-		Cliente cliente = new Cliente("123" ,"george","gmail","809","276","cerro alto","Hombre");
-		Proyecto proyecto = new Proyecto("prueba",grupo,"Movil");
-	
-		Contrato contrato = new Contrato(proyecto,fecha);
 		
+		Cliente cliente = new Cliente("12334","george","gmail","809","276","cerro alto","Hombre");
+		Cliente cliente2 = new Cliente("123","george","gmail","809","276","cerro alto","Hombre");
+		
+		
+		Empresa.getInstance().nuevoCliente(cliente);
+		Empresa.getInstance().nuevoCliente(cliente2);;
+		
+		//System.out.println(cliente.getId());
+		//System.out.println(cliente2.getId());
+	//	System.out.println(Empresa.getInstance().getClienteById("12334").getGenero());
+		
+		//Cliente cliente = new Cliente("123","george","gmail","809","276","cerro alto","Hombre");
+		Proyecto proyecto = new Proyecto("prueba",grupo,"Movil","C++");
+		//Cliente cliente2 = new Cliente("456","george","gmail","809","276","cerro alto","Hombre");
+		//Cliente cliente3 = new Cliente("789","george","gmail","809","276","cerro alto","Hombre");
+		
+		
+
+		Date fechaEntrega = new Date("12/12/2018");
+		Contrato contrato = new Contrato(proyecto,fechaEntrega);
+
+		Empresa.getInstance().nuevoCliente(cliente);
 		proyecto.setContrato(contrato);
 		proyecto.getContrato().setCliente(cliente);
 		Empresa.getInstance().agregarProyecto(proyecto);
-		Empresa.getInstance().agregarProyecto(proyecto);
-		Empresa.getInstance().nuevoCliente(cliente);
+		Empresa.getInstance().nuevoCliente(cliente2);
+		///////////////////////////////////////////////////
 		
-		//System.out.println(Empresa.getInstance().getClienteIndex("1"));
+		System.out.println(Empresa.getInstance().getProyectos().get(0).getContrato().getFechaEntrega());
+		Date aplazo = new Date("12/10/2018");
+	Empresa.getInstance().getContratos().get(0).aplazar(aplazo);
+		System.out.println(Empresa.getInstance().getContratos().get(0).getDiasRestantes());
+		System.out.println(Empresa.getInstance().getProyectos().get(0).getContrato().getDiasRestantes());
+		//System.out.println(Empresa.getInstance().getProyectoByIdContrato("1").getClasificacion());
+		//Empresa.getInstance().cancelarContrato("1");
+		//System.out.println(Empresa.getInstance().getContratos().size());
+		//System.out.println(Empresa.getInstance().get);
+		
+		/*System.out.println(Empresa.getInstance().getContratos().size());
+		System.out.println(Empresa.getInstance().getClientes().get(0).getContratos().size());
+		System.out.println(Empresa.getInstance().getProyectos().size());
+		//System.out.println(Empresa.getInstance().getContratos().size());
+		//System.out.println(cliente.getContratos().size());
+		
+		//System.out.println(Empresa.getInstance().get);
 		
 		//System.out.println(Empresa.getInstance().getContratos().get(0).getCliente().getNombre());
-		
-		//System.out.println(Empresa.getInstance().getProyectos().size());
-		//System.out.println(Empresa.getInstance().getEmpleados().get(0).getProyectosActivos());
-		//	System.out.println(Empresa.getInstance().getEmpleados().get(3).getProyectosActivos());
-		//System.out.println(Empresa.getInstance().getProyectos().get(0).getGrupoTrabajo().get(0).getApellidos());
-		
-		
-		/*
-		Empleado pro2 = new Programador("jeaasdfn","j","hombre",19,"cerro alto",156,esp);
-		Empleado dsg = new Disegnador("jeane","j","hombre",19,"cerro alto",15);
-		Empleado dsg2 = new Disegnador("jeane","j","hombre",19,"cerro alto",15);
-		
+		//System.out.println(Empresa.getInstance().getContratos().get(0).getId());
+		//System.out.println(Empresa.getInstance().getClienteById("1").getNombre());
 		*/
-	
-		
-	/*	Empleado chef = new Jefe("jeanff","j","hombre",19,"cerro alto",1556);
-		Empleado p = new Planificador("jeasn","j","hombre",19,"cerro alto",15, 0);
-	*/
-	/*	System.out.println(pro.getId());
-		System.out.println(dsg.getId());
-		
-		ArrayList<Empleado> grupo = new ArrayList<>();
-		grupo.add(chef);
-		grupo.add(p);
-		grupo.add(pro);
-		grupo.add(pro3);
-		grupo.add(dsg);
-		
-*/
-		
-		 
-		//Date date2 = new Date("15/2/2018");
-		
-		/*Proyecto pr = new Proyecto("523","Globos",grupo,"Web");
-		Proyecto pr2 = new Proyecto("123","Globos",grupo,"Movil");
-		Proyecto pr3 = new Proyecto("123","Globos",grupo,"Movil");
-		
-		Contrato contrato = new Contrato(pr,date);
-		Contrato contrato2 = new Contrato(pr2,date);
-		Contrato contrato3 = new Contrato(pr3,date);
-		
-		Cliente cl = new Cliente("456","asdasd","fafasf","null");
-		
-		Empresa.getInstance().nuevoCliente(cl);
-		Empresa.getInstance().nuevoContrato("456", contrato);
-
-		//System.out.println(Empresa.getInstance().getContratoByIdProyecto("523").getCliente().getNombre());
-		*/
-		
-		//System.out.println(Empresa.getInstance().getClientes().get(0).getContratos().get(0).getProyecto().getId());
-		//System.out.println(Empresa.getInstance().getClienteByIdProyecto("523").getId());
-		//System.out.println(Empresa.getInstance().getPr);
-		
-	//	System.out.println(Empresa.getInstance().getMejorCategoria());
-		
-		//	System.out.println(Empresa.getInstance().getProyectos().size());
-		
-		//System.out.println(Empresa.getInstance().getProyectos().size());
-		//System.out.println(pr.getSumaSalarios());
-		
-		//Empresa.getInstance().asignarProyecto(grupo, pr);
-		//Empresa.getInstance().asignarProyecto(grupo, pr);
-		//Empresa.getInstance().asignarProyecto(grupo, pr);
-		//Empresa.getInstance().asignarProyecto(grupo, pr);
-		//Empresa.getInstance().asignarProyecto(grupo, pr);
-		//Empresa.getInstance().asignarProyecto(grupo, pr);
-	
-		
-		
+				
 	}
 
 }

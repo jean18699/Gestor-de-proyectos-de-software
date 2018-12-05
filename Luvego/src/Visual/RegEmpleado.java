@@ -65,6 +65,8 @@ public class RegEmpleado extends JDialog {
 	private JLabel lblCedula;
 	private JTextField txtCedula;
 	private JTextField txtTelefono;
+	private JCheckBox chckbxCSharp; 
+	private JCheckBox chckbxPython;
 	
 
 	/**
@@ -84,7 +86,7 @@ public class RegEmpleado extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegEmpleado() {
-		setBounds(100, 100, 747, 509);
+		setBounds(100, 100, 747, 533);
 		setResizable(false);
 		setTitle("Registrar empleado");
 		getContentPane().setLayout(new BorderLayout());
@@ -364,7 +366,7 @@ public class RegEmpleado extends JDialog {
 		{
 			JPanel panel_InfoAdicional = new JPanel();
 			panel_InfoAdicional.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-			panel_InfoAdicional.setBounds(173, 364, 560, 81);
+			panel_InfoAdicional.setBounds(173, 364, 560, 92);
 			contentPanel.add(panel_InfoAdicional);
 			panel_InfoAdicional.setLayout(null);
 			{
@@ -384,14 +386,14 @@ public class RegEmpleado extends JDialog {
 			chckbxJava.setBounds(339, 44, 69, 25);
 			panel_InfoAdicional.add(chckbxJava);
 			
-			chckbxHtml = new JCheckBox("HTML");
+			chckbxHtml = new JCheckBox("HTML/Javascript");
 			chckbxHtml.setVisible(false);
-			chckbxHtml.setBounds(412, 44, 69, 25);
+			chckbxHtml.setBounds(412, 44, 106, 25);
 			panel_InfoAdicional.add(chckbxHtml);
 			
 			chckbxCpp = new JCheckBox("C++");
 			chckbxCpp.setVisible(false);
-			chckbxCpp.setBounds(490, 44, 64, 25);
+			chckbxCpp.setBounds(410, 68, 64, 25);
 			panel_InfoAdicional.add(chckbxCpp);
 			{
 				lblFrecuencia = new JLabel("Frecuencia:");
@@ -419,6 +421,14 @@ public class RegEmpleado extends JDialog {
 				lblNewLabel.setBounds(0, 0, 560, 25);
 				panel_InfoAdicional.add(lblNewLabel);
 			}
+			
+			chckbxCSharp = new JCheckBox("C#");
+			chckbxCSharp.setBounds(339, 69, 69, 23);
+			panel_InfoAdicional.add(chckbxCSharp);
+			
+			chckbxPython = new JCheckBox("Python");
+			chckbxPython.setBounds(463, 69, 97, 23);
+			panel_InfoAdicional.add(chckbxPython);
 		}
 		
 		JPanel panel = new JPanel();
@@ -474,6 +484,15 @@ public class RegEmpleado extends JDialog {
 						if(chckbxCpp.isSelected()) {
 							especialidades.add("C++");
 						}
+						if(chckbxCSharp.isSelected())
+						{
+							especialidades.add("C#");
+						}
+						if(chckbxPython.isSelected())
+						{
+							especialidades.add("Python");
+						}
+							
 						
 						int frecuancia = (int) spnFrecuencia.getValue();
 						

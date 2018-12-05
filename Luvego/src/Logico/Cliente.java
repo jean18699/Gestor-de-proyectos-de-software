@@ -14,7 +14,7 @@ public class Cliente implements Serializable{
 	private String telefono;
 	private String telefono2;
 	private String correo;
-	private static int cont;
+	private static int cont = 0;
 	private String nombre;
 	private String direccion;
 	private ArrayList<Contrato> contratos;
@@ -117,10 +117,6 @@ public class Cliente implements Serializable{
 		return direccion;
 	}
 
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 
 	public ArrayList<Contrato> getContratos() {

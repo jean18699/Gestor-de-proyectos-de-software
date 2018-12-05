@@ -47,6 +47,8 @@ import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
+import javax.swing.SwingConstants;
 
 public class Principal extends JFrame {
 
@@ -60,7 +62,14 @@ public class Principal extends JFrame {
 	private DefaultTableModel model;
 	private static Object[] fila;
 	private JTextField txtCantidadProyectos;
-	private JTextField txtGanancias;
+	private JTextField txtPerdidas;
+	private JTextField txtIdCliente;
+	private JTextField txtIngresos;
+	private JTextField txtIdProyecto;
+	private JTextField txtNombreProyecto;
+	private JTextField txtNombreCliente;
+	private JTextField txtFecha;
+	private JTextField txtFechaEntrega;
 	/**
 	 * Launch the application.
 	 */
@@ -152,6 +161,7 @@ public class Principal extends JFrame {
 				RegProyecto regProyecto = new RegProyecto();
 				regProyecto.setModal(true);
 				regProyecto.setVisible(true);
+				cargarProyectos();
 			}
 		});
 		mnProyectos.add(mntmNuevo);
@@ -163,9 +173,22 @@ public class Principal extends JFrame {
 				listar.setLocationRelativeTo(null);
 				listar.setModal(true);
 				listar.setVisible(true);
+				cargarProyectos();
 			}
 		});
 		mnProyectos.add(mntmRegistro);
+		
+		JMenuItem mntmEstadisticas = new JMenuItem("Estadisticas");
+		mntmEstadisticas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EstadisticaProyectos stats = new EstadisticaProyectos();
+				stats.setLocationRelativeTo(null);
+				stats.setModal(true);
+				stats.setVisible(true);
+				cargarProyectos();
+			}
+		});
+		mnProyectos.add(mntmEstadisticas);
 		
 		JMenu mnEmpleados = new JMenu("Empleados");
 		mnEmpleados.setIcon(new ImageIcon(Principal.class.getResource("/img/empleados.png")));
@@ -178,7 +201,7 @@ public class Principal extends JFrame {
 				reg.setLocationRelativeTo(null);
 				reg.setModal(true);
 				reg.setVisible(true);
-				
+				cargarProyectos();
 			}
 		});
 		mnEmpleados.add(mntmNuevo_1);
@@ -190,7 +213,8 @@ public class Principal extends JFrame {
 				list.setLocationRelativeTo(null);
 				list.setModal(true);
 				list.setVisible(true);
-			}
+				cargarProyectos();	
+				}
 		});
 		mnEmpleados.add(mntmGestionar);
 
@@ -202,6 +226,7 @@ public class Principal extends JFrame {
 		JMenuItem mntmRegistrar = new JMenuItem("Registrar cliente");
 		mntmRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				RegCliente reg = new RegCliente();
 				reg.setLocationRelativeTo(null);
 				reg.setModal(true);
@@ -210,14 +235,33 @@ public class Principal extends JFrame {
 		});
 		mnClientes.add(mntmRegistrar);
 		
-		JMenu mnConsulta_1 = new JMenu("Consulta");
-		menuBar.add(mnConsulta_1);
+		JMenuItem mntmListadoDeClientes = new JMenuItem("Listado de clientes");
+		mntmListadoDeClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarClientes list = new ListarClientes();
+				list.setLocationRelativeTo(null);
+				list.setModal(true);
+				list.setVisible(true);
+			}
+		});
+		mnClientes.add(mntmListadoDeClientes);
 		
-		JMenuItem mntmVentas = new JMenuItem("Ventas de la empresa");
-		mnConsulta_1.add(mntmVentas);
+		JMenu mnContratos = new JMenu("Contratos");
+		menuBar.add(mnContratos);
 		
 		JMenuItem mntmContratos = new JMenuItem("Contratos realizados");
-		mnConsulta_1.add(mntmContratos);
+		mntmContratos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarContratos list = new ListarContratos();
+				list.setLocationRelativeTo(null);
+				list.setModal(true);
+				list.setModal(true);
+				list.setVisible(true);
+				cargarProyectos();
+				
+			}
+		});
+		mnContratos.add(mntmContratos);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(128, 128, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -250,6 +294,7 @@ public class Principal extends JFrame {
          false);
         
         ChartPanel chartPanel = new ChartPanel(chart);
+        
         panelProyectosSolicitados.add(chartPanel);
         
         JPanel panel = new JPanel();
@@ -298,24 +343,143 @@ public class Principal extends JFrame {
         panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
         contentPane.add(panel_1);
         
-        txtGanancias = new JTextField();
-        txtGanancias.setBounds(10, 612, 124, 20);
-        contentPane.add(txtGanancias);
-        txtGanancias.setColumns(10);
-        txtGanancias.setText(Long.toString(Empresa.getInstance().getGanancias()));
+        JPanel panel_2 = new JPanel();
+        panel_2.setLayout(null);
+        panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+        panel_2.setBackground(Color.LIGHT_GRAY);
+        panel_2.setBounds(0, 363, 363, 306);
+        contentPane.add(panel_2);
+        
+        txtPerdidas = new JTextField();
+        txtPerdidas.setEditable(false);
+        txtPerdidas.setColumns(10);
+        txtPerdidas.setBounds(10, 262, 154, 20);
+        panel_2.add(txtPerdidas);
+        
+        JLabel label = new JLabel("Ingresos adquiridos");
+        label.setBounds(188, 243, 97, 14);
+        panel_2.add(label);
+        
+        
+        txtIdCliente = new JTextField();
+        txtIdCliente.setEditable(false);
+        txtIdCliente.setColumns(10);
+        txtIdCliente.setBounds(10, 118, 154, 20);
+        panel_2.add(txtIdCliente);
+        /*
+        if(Empresa.getInstance().getUltimoProyecto().getContrato().getCliente().getId()!=null)
+        {
+        	txtIdCliente.setText(Empresa.getInstance().getUltimoProyecto().getContrato().getCliente().getId());
+        	
+        }*/
+        
+        JLabel label_1 = new JLabel("Perdidas estimadas");
+        label_1.setBounds(10, 243, 121, 14);
+        panel_2.add(label_1);
+        
+        txtIngresos = new JTextField();
+        txtIngresos.setEditable(false);
+        txtIngresos.setColumns(10);
+        txtIngresos.setBounds(188, 262, 154, 20);
+        panel_2.add(txtIngresos);
+        
+        JLabel label_2 = new JLabel("ID del proyecto:");
+        label_2.setBounds(10, 36, 88, 14);
+        panel_2.add(label_2);
+        
+        txtIdProyecto = new JTextField(/*Empresa.getInstance().getUltimoProyecto().getClasificacion()*/);
+        txtIdProyecto.setEditable(false);
+        txtIdProyecto.setColumns(10);
+        txtIdProyecto.setBounds(10, 61, 154, 20);
+        panel_2.add(txtIdProyecto);
+       // txtIdProyecto.setText(Empresa.getInstance().getUltimoProyecto().getClasificacion());
+        
+        JLabel label_3 = new JLabel("ID del cliente:");
+        label_3.setBounds(10, 93, 88, 14);
+        panel_2.add(label_3);
+        
+        JLabel label_4 = new JLabel("Nombre del proyecto");
+        label_4.setBounds(188, 36, 121, 14);
+        panel_2.add(label_4);
+        
+        txtNombreProyecto = new JTextField();
+        txtNombreProyecto.setEditable(false);
+        txtNombreProyecto.setColumns(10);
+        txtNombreProyecto.setBounds(188, 61, 154, 20);
+        panel_2.add(txtNombreProyecto);
+        
+        JLabel label_5 = new JLabel("Nombre del cliente");
+        label_5.setBounds(188, 93, 97, 14);
+        panel_2.add(label_5);
+        
+        txtNombreCliente = new JTextField();
+        txtNombreCliente.setEditable(false);
+        txtNombreCliente.setColumns(10);
+        txtNombreCliente.setBounds(188, 118, 154, 20);
+        panel_2.add(txtNombreCliente);
+        
+        JLabel label_6 = new JLabel("Fecha de solicitud");
+        label_6.setBounds(10, 154, 88, 14);
+        panel_2.add(label_6);
+        
+        txtFecha = new JTextField();
+        txtFecha.setEditable(false);
+        txtFecha.setColumns(10);
+        txtFecha.setBounds(10, 179, 154, 20);
+        panel_2.add(txtFecha);
+        
+        JLabel label_7 = new JLabel("Fecha de entrega");
+        label_7.setBounds(188, 154, 97, 14);
+        panel_2.add(label_7);
+        
+        txtFechaEntrega = new JTextField();
+        txtFechaEntrega.setEditable(false);
+        txtFechaEntrega.setColumns(10);
+        txtFechaEntrega.setBounds(188, 179, 154, 20);
+        panel_2.add(txtFechaEntrega);
+        
+        JPanel panel_3 = new JPanel();
+        panel_3.setLayout(null);
+        panel_3.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+        panel_3.setBackground(Color.GRAY);
+        panel_3.setBounds(0, 236, 363, 70);
+        panel_2.add(panel_3);
+        
+        JPanel panel_4 = new JPanel();
+        panel_4.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+        panel_4.setBounds(0, 0, 363, 25);
+        panel_2.add(panel_4);
+        panel_4.setLayout(null);
+        
+        JLabel lblInformacionSobreLa = new JLabel("Informacion sobre la ultima venta");
+        lblInformacionSobreLa.setFont(new Font("Tahoma", Font.BOLD, 12));
+        lblInformacionSobreLa.setHorizontalAlignment(SwingConstants.CENTER);
+        lblInformacionSobreLa.setBounds(0, 0, 363, 25);
+        panel_4.add(lblInformacionSobreLa);
         btnGestionar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		ListarProyectos list = new ListarProyectos();
         		list.setLocationRelativeTo(null);
         		list.setModal(true);
         		list.setVisible(true);
+        		cargarProyectos();
         	}
         });
+        
+        Proyecto ultimo = Empresa.getInstance().getUltimoProyecto();
+        if(ultimo !=null)
+        {
+        	txtIdCliente.setText(ultimo.getContrato().getCliente().getCedula());
+        }
+        
 	}
 	
 	private void cargarProyectos() {
 	
 		Date fecha = new Date();
+		//Empresa.getInstance().eliminarContratoCliente("dasdasd", "1");
+		//System.out.println(Empresa.getInstance().getContratos().size());
+		//System.out.println(Empresa.getInstance().getContratos().remove(0));
 		for(int i = 0; i < Empresa.getInstance().getProyectos().size();i++)
 		{
 			if(Empresa.getInstance().getProyectos().get(i).getContrato().getFechaEntrega().before(fecha))
@@ -337,7 +501,8 @@ public class Principal extends JFrame {
 		
 		
 		for (int i = 0; i < Empresa.getInstance().getProyectos().size(); i++) {
-		 	fila[0] = Empresa.getInstance().getProyectos().get(i).getId();
+		 	
+			fila[0] = Empresa.getInstance().getProyectos().get(i).getId();
 		    fila[1] = Empresa.getInstance().getProyectos().get(i).getNombre();
 		 	fila[2] = Empresa.getInstance().getProyectos().get(i).getEstado();
 

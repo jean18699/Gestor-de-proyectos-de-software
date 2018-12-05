@@ -11,8 +11,8 @@ public class Contrato implements Serializable{
 	 */
 	private static final long serialVersionUID = -6827733299844793709L;
 	private String id;
-	private static int cont;
-	//private Proyecto proyecto;
+	private static int cont = 0;
+	private Proyecto proyecto;//SOLO CON FINES DE CALCULO, NO USAR PARA ACCEDER A NADA
 	private Date fechaInicio;
 	private Date fechaEntrega;
 	private float precioContrato;
@@ -22,21 +22,25 @@ public class Contrato implements Serializable{
 	private float sumaSalarios;
 	
 	
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setProyecto(Proyecto proyecto) {
+		this.proyecto = proyecto;
+	}
+
+	
 	public Contrato(Proyecto proyecto, Date fechaEntrega) {
 		
-		cont++;
+		Contrato.cont+=1;
 		this.id = Integer.toString(cont);
-		//this.proyecto = proyecto;
+		this.proyecto = proyecto;
 		this.fechaInicio = new Date();
 		this.fechaEntrega = fechaEntrega;
 		sumaSalarios = proyecto.getSumaSalarios();
 	}
 	
-/*	
-	public Proyecto getProyecto() {
-		return proyecto;
-	}
-*/
 
 	public Cliente getCliente() {
 		return cliente;
@@ -58,14 +62,17 @@ public class Contrato implements Serializable{
 	}
 
 
-	private int daysBetween(Date d1, Date d2){
-        return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+	private long daysBetween(Date d1, Date d2){
+       
+        long difference = (d1.getTime()-d2.getTime())/86400000;
+        return Math.abs(difference);    		
 	}
 
 	
 	public int getDiasRestantes()
 	{
-		return daysBetween(fechaInicio, fechaEntrega);
+		//return (int) ((fechaInicio.getTime()-fechaEntrega.getTime())/86400000);
+		return (int) daysBetween(fechaInicio, fechaEntrega);
 	}
 
 	public void aplazar(Date fecha)
@@ -91,7 +98,7 @@ public class Contrato implements Serializable{
 	
 	public float getPrecioFinal() {
 		
-		return (8 * getDiasRestantes() * sumaSalarios);//proyecto.getSumaSalarios());
+		return (8 * (getDiasRestantes()) * sumaSalarios);//proyecto.getSumaSalarios());
 	
 	}
 	public void setPrecioFinal(float precioFinal) {

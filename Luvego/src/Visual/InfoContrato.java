@@ -16,6 +16,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
+
 import Logico.Cliente;
 import Logico.Contrato;
 import Logico.Empleado;
@@ -321,6 +323,8 @@ public class InfoContrato extends JDialog {
 						btnCancelarContrato.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								
+								Empresa.getInstance().cancelarContrato(proyecto.getContrato().getId());
+								//System.out.println(select);
 								//Contrato contrato = proyecto.getContrato();//Empresa.getInstance().getContratoByIdProyecto(proyecto.getId());
 								//Empresa.getInstance().cancelarContrato(contrato.getId());
 								dispose();

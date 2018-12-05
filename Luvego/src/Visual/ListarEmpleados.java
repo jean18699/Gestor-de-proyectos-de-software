@@ -15,6 +15,13 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 import com.sun.glass.events.MouseEvent;
 
 import Logico.Disegnador;
@@ -31,6 +38,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.ImageIcon;
 import java.awt.Window.Type;
+import javax.swing.JTextField;
 
 public class ListarEmpleados extends JDialog {
 
@@ -49,6 +57,10 @@ public class ListarEmpleados extends JDialog {
 	private JPanel panel_3;
 	private JLabel label_1;
 	private String select;
+	private JPanel panelRegistrados;
+	private JTextField txtTotalEmpleados;
+	private JLabel lblEmpleadosTotales;
+	private JPanel panel_5;
 
 	/**
 	 * Launch the application.
@@ -70,14 +82,14 @@ public class ListarEmpleados extends JDialog {
 		setType(Type.UTILITY);
 		setResizable(false);
 		setTitle("Registro de empleados");
-		setBounds(100, 100, 797, 298);
+		setBounds(100, 100, 797, 642);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(112, 128, 144));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
-		
+
 		scrollPane = new JScrollPane();
 		scrollPane.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		scrollPane.setBounds(0, 0, 700, 230);
@@ -89,21 +101,19 @@ public class ListarEmpleados extends JDialog {
 				@Override
 				public void mouseClicked(java.awt.event.MouseEvent e) {
 					int index = table.getSelectedRow();
-					if(index >= 0)
-					{
+					if (index >= 0) {
 						select = table.getValueAt(index, 0).toString();
-						
+
 					}
 				}
 			});
 			table.setRowHeight(25);
-			
-		
+
 			table.setFont(new Font("Tahoma", Font.PLAIN, 12));
-			
+
 			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			model = new DefaultTableModel();
-			String[] columnnames = {"Código", "Nombre", "Apellidos", "Posición","Proyectos activos","Evaluacion"};
+			String[] columnnames = { "Código", "Nombre", "Apellidos", "Posición", "Proyectos activos", "Evaluacion" };
 			model.setColumnIdentifiers(columnnames);
 			table.setModel(model);
 			scrollPane.setViewportView(table);
@@ -127,7 +137,7 @@ public class ListarEmpleados extends JDialog {
 							public void mouseClicked(java.awt.event.MouseEvent e) {
 								Empresa.getInstance().eliminarEmpleado(select);
 								cargarEmpleados();
-							
+
 							}
 						});
 						lblX.setBackground(Color.RED);
@@ -197,12 +207,64 @@ public class ListarEmpleados extends JDialog {
 					}
 				}
 			}
-			cargarEmpleados();
+			{
+
+				DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+				dataset.setValue(Empresa.getInstance().getCantJefes(),"Jefe", "Jefes");
+				dataset.setValue(Empresa.getInstance().getCantPlanificadores(), "Planificador", "Planificadores");
+				dataset.setValue(Empresa.getInstance().getCantProgramadores(),"Programador", "Programadores");
+				dataset.setValue(Empresa.getInstance().getCantJefes(),"Diseñador", "Diseñadores");
+				// Creando el Grafico
 			
+				JFreeChart chart = ChartFactory.createBarChart3D("Cantidad de empleados", "Tipo", "Cantidad", dataset,
+						PlotOrientation.VERTICAL, true, true, false);
+				chart.setBackgroundPaint(new Color(112, 128, 144));
+				chart.getTitle().setPaint(Color.black);
+				
+				CategoryPlot p = chart.getCategoryPlot();
+				p.setRangeGridlinePaint(Color.red);
+
+				panelRegistrados = new JPanel();
+
+				panelRegistrados.setBackground(new Color(112, 128, 144));
+
+				panelRegistrados.setBounds(0, 230, 792, 365);
+
+				contentPanel.add(panelRegistrados);
+				panelRegistrados.setLayout(null);
+
+				ChartPanel chartPanel = new ChartPanel(chart);
+				chartPanel.setBounds(0, 11, 792, 290);
+				panelRegistrados.add(chartPanel);
+				chartPanel.setLayout(null);
+				{
+					panel_5 = new JPanel();
+					panel_5.setBackground(new Color(112, 128, 144));
+					panel_5.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+					panel_5.setBounds(0, 312, 263, 35);
+					panelRegistrados.add(panel_5);
+					{
+						lblEmpleadosTotales = new JLabel("Empleados totales:");
+						panel_5.add(lblEmpleadosTotales);
+						lblEmpleadosTotales.setForeground(new Color(0, 0, 0));
+						lblEmpleadosTotales.setBackground(new Color(255, 255, 255));
+						lblEmpleadosTotales.setFont(new Font("Tahoma", Font.BOLD, 11));
+					}
+					{
+						txtTotalEmpleados = new JTextField();
+						panel_5.add(txtTotalEmpleados);
+						txtTotalEmpleados.setColumns(10);
+						txtTotalEmpleados.setText(Integer.toString(Empresa.getInstance().getEmpleados().size()));
+					}
+				}
+
+			}
+			cargarEmpleados();
+
 		}
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(Color.LIGHT_GRAY);
+			buttonPane.setBackground(new Color(112, 128, 144));
 			buttonPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
@@ -225,39 +287,33 @@ public class ListarEmpleados extends JDialog {
 		}
 		cargarEmpleados();
 	}
-	
+
 	private void cargarEmpleados() {
-		
+
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
-		for(int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
+		for (int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
 			fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
 			fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
 			fila[2] = Empresa.getInstance().getEmpleados().get(i).getApellidos();
-			
-			if(Empresa.getInstance().getEmpleados().get(i) instanceof Jefe) {
+
+			if (Empresa.getInstance().getEmpleados().get(i) instanceof Jefe) {
 				fila[3] = "Jefe de proyecto";
-			}
-			else if(Empresa.getInstance().getEmpleados().get(i) instanceof Disegnador) {
+			} else if (Empresa.getInstance().getEmpleados().get(i) instanceof Disegnador) {
 				fila[3] = "Diseñador";
-			}
-			else if(Empresa.getInstance().getEmpleados().get(i) instanceof Programador) {
+			} else if (Empresa.getInstance().getEmpleados().get(i) instanceof Programador) {
 				fila[3] = "Programador";
-			}
-			else {
+			} else {
 				fila[3] = "Planificador";
 			}
 			fila[4] = Empresa.getInstance().getEmpleados().get(i).getProyectos().size();
-			
-			if(Empresa.getInstance().getEmpleados().get(i).getEvaluacionAnual() == 'E')
-			{
+
+			if (Empresa.getInstance().getEmpleados().get(i).getEvaluacionAnual() == 'E') {
 				fila[5] = "Excelente";
 			}
-			
-			
+
 			model.addRow(fila);
 		}
-		
 
 	}
 

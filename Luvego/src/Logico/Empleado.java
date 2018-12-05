@@ -26,14 +26,15 @@ import java.util.ArrayList;
 	protected ArrayList<Proyecto> proyectos;
 	protected char evaluacionAnual;
 	private String ocupacion;
-	protected int proyectosActivos;
+	protected int totalProyectos;
+	protected String condicion;
 	
 	
-	public void eliminarDelProyecto(String idProyecto) {
+	
+	public void eliminarProyecto(String idProyecto) {
 		int index = getProyectoIndex(idProyecto);
 		if(index != -1) {
 			proyectos.remove(index);
-			proyectosActivos--;
 		}
 	}
 	
@@ -54,14 +55,10 @@ import java.util.ArrayList;
 	}
 	
 	
-	public int getProyectosActivos() {
-		return proyectosActivos;
+	public int getTotalProyectos() {
+		return totalProyectos;
 	}
 
-
-	public void setProyectosActivos(int proyectosActivos) {
-		this.proyectosActivos = proyectosActivos;
-	}
 
 
 	public Empleado(String cedula,String nombre, String apellidos, String sexo, int edad,String telefono1,String telefono2,String direccion, float salarioHora) {
@@ -82,13 +79,22 @@ import java.util.ArrayList;
 		this.direccion = direccion;
 		this.salarioHora = salarioHora;
 		proyectos = new ArrayList<>();
-		proyectosActivos = 0;
+		totalProyectos = 0;
 		this.telefono1 = telefono1;
 		this.telefono1 = telefono2;
+		this.condicion = "Disponible";
 		
 	}
 
 	
+	public String getCondicion() {
+		return condicion;
+	}
+
+	public void setCondicion(String condicion) {
+		this.condicion = condicion;
+	}
+
 	public String getCedula() {
 		return cedula;
 	}
@@ -204,7 +210,7 @@ import java.util.ArrayList;
 	
 	public void setProyecto(Proyecto proyecto) {
 		this.proyectos.add(proyecto);
-		proyectosActivos++;
+		totalProyectos++;
 	}
 	
 	public String getCargo()

@@ -3,7 +3,7 @@ package Logico;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Proyecto implements Serializable{
+public class Proyecto implements Serializable {
 
 	/**
 	 * 
@@ -14,10 +14,35 @@ public class Proyecto implements Serializable{
 	private String nombre;
 	private ArrayList<Empleado> grupoTrabajo;
 	private Contrato contrato;
-	//private float sumaSalarios;
+	// private float sumaSalarios;
 	private String clasificacion;
 	private String estado;
+	private String lenguaje;
+
 	
+	public Proyecto(String nombre, ArrayList<Empleado> grupoTrabajo, String clasificacion,String lenguaje) {
+
+		cont++;
+		this.id = Integer.toString(cont);
+		this.nombre = nombre;
+		this.grupoTrabajo = grupoTrabajo;
+		// this.sumaSalarios = getSumaSalarios();
+		this.clasificacion = clasificacion;
+		this.lenguaje = lenguaje;
+		
+		this.estado = "Normal";
+		this.realizado = false; // atributo que solo se utilizara para saber si se creo un proyecto o no en
+								// regProyecto
+	}
+
+	public String getLenguaje() {
+		return lenguaje;
+	}
+
+	public void setLenguaje(String lenguaje) {
+		this.lenguaje = lenguaje;
+	}
+
 	public Contrato getContrato() {
 		return contrato;
 	}
@@ -40,18 +65,7 @@ public class Proyecto implements Serializable{
 		this.estado = estado;
 	}
 
-	public Proyecto(String nombre, ArrayList<Empleado> grupoTrabajo, String clasificacion) {
-
-		cont++;
-		this.id = Integer.toString(cont);
-		this.nombre = nombre;
-		this.grupoTrabajo = grupoTrabajo;
-		//this.sumaSalarios = getSumaSalarios();
-		this.clasificacion = clasificacion;
-		this.estado = "Normal";
-		this.realizado = false; //atributo que solo se utilizara para saber si se creo un proyecto o no en regProyecto
-	}
-
+	
 	/*
 	 * public float getGanancia() { return }
 	 */
@@ -78,6 +92,7 @@ public class Proyecto implements Serializable{
 
 	public void setClasificacion(String clasificacion) {
 		this.clasificacion = clasificacion;
+		
 	}
 
 	public String getNombre() {
@@ -106,7 +121,7 @@ public class Proyecto implements Serializable{
 
 	public Empleado getTrabajadorAdicional() {
 		Empleado emp = null;
-	
+
 		if (grupoTrabajo.get(4) instanceof Jefe) {
 			emp = (Programador) grupoTrabajo.get(4);
 		}
@@ -119,17 +134,17 @@ public class Proyecto implements Serializable{
 		if (grupoTrabajo.get(4) instanceof Disegnador) {
 			emp = (Disegnador) grupoTrabajo.get(4);
 		}
-	
-		return emp;	
+
+		return emp;
 	}
-	
+
 	public float getSumaSalarios() {
 
-		float salaJefe = grupoTrabajo.get(0).getSalarioDia();
-		float salaPlani = grupoTrabajo.get(1).getSalarioDia();
-		float salaP1 = grupoTrabajo.get(2).getSalarioDia();
-		float salaP2 = grupoTrabajo.get(3).getSalarioDia();
-		float salaTrabaAdicional = grupoTrabajo.get(4).getSalarioDia();
+		float salaJefe = grupoTrabajo.get(0).getSalarioHora();
+		float salaPlani = grupoTrabajo.get(1).getSalarioHora();
+		float salaP1 = grupoTrabajo.get(2).getSalarioHora();
+		float salaP2 = grupoTrabajo.get(3).getSalarioHora();
+		float salaTrabaAdicional = grupoTrabajo.get(4).getSalarioHora();
 
 		return (salaJefe + salaPlani + salaP1 + salaP2 + salaTrabaAdicional);
 	}

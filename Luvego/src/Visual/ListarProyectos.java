@@ -122,7 +122,7 @@ public class ListarProyectos extends JDialog {
 			model = new DefaultTableModel();
 			
 			
-			String[] columnnames = { "Código", "Nombre", "Jefe de Proyecto","Estado" };
+			String[] columnnames = { "Código", "Nombre", "Jefe de Proyecto","Estado","Dias restantes"};
 			model.setColumnIdentifiers(columnnames);
 			table.setModel(model);
 			scrollPane.setViewportView(table);
@@ -317,6 +317,22 @@ public class ListarProyectos extends JDialog {
 						.setIcon(new ImageIcon(ListarProyectos.class.getResource("/img/Contratos/contratos.png")));
 				btnRegistroDeContratos.setFont(new Font("Tahoma", Font.BOLD, 11));
 			}
+			
+			JButton btnFinalizarElProyecto = new JButton("Finalizar el proyecto");
+			btnFinalizarElProyecto.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Proyecto proyecto = Empresa.getInstance().getProyectoById(select);
+					Empresa.getInstance().setUltimoProyecto(proyecto);
+					Empresa.getInstance().finalizarProyecto(select);
+					
+					cargarProyectos();
+				}
+			});
+			btnFinalizarElProyecto.setBackground(Color.GREEN);
+			btnFinalizarElProyecto.setBorderPainted(true);
+		
+			btnFinalizarElProyecto.setBounds(612, 5, 136, 23);
+			buttonPane.add(btnFinalizarElProyecto);
 		}
 		{
 			JPanel panel = new JPanel();
@@ -341,7 +357,8 @@ public class ListarProyectos extends JDialog {
 						public void actionPerformed(ActionEvent e) {
 							//Proyecto proyecto = Empresa.getInstance().getProyectoById(select);
 							//Cliente cliente = Empresa.getInstance().getClienteByIdProyecto(proyecto.getId());
-							Proyecto proyecto = Empresa.getInstance().getProyectos().get(Empresa.getInstance().getProyectoIndex(select));
+							
+							Proyecto proyecto = Empresa.getInstance().getProyectoById(select);
 							InfoContrato info = new InfoContrato(proyecto);
 							info.setLocationRelativeTo(null);
 							info.setModal(true);
@@ -357,29 +374,6 @@ public class ListarProyectos extends JDialog {
 					btnContratoInfo.setFont(new Font("Tahoma", Font.BOLD, 11));
 					btnContratoInfo.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 				}
-				
-				JPanel panel_1 = new JPanel();
-				panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-				panel_1.setBackground(Color.GREEN);
-				panel_1.setBounds(0, 84, 87, 83);
-				panel_2.add(panel_1);
-				panel_1.setLayout(null);
-				
-				JLabel label = new JLabel("\u2713");
-				label.setEnabled(false);
-				label.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(java.awt.event.MouseEvent e) {
-						//Empresa.getInstance().finalizarProyecto(select);
-						label.setEnabled(true);
-					}
-				});
-				
-				label.setHorizontalAlignment(SwingConstants.CENTER);
-				label.setFont(new Font("Tahoma", Font.BOLD, 50));
-				label.setForeground(Color.WHITE);
-				label.setBounds(0, 0, 87, 83);
-				panel_1.add(label);
 			}
 		}
 		cargarProyectos();
@@ -403,11 +397,6 @@ public class ListarProyectos extends JDialog {
 		
 		}
 
-		table.getColumnModel().getColumn(0).setMinWidth(200);
-		table.getColumnModel().getColumn(0).setMaxWidth(200);
-
-		table.getColumnModel().getColumn(1).setMinWidth(200);
-		table.getColumnModel().getColumn(1).setMaxWidth(200);
 	}
 
 	private void cargarProyectosMovil() {
@@ -505,7 +494,7 @@ public class ListarProyectos extends JDialog {
 				fila[1] = Empresa.getInstance().getProyectos().get(i).getNombre();
 				fila[2] = Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getNombre() +" "+ Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getApellidos();
 				fila[3] = Empresa.getInstance().getProyectos().get(i).getEstado();
-
+				fila[4] = Empresa.getInstance().getProyectos().get(i).getContrato().getDiasRestantes();
 				
 				
 				model.addRow(fila);

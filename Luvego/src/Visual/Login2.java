@@ -85,9 +85,9 @@ public class Login2 extends JFrame {
 			JButton btnIngresar = new JButton("Ingresar");
 			btnIngresar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					String id = Empresa.getInstance().getLoginUser().getId();
-					String pass = Empresa.getInstance().getPass();
-					if(txtId.getText().equalsIgnoreCase(id) && contrasenaCorrecta(txtContrasena.getPassword())) {
+				//	String id = Empresa.getInstance().getLoginUser().getId();
+					//String pass = Empresa.getInstance().getPass();
+					/*if(txtId.getText().equalsIgnoreCase(id) && contrasenaCorrecta(txtContrasena.getPassword())) {
 						Principal frame = new Principal();
 						dispose();
 						frame.setVisible(true);
@@ -96,7 +96,7 @@ public class Login2 extends JFrame {
 						JOptionPane.showMessageDialog(null, "Id o contraseña", "Advertencia", JOptionPane.WARNING_MESSAGE);
 					
 				}
-				}
+*/				}
 			});
 			//btnEntrar.setActionCommand("OK");
 			getRootPane().setDefaultButton(btnIngresar);
@@ -106,7 +106,7 @@ public class Login2 extends JFrame {
 		{
 			lblFotoLlaves = new JLabel("");
 			lblFotoLlaves.setLayout(new BorderLayout());
-			lblFotoLlaves.setIcon(new ImageIcon(new javax.swing.ImageIcmage().getScalon(getClass().getResource("/img/llaves.png")).getIedInstance(432, 253, Image.SCALE_SMOOTH)));
+			lblFotoLlaves.setIcon(new ImageIcon(Login2.class.getResource("/img/llaves.png")));
 			lblFotoLlaves.setBounds(0, 0, 432, 253);
 			contentPanel.add(lblFotoLlaves);
 		}

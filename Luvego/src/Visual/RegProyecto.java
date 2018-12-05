@@ -101,6 +101,8 @@ public class RegProyecto extends JDialog {
 	private JPanel panel_2;
 	private JButton btnResetear;
 	private JLabel imagen;
+	private JLabel lblLenguaje;
+	private JComboBox cmbLenguaje;
 
 	/**
 	 * Launch the application.
@@ -134,6 +136,31 @@ public class RegProyecto extends JDialog {
 			e.printStackTrace();
 		}
 
+		
+		//Verificando la disponibilidad de los empleados
+		for(int i = 0; i < Empresa.getInstance().getEmpleados().size();i++)
+		{
+			if(!(Empresa.getInstance().getEmpleados().get(i) instanceof Programador))
+			{
+				if(Empresa.getInstance().getEmpleados().get(i).getProyectos().size() < 4)
+				{
+					Empresa.getInstance().getEmpleados().get(i).setCondicion("Disponible");
+				}else
+				{
+					Empresa.getInstance().getEmpleados().get(i).setCondicion("No disponible");
+				}
+			}else
+			{
+				if(Empresa.getInstance().getEmpleados().get(i).getProyectos().size() < 2)
+				{
+					Empresa.getInstance().getEmpleados().get(i).setCondicion("Disponible");
+				}else
+				{
+					Empresa.getInstance().getEmpleados().get(i).setCondicion("No disponible");
+				}
+			}
+		}
+		
 		setBounds(100, 100, 1032, 276);
 		getContentPane().setLayout(new BorderLayout());
 
@@ -182,36 +209,6 @@ public class RegProyecto extends JDialog {
 									cargarClientes();
 								}
 							});
-		
-					panelClientes = new JPanel();
-					panelClientes.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-					panelClientes.setBounds(279, 0, 748, 213);
-					panelProyecto.add(panelClientes);
-					panelClientes.setLayout(null);
-					panelClientes.setVisible(false);
-					
-								scrollPane_1 = new JScrollPane();
-								scrollPane_1.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-								scrollPane_1.setBounds(13, 11, 711, 163);
-								panelClientes.add(scrollPane_1);
-								
-											tablaClientes = new JTable();
-											tablaClientes.setFont(new Font("Tahoma", Font.PLAIN, 14));
-											tablaClientes.setModel(modelClientes);
-											tablaClientes.addMouseListener(new MouseAdapter() {
-												@Override
-												public void mouseClicked(MouseEvent e) {
-													int index = tablaClientes.getSelectedRow();
-													if (index >= 0) {
-														select = tablaClientes.getValueAt(index, 0).toString();
-														btnSiguiente2.setEnabled(true);
-													} else {
-														btnSiguiente2.setEnabled(false);
-													}
-												}
-											});
-											
-														scrollPane_1.setViewportView(tablaClientes);
 		{
 			buttonPane = new JPanel();
 			buttonPane.setBounds(0, 213, 1027, 39);
@@ -320,16 +317,19 @@ public class RegProyecto extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 
 					ArrayList<Empleado> grupoTrabajo = new ArrayList<>();
+					
 					grupoTrabajo.add(Empresa.getInstance().getEmpleadoById(txtJefe.getText()));
+					grupoTrabajo.add(Empresa.getInstance().getEmpleadoById(txtIdPlanificador.getText()));
 					grupoTrabajo.add(Empresa.getInstance().getEmpleadoById(txtIdProgramador1.getText()));
 					grupoTrabajo.add(Empresa.getInstance().getEmpleadoById(txtIdProgramador2.getText()));
-					grupoTrabajo.add(Empresa.getInstance().getEmpleadoById(txtIdPlanificador.getText()));
 					grupoTrabajo.add(Empresa.getInstance().getEmpleadoById(txtIdAdicional.getText()));
 
 					Proyecto proyecto = new Proyecto(txtNombre.getText(), grupoTrabajo,
-							cmbCategoria.getSelectedItem().toString());
+							cmbCategoria.getSelectedItem().toString(),cmbLenguaje.getSelectedItem().toString());
+					
 					Cliente cliente = Empresa.getInstance().getClienteById(select);
-
+					
+					
 					RegContrato reg = new RegContrato(proyecto, cliente);
 					reg.setLocationRelativeTo(null);
 					reg.setModal(true);
@@ -357,380 +357,436 @@ public class RegProyecto extends JDialog {
 			});
 			btnResetear.setBounds(10, 7, 89, 23);
 			buttonPane.add(btnResetear);
+															{
+																panel = new JPanel();
+																panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+																panel.setBounds(0, 0, 441, 213);
+																panelProyecto.add(panel);
+																panel.setLayout(null);
 
-			scrollPane = new JScrollPane();
-			scrollPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-			scrollPane.setBackground(Color.WHITE);
-			scrollPane.setBounds(442, 0, 585, 213);
-			panelProyecto.add(scrollPane);
-			table = new JTable();
-			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			table.setShowVerticalLines(false);
+																lblNombreDelProyecto = new JLabel("Nombre del proyecto:");
+																lblNombreDelProyecto.setBounds(10, 11, 121, 14);
+																panel.add(lblNombreDelProyecto);
+																{
+																	txtNombre = new JTextField();
+																	txtNombre.setBounds(121, 8, 133, 20);
+																	panel.add(txtNombre);
+																	txtNombre.setColumns(10);
+																}
+																{
+																	lblEquipo = new JLabel("Equipo de trabajo");
+																	lblEquipo.setBounds(10, 40, 133, 14);
+																	panel.add(lblEquipo);
+																}
 
-			table.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-//
-					int index = table.getSelectedRow();
-					if (index >= 0) {
-						
-						select = table.getValueAt(index, 0).toString();
+																/*
+																 * cmbOcupacion = new JComboBox(); cmbOcupacion.addMouseListener(new
+																 * MouseAdapter() {
+																 * 
+																 * @Override public void mouseClicked(MouseEvent e) {
+																 * btnCargarAdicional.setEnabled(true); btnCargarJefe.setEnabled(true);
+																 * btnCargarProgramador.setEnabled(true);
+																 * btnCargarProgramador2.setEnabled(true);
+																 * btnCargarPlanificador.setEnabled(true);
+																 * 
+																 * int indexOcupacion = cmbOcupacion.getSelectedIndex();
+																 * System.out.println(indexOcupacion); if(indexOcupacion == 1) {
+																 * cargarPlanificadores(); } else if(indexOcupacion == 2) {
+																 * cargarProgramadores(); } else if(indexOcupacion == 3) { cargarDisegnadores();
+																 * }
+																 * 
+																 * } });
+																 */
 
-						if (btnCargarJefe.isEnabled() && btnCargarProgramador.isEnabled()
-								&& btnCargarProgramador2.isEnabled() && btnCargarPlanificador.isEnabled()) {
-							
-								txtIdAdicional.setText(select);
-						}
+																/*
+																 * btnCargarAdicional = new JButton("Cargar");
+																 * btnCargarAdicional.addActionListener(new ActionListener() { public void
+																 * actionPerformed(ActionEvent e) {
+																 * 
+																 * 
+																 * if(cmbOcupacion.getSelectedItem().toString().equalsIgnoreCase("Programador"))
+																 * { btnCargarAdicional.setEnabled(false); cargarProgramadores(); }
+																 * if(cmbOcupacion.getSelectedItem().toString().equalsIgnoreCase("Planificador")
+																 * ) { btnCargarAdicional.setEnabled(false); cargarPlanificadores(); }
+																 * if(cmbOcupacion.getSelectedItem().toString().equalsIgnoreCase("Diseñador")) {
+																 * btnCargarAdicional.setEnabled(false); cargarDisegnadores(); }
+																 * 
+																 * } });
+																 * 
+																 * 
+																 * btnCargarAdicional.setBounds(105, 142, 65, 23);
+																 * panel_1.add(btnCargarAdicional);
+																 */
 
-						if (!btnCargarJefe.isEnabled()) {
-							
-							txtJefe.setText(select);
-							cargarJefes();
+																lblCategoria = new JLabel("Categoria:");
+																lblCategoria.setBounds(269, 11, 64, 14);
+																panel.add(lblCategoria);
 
-						}
-						if (!btnCargarProgramador.isEnabled()) {
-							txtIdProgramador1.setText(select);
-							cargarProgramadores();
-						}
-						if (!btnCargarProgramador2.isEnabled()) {
-							txtIdProgramador2.setText(select);
-							cargarProgramadores();
-						}
-						if (!btnCargarPlanificador.isEnabled()) {
-							txtIdPlanificador.setText(select);
-							cargarPlanificadores();
-						}
-					}
+																cmbCategoria = new JComboBox();
+																cmbCategoria.setModel(
+																		new DefaultComboBoxModel(new String[] { "<Seleccione>", "Escritorio", "Web", "Movil" }));
+																cmbCategoria.setBounds(328, 8, 98, 20);
+																panel.add(cmbCategoria);
 
-				}
-			});
-			table.setModel(model);
+																panel_1 = new JPanel();
+																panel_1.setBackground(Color.WHITE);
+																panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+																panel_1.setBounds(0, 65, 441, 147);
+																panel.add(panel_1);
+																panel_1.setLayout(null);
 
-			scrollPane.setViewportView(table);
+																lblProgramador = new JLabel("Programador 1:");
+																lblProgramador.setFont(new Font("Tahoma", Font.PLAIN, 12));
+																lblProgramador.setBounds(24, 61, 93, 14);
+																panel_1.add(lblProgramador);
 
-		
-			panel_2 = new JPanel();
-			panel_2.setBackground(Color.WHITE);
-			panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-			panel_2.setBounds(0, 0, 279, 213);
-			panelProyecto.add(panel_2);
-			panel_2.setLayout(null);
-			panel_2.setVisible(false);
-			
-			imagen = new JLabel("");
-			imagen.setBorder(new LineBorder(new Color(0, 0, 0)));
-			imagen.setBackground(Color.WHITE);
-			imagen.setIcon(new ImageIcon(RegProyecto.class.getResource("/img/Cliente/clientes 3.png")));
-			imagen.setBounds(10, 11, 259, 191);
-			panel_2.add(imagen);
-			{
-				panel = new JPanel();
-				panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-				panel.setBounds(0, 0, 441, 213);
-				panelProyecto.add(panel);
-				panel.setLayout(null);
+																lblPlanificador = new JLabel("Planificador:");
+																lblPlanificador.setFont(new Font("Tahoma", Font.PLAIN, 12));
+																lblPlanificador.setBounds(42, 36, 75, 14);
+																panel_1.add(lblPlanificador);
 
-				lblNombreDelProyecto = new JLabel("Nombre del proyecto:");
-				lblNombreDelProyecto.setBounds(10, 11, 121, 14);
-				panel.add(lblNombreDelProyecto);
-				{
-					txtNombre = new JTextField();
-					txtNombre.setBounds(121, 8, 133, 20);
-					panel.add(txtNombre);
-					txtNombre.setColumns(10);
-				}
-				{
-					lblEquipo = new JLabel("Equipo de trabajo");
-					lblEquipo.setBounds(10, 40, 133, 14);
-					panel.add(lblEquipo);
-				}
+																{
+																	lblJefeDelProyecto = new JLabel("Jefe del proyecto:");
+																	lblJefeDelProyecto.setFont(new Font("Tahoma", Font.PLAIN, 12));
+																	lblJefeDelProyecto.setBounds(10, 11, 114, 14);
+																	panel_1.add(lblJefeDelProyecto);
+																}
 
-				/*
-				 * cmbOcupacion = new JComboBox(); cmbOcupacion.addMouseListener(new
-				 * MouseAdapter() {
-				 * 
-				 * @Override public void mouseClicked(MouseEvent e) {
-				 * btnCargarAdicional.setEnabled(true); btnCargarJefe.setEnabled(true);
-				 * btnCargarProgramador.setEnabled(true);
-				 * btnCargarProgramador2.setEnabled(true);
-				 * btnCargarPlanificador.setEnabled(true);
-				 * 
-				 * int indexOcupacion = cmbOcupacion.getSelectedIndex();
-				 * System.out.println(indexOcupacion); if(indexOcupacion == 1) {
-				 * cargarPlanificadores(); } else if(indexOcupacion == 2) {
-				 * cargarProgramadores(); } else if(indexOcupacion == 3) { cargarDisegnadores();
-				 * }
-				 * 
-				 * } });
-				 */
+																lblProgramador_1 = new JLabel("Programador 2:");
+																lblProgramador_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+																lblProgramador_1.setBounds(24, 86, 93, 14);
+																panel_1.add(lblProgramador_1);
 
-				/*
-				 * btnCargarAdicional = new JButton("Cargar");
-				 * btnCargarAdicional.addActionListener(new ActionListener() { public void
-				 * actionPerformed(ActionEvent e) {
-				 * 
-				 * 
-				 * if(cmbOcupacion.getSelectedItem().toString().equalsIgnoreCase("Programador"))
-				 * { btnCargarAdicional.setEnabled(false); cargarProgramadores(); }
-				 * if(cmbOcupacion.getSelectedItem().toString().equalsIgnoreCase("Planificador")
-				 * ) { btnCargarAdicional.setEnabled(false); cargarPlanificadores(); }
-				 * if(cmbOcupacion.getSelectedItem().toString().equalsIgnoreCase("Diseñador")) {
-				 * btnCargarAdicional.setEnabled(false); cargarDisegnadores(); }
-				 * 
-				 * } });
-				 * 
-				 * 
-				 * btnCargarAdicional.setBounds(105, 142, 65, 23);
-				 * panel_1.add(btnCargarAdicional);
-				 */
+																txtJefe = new JTextField();
+																txtJefe.setEnabled(false);
+																txtJefe.setBounds(117, 9, 140, 20);
+																panel_1.add(txtJefe);
+																txtJefe.setColumns(10);
 
-				lblCategoria = new JLabel("Categoria:");
-				lblCategoria.setBounds(269, 11, 64, 14);
-				panel.add(lblCategoria);
+																btnCargarJefe = new JButton("Cargar");
+																btnCargarJefe.setFont(new Font("Tahoma", Font.PLAIN, 12));
+																btnCargarJefe.addActionListener(new ActionListener() {
+																	public void actionPerformed(ActionEvent e) {
+																		cargarJefes();
+																		btnCargarProgramador.setEnabled(true);
+																		btnCargarProgramador2.setEnabled(true);
+																		btnCargarJefe.setEnabled(false);
+																		btnCargarPlanificador.setEnabled(true);
+																		// btnCargarAdicional.setEnabled(true);
+																	}
+																});
+																btnCargarJefe.setBounds(267, 7, 93, 23);
+																panel_1.add(btnCargarJefe);
 
-				cmbCategoria = new JComboBox();
-				cmbCategoria.setModel(
-						new DefaultComboBoxModel(new String[] { "<Seleccione>", "Escritorio", "Web", "Movil" }));
-				cmbCategoria.setBounds(328, 8, 98, 20);
-				panel.add(cmbCategoria);
+																txtIdPlanificador = new JTextField();
+																txtIdPlanificador.setEnabled(false);
+																txtIdPlanificador.setBounds(117, 33, 140, 20);
+																panel_1.add(txtIdPlanificador);
+																txtIdPlanificador.setColumns(10);
 
-				panel_1 = new JPanel();
-				panel_1.setBackground(Color.WHITE);
-				panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-				panel_1.setBounds(0, 65, 441, 147);
-				panel.add(panel_1);
-				panel_1.setLayout(null);
+																txtIdProgramador1 = new JTextField();
+																txtIdProgramador1.setEnabled(false);
+																txtIdProgramador1.setBounds(117, 58, 140, 20);
+																panel_1.add(txtIdProgramador1);
+																txtIdProgramador1.setColumns(10);
 
-				lblProgramador = new JLabel("Programador 1:");
-				lblProgramador.setFont(new Font("Tahoma", Font.PLAIN, 12));
-				lblProgramador.setBounds(24, 61, 93, 14);
-				panel_1.add(lblProgramador);
+																txtIdProgramador2 = new JTextField();
+																txtIdProgramador2.setEnabled(false);
+																txtIdProgramador2.setBounds(117, 83, 140, 20);
+																panel_1.add(txtIdProgramador2);
+																txtIdProgramador2.setColumns(10);
 
-				lblPlanificador = new JLabel("Planificador:");
-				lblPlanificador.setFont(new Font("Tahoma", Font.PLAIN, 12));
-				lblPlanificador.setBounds(42, 36, 75, 14);
-				panel_1.add(lblPlanificador);
+																btnCargarPlanificador = new JButton("Cargar");
+																btnCargarPlanificador.setFont(new Font("Tahoma", Font.PLAIN, 12));
+																btnCargarPlanificador.addActionListener(new ActionListener() {
+																	public void actionPerformed(ActionEvent e) {
+																		cargarPlanificadores();
+																		btnCargarProgramador.setEnabled(true);
+																		btnCargarProgramador2.setEnabled(true);
+																		btnCargarJefe.setEnabled(true);
+																		btnCargarPlanificador.setEnabled(false);
+																		// btnCargarAdicional.setEnabled(true);
+																	}
+																});
+																btnCargarPlanificador.setBounds(267, 32, 93, 23);
+																panel_1.add(btnCargarPlanificador);
 
-				{
-					lblJefeDelProyecto = new JLabel("Jefe del proyecto:");
-					lblJefeDelProyecto.setFont(new Font("Tahoma", Font.PLAIN, 12));
-					lblJefeDelProyecto.setBounds(10, 11, 114, 14);
-					panel_1.add(lblJefeDelProyecto);
-				}
+																btnCargarProgramador = new JButton("Cargar");
+																btnCargarProgramador.setFont(new Font("Tahoma", Font.PLAIN, 11));
+																btnCargarProgramador.addActionListener(new ActionListener() {
+																	public void actionPerformed(ActionEvent e) {
+																		if(cmbLenguaje.getSelectedItem().toString().equalsIgnoreCase("<Seleccione>"))
+																		{
+																				cargarProgramadores();
+																		}else
+																		{
+																			cargarProgramadoresEspecializados();
+																		}
+																		
+																		btnCargarProgramador.setEnabled(false);
+																		btnCargarJefe.setEnabled(true);
+																		btnCargarPlanificador.setEnabled(true);
+																		// btnCargarAdicional.setEnabled(true);
+																		btnCargarProgramador2.setEnabled(true);
+																	}
+																});
+																btnCargarProgramador.setBounds(267, 58, 93, 23);
+																panel_1.add(btnCargarProgramador);
 
-				lblProgramador_1 = new JLabel("Programador 2:");
-				lblProgramador_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-				lblProgramador_1.setBounds(24, 86, 93, 14);
-				panel_1.add(lblProgramador_1);
+																btnCargarProgramador2 = new JButton("Cargar");
+																btnCargarProgramador2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+																btnCargarProgramador2.addActionListener(new ActionListener() {
+																	public void actionPerformed(ActionEvent e) {
+																		
+																		if(cmbLenguaje.getSelectedItem().toString().equalsIgnoreCase("<Seleccione>"))
+																		{
+																				cargarProgramadores();
+																		}else
+																		{
+																			cargarProgramadoresEspecializados();
+																		}
+																		
+																		btnCargarProgramador.setEnabled(true);
+																		btnCargarProgramador2.setEnabled(false);
+																		btnCargarJefe.setEnabled(true);
+																		btnCargarPlanificador.setEnabled(true);
+																		// btnCargarAdicional.setEnabled(true);
+																	}
+																});
+																btnCargarProgramador2.setBounds(267, 82, 93, 23);
+																panel_1.add(btnCargarProgramador2);
 
-				txtJefe = new JTextField();
-				txtJefe.setEnabled(false);
-				txtJefe.setBounds(117, 9, 140, 20);
-				panel_1.add(txtJefe);
-				txtJefe.setColumns(10);
+																cmbOcupacion = new JComboBox();
+																cmbOcupacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
+																cmbOcupacion.addActionListener(new ActionListener() {
 
-				btnCargarJefe = new JButton("Cargar");
-				btnCargarJefe.setFont(new Font("Tahoma", Font.PLAIN, 12));
-				btnCargarJefe.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						cargarJefes();
-						btnCargarProgramador.setEnabled(true);
-						btnCargarProgramador2.setEnabled(true);
-						btnCargarJefe.setEnabled(false);
-						btnCargarPlanificador.setEnabled(true);
-						// btnCargarAdicional.setEnabled(true);
-					}
-				});
-				btnCargarJefe.setBounds(267, 7, 93, 23);
-				panel_1.add(btnCargarJefe);
+																	@Override
+																	public void actionPerformed(ActionEvent e) {
 
-				txtIdPlanificador = new JTextField();
-				txtIdPlanificador.setEnabled(false);
-				txtIdPlanificador.setBounds(117, 33, 140, 20);
-				panel_1.add(txtIdPlanificador);
-				txtIdPlanificador.setColumns(10);
+																		// btnCargarAdicional.setEnabled(true);
+																		btnCargarJefe.setEnabled(true);
+																		btnCargarProgramador.setEnabled(true);
+																		btnCargarProgramador2.setEnabled(true);
+																		btnCargarPlanificador.setEnabled(true);
 
-				txtIdProgramador1 = new JTextField();
-				txtIdProgramador1.setEnabled(false);
-				txtIdProgramador1.setBounds(117, 58, 140, 20);
-				panel_1.add(txtIdProgramador1);
-				txtIdProgramador1.setColumns(10);
+																		int indexOcupacion = cmbOcupacion.getSelectedIndex();
+																		System.out.println(indexOcupacion);
+																		if (indexOcupacion == 1) {
+																			cargarPlanificadores();
+																		} else if (indexOcupacion == 2) {
+																			cargarProgramadores();
+																		} else if (indexOcupacion == 3) {
+																			cargarDisegnadores();
+																		}
 
-				txtIdProgramador2 = new JTextField();
-				txtIdProgramador2.setEnabled(false);
-				txtIdProgramador2.setBounds(117, 83, 140, 20);
-				panel_1.add(txtIdProgramador2);
-				txtIdProgramador2.setColumns(10);
+																	}
+																});
 
-				btnCargarPlanificador = new JButton("Cargar");
-				btnCargarPlanificador.setFont(new Font("Tahoma", Font.PLAIN, 12));
-				btnCargarPlanificador.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						cargarPlanificadores();
-						btnCargarProgramador.setEnabled(true);
-						btnCargarProgramador2.setEnabled(true);
-						btnCargarJefe.setEnabled(true);
-						btnCargarPlanificador.setEnabled(false);
-						// btnCargarAdicional.setEnabled(true);
-					}
-				});
-				btnCargarPlanificador.setBounds(267, 32, 93, 23);
-				panel_1.add(btnCargarPlanificador);
+																cmbOcupacion.setModel(new DefaultComboBoxModel(
+																		new String[] { "<Ocupacion>", "Planificador", "Programador", "Dise\u00F1ador" }));
+																cmbOcupacion.setBounds(259, 110, 101, 20);
+																panel_1.add(cmbOcupacion);
 
-				btnCargarProgramador = new JButton("Cargar");
-				btnCargarProgramador.setFont(new Font("Tahoma", Font.PLAIN, 11));
-				btnCargarProgramador.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						cargarProgramadores();
-						btnCargarProgramador.setEnabled(false);
-						btnCargarJefe.setEnabled(true);
-						btnCargarPlanificador.setEnabled(true);
-						// btnCargarAdicional.setEnabled(true);
-						btnCargarProgramador2.setEnabled(true);
-					}
-				});
-				btnCargarProgramador.setBounds(267, 58, 93, 23);
-				panel_1.add(btnCargarProgramador);
+																txtIdAdicional = new JTextField();
+																txtIdAdicional.setEnabled(false);
+																txtIdAdicional.setBounds(117, 111, 133, 20);
+																panel_1.add(txtIdAdicional);
+																txtIdAdicional.setColumns(10);
 
-				btnCargarProgramador2 = new JButton("Cargar");
-				btnCargarProgramador2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-				btnCargarProgramador2.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						cargarProgramadores();
-						btnCargarProgramador.setEnabled(true);
-						btnCargarProgramador2.setEnabled(false);
-						btnCargarJefe.setEnabled(true);
-						btnCargarPlanificador.setEnabled(true);
-						// btnCargarAdicional.setEnabled(true);
-					}
-				});
-				btnCargarProgramador2.setBounds(267, 82, 93, 23);
-				panel_1.add(btnCargarProgramador2);
+																lblAdicional = new JLabel("Adicional:");
+																lblAdicional.setFont(new Font("Tahoma", Font.PLAIN, 12));
+																lblAdicional.setBounds(59, 111, 58, 14);
+																panel_1.add(lblAdicional);
 
-				cmbOcupacion = new JComboBox();
-				cmbOcupacion.setFont(new Font("Tahoma", Font.PLAIN, 12));
-				cmbOcupacion.addActionListener(new ActionListener() {
+																btnInfoJefe = new JButton("\u00A1");
+																btnInfoJefe.addActionListener(new ActionListener() {
+																	public void actionPerformed(ActionEvent e) {
+																		Empleado emp = Empresa.getInstance().getEmpleadoById(txtJefe.getText());
+																		InfoEmpleado info = new InfoEmpleado(emp);
+																		info.setLocationRelativeTo(null);
+																		info.setModal(true);
+																		info.setVisible(true);
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
+																	}
+																});
+																btnInfoJefe.setFont(new Font("Tahoma", Font.BOLD, 12));
+																btnInfoJefe.setBounds(370, 8, 50, 23);
+																panel_1.add(btnInfoJefe);
 
-						// btnCargarAdicional.setEnabled(true);
-						btnCargarJefe.setEnabled(true);
-						btnCargarProgramador.setEnabled(true);
-						btnCargarProgramador2.setEnabled(true);
-						btnCargarPlanificador.setEnabled(true);
+																btnInfoPlanificador = new JButton("\u00A1");
+																btnInfoPlanificador.addActionListener(new ActionListener() {
+																	public void actionPerformed(ActionEvent e) {
+																		Empleado emp = Empresa.getInstance().getEmpleadoById(txtIdPlanificador.getText());
+																		InfoEmpleado info = new InfoEmpleado(emp);
+																		info.setLocationRelativeTo(null);
+																		info.setModal(true);
+																		info.setVisible(true);
 
-						int indexOcupacion = cmbOcupacion.getSelectedIndex();
-						System.out.println(indexOcupacion);
-						if (indexOcupacion == 1) {
-							cargarPlanificadores();
-						} else if (indexOcupacion == 2) {
-							cargarProgramadores();
-						} else if (indexOcupacion == 3) {
-							cargarDisegnadores();
-						}
+																	}
+																});
+																btnInfoPlanificador.setFont(new Font("Tahoma", Font.BOLD, 12));
+																btnInfoPlanificador.setBounds(370, 33, 50, 23);
+																panel_1.add(btnInfoPlanificador);
 
-					}
-				});
+																btnInfoProgramador = new JButton("\u00A1");
+																btnInfoProgramador.addActionListener(new ActionListener() {
+																	public void actionPerformed(ActionEvent e) {
+																		Empleado emp = Empresa.getInstance().getEmpleadoById(txtIdProgramador1.getText());
+																		InfoEmpleado info = new InfoEmpleado(emp);
+																		info.setLocationRelativeTo(null);
+																		info.setModal(true);
+																		info.setVisible(true);
 
-				cmbOcupacion.setModel(new DefaultComboBoxModel(
-						new String[] { "<Ocupacion>", "Planificador", "Programador", "Dise\u00F1ador" }));
-				cmbOcupacion.setBounds(259, 110, 101, 20);
-				panel_1.add(cmbOcupacion);
+																	}
+																});
+																btnInfoProgramador.setFont(new Font("Tahoma", Font.BOLD, 12));
+																btnInfoProgramador.setBounds(370, 58, 50, 23);
+																panel_1.add(btnInfoProgramador);
 
-				txtIdAdicional = new JTextField();
-				txtIdAdicional.setEnabled(false);
-				txtIdAdicional.setBounds(117, 111, 133, 20);
-				panel_1.add(txtIdAdicional);
-				txtIdAdicional.setColumns(10);
+																btnInfoProgramador2 = new JButton("\u00A1");
+																btnInfoProgramador2.addActionListener(new ActionListener() {
+																	public void actionPerformed(ActionEvent e) {
+																		Empleado emp = Empresa.getInstance().getEmpleadoById(txtIdProgramador2.getText());
+																		InfoEmpleado info = new InfoEmpleado(emp);
+																		info.setLocationRelativeTo(null);
+																		info.setModal(true);
+																		info.setVisible(true);
 
-				lblAdicional = new JLabel("Adicional:");
-				lblAdicional.setFont(new Font("Tahoma", Font.PLAIN, 12));
-				lblAdicional.setBounds(59, 111, 58, 14);
-				panel_1.add(lblAdicional);
+																	}
+																});
+																btnInfoProgramador2.setFont(new Font("Tahoma", Font.BOLD, 12));
+																btnInfoProgramador2.setBounds(370, 83, 50, 23);
+																panel_1.add(btnInfoProgramador2);
 
-				btnInfoJefe = new JButton("\u00A1");
-				btnInfoJefe.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Empleado emp = Empresa.getInstance().getEmpleadoById(txtJefe.getText());
-						InfoEmpleado info = new InfoEmpleado(emp);
-						info.setLocationRelativeTo(null);
-						info.setModal(true);
-						info.setVisible(true);
+																btnInfoAdicional = new JButton("\u00A1");
+																btnInfoAdicional.addActionListener(new ActionListener() {
+																	public void actionPerformed(ActionEvent e) {
+																		Empleado emp = Empresa.getInstance().getEmpleadoById(txtIdAdicional.getText());
+																		InfoEmpleado info = new InfoEmpleado(emp);
+																		info.setLocationRelativeTo(null);
+																		info.setModal(true);
+																		info.setVisible(true);
 
-					}
-				});
-				btnInfoJefe.setFont(new Font("Tahoma", Font.BOLD, 12));
-				btnInfoJefe.setBounds(370, 8, 50, 23);
-				panel_1.add(btnInfoJefe);
+																	}
+																});
+																btnInfoAdicional.setFont(new Font("Tahoma", Font.BOLD, 12));
+																btnInfoAdicional.setBounds(370, 110, 50, 23);
+																panel_1.add(btnInfoAdicional);
 
-				btnInfoPlanificador = new JButton("\u00A1");
-				btnInfoPlanificador.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Empleado emp = Empresa.getInstance().getEmpleadoById(txtIdPlanificador.getText());
-						InfoEmpleado info = new InfoEmpleado(emp);
-						info.setLocationRelativeTo(null);
-						info.setModal(true);
-						info.setVisible(true);
-
-					}
-				});
-				btnInfoPlanificador.setFont(new Font("Tahoma", Font.BOLD, 12));
-				btnInfoPlanificador.setBounds(370, 33, 50, 23);
-				panel_1.add(btnInfoPlanificador);
-
-				btnInfoProgramador = new JButton("\u00A1");
-				btnInfoProgramador.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Empleado emp = Empresa.getInstance().getEmpleadoById(txtIdProgramador1.getText());
-						InfoEmpleado info = new InfoEmpleado(emp);
-						info.setLocationRelativeTo(null);
-						info.setModal(true);
-						info.setVisible(true);
-
-					}
-				});
-				btnInfoProgramador.setFont(new Font("Tahoma", Font.BOLD, 12));
-				btnInfoProgramador.setBounds(370, 58, 50, 23);
-				panel_1.add(btnInfoProgramador);
-
-				btnInfoProgramador2 = new JButton("\u00A1");
-				btnInfoProgramador2.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Empleado emp = Empresa.getInstance().getEmpleadoById(txtIdProgramador2.getText());
-						InfoEmpleado info = new InfoEmpleado(emp);
-						info.setLocationRelativeTo(null);
-						info.setModal(true);
-						info.setVisible(true);
-
-					}
-				});
-				btnInfoProgramador2.setFont(new Font("Tahoma", Font.BOLD, 12));
-				btnInfoProgramador2.setBounds(370, 83, 50, 23);
-				panel_1.add(btnInfoProgramador2);
-
-				btnInfoAdicional = new JButton("\u00A1");
-				btnInfoAdicional.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Empleado emp = Empresa.getInstance().getEmpleadoById(txtIdAdicional.getText());
-						InfoEmpleado info = new InfoEmpleado(emp);
-						info.setLocationRelativeTo(null);
-						info.setModal(true);
-						info.setVisible(true);
-
-					}
-				});
-				btnInfoAdicional.setFont(new Font("Tahoma", Font.BOLD, 12));
-				btnInfoAdicional.setBounds(370, 110, 50, 23);
-				panel_1.add(btnInfoAdicional);
-
-				panel_4 = new JPanel();
-				panel_4.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-				panel_4.setBackground(Color.LIGHT_GRAY);
-				panel_4.setBounds(0, 31, 104, 35);
-				panel.add(panel_4);
-			}
+																panel_4 = new JPanel();
+																panel_4.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+																panel_4.setBackground(Color.LIGHT_GRAY);
+																panel_4.setBounds(0, 31, 104, 35);
+																panel.add(panel_4);
+																
+																lblLenguaje = new JLabel("Lenguaje:");
+																lblLenguaje.setBounds(269, 40, 55, 14);
+																panel.add(lblLenguaje);
+																
+																cmbLenguaje = new JComboBox();
+																cmbLenguaje.setModel(
+																		new DefaultComboBoxModel(new String[] {"<Seleccione>", "Java", "C++", "C#", "Python", "HTML/Javascript"}));
+																
+																cmbLenguaje.setBounds(328, 37, 98, 20);
+																panel.add(cmbLenguaje);
+															}
+															
+																	
+																		panel_2 = new JPanel();
+																		panel_2.setBackground(Color.WHITE);
+																		panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+																		panel_2.setBounds(0, 0, 279, 213);
+																		panelProyecto.add(panel_2);
+																		panel_2.setLayout(null);
+																		panel_2.setVisible(false);
+																		
+																		imagen = new JLabel("");
+																		imagen.setBorder(new LineBorder(new Color(0, 0, 0)));
+																		imagen.setBackground(Color.WHITE);
+																		imagen.setIcon(new ImageIcon(RegProyecto.class.getResource("/img/Cliente/clientes 3.png")));
+																		imagen.setBounds(10, 11, 259, 191);
+																		panel_2.add(imagen);
+																		
+																					scrollPane = new JScrollPane();
+																					scrollPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+																					scrollPane.setBackground(Color.WHITE);
+																					scrollPane.setBounds(442, 0, 585, 213);
+																					panelProyecto.add(scrollPane);
+																					table = new JTable();
+																					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+																					table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+																					table.setShowVerticalLines(false);
+																					
+																								table.addMouseListener(new MouseAdapter() {
+																									@Override
+																									public void mouseClicked(MouseEvent e) {
+																					//
+																										int index = table.getSelectedRow();
+																										if (index >= 0) {
+																											
+																											select = table.getValueAt(index, 0).toString();
+																					
+																											if (btnCargarJefe.isEnabled() && btnCargarProgramador.isEnabled()
+																													&& btnCargarProgramador2.isEnabled() && btnCargarPlanificador.isEnabled()) {
+																												
+																													txtIdAdicional.setText(select);
+																											}
+																					
+																											if (!btnCargarJefe.isEnabled()) {
+																												
+																												txtJefe.setText(select);
+																												cargarJefes();
+																					
+																											}
+																											if (!btnCargarProgramador.isEnabled()) {
+																												txtIdProgramador1.setText(select);
+																												cargarProgramadores();
+																											}
+																											if (!btnCargarProgramador2.isEnabled()) {
+																												txtIdProgramador2.setText(select);
+																												cargarProgramadores();
+																											}
+																											if (!btnCargarPlanificador.isEnabled()) {
+																												txtIdPlanificador.setText(select);
+																												cargarPlanificadores();
+																											}
+																										}
+																					
+																									}
+																								});
+																								table.setModel(model);
+																								
+																											scrollPane.setViewportView(table);
+																											
+																														panelClientes = new JPanel();
+																														panelClientes.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+																														panelClientes.setBounds(279, 0, 748, 213);
+																														panelProyecto.add(panelClientes);
+																														panelClientes.setLayout(null);
+																														panelClientes.setVisible(false);
+																														
+																																	scrollPane_1 = new JScrollPane();
+																																	scrollPane_1.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+																																	scrollPane_1.setBounds(13, 11, 711, 163);
+																																	panelClientes.add(scrollPane_1);
+																																	
+																																				tablaClientes = new JTable();
+																																				tablaClientes.setFont(new Font("Tahoma", Font.PLAIN, 14));
+																																				tablaClientes.setModel(modelClientes);
+																																				tablaClientes.addMouseListener(new MouseAdapter() {
+																																					@Override
+																																					public void mouseClicked(MouseEvent e) {
+																																						int index = tablaClientes.getSelectedRow();
+																																						if (index >= 0) {
+																																							select = tablaClientes.getValueAt(index, 0).toString();
+																																							btnSiguiente2.setEnabled(true);
+																																						} else {
+																																							btnSiguiente2.setEnabled(false);
+																																						}
+																																					}
+																																				});
+																																				
+																																							scrollPane_1.setViewportView(tablaClientes);
 			getContentPane()
 					.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { panelProyecto, table }));
 		}
@@ -742,7 +798,8 @@ public class RegProyecto extends JDialog {
 		for (int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
 			if (Empresa.getInstance().getEmpleados().get(i) instanceof Jefe
 					&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtJefe.getText())
-				&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdAdicional.getText())){
+				&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdAdicional.getText())
+				&& Empresa.getInstance().getEmpleados().get(i).getCondicion().equalsIgnoreCase("Disponible")){
 				fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
 				fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
 				fila[2] = Empresa.getInstance().getEmpleados().get(i).getCargo();
@@ -763,10 +820,10 @@ public class RegProyecto extends JDialog {
 		for (int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
 			if (Empresa.getInstance().getEmpleados().get(i) instanceof Programador
 					&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdProgramador1.getText())
-							&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdProgramador2.getText())
-							&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdAdicional.getText()))
+					&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdProgramador2.getText())
+							&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdAdicional.getText())
+							&& Empresa.getInstance().getEmpleados().get(i).getCondicion().equalsIgnoreCase("Disponible"))
 			{
-
 				fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
 				fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
 				fila[2] = Empresa.getInstance().getEmpleados().get(i).getCargo();
@@ -781,13 +838,47 @@ public class RegProyecto extends JDialog {
 
 	}
 
+
+	private void cargarProgramadoresEspecializados() {
+		model.setRowCount(0);
+		fila = new Object[model.getColumnCount()];
+		for (int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
+			if (Empresa.getInstance().getEmpleados().get(i) instanceof Programador
+					&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdProgramador1.getText())
+					&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdProgramador2.getText())
+							&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdAdicional.getText())
+							&& Empresa.getInstance().getEmpleados().get(i).getCondicion().equalsIgnoreCase("Disponible"))
+			{
+				for(int j = 0; j < ((Programador)Empresa.getInstance().getEmpleados().get(i)).getEspecialidades().size();j++)
+				{
+					if(((Programador)Empresa.getInstance().getEmpleados().get(i)).getEspecialidades().get(j).equalsIgnoreCase(cmbLenguaje.getSelectedItem().toString()))
+					{
+
+						fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
+						fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
+						fila[2] = Empresa.getInstance().getEmpleados().get(i).getCargo();
+						fila[3] = Empresa.getInstance().getEmpleados().get(i).getSalarioHora();
+						fila[4] = Empresa.getInstance().getEmpleados().get(i).getEvaluacionAnual();
+						model.addRow(fila);		
+					}
+				}
+			}
+		}
+
+		table.getColumnModel().getColumn(0).setMinWidth(100);
+		// table.getColumnModel().getColumn(0).setMaxWidth(100);
+
+	}
+
+	
 	private void cargarPlanificadores() {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		for (int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
 			if (Empresa.getInstance().getEmpleados().get(i) instanceof Planificador
 					&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdPlanificador.getText()) 
-				&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdAdicional.getText())) {
+				&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdAdicional.getText())
+				&& Empresa.getInstance().getEmpleados().get(i).getCondicion().equalsIgnoreCase("Disponible")) {
 					
 				fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
 				fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
@@ -809,7 +900,8 @@ public class RegProyecto extends JDialog {
 		fila = new Object[model.getColumnCount()];
 		for (int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
 			if (Empresa.getInstance().getEmpleados().get(i) instanceof Disegnador
-					&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdAdicional.getText())) {
+					&& !Empresa.getInstance().getEmpleados().get(i).getId().equalsIgnoreCase(txtIdAdicional.getText())
+				&& Empresa.getInstance().getEmpleados().get(i).getCondicion().equalsIgnoreCase("Disponible")){
 				fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
 				fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
 				fila[2] = Empresa.getInstance().getEmpleados().get(i).getCargo();
@@ -826,9 +918,12 @@ public class RegProyecto extends JDialog {
 
 	private void cargarClientes() {
 		modelClientes.setRowCount(0);
+		
+		
+		
 		fila = new Object[modelClientes.getColumnCount()];
 		for (int i = 0; i < Empresa.getInstance().getClientes().size(); i++) {
-			fila[0] = Empresa.getInstance().getClientes().get(i).getId();
+			fila[0] = Empresa.getInstance().getClientes().get(i).getCedula();
 			fila[1] = Empresa.getInstance().getClientes().get(i).getNombre();
 			fila[2] = Empresa.getInstance().getClientes().get(i).getDireccion();
 			fila[3] = Empresa.getInstance().getClientes().get(i).getContratos().size();
@@ -837,7 +932,4 @@ public class RegProyecto extends JDialog {
 			modelClientes.addRow(fila);
 		}
 	}
-
-
-
 }
