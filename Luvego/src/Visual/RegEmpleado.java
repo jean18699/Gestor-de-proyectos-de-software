@@ -74,7 +74,7 @@ public class RegEmpleado extends JDialog {
 	private JCheckBox chckbxPython;
 	private JSpinner spnSalario;
 	
-
+//
 	/**
 	 * Launch the application.
 	 */
