@@ -11,8 +11,7 @@ public class Empresa implements Serializable {
 	 */
 	private static final long serialVersionUID = 6921637127266475472L;
 	private ArrayList<Cliente> clientes;
-	private static Cliente loginUser;
-	private static String pass;
+	private static User loginUser;
 	private ArrayList<Contrato> contratos;
 	private ArrayList<Empleado> empleados;
 	private Proyecto ultimoProyecto;
@@ -48,12 +47,13 @@ public class Empresa implements Serializable {
 		empleados = new ArrayList<>();
 		proyectos = new ArrayList<>();
 		ultimoProyecto = null;
+		loginUser = new User();
 		ganancias = 0;
 		cantProyectosTerminados = 0;
 		cantProyectosCancelados = 0;
 		// loginUser = new Cliente();
-		// loginUser.setId("Admin");
-		pass = new String("0000");
+		loginUser.setTipo("Admin");
+		loginUser.setPass("0000");
 	}
 
 	public int getTotalProyectos() {
@@ -108,10 +108,6 @@ public class Empresa implements Serializable {
 		this.ultimoProyecto = ultimoProyecto;
 	}
 
-	public static String getPass() {
-		return pass;
-	}
-
 	public float getGanancias() {
 		return ganancias;
 	}
@@ -120,14 +116,13 @@ public class Empresa implements Serializable {
 		this.ganancias = ganancias;
 	}
 
-	
-	 public static Cliente getLoginUser() { return loginUser; }
-	 
-	
-	 public static void setLoginUser(Cliente loginUser) { 
-		 Empresa.loginUser = loginUser; 
-	 }
-	 
+	public static User getLoginUser() {
+		return loginUser;
+	}
+
+	public static void setLoginUser(User loginUser) {
+		Empresa.loginUser = loginUser;
+	}
 
 	public static Empresa getInstance() {
 		if (empresa == null) {

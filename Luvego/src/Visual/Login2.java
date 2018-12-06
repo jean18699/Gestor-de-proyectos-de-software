@@ -7,6 +7,11 @@ import java.awt.Image;
 //import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 //import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
@@ -43,13 +48,29 @@ public class Login2 extends JFrame {
 			}
 		});
 	}
+	
+	private void leerArchivo() throws IOException, ClassNotFoundException {
+		File archivoBiblioteca = new File("registro.dat");
+		if(!archivoBiblioteca.exists()) {
+			FileOutputStream f = new FileOutputStream(new File("registro.dat"));
+			f.close();
+		}
+		FileInputStream fi = new FileInputStream(new File("registro.dat"));
+		if(archivoBiblioteca.length() > 0) {
+			ObjectInputStream oi = new ObjectInputStream(fi);
+			Empresa.getInstance().setEmpresa((Empresa) oi.readObject());	
+			oi.close();
+		}
+	}
 
 
-	public Login2() {
+	public Login2() throws ClassNotFoundException, IOException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Login");
 		setBounds(100, 100, 450, 300);
 		setLocationRelativeTo(null);
+		
+		leerArchivo();
 
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -86,16 +107,16 @@ public class Login2 extends JFrame {
 			btnIngresar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
-				//	String id = Empresa.getInstance().getLoginUser().getId();
-					//String pass = Empresa.getInstance().getPass();
-					/*if(txtId.getText().equalsIgnoreCase(id) && contrasenaCorrecta(txtContrasena.getPassword())) {
-=======
-					Empresa.getInstance();
-					String id = Empresa.getLoginUser().getId();
-					Empresa.getInstance();
-					String pass = Empresa.getPass();
-					if(txtId.getText().equalsIgnoreCase(id) && contrasenaCorrecta(txtContrasena.getPassword())) {
->>>>>>> branch 'master' of https://github.com/jean18699/ProyectoFinalP1.git
+				    String tipo = Empresa.getInstance().getLoginUser().getTipo();
+					String pass = Empresa.getInstance().getLoginUser().getPass();
+					System.out.println(Empresa.getInstance().getLoginUser().getTipo()+" "+txtId.getText());
+					System.out.println(Empresa.getInstance().getLoginUser().getPass()+" "+String.valueOf(txtContrasena.getPassword()));
+					if(txtId.getText().equalsIgnoreCase(tipo) && contrasenaCorrecta(txtContrasena.getPassword())) {
+					//Empresa.getInstance();
+					//String id = Empresa.getLoginUser().getId();
+					//Empresa.getInstance();
+					//String pass = Empresa.getPass();
+					if(txtId.getText().equals(tipo) && String.valueOf(txtContrasena.getPassword()).equals(pass)) {
 						Principal frame = new Principal();
 						dispose();
 						frame.setVisible(true);
@@ -104,7 +125,8 @@ public class Login2 extends JFrame {
 						JOptionPane.showMessageDialog(null, "Id o contraseña", "Advertencia", JOptionPane.WARNING_MESSAGE);
 					
 				}
-*/				}
+			}
+			}
 			});
 			//btnEntrar.setActionCommand("OK");
 			getRootPane().setDefaultButton(btnIngresar);
@@ -114,7 +136,7 @@ public class Login2 extends JFrame {
 		{
 			lblFotoLlaves = new JLabel("");
 			lblFotoLlaves.setLayout(new BorderLayout());
-			lblFotoLlaves.setIcon(new ImageIcon(Login2.class.getResource("/img/llaves.png")));
+			lblFotoLlaves.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/img/llaves.png")).getImage().getScaledInstance(432, 253, Image.SCALE_SMOOTH)));
 			lblFotoLlaves.setBounds(0, 0, 432, 253);
 			contentPanel.add(lblFotoLlaves);
 		}
@@ -122,7 +144,7 @@ public class Login2 extends JFrame {
 	
 	public boolean contrasenaCorrecta(char[] intento) {
 		boolean esCorrecto = true;
-		char[] contrasenaCorrecta = Empresa.getInstance().getPass().toCharArray();
+		char[] contrasenaCorrecta = Empresa.getInstance().getLoginUser().getPass().toCharArray();
 		
 		if(intento.length != contrasenaCorrecta.length) {
 			esCorrecto = false;
