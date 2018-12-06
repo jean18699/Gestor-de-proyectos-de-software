@@ -333,7 +333,6 @@ public class RegContrato extends JDialog {
 							contrato.setFechaInicio(fecha);
 							contrato.setCliente(cliente);
 							proyecto.setContrato(contrato);
-<<<<<<< HEAD
 							*/
 							//System.out.println(cliente.getCedula());
 							//Empresa.getInstance().agregarProyecto(proyecto);
@@ -341,10 +340,6 @@ public class RegContrato extends JDialog {
 							//Empresa.getInstance().getClientes().get(Empresa.getInstance().getClienteIndex(cliente.getId())).setContrato(contrato);
 							//System.out.println(Empresa.getInstance().get);
 							
-=======
-							proyecto.getContrato().setCliente(cliente);
-							//Empresa.getInstance().agregarProyecto(proyecto);
->>>>>>> branch 'master' of https://github.com/jean18699/ProyectoFinalP1.git
 							//Empresa.getInstance().nuevoContrato(cliente.getId(), contrato);
 							//contrato.setFechaInicio(fecha);
 							

@@ -1,6 +1,7 @@
 package Logico;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -59,17 +60,31 @@ public class Main {
 		
 		
 
-		Date fechaEntrega = new Date("12/12/2018");
-		Contrato contrato = new Contrato(proyecto,fechaEntrega);
+	//	Contrato contrato = new Contrato(proyecto,fechaEntrega);
 
-		Empresa.getInstance().nuevoCliente(cliente);
+		/*Empresa.getInstance().nuevoCliente(cliente);
 		proyecto.setContrato(contrato);
 		proyecto.getContrato().setCliente(cliente);
 		Empresa.getInstance().agregarProyecto(proyecto);
 		Empresa.getInstance().nuevoCliente(cliente2);
 		///////////////////////////////////////////////////
+		*/
 		
-		System.out.println(Empresa.getInstance().getProyectos().get(0).getContrato().getFechaEntrega());
+		Date fechaEntrega = new Date("12/07/2018");
+		fecha = new Date();
+		//DecimalFormat crunchifyFormatter = new DecimalFormat("###,###");
+
+		// getTime() returns the number of milliseconds since January 1, 1970, 00:00:00 GMT represented by this Date object
+		long diff = fecha.getTime() - fechaEntrega.getTime();
+
+		int diffDays = -(int) (diff / (24 * 60 * 60 * 1000));
+		System.out.println("difference between days: " + diffDays);
+		System.out.println(fecha);
+		
+		
+		
+		
+		/*System.out.println(Empresa.getInstance().getProyectos().get(0).getContrato().getFechaEntrega());
 		Date aplazo = new Date("12/10/2018");
 	Empresa.getInstance().getContratos().get(0).aplazar(aplazo);
 		System.out.println(Empresa.getInstance().getContratos().get(0).getDiasRestantes());

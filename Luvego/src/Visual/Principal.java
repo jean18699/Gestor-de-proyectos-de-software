@@ -496,7 +496,7 @@ public class Principal extends JFrame {
 	}
 	
 	private void cargarProyectos() {
-<<<<<<< HEAD
+//<<<<<<< HEAD
 	
 		Date fecha = new Date();
 		//Empresa.getInstance().eliminarContratoCliente("dasdasd", "1");
@@ -518,9 +518,8 @@ public class Principal extends JFrame {
 			}
 		}
 		
-=======
-		System.out.println(Empresa.getInstance().getProyectos().size());
->>>>>>> branch 'master' of https://github.com/jean18699/ProyectoFinalP1.git
+//=======
+//>>>>>>> branch 'master' of https://github.com/jean18699/ProyectoFinalP1.git
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		

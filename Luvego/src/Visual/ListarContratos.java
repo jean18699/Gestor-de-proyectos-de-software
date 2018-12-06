@@ -224,6 +224,11 @@ public class ListarContratos extends JDialog {
 			}
 			{
 				JButton btnCancelarContrato = new JButton("Cancelar contrato");
+				btnCancelarContrato.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Empresa.getInstance().cancelarContrato(select);
+					}
+				});
 				btnCancelarContrato.setBounds(736, 5, 128, 23);
 				buttonPane.add(btnCancelarContrato);
 			}

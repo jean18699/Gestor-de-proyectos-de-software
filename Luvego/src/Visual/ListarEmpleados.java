@@ -224,6 +224,11 @@ public class ListarEmpleados extends JDialog {
 				CategoryPlot p = chart.getCategoryPlot();
 				p.setRangeGridlinePaint(Color.red);
 
+				ChartPanel chartPanel = new ChartPanel(chart);
+				chartPanel.setBounds(0, 11, 792, 290);
+				chartPanel.setLayout(null);
+
+				
 				panelRegistrados = new JPanel();
 
 				panelRegistrados.setBackground(new Color(112, 128, 144));
@@ -233,10 +238,7 @@ public class ListarEmpleados extends JDialog {
 				contentPanel.add(panelRegistrados);
 				panelRegistrados.setLayout(null);
 
-				ChartPanel chartPanel = new ChartPanel(chart);
-				chartPanel.setBounds(0, 11, 792, 290);
 				panelRegistrados.add(chartPanel);
-				chartPanel.setLayout(null);
 				{
 					panel_5 = new JPanel();
 					panel_5.setBackground(new Color(112, 128, 144));
@@ -316,5 +318,28 @@ public class ListarEmpleados extends JDialog {
 		}
 
 	}
+/*
+	public void cargarGrafico()
+	{
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		dataset.setValue(Empresa.getInstance().getCantJefes(),"Jefe", "Jefes");
+		dataset.setValue(Empresa.getInstance().getCantPlanificadores(), "Planificador", "Planificadores");
+		dataset.setValue(Empresa.getInstance().getCantProgramadores(),"Programador", "Programadores");
+		dataset.setValue(Empresa.getInstance().getCantJefes(),"Diseñador", "Diseñadores");
+		// Creando el Grafico
+	
+		JFreeChart chart = ChartFactory.createBarChart3D("Cantidad de empleados", "Tipo", "Cantidad", dataset,
+				PlotOrientation.VERTICAL, true, true, false);
+		chart.setBackgroundPaint(new Color(112, 128, 144));
+		chart.getTitle().setPaint(Color.black);
+		
+		CategoryPlot p = chart.getCategoryPlot();
+		p.setRangeGridlinePaint(Color.red);
 
+		ChartPanel chartPanel = new ChartPanel(chart);
+		chartPanel.setBounds(0, 11, 792, 290);
+		chartPanel.setLayout(null);
+
+	}*/
+	
 }
