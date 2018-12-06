@@ -109,8 +109,6 @@ public class Login2 extends JFrame {
 
 				    String tipo = Empresa.getInstance().getLoginUser().getTipo();
 					String pass = Empresa.getInstance().getLoginUser().getPass();
-					System.out.println(Empresa.getInstance().getLoginUser().getTipo()+" "+txtId.getText());
-					System.out.println(Empresa.getInstance().getLoginUser().getPass()+" "+String.valueOf(txtContrasena.getPassword()));
 					if(txtId.getText().equalsIgnoreCase(tipo) && contrasenaCorrecta(txtContrasena.getPassword())) {
 					//Empresa.getInstance();
 					//String id = Empresa.getLoginUser().getId();
