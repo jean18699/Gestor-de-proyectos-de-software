@@ -72,9 +72,8 @@ public class RegEmpleado extends JDialog {
 	private JTextField txtTelefono;
 	private JCheckBox chckbxCSharp; 
 	private JCheckBox chckbxPython;
-	private JSpinner spnSalario;
 	
-//
+
 	/**
 	 * Launch the application.
 	 */
@@ -423,7 +422,7 @@ public class RegEmpleado extends JDialog {
 			spnFrecuencia.setBounds(343, 45, 69, 22);
 			panel_InfoAdicional.add(spnFrecuencia);
 			
-			spnSalario = new JSpinner();
+			JSpinner spnSalario = new JSpinner();
 			
 			Float value = new Float(1.0);
 			Float step = new Float(0.1);
@@ -453,7 +452,7 @@ public class RegEmpleado extends JDialog {
 			panel_InfoAdicional.add(chckbxCSharp);
 			
 			chckbxPython = new JCheckBox("Python");
-			chckbxPython.setVisible(false);
+			chckbxCpp.setVisible(false);
 			chckbxPython.setBounds(463, 69, 97, 23);
 			panel_InfoAdicional.add(chckbxPython);
 		}
@@ -498,7 +497,7 @@ public class RegEmpleado extends JDialog {
 						float salarioHora = 0; //Float.valueOf(txtSalarioHora.getText());
 						
 						if(Empresa.getInstance().ValidadorFlotantes(txtSalarioHora.getText())) {
-							salarioHora = Float.valueOf(spnSalario.getValue().toString());
+							salarioHora = Float.valueOf(txtSalarioHora.getText());
 						}
 						
 						ArrayList<String> especialidades = new ArrayList<>();
@@ -522,55 +521,24 @@ public class RegEmpleado extends JDialog {
 							
 						
 						int frecuancia = (int) spnFrecuencia.getValue();
-						/*
+						
 						if(!Empresa.getInstance().ValidadorNombre(nombre) || !Empresa.getInstance().ValidadorNombre(apellidos) ||!Empresa.getInstance().ValidadorNumeros(cedula)  ||!Empresa.getInstance().ValidadorNumeros(telefono)
-								||!Empresa.getInstance().ValidadorNumeros(telefono2) || direccion.equals("")) {
+								||!Empresa.getInstance().ValidadorNombre(nombre)|| salarioHora == 0 || direccion.equals("")) {
 							
 							JOptionPane.showMessageDialog(null, "Por favor, llene correctamente todos los campos", "Advertencia", JOptionPane.WARNING_MESSAGE);
-							if(!Empresa.getInstance().ValidadorNumeros(cedula)) {
-								txtCedula.setForeground(Color.RED);
-							}
-							else {
-								txtCedula.setForeground(Color.BLACK);
-							}
-							if(!Empresa.getInstance().ValidadorNumeros(telefono)) {
-								txtTelefono.setForeground(Color.RED);
-							}
-							else {
-								txtTelefono.setForeground(Color.BLACK);
-							}
-							if(!Empresa.getInstance().ValidadorNumeros(telefono2)) {
-								txtTelefono2.setForeground(Color.RED);
-							}
-							else {
-								txtTelefono2.setForeground(Color.BLACK);
-							}
 							if(!Empresa.getInstance().ValidadorNombre(nombre)) {
 								txtNombre.setForeground(Color.RED);
-							}
-							else {
-								txtNombre.setForeground(Color.BLACK);
 							}
 							if(!Empresa.getInstance().ValidadorNombre(apellidos)) {
 								txtApellidos.setForeground(Color.RED);
 							}
-							else {
-								txtApellidos.setForeground(Color.BLACK);
-							}
-<<<<<<< HEAD
-						
-=======
-							if(direccion.equals("")) {
+							/*if(direccion.equals("")) {
 								txtDireccion.setForeground(Color.RED);
-							}
-							else {
-								txtDireccion.setForeground(Color.BLACK);
-							}
-							/*if(salarioHora == 0) {
-								txtSalarioHora.setForeground(Color.RED);
 							}*/
+							if(salarioHora == 0) {
+								txtSalarioHora.setForeground(Color.RED);
+							}
 						}
->>>>>>> branch 'master' of https://github.com/jean18699/ProyectoFinalP1.git
 						else {
 							if(rdbtnProgramador.isSelected() && !chckbxJava.isSelected() && !chckbxHtml.isSelected() && !chckbxCpp.isSelected()) {
 								JOptionPane.showMessageDialog(null, "Por favor, seleccione una o más especialidades", "Advertencia", JOptionPane.WARNING_MESSAGE);
