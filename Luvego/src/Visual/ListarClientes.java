@@ -284,7 +284,7 @@ public class ListarClientes extends JDialog {
 			}
 			{
 				JLabel lblFondo = new JLabel("");
-				lblFondo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clients.jpg")).getImage().getScaledInstance(1134, 391, Image.SCALE_SMOOTH)));
+				//lblFondo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clients.jpg")).getImage().getScaledInstance(1134, 391, Image.SCALE_SMOOTH)));
 				//lblFondo.setIcon(new ImageIcon(ListarClientes.class.getResource("/img/clients.jpg")));
 				lblFondo.setBounds(0, 0, 1134, 391);
 				panel.add(lblFondo);
