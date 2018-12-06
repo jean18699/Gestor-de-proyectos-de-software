@@ -34,6 +34,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.border.BevelBorder;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.SwingConstants;
 import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.border.LineBorder;
@@ -464,7 +466,8 @@ public class RegEmpleado extends JDialog {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon(RegEmpleado.class.getResource("/img/Empleados/empleados_ventana.jpg")));
+		lblNewLabel_1.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Empleados/empleados_ventana.jpg")).getImage().getScaledInstance(170, 250, Image.SCALE_SMOOTH)));
+		//lblNewLabel_1.setIcon(new ImageIcon(RegEmpleado.class.getResource("/img/Empleados/empleados_ventana.jpg")));
 		lblNewLabel_1.setBounds(0, 0, 172, 445);
 		panel.add(lblNewLabel_1);
 		{
