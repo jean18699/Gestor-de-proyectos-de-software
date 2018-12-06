@@ -53,42 +53,43 @@ public class Main {
 		//System.out.println(cliente2.getId());
 	//	System.out.println(Empresa.getInstance().getClienteById("12334").getGenero());
 		
-		//Cliente cliente = new Cliente("123","george","gmail","809","276","cerro alto","Hombre");
+	//	Cliente cliente = new Cliente("123","george","gmail","809","276","cerro alto","Hombre");
 		Proyecto proyecto = new Proyecto("prueba",grupo,"Movil","C++");
 		//Cliente cliente2 = new Cliente("456","george","gmail","809","276","cerro alto","Hombre");
 		//Cliente cliente3 = new Cliente("789","george","gmail","809","276","cerro alto","Hombre");
 		
-		
+	
+		Date fechaEntrega = new Date("12/8/2018");
+		Contrato contrato = new Contrato(proyecto,fechaEntrega);
 
-	//	Contrato contrato = new Contrato(proyecto,fechaEntrega);
-
-		/*Empresa.getInstance().nuevoCliente(cliente);
+		Empresa.getInstance().nuevoCliente(cliente);
 		proyecto.setContrato(contrato);
 		proyecto.getContrato().setCliente(cliente);
 		Empresa.getInstance().agregarProyecto(proyecto);
-		Empresa.getInstance().nuevoCliente(cliente2);
+		//Empresa.getInstance().nuevoCliente(cliente2);
 		///////////////////////////////////////////////////
-		*/
 		
-		Date fechaEntrega = new Date("12/07/2018");
-		fecha = new Date();
-		//DecimalFormat crunchifyFormatter = new DecimalFormat("###,###");
-
-		// getTime() returns the number of milliseconds since January 1, 1970, 00:00:00 GMT represented by this Date object
-		long diff = fecha.getTime() - fechaEntrega.getTime();
-
-		int diffDays = -(int) (diff / (24 * 60 * 60 * 1000));
-		System.out.println("difference between days: " + diffDays);
-		System.out.println(fecha);
-		
-		
-		
-		
-		/*System.out.println(Empresa.getInstance().getProyectos().get(0).getContrato().getFechaEntrega());
-		Date aplazo = new Date("12/10/2018");
-	Empresa.getInstance().getContratos().get(0).aplazar(aplazo);
 		System.out.println(Empresa.getInstance().getContratos().get(0).getDiasRestantes());
-		System.out.println(Empresa.getInstance().getProyectos().get(0).getContrato().getDiasRestantes());
+		//System.out.println(Empresa.getInstance().atrasado("1"));
+		
+		//System.out.println(Empresa.getInstance().getContratos().get(0).getDiasRestantes());
+		
+	//	Empresa.getInstance().finalizarProyecto("1");
+		
+		//System.out.println(Empresa.getInstance().getGanancias());
+		//System.out.println(Empresa.getInstance().getProyectos().get(0).getId());
+		//System.out.println(Empresa.getInstance().getContratos().get(0).getPrecioFinal());
+		//System.out.println(Empresa.getInstance().getGanancias());
+		
+		
+		
+		
+		//System.out.println(Empresa.getInstance().getContratos().get(0));
+		//System.out.println(Empresa.getInstance().getProyectos().get(0).getContrato().getPrecioFinal());
+		//System.out.println(Empresa.getInstance().getContratos().get(0).getPrecioFinal());
+		
+	//	Date aplazo = new Date("12/10/2018");
+		//Empresa.getInstance().getContratos().get(0).aplazar(aplazo);
 		//System.out.println(Empresa.getInstance().getProyectoByIdContrato("1").getClasificacion());
 		//Empresa.getInstance().cancelarContrato("1");
 		//System.out.println(Empresa.getInstance().getContratos().size());

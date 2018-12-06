@@ -2,6 +2,7 @@ package Logico;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Empresa implements Serializable {
 
@@ -26,6 +27,10 @@ public class Empresa implements Serializable {
 	private int cantProyectosTerminados;
 	private int cantProyectosCancelados;
 	private int totalProyectos;
+	private ArrayList<Proyecto> proyectos;
+	private static Empresa empresa;
+	private float ganancias;
+
 	
 	private Empresa() {
 		//
@@ -86,9 +91,6 @@ public class Empresa implements Serializable {
 		return cantCSharp;
 	}
 
-	private ArrayList<Proyecto> proyectos;
-	private static Empresa empresa;
-	private long ganancias;
 
 	public Proyecto getUltimoProyecto() {
 		return ultimoProyecto;
@@ -104,7 +106,7 @@ public class Empresa implements Serializable {
 		return pass;
 	}
 
-	public long getGanancias() {
+	public float getGanancias() {
 		return ganancias;
 	}
 
@@ -283,7 +285,6 @@ public class Empresa implements Serializable {
 		Cliente cliente = getClienteById(idCliente);
 		cliente.setContrato(contrato);
 		// contratos.add(contrato);
-
 	}
 
 	public void agregarProyecto(Proyecto proyecto) {
@@ -306,7 +307,7 @@ public class Empresa implements Serializable {
 		}
 
 		for (int i = 0; i < clientes.size(); i++) {
-			for (int j = 0; j < clientes.size(); j++) {
+			for (int j = 0; j < clientes.get(i).getContratos().size(); j++) {
 				if (clientes.get(i).getContratos().get(j).getId().equalsIgnoreCase(idContrato)) {
 					clientes.get(i).getContratos().remove(j);
 				}
@@ -481,15 +482,59 @@ public class Empresa implements Serializable {
 	 * 
 	 * } } }
 	 */
-
+/*public int atrasado(String idProyecto)
+{
+	Proyecto proyecto = getProyectoById(idProyecto);
+	//for(int i = 0; i < proyecto.getContrato().getDiasRestantes())
+	Date fecha = new Date();	
+	
+}
+	*/
 	public void finalizarProyecto(String idProyecto) {
+		
 		Proyecto proyecto = getProyectoById(idProyecto);
-		if (proyecto.getEstado().equalsIgnoreCase("Finalizado")) {
-			this.ganancias += proyecto.getContrato().getPrecioFinal() * 0.10;
-			ultimoProyecto = proyecto;
+		
+		
+	/*	if(proyecto.getEstado().equalsIgnoreCase("Finalizado") && !proyecto.isAtrasado())
+		{
+			this.ganancias += proyecto.getContrato().getPrecioFinal() * 0.15;
+		}
+		else if(proyecto.getEstado().equalsIgnoreCase("Finalizado") && proyecto.isAtrasado())
+		{
+			
+		}
+		
+	*/	
+		
+		
+		
+		for (int i = 0; i < contratos.size(); i++) {
+			if (contratos.get(i).getId().equalsIgnoreCase(proyecto.getContrato().getId())) {
+				contratos.remove(i);
+			}
 		}
 
-		cancelarContrato(proyecto.getId());
+		for (int i = 0; i < clientes.size(); i++) {
+			for (int j = 0; j < clientes.get(i).getContratos().size(); j++) {
+				if (clientes.get(i).getContratos().get(j).getId().equalsIgnoreCase(proyecto.getContrato().getId())) {
+					clientes.get(i).getContratos().remove(j);
+				}
+			}
+		}
+
+		for (int i = 0; i < proyectos.size(); i++) {
+			if (proyectos.get(i).getContrato().getId().equalsIgnoreCase(proyecto.getContrato().getId())) {
+
+				eliminarProyecto(proyectos.get(i).getId());
+			}
+		}
+	
+		//System.out.println(proyecto);
+		/*if (proyecto.getEstado().equalsIgnoreCase("Finalizado")) {
+			this.ganancias += proyecto.getContrato().getPrecioFinal() * 0.15;
+			ultimoProyecto = proyecto;
+		}*/
+
 		cantProyectosTerminados++;
 	}
 

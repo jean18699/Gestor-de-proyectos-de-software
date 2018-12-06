@@ -60,21 +60,10 @@ public class Contrato implements Serializable{
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-
-
-	private int daysBetween(Date d1, Date d2){
-       
-		long diff = d1.getTime() - d2.getTime();
-
-		int diffDays = -(int) (diff / (24 * 60 * 60 * 1000));
-		return diffDays;
-	}
-
 	
 	public int getDiasRestantes()
 	{
-		//return (int) ((fechaInicio.getTime()-fechaEntrega.getTime())/86400000);
-		return daysBetween(fechaInicio, fechaEntrega);
+		return Math.abs(fechaInicio.getDate() - fechaEntrega.getDate());
 	}
 
 	public void aplazar(Date fecha)

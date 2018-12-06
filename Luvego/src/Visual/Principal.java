@@ -326,11 +326,7 @@ public class Principal extends JFrame {
         lblEstadoDeProyectos.setBounds(20, 11, 160, 14);
         panel.add(lblEstadoDeProyectos);
         
-        for (int i = 0; i < Empresa.getInstance().getProyectos().size(); i++) {
-		 	System.out.println(Empresa.getInstance().getProyectos().get(i).getId());
-
-		}
-        
+               
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(20, 36, 452, 112);
         panel.add(scrollPane);
@@ -507,6 +503,7 @@ public class Principal extends JFrame {
 			if(Empresa.getInstance().getProyectos().get(i).getContrato().getFechaEntrega().before(fecha))
 			{
 				Empresa.getInstance().getProyectos().get(i).setEstado("Atrasado");
+				Empresa.getInstance().getProyectos().get(i).setAtrasado(true);
 			}
 		}
 	

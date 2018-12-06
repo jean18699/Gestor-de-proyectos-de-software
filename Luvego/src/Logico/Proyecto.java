@@ -18,6 +18,7 @@ public class Proyecto implements Serializable {
 	private String clasificacion;
 	private String estado;
 	private String lenguaje;
+	private boolean atrasado;
 
 	
 	public Proyecto(String nombre, ArrayList<Empleado> grupoTrabajo, String clasificacion,String lenguaje) {
@@ -29,7 +30,7 @@ public class Proyecto implements Serializable {
 		// this.sumaSalarios = getSumaSalarios();
 		this.clasificacion = clasificacion;
 		this.lenguaje = lenguaje;
-		
+		this.atrasado = false;
 		this.estado = "Normal";
 		this.realizado = false; // atributo que solo se utilizara para saber si se creo un proyecto o no en
 								// regProyecto
@@ -155,6 +156,14 @@ public class Proyecto implements Serializable {
 
 	public static int getCont() {
 		return cont;
+	}
+
+	public boolean isAtrasado() {
+		return atrasado;
+	}
+
+	public void setAtrasado(boolean atrasado) {
+		this.atrasado = atrasado;
 	}
 	
 	
