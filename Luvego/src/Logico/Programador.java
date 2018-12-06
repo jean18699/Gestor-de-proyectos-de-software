@@ -19,13 +19,15 @@ public class Programador extends Empleado implements Serializable{
 				this.especialidades = especialidades;
 	}
 
-		public ArrayList<String> getEspecialidades() {
+	public ArrayList<String> getEspecialidades() {
 		return especialidades;
 	}
 
 	public String getOcupacion() {
 		return "Programador";
 	}
+	
+	
 
 	public void setEspecialidades(ArrayList<String> especialidades) {
 		this.especialidades = especialidades;

@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.sun.glass.events.MouseEvent;
+//import com.sun.org.apache.xpath.internal.operations.String;
 
 import Logico.Cliente;
 import Logico.ColorTabla;
@@ -42,6 +43,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.LineBorder;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.AncestorEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class ListarClientes extends JDialog {
 
@@ -84,9 +88,10 @@ public class ListarClientes extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			modelClientes = new DefaultTableModel();
+			modelClientes.setRowCount(0);
 
-			String[] columnnames = {"Cedula", "Nombre", "Proyectos activos", "Proyectos totales" };
-			modelClientes.setColumnIdentifiers(columnnames);
+			//String[] columnnames = {"Cedula", "Nombre", "Proyectos activos", "Proyectos totales" };
+			//modelClientes.setColumnIdentifiers(columnnames);
 
 		}
 
@@ -165,7 +170,7 @@ public class ListarClientes extends JDialog {
 			scrollPane.setViewportView(table);
 			{
 				JPanel panel_2 = new JPanel();
-				panel_2.setBounds(0, 11, 155, 243);
+				panel_2.setBounds(0, 22, 155, 162);
 				panel.add(panel_2);
 				panel_2.setLayout(null);
 				panel_2.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(0, 0, 0), null, null, null));
@@ -179,11 +184,32 @@ public class ListarClientes extends JDialog {
 					panel_2.add(panel_1);
 					{
 						txtNombre = new JTextField();
+						txtNombre.addKeyListener(new KeyListener() {
+							
+							@Override
+							public void keyTyped(KeyEvent e) {
+								// TODO Auto-generated method stub
+								
+							}
+							
+							@Override
+							public void keyReleased(KeyEvent e) {
+								// TODO Auto-generated method stub
+								cargarClientes();
+								
+							}
+							
+							@Override
+							public void keyPressed(KeyEvent e) {
+								// TODO Auto-generated method stub
+								
+							}
+						});
 						txtNombre.setColumns(10);
-						txtNombre.setBounds(10, 20, 135, 20);
+						txtNombre.setBounds(12, 33, 135, 20);
 						panel_1.add(txtNombre);
 					}
-					{
+					/*{
 						JButton btnCargarPorNombre = new JButton("Consultar");
 						btnCargarPorNombre.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -193,7 +219,7 @@ public class ListarClientes extends JDialog {
 						btnCargarPorNombre.setBackground(new Color(220, 220, 220));
 						btnCargarPorNombre.setBounds(38, 45, 79, 23);
 						panel_1.add(btnCargarPorNombre);
-					}
+					}*/
 					{
 						JLabel lblBuscarPorNombre = new JLabel("Buscar por nombre");
 						lblBuscarPorNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -211,11 +237,32 @@ public class ListarClientes extends JDialog {
 					panel_2.add(panel_1);
 					{
 						txtCedula = new JTextField();
+						txtCedula.addKeyListener(new KeyListener() {
+							
+							@Override
+							public void keyTyped(KeyEvent e) {
+								// TODO Auto-generated method stub
+								
+							}
+							
+							@Override
+							public void keyReleased(KeyEvent e) {
+								// TODO Auto-generated method stub
+								cargarClientes();
+								
+							}
+							
+							@Override
+							public void keyPressed(KeyEvent e) {
+								// TODO Auto-generated method stub
+								
+							}
+						});
 						txtCedula.setColumns(10);
-						txtCedula.setBounds(10, 20, 135, 20);
+						txtCedula.setBounds(12, 32, 135, 20);
 						panel_1.add(txtCedula);
 					}
-					{
+					/*{
 						JButton btnCargarPorId = new JButton("Consultar");
 						btnCargarPorId.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -225,7 +272,7 @@ public class ListarClientes extends JDialog {
 						btnCargarPorId.setBackground(new Color(220, 220, 220));
 						btnCargarPorId.setBounds(38, 45, 79, 23);
 						panel_1.add(btnCargarPorId);
-					}
+					}*/
 					{
 						JLabel lblBuscarPorCedula = new JLabel("Buscar por cedula");
 						lblBuscarPorCedula.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -238,7 +285,7 @@ public class ListarClientes extends JDialog {
 		cargarClientes();
 	}
 
-	private void cargarClientes() {
+	/*private void cargarClientes() {
 		modelClientes.setRowCount(0);
 		fila = new Object[modelClientes.getColumnCount()];
 
@@ -288,7 +335,26 @@ public class ListarClientes extends JDialog {
 				modelClientes.addRow(fila);
 			}
 		}
-	}
+	}*/
 
+	private void cargarClientes() {
+		int i;
+		modelClientes.setColumnIdentifiers(new String[] {"Cedula", "Nombre", "Proyectos activos", "Proyectos totales"});
+		modelClientes.setRowCount(0);
+		fila = new Object[modelClientes.getColumnCount()];
+
+		for(i = 0; i < Empresa.getInstance().getClientes().size(); i++) {
+			if(Empresa.getInstance().getClientes().get(i).getNombre().contains(txtNombre.getText()) && Empresa.getInstance().getClientes().get(i).getCedula().contains(txtCedula.getText())) {
+				System.out.println(Empresa.getInstance().getClientes().get(i).getId());
+				System.out.println(txtCedula.getText());
+				fila[0] = Empresa.getInstance().getClientes().get(i).getCedula();
+				fila[1] = Empresa.getInstance().getClientes().get(i).getNombre();
+				fila[2] = Empresa.getInstance().getClientes().get(i).getContratos().size();
+				fila[3] = Empresa.getInstance().getClientes().get(i).getTotalContratos();
+				//fila[4] = Empresa.getInstance().getClientes().get(i).getTotalContratos();
+				modelClientes.addRow(fila);
+			}
+		}
+	}
 	
 }

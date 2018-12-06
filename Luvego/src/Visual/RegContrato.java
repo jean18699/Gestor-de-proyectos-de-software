@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import Logico.Cliente;
 import Logico.Contrato;
@@ -53,6 +55,7 @@ public class RegContrato extends JDialog {
 	private JSpinner spnFecha;
 	private JTextField txtPrecioContrato;
 	private Date fechaEntrega;
+	private int caretPosition;
 	/**
 	 * Launch the application.
 	 */
@@ -129,7 +132,62 @@ public class RegContrato extends JDialog {
 					JSpinner.DateEditor DateEdit = new JSpinner.DateEditor(spnFecha, patron);
 					DateEdit.getTextField().setEditable(true);
 					
+					/*spnFecha.addChangeListener(new ChangeListener() {
+						int i = 0;
+				        @Override
+				        public void stateChanged(ChangeEvent e) {
+				            
+				            fechaEntrega = (Date) spnFecha.getValue();
+							contrato.setProyecto(proyecto);
+							contrato.setFechaEntrega(fechaEntrega);
+							txtPrecioContrato.setText(Float.toString(contrato.getPrecioFinal()));
+							txtIdContrato.setText(contrato.getId());
+				            
+				        }
+				    });*/
+					
 					spnFecha.setEditor(DateEdit);
+					
+					((DefaultEditor) spnFecha.getEditor()).getTextField().setHorizontalAlignment(SwingConstants.CENTER);
+					((JSpinner.DefaultEditor)spnFecha.getEditor()).getTextField().addCaretListener(new CaretListener() {
+						
+						@Override
+						public void caretUpdate(CaretEvent e) {
+							// TODO Auto-generated method stub
+							caretPosition = e.getDot();				
+						}
+					});;
+					
+					
+					((JSpinner.DefaultEditor)spnFecha.getEditor()).getTextField().addKeyListener(new KeyListener() {
+						
+						@Override
+						public void keyTyped(KeyEvent e) {
+							// TODO Auto-generated method stub
+
+							if(e.getKeyCode() != KeyEvent.VK_RIGHT && e.getKeyCode() != KeyEvent.VK_LEFT && e.getKeyCode() != KeyEvent.VK_UP && e.getKeyCode() != KeyEvent.VK_DOWN) {
+								e.consume();
+							}
+						}
+						
+						@Override
+						public void keyReleased(KeyEvent e) {
+							// TODO Auto-generated method stub
+
+
+											
+						}
+						
+						@Override
+						public void keyPressed(KeyEvent e) {
+							// TODO Auto-generated method stub
+
+							if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
+								e.consume();
+							}
+
+						}
+					});
 					
 					
 					JButton btnAceptarFecha = new JButton("Aceptar y obtener precio");

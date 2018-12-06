@@ -26,6 +26,8 @@ import Logico.Empresa;
 import Logico.Proyecto;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.border.SoftBevelBorder;
@@ -144,6 +146,26 @@ public class ListarProyectos extends JDialog {
 				panel.add(panel_1);
 				{
 					txtNombre = new JTextField();
+					txtNombre.addKeyListener(new KeyListener() {
+
+						@Override
+						public void keyTyped(KeyEvent e) {
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void keyReleased(KeyEvent e) {
+							// TODO Auto-generated method stub
+							cargarProyectos();
+						}
+
+						@Override
+						public void keyPressed(KeyEvent e) {
+							// TODO Auto-generated method stub
+
+						}
+					});
 					txtNombre.setColumns(10);
 					txtNombre.setBounds(10, 20, 135, 20);
 					panel_1.add(txtNombre);
@@ -176,6 +198,26 @@ public class ListarProyectos extends JDialog {
 				panel.add(panel_1);
 				{
 					txtId = new JTextField();
+					txtId.addKeyListener(new KeyListener() {
+
+						@Override
+						public void keyTyped(KeyEvent e) {
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void keyReleased(KeyEvent e) {
+							// TODO Auto-generated method stub
+							cargarProyectos();
+						}
+
+						@Override
+						public void keyPressed(KeyEvent e) {
+							// TODO Auto-generated method stub
+
+						}
+					});
 					txtId.setColumns(10);
 					txtId.setBounds(10, 20, 135, 20);
 					panel_1.add(txtId);
@@ -208,7 +250,7 @@ public class ListarProyectos extends JDialog {
 				{
 					cmbCategoria = new JComboBox<String>();
 					cmbCategoria.setModel(
-							new DefaultComboBoxModel(new String[] { "<Seleccione>", "Escritorio", "Web", "Movil" }));
+							new DefaultComboBoxModel(new String[] {"Todas", "Escritorio", "Web", "Movil"}));
 					cmbCategoria.setMaximumRowCount(15);
 					cmbCategoria.setBounds(10, 20, 135, 20);
 					panel_1.add(cmbCategoria);
@@ -378,8 +420,28 @@ public class ListarProyectos extends JDialog {
 		}
 		cargarProyectos();
 	}
-
+	
 	private void cargarProyectos() {
+		model.setRowCount(0);
+		fila = new Object[model.getColumnCount()];
+		for (int i = 0; i < Empresa.getInstance().getProyectos().size(); i++) {
+				if(Empresa.getInstance().getProyectos().get(i).getNombre().contains(txtNombre.getText()) && Empresa.getInstance().getProyectos().get(i).getId().contains(txtId.getText()) && Empresa.getInstance().getProyectos().get(i).getClasificacion().contains(cmbCategoria.getSelectedItem().toString())) {
+				fila[0] = Empresa.getInstance().getProyectos().get(i).getId();
+				fila[1] = Empresa.getInstance().getProyectos().get(i).getNombre();
+				fila[2] = Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getNombre() +" "+ Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getApellidos();
+				fila[3] = Empresa.getInstance().getProyectos().get(i).getEstado();
+				model.addRow(fila);
+				
+				if(Empresa.getInstance().getProyectos().get(i).getEstado().equalsIgnoreCase("Atrasado"))
+				{
+						ColorTabla.indice(i);
+				}
+			}
+		}
+
+	}
+
+	/*private void cargarProyectos() {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		for (int i = 0; i < Empresa.getInstance().getProyectos().size(); i++) {
@@ -397,7 +459,7 @@ public class ListarProyectos extends JDialog {
 		
 		}
 
-	}
+	}*/
 
 	private void cargarProyectosMovil() {
 		model.setRowCount(0);

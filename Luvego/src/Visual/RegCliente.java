@@ -45,6 +45,7 @@ public class RegCliente extends JDialog {
 	private JTextField txtTelefono;
 	private JTextField txtTelefono2;
 	private JTextField txtCorreo;
+	private JRadioButton rdbtnHombre;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	
 	public RegCliente() {
@@ -115,7 +116,8 @@ public class RegCliente extends JDialog {
 		lblSexo.setBounds(20, 110, 45, 16);
 		panel.add(lblSexo);
 		
-		JRadioButton rdbtnHombre = new JRadioButton("Hombre");
+		rdbtnHombre = new JRadioButton("Hombre");
+		rdbtnHombre.setSelected(true);
 		buttonGroup.add(rdbtnHombre);
 		rdbtnHombre.setBounds(79, 104, 88, 24);
 		panel.add(rdbtnHombre);
@@ -193,6 +195,7 @@ public class RegCliente extends JDialog {
 			btnAceptar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
+					
 					String genero  = null;
 					if(rdbtnHombre.isSelected())
 					{
@@ -203,54 +206,74 @@ public class RegCliente extends JDialog {
 						genero = "Mujer";
 					}
 					
-					Cliente cliente = new Cliente(txtCedula.getText(),txtNombre.getText(),txtCorreo.getText(),txtTelefono.getText(),txtTelefono2.getText(),
-							txtDireccion.getText(),genero);
-					Empresa.getInstance().nuevoCliente(cliente);
+					String cedula = txtCedula.getText();
+					String nombre = txtNombre.getText();
+					String apellido = txtApellido.getText();
+					String tel1 = txtTelefono.getText();
+					String tel2 = txtTelefono2.getText();
+					String correo = txtCorreo.getText();
 					
-					dispose();
+					if(!Empresa.getInstance().ValidadorCedula(cedula) || !Empresa.getInstance().ValidadorNombre(nombre) || !Empresa.getInstance().ValidadorNombre(apellido) || !ValidadorTelefono(tel1) || !ValidadorTelefono(tel2) || !ValidadorCorreo(correo) || txtDireccion.getText().equalsIgnoreCase("")) {
+						JOptionPane.showMessageDialog(null, "Por favor, llene correctamente todos los campos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+						if(!Empresa.getInstance().ValidadorCedula(cedula)) {
+							txtCedula.setForeground(Color.RED);
+						}
+						else {
+							txtCedula.setForeground(Color.BLACK);
+						}
+						if(!Empresa.getInstance().ValidadorNombre(nombre)) {
+							txtNombre.setForeground(Color.RED);
+						}
+						else {
+							txtNombre.setForeground(Color.BLACK);
+						}
+						if(!Empresa.getInstance().ValidadorNombre(apellido)) {
+							txtApellido.setForeground(Color.BLACK);
+						}
+						else {
+							txtApellido.setBackground(Color.BLACK);
+						}
+						if(!ValidadorTelefono(tel1)) {
+							txtTelefono.setForeground(Color.RED);
+						}
+						else {
+							txtTelefono.setForeground(Color.BLACK);
+						}
+						if(!ValidadorTelefono(tel2)) {
+							txtTelefono2.setForeground(Color.RED);
+						}
+						else {
+							txtTelefono2.setForeground(Color.BLACK);
+						}
+						if(!ValidadorCorreo(correo)) {
+							txtCorreo.setForeground(Color.RED);
+						}
+						else {
+							txtCorreo.setForeground(Color.BLACK);
+						}
+						if(txtDireccion.getText().equalsIgnoreCase("")) {
+							txtDireccion.setForeground(Color.RED);
+						}
+						else {
+							txtDireccion.setForeground(Color.BLACK);
+						}
+					}
+					
+					else {
+						Cliente cliente = new Cliente(txtCedula.getText(),txtNombre.getText(),txtCorreo.getText(),txtTelefono.getText(),txtTelefono2.getText(),
+								txtDireccion.getText(),genero);
+						Empresa.getInstance().nuevoCliente(cliente);
+						
+						dispose();
+					}
 				}
+				
+				
 				
 			});
 			btnAceptar.setBorder(new LineBorder(new Color(112, 128, 144)));
 			btnAceptar.setBounds(269, 5, 72, 26);
-	/*		btnAceptar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-					boolean repetido = false;
-					boolean encontrado = false;
-					int i = 0 ;
-					
-					/*if(txtId.getText().equalsIgnoreCase("") || txtDireccion.getText().equalsIgnoreCase("")
-							|| txtId.getText().equalsIgnoreCase(""))
-					{
 
-						JOptionPane.showMessageDialog(null, "Complete todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-					}else
-					{
-						while(i < Empresa.getInstance().getClientes().size() && !encontrado)
-						{
-							if(Empresa.getInstance().getClientes().get(i).getId().equalsIgnoreCase(txtId.getText()))
-							{
-								repetido = true;
-								encontrado = true;
-							}
-							i++;	
-						}
-					
-						if(repetido == true)
-						{
-							JOptionPane.showMessageDialog(null, "Este usuario ya se encuentra registrado", "Error", JOptionPane.ERROR_MESSAGE);
-							
-						}else
-						{
-						
-							Cliente cliente = new Cliente(txtId.getText(),txtNombre.getText(),txtDireccion.getText(), "1234");
-							Empresa.getInstance().nuevoCliente(cliente);
-							dispose();
-						}
-					}
-				}
-			});*/
 			btnAceptar.setForeground(new Color(0, 0, 0));
 			btnAceptar.setBackground(new Color(245, 245, 245));
 			
@@ -258,5 +281,59 @@ public class RegCliente extends JDialog {
 			buttonPane.add(btnAceptar);
 			getRootPane().setDefaultButton(btnAceptar);
 		}
+	}
+	
+	public boolean ValidadorTelefono(String str) {
+		boolean verdad = true;
+		
+		int i = 0;
+		int cantGuiones = 0;
+		if(str.equalsIgnoreCase("")) {
+			return false;
+		}
+		while(i < str.length() && verdad != false) {
+			if(Integer.valueOf(str.charAt(i)) == 45) {
+				cantGuiones++;
+			}
+			if((Integer.valueOf(str.charAt(i)) != 45 && Integer.valueOf(str.charAt(i)) < 48 || Integer.valueOf(str.charAt(i)) > 57) || cantGuiones > 2) {
+				verdad = false;
+				return verdad;
+			}
+			i++;
+
+		}
+		return verdad;
+	}
+	
+	public boolean ValidadorCorreo(String str) {
+		boolean arrobaEncontrado = false;
+		boolean puntoEncontrado = false;
+
+		int i = 0;
+		if (str.equalsIgnoreCase("") || Integer.valueOf(str.charAt(0)) == 32) {
+			return false;
+		}
+
+		while (i < str.length() && (arrobaEncontrado != true || puntoEncontrado != true)) {
+			
+			if(Integer.valueOf(str.charAt(i)) == 64) {
+				arrobaEncontrado = true;
+			}
+			if(Integer.valueOf(str.charAt(i)) == 46) {
+				puntoEncontrado = true;
+			}
+
+			i++;
+		}
+		
+		System.out.println(arrobaEncontrado);
+		System.out.println(puntoEncontrado);
+		System.out.println("\n");
+		
+		if(arrobaEncontrado == true && puntoEncontrado == true) {
+			return true;
+		}
+		
+		return false;
 	}
 }

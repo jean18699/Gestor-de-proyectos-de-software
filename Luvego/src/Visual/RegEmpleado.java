@@ -260,6 +260,9 @@ public class RegEmpleado extends JDialog {
 						chckbxJava.setVisible(false);
 						chckbxHtml.setVisible(false);
 						chckbxCpp.setVisible(false);
+						chckbxCSharp.setVisible(false);
+						chckbxPython.setVisible(false);
+						
 						
 						lblFrecuencia.setVisible(false);
 						spnFrecuencia.setVisible(false);
@@ -289,6 +292,8 @@ public class RegEmpleado extends JDialog {
 						chckbxJava.setVisible(true);
 						chckbxHtml.setVisible(true);
 						chckbxCpp.setVisible(true);
+						chckbxCSharp.setVisible(true);
+						chckbxPython.setVisible(true);
 						
 						lblFrecuencia.setVisible(false);
 						spnFrecuencia.setVisible(false);
@@ -316,6 +321,8 @@ public class RegEmpleado extends JDialog {
 						chckbxJava.setVisible(false);
 						chckbxHtml.setVisible(false);
 						chckbxCpp.setVisible(false);
+						chckbxCSharp.setVisible(false);
+						chckbxPython.setVisible(false);
 						
 						lblFrecuencia.setVisible(true);
 						spnFrecuencia.setVisible(true);
@@ -343,6 +350,8 @@ public class RegEmpleado extends JDialog {
 						chckbxJava.setVisible(false);
 						chckbxHtml.setVisible(false);
 						chckbxCpp.setVisible(false);
+						chckbxCSharp.setVisible(false);
+						chckbxPython.setVisible(false);
 						
 						lblFrecuencia.setVisible(false);
 						spnFrecuencia.setVisible(false);
@@ -423,10 +432,12 @@ public class RegEmpleado extends JDialog {
 			}
 			
 			chckbxCSharp = new JCheckBox("C#");
+			chckbxCSharp.setVisible(false);
 			chckbxCSharp.setBounds(339, 69, 69, 23);
 			panel_InfoAdicional.add(chckbxCSharp);
 			
 			chckbxPython = new JCheckBox("Python");
+			chckbxCpp.setVisible(false);
 			chckbxPython.setBounds(463, 69, 97, 23);
 			panel_InfoAdicional.add(chckbxPython);
 		}
@@ -545,6 +556,7 @@ public class RegEmpleado extends JDialog {
 								cleanFields();
 							}
 						}
+						System.out.println(Empresa.getInstance().getEmpleados().size());
 					}
 				});
 				btnRegistrar.setActionCommand("OK");
