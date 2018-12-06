@@ -11,7 +11,7 @@ public class Empresa implements Serializable {
 	 */
 	private static final long serialVersionUID = 6921637127266475472L;
 	private ArrayList<Cliente> clientes;
-	// private static Cliente loginUser;
+	private static Cliente loginUser;
 	private static String pass;
 	private ArrayList<Contrato> contratos;
 	private ArrayList<Empleado> empleados;
@@ -120,13 +120,14 @@ public class Empresa implements Serializable {
 		this.ganancias = ganancias;
 	}
 
-	/*
-	 * public static Cliente getLoginUser() { return loginUser; }
-	 */
-	/*
-	 * public static void setLoginUser(Cliente loginUser) { Empresa.loginUser =
-	 * loginUser; }
-	 */
+	
+	 public static Cliente getLoginUser() { return loginUser; }
+	 
+	
+	 public static void setLoginUser(Cliente loginUser) { 
+		 Empresa.loginUser = loginUser; 
+	 }
+	 
 
 	public static Empresa getInstance() {
 		if (empresa == null) {
@@ -545,6 +546,7 @@ public class Empresa implements Serializable {
 			ganancia = (float) (proyecto.getContrato().getPrecioFinal() * 0.15); 
 			ganancias+= ganancia;
 			ultimaGanancia = ganancia;
+			UltimasPerdida = 0;
 		}
 
 			cancelarContrato(proyecto.getContrato().getId());

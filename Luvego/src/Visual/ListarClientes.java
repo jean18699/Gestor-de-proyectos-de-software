@@ -145,7 +145,7 @@ public class ListarClientes extends JDialog {
 			panel.setLayout(null);
 
 			scrollPane = new JScrollPane();
-			scrollPane.setBounds(156, 0, 978, 200);
+			scrollPane.setBounds(156, 0, 978, 205);
 			panel.add(scrollPane);
 			scrollPane.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -303,6 +303,12 @@ public class ListarClientes extends JDialog {
 				btnVerCliente.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 				btnVerCliente.setBounds(0, 164, 155, 41);
 				panel.add(btnVerCliente);
+			}
+			{
+				JLabel label = new JLabel("");
+				label.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Cliente/ImagenListaClientes.jpeg")).getImage().getScaledInstance(1134, 391, Image.SCALE_SMOOTH)));
+				label.setBounds(0, 0, 1134, 391);
+				panel.add(label);
 			}
 			{
 				/*JLabel lblFondo = new JLabel("");
