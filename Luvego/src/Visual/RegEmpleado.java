@@ -72,6 +72,7 @@ public class RegEmpleado extends JDialog {
 	private JTextField txtTelefono;
 	private JCheckBox chckbxCSharp; 
 	private JCheckBox chckbxPython;
+	private JSpinner spnSalario;
 	
 
 	/**
@@ -422,7 +423,7 @@ public class RegEmpleado extends JDialog {
 			spnFrecuencia.setBounds(343, 45, 69, 22);
 			panel_InfoAdicional.add(spnFrecuencia);
 			
-			JSpinner spnSalario = new JSpinner();
+			spnSalario = new JSpinner();
 			
 			Float value = new Float(1.0);
 			Float step = new Float(0.1);
@@ -452,7 +453,7 @@ public class RegEmpleado extends JDialog {
 			panel_InfoAdicional.add(chckbxCSharp);
 			
 			chckbxPython = new JCheckBox("Python");
-			chckbxCpp.setVisible(false);
+			chckbxPython.setVisible(false);
 			chckbxPython.setBounds(463, 69, 97, 23);
 			panel_InfoAdicional.add(chckbxPython);
 		}
@@ -497,7 +498,7 @@ public class RegEmpleado extends JDialog {
 						float salarioHora = 0; //Float.valueOf(txtSalarioHora.getText());
 						
 						if(Empresa.getInstance().ValidadorFlotantes(txtSalarioHora.getText())) {
-							salarioHora = Float.valueOf(txtSalarioHora.getText());
+							salarioHora = Float.valueOf(spnSalario.getValue().toString());
 						}
 						
 						ArrayList<String> especialidades = new ArrayList<>();
@@ -523,21 +524,48 @@ public class RegEmpleado extends JDialog {
 						int frecuancia = (int) spnFrecuencia.getValue();
 						
 						if(!Empresa.getInstance().ValidadorNombre(nombre) || !Empresa.getInstance().ValidadorNombre(apellidos) ||!Empresa.getInstance().ValidadorNumeros(cedula)  ||!Empresa.getInstance().ValidadorNumeros(telefono)
-								||!Empresa.getInstance().ValidadorNombre(nombre)|| salarioHora == 0 || direccion.equals("")) {
+								||!Empresa.getInstance().ValidadorNumeros(telefono2) || direccion.equals("")) {
 							
 							JOptionPane.showMessageDialog(null, "Por favor, llene correctamente todos los campos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+							if(!Empresa.getInstance().ValidadorNumeros(cedula)) {
+								txtCedula.setForeground(Color.RED);
+							}
+							else {
+								txtCedula.setForeground(Color.BLACK);
+							}
+							if(!Empresa.getInstance().ValidadorNumeros(telefono)) {
+								txtTelefono.setForeground(Color.RED);
+							}
+							else {
+								txtTelefono.setForeground(Color.BLACK);
+							}
+							if(!Empresa.getInstance().ValidadorNumeros(telefono2)) {
+								txtTelefono2.setForeground(Color.RED);
+							}
+							else {
+								txtTelefono2.setForeground(Color.BLACK);
+							}
 							if(!Empresa.getInstance().ValidadorNombre(nombre)) {
 								txtNombre.setForeground(Color.RED);
+							}
+							else {
+								txtNombre.setForeground(Color.BLACK);
 							}
 							if(!Empresa.getInstance().ValidadorNombre(apellidos)) {
 								txtApellidos.setForeground(Color.RED);
 							}
-							/*if(direccion.equals("")) {
-								txtDireccion.setForeground(Color.RED);
-							}*/
-							if(salarioHora == 0) {
-								txtSalarioHora.setForeground(Color.RED);
+							else {
+								txtApellidos.setForeground(Color.BLACK);
 							}
+							if(direccion.equals("")) {
+								txtDireccion.setForeground(Color.RED);
+							}
+							else {
+								txtDireccion.setForeground(Color.BLACK);
+							}
+							/*if(salarioHora == 0) {
+								txtSalarioHora.setForeground(Color.RED);
+							}*/
 						}
 						else {
 							if(rdbtnProgramador.isSelected() && !chckbxJava.isSelected() && !chckbxHtml.isSelected() && !chckbxCpp.isSelected()) {
