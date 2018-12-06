@@ -15,6 +15,8 @@ import Logico.Empleado;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.Font;
@@ -54,6 +56,24 @@ public class InfoEquipo extends JDialog {
 	 * Create the dialog.
 	 */
 	public InfoEquipo(ArrayList<Empleado> equipo) {
+		
+		
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		setResizable(false);
 		setType(Type.UTILITY);
 		setTitle("Equipo a cargo del desarolllo");

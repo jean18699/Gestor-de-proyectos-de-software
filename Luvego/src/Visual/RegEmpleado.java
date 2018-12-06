@@ -37,6 +37,8 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.border.LineBorder;
 import java.awt.Component;
@@ -94,6 +96,23 @@ public class RegEmpleado extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegEmpleado() {
+		
+		
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		setBounds(100, 100, 747, 533);
 		setResizable(false);
 		setTitle("Registrar empleado");
@@ -102,6 +121,8 @@ public class RegEmpleado extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		setLocationRelativeTo(null);
 		contentPanel.setLayout(null);
+		
+		
 		
 		JPanel panel_InfoPersonal = new JPanel();
 		panel_InfoPersonal.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
