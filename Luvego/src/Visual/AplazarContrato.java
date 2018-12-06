@@ -30,6 +30,8 @@ import java.awt.Font;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.JSpinner.DefaultEditor;
 
 public class AplazarContrato extends JDialog {
@@ -59,6 +61,23 @@ public class AplazarContrato extends JDialog {
 	 * Create the dialog.
 	 */
 	public AplazarContrato(Contrato contrato) {
+		
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		this.contrato = contrato;
 		setResizable(false);
 		setType(Type.UTILITY);

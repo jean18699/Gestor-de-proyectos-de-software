@@ -186,9 +186,9 @@ public class RegCliente extends JDialog {
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.setBorder(new LineBorder(new Color(112, 128, 144)));
 				cancelButton.setBounds(353, 5, 63, 26);
-				cancelButton.setFont(new Font("Arial", Font.BOLD, 12));
+				cancelButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 				cancelButton.setForeground(new Color(0, 0, 0));
-				cancelButton.setBackground(new Color(0, 0, 0));
+				cancelButton.setBackground(new Color(128, 128, 128));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
@@ -198,6 +198,7 @@ public class RegCliente extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 			JButton btnAceptar = new JButton("Aceptar");
+			btnAceptar.setFont(new Font("Tahoma", Font.BOLD, 11));
 			btnAceptar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
@@ -281,7 +282,7 @@ public class RegCliente extends JDialog {
 			btnAceptar.setBounds(269, 5, 72, 26);
 
 			btnAceptar.setForeground(new Color(0, 0, 0));
-			btnAceptar.setBackground(new Color(0, 0, 0));
+			btnAceptar.setBackground(new Color(105, 105, 105));
 			
 			btnAceptar.setActionCommand("btnAceptar");
 			buttonPane.add(btnAceptar);

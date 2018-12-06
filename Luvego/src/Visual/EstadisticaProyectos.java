@@ -21,6 +21,7 @@ import javafx.scene.chart.Chart;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.BevelBorder;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
@@ -54,6 +55,24 @@ public class EstadisticaProyectos extends JDialog {
 	 * Create the dialog.
 	 */
 	public EstadisticaProyectos() {
+		
+		
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		setResizable(false);
 		setTitle("Estadisticas");
 		setBounds(100, 100, 1114, 479);
