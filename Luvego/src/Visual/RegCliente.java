@@ -49,13 +49,14 @@ public class RegCliente extends JDialog {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	
 	public RegCliente() {
+		setResizable(false);
 		setType(Type.UTILITY);
 		setFont(new Font("Dialog", Font.BOLD, 12));
 		setBackground(Color.BLACK);
 		
 		
 		setTitle("Registro de cliente");
-		setBounds(100, 100, 444, 334);
+		setBounds(100, 100, 432, 334);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(220, 220, 220));
@@ -99,6 +100,7 @@ public class RegCliente extends JDialog {
 		panel.add(lblCedula);
 		
 		txtCedula = new JTextField();
+		txtCedula.setBorder(new LineBorder(new Color(0, 0, 0)));
 		txtCedula.setBounds(79, 17, 180, 20);
 		panel.add(txtCedula);
 		txtCedula.setColumns(10);
@@ -108,6 +110,7 @@ public class RegCliente extends JDialog {
 		panel.add(lblApellido);
 		
 		txtApellido = new JTextField();
+		txtApellido.setBorder(new LineBorder(new Color(0, 0, 0)));
 		txtApellido.setBounds(79, 76, 180, 20);
 		panel.add(txtApellido);
 		txtApellido.setColumns(10);
@@ -132,6 +135,7 @@ public class RegCliente extends JDialog {
 		panel.add(lblTelefono);
 		
 		txtTelefono = new JTextField();
+		txtTelefono.setBorder(new LineBorder(new Color(0, 0, 0)));
 		txtTelefono.setBounds(79, 139, 180, 20);
 		panel.add(txtTelefono);
 		txtTelefono.setColumns(10);
@@ -141,6 +145,7 @@ public class RegCliente extends JDialog {
 		panel.add(lblTelefono_1);
 		
 		txtTelefono2 = new JTextField();
+		txtTelefono2.setBorder(new LineBorder(new Color(0, 0, 0)));
 		txtTelefono2.setBounds(79, 163, 180, 20);
 		panel.add(txtTelefono2);
 		txtTelefono2.setColumns(10);
@@ -150,6 +155,7 @@ public class RegCliente extends JDialog {
 		panel.add(lblCorreo);
 		
 		txtCorreo = new JTextField();
+		txtCorreo.setBorder(new LineBorder(new Color(0, 0, 0)));
 		txtCorreo.setBounds(79, 191, 180, 20);
 		panel.add(txtCorreo);
 		txtCorreo.setColumns(10);
@@ -172,7 +178,7 @@ public class RegCliente extends JDialog {
 			buttonPane.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
 			buttonPane.setBounds(0, 263, 428, 32);
 			contentPanel.add(buttonPane);
-			buttonPane.setBackground(Color.LIGHT_GRAY);
+			buttonPane.setBackground(new Color(112, 128, 144));
 			{
 				buttonPane.setLayout(null);
 			}
@@ -182,7 +188,7 @@ public class RegCliente extends JDialog {
 				cancelButton.setBounds(353, 5, 63, 26);
 				cancelButton.setFont(new Font("Arial", Font.BOLD, 12));
 				cancelButton.setForeground(new Color(0, 0, 0));
-				cancelButton.setBackground(new Color(245, 245, 245));
+				cancelButton.setBackground(new Color(0, 0, 0));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
@@ -275,7 +281,7 @@ public class RegCliente extends JDialog {
 			btnAceptar.setBounds(269, 5, 72, 26);
 
 			btnAceptar.setForeground(new Color(0, 0, 0));
-			btnAceptar.setBackground(new Color(245, 245, 245));
+			btnAceptar.setBackground(new Color(0, 0, 0));
 			
 			btnAceptar.setActionCommand("btnAceptar");
 			buttonPane.add(btnAceptar);

@@ -17,10 +17,12 @@ import java.awt.Window.Type;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.JSpinner;
@@ -37,8 +39,9 @@ public class AplazarContrato extends JDialog {
 	private String patron = "dd/MM/yyyy";
 	private JSpinner spnFecha;
 	private int caretPosition;
-	
+
 	private Contrato contrato;
+
 	/**
 	 * Launch the application.
 	 */
@@ -80,63 +83,59 @@ public class AplazarContrato extends JDialog {
 			{
 				Date date = new Date();
 				SpinnerDateModel sdm = new SpinnerDateModel(date, null, null, Calendar.MINUTE);
-	
+
 				spnFecha = new JSpinner(sdm);
 				spnFecha.setBounds(32, 42, 108, 20);
 				panel.add(spnFecha);
-				
+
 				JSpinner.DateEditor DateEdit = new JSpinner.DateEditor(spnFecha, patron);
 				DateEdit.getTextField().setEditable(true);
-				
+
 				spnFecha.setEditor(DateEdit);
-				
+
 				((DefaultEditor) spnFecha.getEditor()).getTextField().setHorizontalAlignment(SwingConstants.CENTER);
-				((JSpinner.DefaultEditor)spnFecha.getEditor()).getTextField().addCaretListener(new CaretListener() {
-					
+				((JSpinner.DefaultEditor) spnFecha.getEditor()).getTextField().addCaretListener(new CaretListener() {
+
 					@Override
 					public void caretUpdate(CaretEvent e) {
 						// TODO Auto-generated method stub
-						caretPosition = e.getDot();				
+						caretPosition = e.getDot();
 					}
-				});;
-				
-				
-				((JSpinner.DefaultEditor)spnFecha.getEditor()).getTextField().addKeyListener(new KeyListener() {
-					
+				});
+				;
+
+				((JSpinner.DefaultEditor) spnFecha.getEditor()).getTextField().addKeyListener(new KeyListener() {
+
 					@Override
 					public void keyTyped(KeyEvent e) {
 						// TODO Auto-generated method stub
 
-						if(e.getKeyCode() != KeyEvent.VK_RIGHT && e.getKeyCode() != KeyEvent.VK_LEFT && e.getKeyCode() != KeyEvent.VK_UP && e.getKeyCode() != KeyEvent.VK_DOWN) {
+						if (e.getKeyCode() != KeyEvent.VK_RIGHT && e.getKeyCode() != KeyEvent.VK_LEFT
+								&& e.getKeyCode() != KeyEvent.VK_UP && e.getKeyCode() != KeyEvent.VK_DOWN) {
 							e.consume();
 						}
 					}
-					
+
 					@Override
 					public void keyReleased(KeyEvent e) {
 						// TODO Auto-generated method stub
 
-
-										
 					}
-					
+
 					@Override
 					public void keyPressed(KeyEvent e) {
 						// TODO Auto-generated method stub
 
-						if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
+						if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 							e.consume();
 						}
 
 					}
 				});
-				
-				
+
 			}
 		}
-		
-		
-		
+
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -144,21 +143,23 @@ public class AplazarContrato extends JDialog {
 			panel.setBounds(170, 0, 180, 90);
 			contentPanel.add(panel);
 			panel.setLayout(null);
-					{
-						txtFechaAnterior = new JTextField();
-						txtFechaAnterior.setBounds(31, 42, 115, 20);
-						panel.add(txtFechaAnterior);
-						txtFechaAnterior.setEditable(false);
-						txtFechaAnterior.setColumns(10);
-						txtFechaAnterior.setText(contrato.getFechaEntrega().toString());
-					}
-					{
-						JLabel lblFechaDeEntrega = new JLabel("Fecha de entrega anterior");
-						lblFechaDeEntrega.setHorizontalAlignment(SwingConstants.CENTER);
-						lblFechaDeEntrega.setBounds(0, 11, 180, 20);
-						panel.add(lblFechaDeEntrega);
-						lblFechaDeEntrega.setFont(new Font("Tahoma", Font.BOLD, 11));
-					}
+			{
+				txtFechaAnterior = new JTextField();
+				txtFechaAnterior.setBounds(31, 42, 115, 20);
+				panel.add(txtFechaAnterior);
+				txtFechaAnterior.setEditable(false);
+				txtFechaAnterior.setColumns(10);
+				SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+				
+				txtFechaAnterior.setText(formato.format(contrato.getFechaEntrega()).toString());
+			}
+			{
+				JLabel lblFechaDeEntrega = new JLabel("Fecha de entrega anterior");
+				lblFechaDeEntrega.setHorizontalAlignment(SwingConstants.CENTER);
+				lblFechaDeEntrega.setBounds(0, 11, 180, 20);
+				panel.add(lblFechaDeEntrega);
+				lblFechaDeEntrega.setFont(new Font("Tahoma", Font.BOLD, 11));
+			}
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -170,9 +171,16 @@ public class AplazarContrato extends JDialog {
 				JButton btnAceptar = new JButton("Aceptar");
 				btnAceptar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						contrato.aplazar((Date)spnFecha.getValue());
-						dispose();
+						Date fecha = (Date) spnFecha.getValue();
+						if (fecha.before(contrato.getFechaEntrega())) {
+							JOptionPane.showMessageDialog(null, "Digite una fecha valida", "Error",
+									JOptionPane.ERROR_MESSAGE);
+						} else {
+							contrato.aplazar((Date) spnFecha.getValue());
+							dispose();
+						}
 					}
+
 				});
 				btnAceptar.setActionCommand("OK");
 				buttonPane.add(btnAceptar);

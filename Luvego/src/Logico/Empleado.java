@@ -24,13 +24,26 @@ import java.util.ArrayList;
 	protected final float salarioHora;
 	protected final String direccion;
 	protected ArrayList<Proyecto> proyectos;
-	protected char evaluacionAnual;
+	protected String evaluacionAnual;
 	private String ocupacion;
 	protected int totalProyectos;
 	protected String condicion;
+	protected int proyectosAtrasados;
 	
 	
 	
+	public int getProyectosAtrasados() {
+		return proyectosAtrasados;
+	}
+
+	public void setTotalProyectos(int totalProyectos) {
+		this.totalProyectos = totalProyectos;
+	}
+
+	public void setProyectosAtrasados(int proyectosAtrasados) {
+		this.proyectosAtrasados = proyectosAtrasados;
+	}
+
 	public void eliminarProyecto(String idProyecto) {
 		int index = getProyectoIndex(idProyecto);
 		if(index != -1) {
@@ -70,7 +83,7 @@ import java.util.ArrayList;
 		generarCeros();
 		id = ceros+=id;
 		
-		this.evaluacionAnual = 'E';
+		this.evaluacionAnual = "Excelente";
 		this.cedula = cedula;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -141,12 +154,12 @@ import java.util.ArrayList;
 
 	
 
-	public char getEvaluacionAnual() {
+	public String getEvaluacionAnual() {
 		return evaluacionAnual;
 	}
 
 
-	public void setEvaluacionAnual(char evaluacionAnual) {
+	public void setEvaluacionAnual(String evaluacionAnual) {
 		this.evaluacionAnual = evaluacionAnual;
 	}
 

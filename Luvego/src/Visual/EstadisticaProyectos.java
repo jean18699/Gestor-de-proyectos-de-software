@@ -54,6 +54,7 @@ public class EstadisticaProyectos extends JDialog {
 	 * Create the dialog.
 	 */
 	public EstadisticaProyectos() {
+		setResizable(false);
 		setTitle("Estadisticas");
 		setBounds(100, 100, 1114, 479);
 		getContentPane().setLayout(new BorderLayout());
@@ -115,7 +116,7 @@ public class EstadisticaProyectos extends JDialog {
 				{//dfgdfg
 					txtAplazados = new JTextField();
 					txtAplazados.setEditable(false);
-					txtAplazados.setBounds(140, 7, 92, 20);
+					txtAplazados.setBounds(140, 7, 91, 25);
 					panel_1.add(txtAplazados);
 					txtAplazados.setColumns(10);
 					
@@ -144,7 +145,7 @@ public class EstadisticaProyectos extends JDialog {
 				{
 					txtAtrasados = new JTextField();
 					txtAtrasados.setEditable(false);
-					txtAtrasados.setBounds(140, 7, 92, 20);
+					txtAtrasados.setBounds(140, 7, 92, 25);
 					panel_1.add(txtAtrasados);
 					txtAtrasados.setColumns(10);
 					
@@ -173,7 +174,7 @@ public class EstadisticaProyectos extends JDialog {
 				{
 					txtProyectosActivos = new JTextField();
 					txtProyectosActivos.setEditable(false);
-					txtProyectosActivos.setBounds(140, 5, 92, 20);
+					txtProyectosActivos.setBounds(140, 5, 92, 25);
 					panel_1.add(txtProyectosActivos);
 					txtProyectosActivos.setColumns(10);
 					txtProyectosActivos.setText(Integer.toString(Empresa.getInstance().getProyectos().size()));
@@ -212,7 +213,7 @@ public class EstadisticaProyectos extends JDialog {
 				{
 					txtCompletados = new JTextField();
 					txtCompletados.setEditable(false);
-					txtCompletados.setBounds(154, 7, 79, 20);
+					txtCompletados.setBounds(154, 7, 79, 25);
 					panel_1_1.add(txtCompletados);
 					txtCompletados.setColumns(10);
 					txtCompletados.setText(Integer.toString(Empresa.getInstance().getCantProyectosTerminados()));
@@ -283,7 +284,7 @@ public class EstadisticaProyectos extends JDialog {
 					txtPerdidas = new JTextField();
 					txtPerdidas.setEditable(false);
 					txtPerdidas.setColumns(10);
-					txtPerdidas.setBounds(141, 10, 92, 20);
+					txtPerdidas.setBounds(141, 10, 92, 25);
 					panel_1.add(txtPerdidas);
 					txtPerdidas.setText(Float.toString(Empresa.getInstance().getPerdidasTotales()));
 				}
@@ -303,7 +304,7 @@ public class EstadisticaProyectos extends JDialog {
 					txtGanancias = new JTextField();
 					txtGanancias.setEditable(false);
 					txtGanancias.setColumns(10);
-					txtGanancias.setBounds(154, 7, 79, 20);
+					txtGanancias.setBounds(154, 7, 79, 25);
 					panel_1.add(txtGanancias);
 					txtGanancias.setText(Float.toString(Empresa.getInstance().getGanancias()));
 				}
@@ -317,15 +318,15 @@ public class EstadisticaProyectos extends JDialog {
 				buttonPane.setBackground(Color.GRAY);
 				buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 				{
-					JButton okButton = new JButton("OK");
-					okButton.setActionCommand("OK");
-					buttonPane.add(okButton);
-					getRootPane().setDefaultButton(okButton);
+					JButton btnAceptar = new JButton("Aceptar");
+					btnAceptar.setActionCommand("OK");
+					buttonPane.add(btnAceptar);
+					getRootPane().setDefaultButton(btnAceptar);
 				}
 				{
-					JButton cancelButton = new JButton("Cancel");
-					cancelButton.setActionCommand("Cancel");
-					buttonPane.add(cancelButton);
+					JButton btnCancelar = new JButton("Cancelar");
+					btnCancelar.setActionCommand("Cancel");
+					buttonPane.add(btnCancelar);
 				}
 			}
 		}

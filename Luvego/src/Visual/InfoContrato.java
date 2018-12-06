@@ -291,6 +291,15 @@ public class InfoContrato extends JDialog {
 						}
 						{
 							JButton btnNewButton_2 = new JButton("Informacion");
+							btnNewButton_2.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									InfoCliente info = new InfoCliente(proyecto.getContrato().getCliente());
+									info.setLocationRelativeTo(null);
+									info.setModal(true);
+									info.setVisible(true);
+									
+								}
+							});
 							btnNewButton_2.setBounds(326, 60, 101, 23);
 							panel_3.add(btnNewButton_2);
 						}

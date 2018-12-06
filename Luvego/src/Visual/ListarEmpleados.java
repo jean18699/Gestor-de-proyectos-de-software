@@ -341,11 +341,11 @@ public class ListarEmpleados extends JDialog {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		for (int i = 0; i < Empresa.getInstance().getEmpleados().size(); i++) {
-				if(Empresa.getInstance().getEmpleados().get(i).getNombre().contains(txtBuscarEmpleado.getText()) || Empresa.getInstance().getEmpleados().get(i).getId().contains(txtBuscarEmpleado.getText())) {
+
 				fila[0] = Empresa.getInstance().getEmpleados().get(i).getId();
 				fila[1] = Empresa.getInstance().getEmpleados().get(i).getNombre();
 				fila[2] = Empresa.getInstance().getEmpleados().get(i).getApellidos();
-	
+				
 				if (Empresa.getInstance().getEmpleados().get(i) instanceof Jefe) {
 					fila[3] = "Jefe de proyecto";
 				} else if (Empresa.getInstance().getEmpleados().get(i) instanceof Disegnador) {
@@ -356,17 +356,14 @@ public class ListarEmpleados extends JDialog {
 					fila[3] = "Planificador";
 				}
 				fila[4] = Empresa.getInstance().getEmpleados().get(i).getProyectos().size();
-	
-				if (Empresa.getInstance().getEmpleados().get(i).getEvaluacionAnual() == 'E') {
-					fila[5] = "Excelente";
-				}
-	
+				fila[4] = Empresa.getInstance().getEmpleados().get(i).getEvaluacionAnual();
+				
 				model.addRow(fila);
-			}
+			
 		}
 
 	}
-	
+
 	/*
 	 * public void cargarGrafico() { DefaultCategoryDataset dataset = new
 	 * DefaultCategoryDataset();

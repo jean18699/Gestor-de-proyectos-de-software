@@ -131,7 +131,7 @@ public class InfoEmpleado extends JDialog {
 			txtEvaluacion.setBounds(342, 106, 118, 20);
 			panel.add(txtEvaluacion);
 			txtEvaluacion.setColumns(10);
-			txtEvaluacion.setText(Character.toString(empleado.getEvaluacionAnual()));
+			txtEvaluacion.setText(empleado.getEvaluacionAnual());
 			
 			JLabel lblCantidadDeProyectos = new JLabel("Cantidad de proyectos:");
 			lblCantidadDeProyectos.setFont(new Font("Tahoma", Font.BOLD, 11));
