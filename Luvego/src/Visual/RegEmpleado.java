@@ -451,7 +451,7 @@ public class RegEmpleado extends JDialog {
 			panel_InfoAdicional.add(chckbxCSharp);
 			
 			chckbxPython = new JCheckBox("Python");
-			chckbxCpp.setVisible(false);
+			chckbxPython.setVisible(false);
 			chckbxPython.setBounds(463, 69, 97, 23);
 			panel_InfoAdicional.add(chckbxPython);
 		}
@@ -563,7 +563,7 @@ public class RegEmpleado extends JDialog {
 							if(salarioHora == 0) {
 								txtSalarioHora.setForeground(Color.RED);
 							}
-						if(rdbtnProgramador.isSelected() && !chckbxJava.isSelected() && !chckbxHtml.isSelected() && !chckbxCpp.isSelected()) {
+						if(rdbtnProgramador.isSelected() && !chckbxJava.isSelected() && !chckbxHtml.isSelected() && !chckbxCpp.isSelected() && !chckbxCSharp.isSelected() && !chckbxPython.isSelected()) {
 							JOptionPane.showMessageDialog(null, "Por favor, seleccione una o más especialidades", "Advertencia", JOptionPane.WARNING_MESSAGE);
 						}
 												
