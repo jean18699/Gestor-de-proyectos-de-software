@@ -74,7 +74,7 @@ public class Main {
 		Date nuevaFecha = new Date("12/12/2018");
 	
 		//Empresa.getInstance().getProyectos().get(0).setAtrasado(true);
-		
+		System.out.println(Empresa.getInstance().getUltimoId());
 		System.out.println(Empresa.getInstance().getContratos().get(0).getPrecioFinal());
 		//Empresa.getInstance().finalizarProyecto("1");
 		//System.out.println(Empresa.getInstance().getGanancias());

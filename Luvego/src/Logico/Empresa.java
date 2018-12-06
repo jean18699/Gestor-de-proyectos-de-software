@@ -33,6 +33,13 @@ public class Empresa implements Serializable {
 	private float ultimaGanancia;
 	private float perdidasTotales;
 	private float UltimasPerdida;
+	private String ultimoId;
+	private String ultimoIdCliente;
+	private String ultimoNombreCliente;
+	private String ultimoNombreProyecto;
+	private Date ultimoFechaSolicitud;
+	private Date ultimoFechaEntrega;
+	
 
 	private Empresa() {
 		//
@@ -505,7 +512,13 @@ public class Empresa implements Serializable {
 		float perdidas = 0;
 		float ganancia = 0;
 		Proyecto proyecto = getProyectoById(idProyecto);
-		ultimoProyecto = proyecto;
+		
+		ultimoId = proyecto.getId();
+		ultimoNombreCliente = proyecto.getContrato().getCliente().getNombre();
+		ultimoIdCliente = proyecto.getContrato().getCliente().getId();
+		ultimoNombreProyecto = proyecto.getNombre();
+		ultimoFechaSolicitud = proyecto.getContrato().getFechaInicio();
+		ultimoFechaEntrega = proyecto.getContrato().getFechaEntrega();
 		
 		if (proyecto.getContrato().isAplazado() && proyecto.getContrato().isAplazado()) {
 
@@ -558,6 +571,54 @@ public class Empresa implements Serializable {
 		 */
 
 		cantProyectosTerminados++;
+	}
+
+	public Date getUltimoFechaEntrega() {
+		return ultimoFechaEntrega;
+	}
+
+	public void setUltimoFechaEntrega(Date ultimoFechaEntrega) {
+		this.ultimoFechaEntrega = ultimoFechaEntrega;
+	}
+
+	public Date getUltimoFechaSolicitud() {
+		return ultimoFechaSolicitud;
+	}
+
+	public void setUltimoFechaSolicitud(Date ultimoFechaSolicitud) {
+		this.ultimoFechaSolicitud = ultimoFechaSolicitud;
+	}
+
+	public String getUltimoNombreProyecto() {
+		return ultimoNombreProyecto;
+	}
+
+	public void setUltimoNombreProyecto(String ultimoNombreProyecto) {
+		this.ultimoNombreProyecto = ultimoNombreProyecto;
+	}
+
+	public String getUltimoId() {
+		return ultimoId;
+	}
+
+	public String getUltimoIdCliente() {
+		return ultimoIdCliente;
+	}
+
+	public String getUltimoNombreCliente() {
+		return ultimoNombreCliente;
+	}
+
+	public void setUltimoId(String ultimoId) {
+		this.ultimoId = ultimoId;
+	}
+
+	public void setUltimoIdCliente(String ultimoIdCliente) {
+		this.ultimoIdCliente = ultimoIdCliente;
+	}
+
+	public void setUltimoNombreCliente(String ultimoNombreCliente) {
+		this.ultimoNombreCliente = ultimoNombreCliente;
 	}
 
 	public float getUltimaGanancia() {

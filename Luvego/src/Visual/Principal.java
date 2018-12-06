@@ -375,6 +375,7 @@ public class Principal extends JFrame {
         txtPerdidas.setEditable(false);
         txtPerdidas.setColumns(10);
         txtPerdidas.setBounds(10, 262, 154, 20);
+        txtPerdidas.setText(Float.toString(Empresa.getInstance().getUltimasPerdida()));
         panel_2.add(txtPerdidas);
         
         JLabel label = new JLabel("Ingresos adquiridos");
@@ -386,6 +387,7 @@ public class Principal extends JFrame {
         txtIdCliente.setEditable(false);
         txtIdCliente.setColumns(10);
         txtIdCliente.setBounds(10, 118, 154, 20);
+        txtIdCliente.setText(Empresa.getInstance().getUltimoIdCliente());
         panel_2.add(txtIdCliente);
         /*
         if(Empresa.getInstance().getUltimoProyecto().getContrato().getCliente().getId()!=null)
@@ -402,17 +404,20 @@ public class Principal extends JFrame {
         txtIngresos.setEditable(false);
         txtIngresos.setColumns(10);
         txtIngresos.setBounds(188, 262, 154, 20);
+        txtIngresos.setText(Float.toString(Empresa.getInstance().getUltimaGanancia()));
         panel_2.add(txtIngresos);
         
         JLabel label_2 = new JLabel("ID del proyecto:");
         label_2.setBounds(10, 36, 88, 14);
         panel_2.add(label_2);
         
-        txtIdProyecto = new JTextField(/*Empresa.getInstance().getUltimoProyecto().getClasificacion()*/);
+        txtIdProyecto = new JTextField();
         txtIdProyecto.setEditable(false);
         txtIdProyecto.setColumns(10);
         txtIdProyecto.setBounds(10, 61, 154, 20);
         panel_2.add(txtIdProyecto);
+        txtIdProyecto.setText(Empresa.getInstance().getUltimoId());
+        
        // txtIdProyecto.setText(Empresa.getInstance().getUltimoProyecto().getClasificacion());
         
         JLabel label_3 = new JLabel("ID del cliente:");
@@ -428,6 +433,7 @@ public class Principal extends JFrame {
         txtNombreProyecto.setColumns(10);
         txtNombreProyecto.setBounds(188, 61, 154, 20);
         panel_2.add(txtNombreProyecto);
+        txtNombreProyecto.setText(Empresa.getInstance().getUltimoNombreProyecto());
         
         JLabel label_5 = new JLabel("Nombre del cliente");
         label_5.setBounds(188, 93, 97, 14);
@@ -437,6 +443,7 @@ public class Principal extends JFrame {
         txtNombreCliente.setEditable(false);
         txtNombreCliente.setColumns(10);
         txtNombreCliente.setBounds(188, 118, 154, 20);
+        txtNombreCliente.setText(Empresa.getInstance().getUltimoNombreCliente());
         panel_2.add(txtNombreCliente);
         
         JLabel label_6 = new JLabel("Fecha de solicitud");
