@@ -34,6 +34,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.border.BevelBorder;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.SwingConstants;
 import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.border.LineBorder;
@@ -458,14 +460,15 @@ public class RegEmpleado extends JDialog {
 		}
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.setBounds(0, 0, 172, 445);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon(RegEmpleado.class.getResource("/img/Empleados/empleados_ventana.jpg")));
-		lblNewLabel_1.setBounds(0, 0, 172, 445);
+		lblNewLabel_1.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Empleados/empleados_ventana.jpg")).getImage().getScaledInstance(320, 350, Image.SCALE_SMOOTH)));
+		//lblNewLabel_1.setIcon(new ImageIcon(RegEmpleado.class.getResource("/img/Empleados/empleados_ventana.jpg")));
+		lblNewLabel_1.setBounds(-58, 0, 230, 445);
 		panel.add(lblNewLabel_1);
 		{
 			JPanel buttonPane = new JPanel();
