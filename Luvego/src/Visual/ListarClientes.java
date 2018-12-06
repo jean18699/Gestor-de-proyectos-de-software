@@ -39,9 +39,6 @@ import javax.swing.ImageIcon;
 import javax.swing.border.EtchedBorder;
 import java.awt.Component;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
 import java.awt.Cursor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.LineBorder;
@@ -74,22 +71,6 @@ public class ListarClientes extends JDialog {
 	public ListarClientes() {
 		setResizable(false);
 
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		setTitle("Lista de clientes");
 		setBounds(100, 100, 1137, 453);
 		setLocationRelativeTo(null);
