@@ -261,7 +261,7 @@ public class RegContrato extends JDialog {
 					}
 					{
 						JPanel panel_3 = new JPanel();
-						panel_3.setBorder(new TitledBorder(null, "Datos preliminares del cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+						panel_3.setBorder(new TitledBorder(null, "Datos del cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 						panel_3.setBounds(10, 118, 437, 99);
 						panel_2.add(panel_3);
 						panel_3.setLayout(null);
@@ -321,6 +321,7 @@ public class RegContrato extends JDialog {
 						public void actionPerformed(ActionEvent e) {
 							
 							fechaEntrega = (Date)spnFecha.getValue();
+							
 							Contrato contrato = new Contrato(proyecto,fechaEntrega);
 							contrato.setProyecto(null);
 							contrato.setFechaEntrega(fechaEntrega);
@@ -341,16 +342,16 @@ public class RegContrato extends JDialog {
 							if(proyecto.getLenguaje().equalsIgnoreCase("C++"))
 								Empresa.getInstance().setCantCP(Empresa.getInstance().getCantCP()+1);
 								
-							if(proyecto.getClasificacion().equalsIgnoreCase("Java"))
+							if(proyecto.getLenguaje().equalsIgnoreCase("Java"))
 								Empresa.getInstance().setCantJava(Empresa.getInstance().getCantJava()+1);
 
-							if(proyecto.getClasificacion().equalsIgnoreCase("C#"))
+							if(proyecto.getLenguaje().equalsIgnoreCase("C#"))
 								Empresa.getInstance().setCantCSharp(Empresa.getInstance().getCantCSharp()+1);
 							
-							if(proyecto.getClasificacion().equalsIgnoreCase("Python"))
+							if(proyecto.getLenguaje().equalsIgnoreCase("Python"))
 								Empresa.getInstance().setCantCSharp(Empresa.getInstance().getCantCSharp()+1);
 							
-							if(proyecto.getClasificacion().equalsIgnoreCase("HTML/Javascript"))
+							if(proyecto.getLenguaje().equalsIgnoreCase("HTML/Javascript"))
 								Empresa.getInstance().setCantHtml(Empresa.getInstance().getCantHtml()+1);
 							
 							

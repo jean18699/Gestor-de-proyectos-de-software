@@ -488,10 +488,10 @@ public class RegEmpleado extends JDialog {
 						}
 						int edad = (int) spnEdad.getValue();
 						String direccion = txtDireccion.getText();
-						float salarioHora = 0; //Float.valueOf(txtSalarioHora.getText());
+						float salarioHora = Float.valueOf(spnSalario.getValue().toString());
 						
 						if(Empresa.getInstance().ValidadorFlotantes(txtSalarioHora.getText())) {
-							salarioHora = Float.valueOf(txtSalarioHora.getText());
+							salarioHora = (Float)spnSalario.getValue();//Float.valueOf(txtSalarioHora.getText());
 						}
 						
 						ArrayList<String> especialidades = new ArrayList<>();

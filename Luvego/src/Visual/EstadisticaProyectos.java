@@ -92,6 +92,7 @@ public class EstadisticaProyectos extends JDialog {
 			}
 			JPanel panel = new JPanel();
 			panel.setBounds(0, 0, 1098, 403);
+			
 			contentPanel.add(panel);
 			panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 			panel.setLayout(null);

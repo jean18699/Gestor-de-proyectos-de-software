@@ -375,9 +375,9 @@ public class ListarEmpleados extends JDialog {
 					fila[3] = "Planificador";
 				}
 				fila[4] = Empresa.getInstance().getEmpleados().get(i).getProyectos().size();
-				fila[4] = Empresa.getInstance().getEmpleados().get(i).getEvaluacionAnual();
-				
 				fila[5] = Empresa.getInstance().getEmpleados().get(i).getEvaluacionAnual();
+				
+
 				model.addRow(fila);
 			
 		}
