@@ -61,6 +61,9 @@ public class ListarEmpleados extends JDialog {
 	private JTextField txtTotalEmpleados;
 	private JLabel lblEmpleadosTotales;
 	private JPanel panel_5;
+	private JPanel panel_4;
+	private JTextField textField;
+	private JLabel lblBuscarEmpleado;
 
 	/**
 	 * Launch the application.
@@ -225,7 +228,7 @@ public class ListarEmpleados extends JDialog {
 				p.setRangeGridlinePaint(Color.red);
 
 				ChartPanel chartPanel = new ChartPanel(chart);
-				chartPanel.setBounds(0, 11, 792, 290);
+				chartPanel.setBounds(0, 0, 792, 301);
 				chartPanel.setLayout(null);
 
 				
@@ -257,6 +260,22 @@ public class ListarEmpleados extends JDialog {
 						panel_5.add(txtTotalEmpleados);
 						txtTotalEmpleados.setColumns(10);
 						txtTotalEmpleados.setText(Integer.toString(Empresa.getInstance().getEmpleados().size()));
+					}
+				}
+				{
+					panel_4 = new JPanel();
+					panel_4.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+					panel_4.setBackground(new Color(112, 128, 144));
+					panel_4.setBounds(566, 312, 226, 35);
+					panelRegistrados.add(panel_4);
+					{
+						lblBuscarEmpleado = new JLabel("Buscar empleado");
+						panel_4.add(lblBuscarEmpleado);
+					}
+					{
+						textField = new JTextField();
+						panel_4.add(textField);
+						textField.setColumns(10);
 					}
 				}
 
