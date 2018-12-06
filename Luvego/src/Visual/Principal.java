@@ -158,8 +158,32 @@ public class Principal extends JFrame {
 			e1.printStackTrace();
 		}
 		
+	/*	ArrayList<String> esp = new ArrayList<>();
+		esp.add("Java");
+		esp.add("Python");
 		
 		
+		Empleado pln = new Planificador("456","Pedro","j","hombre",19,"8094848","61468464","cerroalto",100,5);
+		Empleado pro = new Programador("789","123","j","hombre",19,"8094848","61468464","cerroalto",100,esp);
+		Empleado pro2 = new Programador("101","123","j","hombre",19,"8094848","61468464","cerroalto",100,esp);
+		Empleado dsg = new Disegnador("112","jeane","j","hombre",19,"684684","64684","cerro alto",100);
+		Empleado chef = new Jefe("456","123","j","hombre",19,"8094848","61468464","cerroalto",100);
+		
+
+		Empresa.getInstance().nuevoEmpleado(pro);
+		Empresa.getInstance().nuevoEmpleado(pro2);
+		Empresa.getInstance().nuevoEmpleado(dsg);
+		Empresa.getInstance().nuevoEmpleado(chef);
+		Empresa.getInstance().nuevoEmpleado(pln);
+		
+		ArrayList<Empleado> grupo = new ArrayList<>();
+		grupo.add(chef);
+		grupo.add(pln);
+		grupo.add(pro);
+		grupo.add(pro2);
+		grupo.add(dsg);
+
+		*/
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		dim = super.getToolkit().getScreenSize();

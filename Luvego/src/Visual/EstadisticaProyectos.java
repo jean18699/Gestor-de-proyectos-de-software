@@ -112,7 +112,7 @@ public class EstadisticaProyectos extends JDialog {
 					label_1.setBounds(14, 10, 137, 14);
 					panel_1.add(label_1);
 				}
-				{
+				{//dfgdfg
 					txtAplazados = new JTextField();
 					txtAplazados.setEditable(false);
 					txtAplazados.setBounds(140, 7, 92, 20);
