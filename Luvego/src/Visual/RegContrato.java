@@ -25,6 +25,7 @@ import Logico.Empresa;
 import Logico.Proyecto;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.JSpinner;
@@ -91,6 +92,9 @@ public class RegContrato extends JDialog {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		
+		Contrato contrato = new Contrato(proyecto,fechaEntrega);
 		
 		setBounds(100, 100, 550, 338);
 		getContentPane().setLayout(null);
@@ -332,12 +336,12 @@ public class RegContrato extends JDialog {
 						public void actionPerformed(ActionEvent e) {
 							
 							fechaEntrega = (Date)spnFecha.getValue();
-							Contrato contrato = new Contrato(proyecto,fechaEntrega);
+							
 							contrato.setProyecto(null);
 							contrato.setFechaEntrega(fechaEntrega);
 							contrato.setCliente(cliente);
 							proyecto.setContrato(contrato);
-							
+							contrato.setId(Integer.toString(Empresa.getInstance().getTotalProyectos()+1));
 							
 							if(proyecto.getClasificacion().equalsIgnoreCase("Escritorio"))
 								Empresa.getInstance().setCantDesktop(Empresa.getInstance().getCantDesktop()+1);
@@ -364,10 +368,18 @@ public class RegContrato extends JDialog {
 							if(proyecto.getClasificacion().equalsIgnoreCase("HTML/Javascript"))
 								Empresa.getInstance().setCantHtml(Empresa.getInstance().getCantHtml()+1);
 							
-							Empresa.getInstance().agregarProyecto(proyecto);
 							
-							proyecto.setRealizado(true);
-							dispose();
+							//JOptionPane.showMessageDialog(null, "Id del contrato: "+contrato.getId(), "Confirmacion",
+
+							ConfirmacionContrato confirm = new ConfirmacionContrato(proyecto);
+							confirm.setLocationRelativeTo(null);
+							confirm.setModal(true);
+							confirm.setVisible(true);
+							Empresa.getInstance().agregarProyecto(proyecto);
+							if(proyecto.isRealizado())
+							{
+								dispose();
+							}
 							
 						}
 					});
