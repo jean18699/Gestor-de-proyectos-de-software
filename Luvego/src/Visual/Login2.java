@@ -85,7 +85,7 @@ public class Login2 extends JFrame {
 			JButton btnIngresar = new JButton("Ingresar");
 			btnIngresar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-//<<<<<<< HEAD
+
 				//	String id = Empresa.getInstance().getLoginUser().getId();
 					//String pass = Empresa.getInstance().getPass();
 					/*if(txtId.getText().equalsIgnoreCase(id) && contrasenaCorrecta(txtContrasena.getPassword())) {
