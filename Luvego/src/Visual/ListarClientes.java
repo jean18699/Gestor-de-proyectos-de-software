@@ -3,6 +3,7 @@ package Visual;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.ScrollPane;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
@@ -78,7 +79,7 @@ public class ListarClientes extends JDialog {
 	public ListarClientes() {
 		setResizable(false);
 
-		setTitle("Lista de proyectos");
+		setTitle("Lista de clientes");
 		setBounds(100, 100, 1137, 453);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
@@ -143,7 +144,7 @@ public class ListarClientes extends JDialog {
 			panel.setLayout(null);
 
 			scrollPane = new JScrollPane();
-			scrollPane.setBounds(161, 22, 963, 330);
+			scrollPane.setBounds(156, 0, 978, 200);
 			panel.add(scrollPane);
 			scrollPane.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 			scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -170,7 +171,7 @@ public class ListarClientes extends JDialog {
 			scrollPane.setViewportView(table);
 			{
 				JPanel panel_2 = new JPanel();
-				panel_2.setBounds(0, 22, 155, 162);
+				panel_2.setBounds(0, 0, 155, 162);
 				panel.add(panel_2);
 				panel_2.setLayout(null);
 				panel_2.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(0, 0, 0), null, null, null));
@@ -280,6 +281,13 @@ public class ListarClientes extends JDialog {
 						panel_1.add(lblBuscarPorCedula);
 					}
 				}
+			}
+			{
+				JLabel lblFondo = new JLabel("");
+				lblFondo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clients.jpg")).getImage().getScaledInstance(1134, 391, Image.SCALE_SMOOTH)));
+				//lblFondo.setIcon(new ImageIcon(ListarClientes.class.getResource("/img/clients.jpg")));
+				lblFondo.setBounds(0, 0, 1134, 391);
+				panel.add(lblFondo);
 			}
 		}
 		cargarClientes();
