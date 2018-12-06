@@ -281,6 +281,8 @@ public class InfoContrato extends JDialog {
 							JButton btnNewButton_2 = new JButton("Informacion");
 							btnNewButton_2.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
+									
+									
 									InfoCliente info = new InfoCliente(proyecto.getContrato().getCliente());
 									info.setLocationRelativeTo(null);
 									info.setModal(true);
@@ -315,21 +317,6 @@ public class InfoContrato extends JDialog {
 							dispose();
 						}
 					});
-					{
-						JButton btnCancelarContrato = new JButton("Cancelar contrato");
-						btnCancelarContrato.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								
-								Empresa.getInstance().cancelarContrato(proyecto.getContrato().getId());
-								//System.out.println(select);
-								//Contrato contrato = proyecto.getContrato();//Empresa.getInstance().getContratoByIdProyecto(proyecto.getId());
-								//Empresa.getInstance().cancelarContrato(contrato.getId());
-								dispose();
-							}
-						});
-						btnCancelarContrato.setForeground(new Color(255, 0, 0));
-						buttonPane.add(btnCancelarContrato);
-					}
 					btnCancelar.setActionCommand("Cancel");
 					buttonPane.add(btnCancelar);
 				}

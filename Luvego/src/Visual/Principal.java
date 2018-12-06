@@ -55,6 +55,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 public class Principal extends JFrame {
 
@@ -96,15 +97,6 @@ public class Principal extends JFrame {
 		});
 	}
 //
-
-	/*
-	 * private void escribirArchivo() throws IOException { FileOutputStream f = new
-	 * FileOutputStream(new File("registro.dat")); ObjectOutputStream o = new
-	 * ObjectOutputStream(f); o.writeObject(Empresa.getInstance()); f.close();
-	 * o.close();
-	 * 
-	 * }
-	 */
 
 	public Principal() {
 
@@ -170,10 +162,6 @@ public class Principal extends JFrame {
 				regProyecto.setModal(true);
 				regProyecto.setVisible(true);
 				cargarProyectos();
-				ArrayList<String> esp = new ArrayList<>();
-				esp.add("Java");
-				esp.add("Python");
-
 				
 
 				repaint();
@@ -511,7 +499,7 @@ public class Principal extends JFrame {
 	private void cargarProyectos() {
 //<<<<<<< HEAD
 
-		
+	
 		Date fecha = new Date();
 		// Empresa.getInstance().eliminarContratoCliente("dasdasd", "1");
 		// System.out.println(Empresa.getInstance().getContratos().size());
@@ -567,4 +555,5 @@ public class Principal extends JFrame {
 		}
 
 	}
+
 }

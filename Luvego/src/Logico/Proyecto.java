@@ -23,7 +23,7 @@ public class Proyecto implements Serializable {
 	
 	public Proyecto(String nombre, ArrayList<Empleado> grupoTrabajo, String clasificacion,String lenguaje) {
 
-		cont++;
+		Proyecto.cont++;
 		this.id = Integer.toString(cont);
 		this.nombre = nombre;
 		this.grupoTrabajo = grupoTrabajo;

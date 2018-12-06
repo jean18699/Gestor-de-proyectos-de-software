@@ -112,11 +112,11 @@ public class ListarClientes extends JDialog {
 			{
 				JButton btnNuevoCliente = new JButton("Nuevo cliente");
 				btnNuevoCliente.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				btnNuevoCliente.setBounds(0, 5, 155, 23);
+				btnNuevoCliente.setBounds(10, 5, 145, 23);
 				buttonPane.add(btnNuevoCliente);
 				btnNuevoCliente.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						RegProyecto reg = new RegProyecto();
+						RegCliente reg = new RegCliente();
 						reg.setLocationRelativeTo(null);
 						reg.setModal(true);
 						reg.setVisible(true);

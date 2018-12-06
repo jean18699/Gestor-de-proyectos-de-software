@@ -347,6 +347,8 @@ public class Empresa implements Serializable {
 		 */
 	}
 
+	
+	
 	public Proyecto getProyectoById(String id) {
 		Proyecto proyecto = null;
 		boolean encontrado = false;
