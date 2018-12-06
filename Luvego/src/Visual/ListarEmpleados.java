@@ -48,7 +48,7 @@ public class ListarEmpleados extends JDialog {
 	private JScrollPane scrollPane;
 	private static JTable table;
 	private int index;
-	private JButton btnDetalles;
+	private JButton btnAceptar;
 	private static DefaultTableModel model;
 	private static Object[] fila;
 	private JPanel panel;
@@ -213,15 +213,48 @@ public class ListarEmpleados extends JDialog {
 				}
 			}
 			{
-
+				
+				
 				DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-				dataset.setValue(Empresa.getInstance().getCantJefes(), "Jefe", "Jefes");
-				dataset.setValue(Empresa.getInstance().getCantPlanificadores(), "Planificador", "Planificadores");
-				dataset.setValue(Empresa.getInstance().getCantProgramadores(), "Programador", "Programadores");
-				dataset.setValue(Empresa.getInstance().getCantJefes(), "Diseñador", "Diseñadores");
+				if(Empresa.getInstance().getCantJefes()==0)
+				{
+					dataset.setValue(Empresa.getInstance().getCantJefes(), "Jefe", "Jefes");
+						
+				}else
+				{
+					dataset.setValue(Empresa.getInstance().getCantJefes(), "Jefe", "Jefes");
+					
+				}
+				if(Empresa.getInstance().getCantJefes()==0)
+				{
+					dataset.setValue(0, "Jefe", "Jefes");
+				}
+				if(Empresa.getInstance().getCantPlanificadores()==0)
+				{
+					dataset.setValue(0, "Planificador", "Planificadores");
+				}else
+				{
+					dataset.setValue(Empresa.getInstance().getCantPlanificadores(), "Planificador", "Planificadores");
+				}
+				if(Empresa.getInstance().getCantProgramadores()==0)
+				{
+					dataset.setValue(0, "Programador", "Programadores");
+				}else
+				{
+					dataset.setValue(Empresa.getInstance().getCantProgramadores(), "Programador", "Programadores");
+				}
+				if(Empresa.getInstance().getCantDisegnadores()==0)
+				{
+					dataset.setValue(0, "Diseñador", "Diseñadores");
+				}else
+				{
+					dataset.setValue(Empresa.getInstance().getCantJefes(), "Diseñador", "Diseñadores");
+				}
+
+				
 				// Creando el Grafico
 
-				JFreeChart chart = ChartFactory.createBarChart3D("Cantidad de empleados", "Tipo", "Cantidad", dataset,
+				JFreeChart chart = ChartFactory.createBarChart3D("Cantidad de empleados", "Tipo de empleado", "Cantidad", dataset,
 						PlotOrientation.VERTICAL, true, true, false);
 				chart.setBackgroundPaint(new Color(112, 128, 144));
 				chart.getTitle().setPaint(Color.black);
@@ -288,7 +321,7 @@ public class ListarEmpleados extends JDialog {
 					panel_5 = new JPanel();
 					panel_5.setBackground(new Color(112, 128, 144));
 					panel_5.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-					panel_5.setBounds(0, 312, 263, 35);
+					panel_5.setBounds(0, 326, 263, 35);
 					panelRegistrados.add(panel_5);
 					{
 						lblEmpleadosTotales = new JLabel("Empleados totales:");
@@ -317,20 +350,15 @@ public class ListarEmpleados extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				btnDetalles = new JButton("Detalles");
-				btnDetalles.addActionListener(new ActionListener() {
+				btnAceptar = new JButton("Aceptar");
+				btnAceptar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					}
 				});
-				btnDetalles.setEnabled(false);
-				btnDetalles.setActionCommand("OK");
-				buttonPane.add(btnDetalles);
-				getRootPane().setDefaultButton(btnDetalles);
-			}
-			{
-				JButton btnCancelar = new JButton("Cancelar");
-				btnCancelar.setActionCommand("Cancel");
-				buttonPane.add(btnCancelar);
+				btnAceptar.setEnabled(false);
+				btnAceptar.setActionCommand("OK");
+				buttonPane.add(btnAceptar);
+				getRootPane().setDefaultButton(btnAceptar);
 			}
 		}
 		cargarEmpleados();
@@ -358,6 +386,7 @@ public class ListarEmpleados extends JDialog {
 				fila[4] = Empresa.getInstance().getEmpleados().get(i).getProyectos().size();
 				fila[4] = Empresa.getInstance().getEmpleados().get(i).getEvaluacionAnual();
 				
+				fila[5] = Empresa.getInstance().getEmpleados().get(i).getEvaluacionAnual();
 				model.addRow(fila);
 			
 		}
