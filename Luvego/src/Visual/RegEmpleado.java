@@ -570,44 +570,42 @@ public class RegEmpleado extends JDialog {
 >>>>>>> branch 'master' of https://github.com/jean18699/ProyectoFinalP1.git
 =======
 							}*/
-							if(salarioHora == 0) {
-								txtSalarioHora.setForeground(Color.RED);
-							}
-							/*if(rdbtnProgramador.isSelected() && !chckbxJava.isSelected() && !chckbxHtml.isSelected() && !chckbxCpp.isSelected()) {
-								JOptionPane.showMessageDialog(null, "Por favor, seleccione una o más especialidades", "Advertencia", JOptionPane.WARNING_MESSAGE);
-							}*/
-							if(salarioHora == 0) {
-								txtSalarioHora.setForeground(Color.RED);
-							}
-						if(rdbtnProgramador.isSelected() && !chckbxJava.isSelected() && !chckbxHtml.isSelected() && !chckbxCpp.isSelected() && !chckbxCSharp.isSelected() && !chckbxPython.isSelected()) {
-							JOptionPane.showMessageDialog(null, "Por favor, seleccione una o más especialidades", "Advertencia", JOptionPane.WARNING_MESSAGE);
-						}
 						
+						if(Empresa.getInstance().ValidadorNombre(nombre) && Empresa.getInstance().ValidadorNombre(apellidos) && Empresa.getInstance().getInstance().ValidadorNumeros(telefono) && Empresa.getInstance().ValidadorNumeros(telefono2)) {
+						
+							if(rdbtnProgramador.isSelected() && !chckbxJava.isSelected() && !chckbxHtml.isSelected() && !chckbxCpp.isSelected() && !chckbxCSharp.isSelected() && !chckbxPython.isSelected()) {
+								JOptionPane.showMessageDialog(null, "Por favor, seleccione una o más especialidades", "Advertencia", JOptionPane.WARNING_MESSAGE);
+							}
+							
+							else {
+														
+									if(rdbtnJefe.isSelected()) {
+										Empleado jefe = new Jefe(cedula,nombre, apellidos, sexo, edad,telefono,telefono2, direccion, salarioHora);
+										Empresa.getInstance().nuevoEmpleado(jefe);
+										JOptionPane.showMessageDialog(null, "Identificador asignado: "+jefe.getId(), "Registro completo", JOptionPane.INFORMATION_MESSAGE);
+									}
+									else if(rdbtnProgramador.isSelected()) {
+										Empleado programador = new Programador(cedula,nombre, apellidos, sexo, edad,telefono,telefono2, direccion, salarioHora, especialidades);
+										Empresa.getInstance().nuevoEmpleado(programador);
+		
+										JOptionPane.showMessageDialog(null, "Identificador asignado: "+programador.getId(), "Registro completo", JOptionPane.INFORMATION_MESSAGE);
+									}
+									else if(rdbtnPlanificador.isSelected()) {
+										Empleado planificador = new Planificador(cedula,nombre, apellidos, sexo, edad,telefono,telefono2, direccion, salarioHora, frecuancia);
+										Empresa.getInstance().nuevoEmpleado(planificador);
+		
+										JOptionPane.showMessageDialog(null, "Identificador asignado: "+planificador.getId(), "Registro completo", JOptionPane.INFORMATION_MESSAGE);
+									}
+									else if(rdbtnDisegnador.isSelected()) {
+										Empleado disegnador = new Disegnador(cedula,nombre, apellidos, sexo, edad,telefono,telefono2, direccion, salarioHora);
+										Empresa.getInstance().nuevoEmpleado(disegnador);
+										JOptionPane.showMessageDialog(null, "Identificador asignado: "+disegnador.getId(), "Registro completo", JOptionPane.INFORMATION_MESSAGE);
+									}
+								cleanFields();
+							}
+						}
 						else {
-													
-								if(rdbtnJefe.isSelected()) {
-									Empleado jefe = new Jefe(cedula,nombre, apellidos, sexo, edad,telefono,telefono2, direccion, salarioHora);
-									Empresa.getInstance().nuevoEmpleado(jefe);
-									JOptionPane.showMessageDialog(null, "Identificador asignado: "+jefe.getId(), "Registro completo", JOptionPane.INFORMATION_MESSAGE);
-								}
-								else if(rdbtnProgramador.isSelected()) {
-									Empleado programador = new Programador(cedula,nombre, apellidos, sexo, edad,telefono,telefono2, direccion, salarioHora, especialidades);
-									Empresa.getInstance().nuevoEmpleado(programador);
-	
-									JOptionPane.showMessageDialog(null, "Identificador asignado: "+programador.getId(), "Registro completo", JOptionPane.INFORMATION_MESSAGE);
-								}
-								else if(rdbtnPlanificador.isSelected()) {
-									Empleado planificador = new Planificador(cedula,nombre, apellidos, sexo, edad,telefono,telefono2, direccion, salarioHora, frecuancia);
-									Empresa.getInstance().nuevoEmpleado(planificador);
-	
-									JOptionPane.showMessageDialog(null, "Identificador asignado: "+planificador.getId(), "Registro completo", JOptionPane.INFORMATION_MESSAGE);
-								}
-								else if(rdbtnDisegnador.isSelected()) {
-									Empleado disegnador = new Disegnador(cedula,nombre, apellidos, sexo, edad,telefono,telefono2, direccion, salarioHora);
-									Empresa.getInstance().nuevoEmpleado(disegnador);
-									JOptionPane.showMessageDialog(null, "Identificador asignado: "+disegnador.getId(), "Registro completo", JOptionPane.INFORMATION_MESSAGE);
-								}
-							cleanFields();
+							JOptionPane.showMessageDialog(null, "Por favor, llene correctamente todos los campos", "Advertencia", JOptionPane.WARNING_MESSAGE);
 						}
 					}
 				});
