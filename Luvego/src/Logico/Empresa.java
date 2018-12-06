@@ -505,7 +505,8 @@ public class Empresa implements Serializable {
 		float perdidas = 0;
 		float ganancia = 0;
 		Proyecto proyecto = getProyectoById(idProyecto);
-
+		ultimoProyecto = proyecto;
+		
 		if (proyecto.getContrato().isAplazado() && proyecto.getContrato().isAplazado()) {
 
 			for (int i = 0; i < proyecto.getContrato().getDiasRestantes(); i++) {

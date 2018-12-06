@@ -407,7 +407,7 @@ public class RegEmpleado extends JDialog {
 			
 			chckbxCpp = new JCheckBox("C++");
 			chckbxCpp.setVisible(false);
-			chckbxCpp.setBounds(410, 68, 64, 25);
+			chckbxCpp.setBounds(410, 68, 49, 25);
 			panel_InfoAdicional.add(chckbxCpp);
 			{
 				lblFrecuencia = new JLabel("Frecuencia:");
@@ -521,7 +521,7 @@ public class RegEmpleado extends JDialog {
 							
 						
 						int frecuancia = (int) spnFrecuencia.getValue();
-						
+						/*
 						if(!Empresa.getInstance().ValidadorNombre(nombre) || !Empresa.getInstance().ValidadorNombre(apellidos) ||!Empresa.getInstance().ValidadorNumeros(cedula)  ||!Empresa.getInstance().ValidadorNumeros(telefono)
 								||!Empresa.getInstance().ValidadorNombre(nombre)|| salarioHora == 0 || direccion.equals("")) {
 							
@@ -538,7 +538,7 @@ public class RegEmpleado extends JDialog {
 							if(salarioHora == 0) {
 								txtSalarioHora.setForeground(Color.RED);
 							}
-						}
+						
 						else {
 							if(rdbtnProgramador.isSelected() && !chckbxJava.isSelected() && !chckbxHtml.isSelected() && !chckbxCpp.isSelected()) {
 								JOptionPane.showMessageDialog(null, "Por favor, seleccione una o más especialidades", "Advertencia", JOptionPane.WARNING_MESSAGE);

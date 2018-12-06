@@ -32,6 +32,7 @@ public class InfoEmpleado extends JDialog {
 	private JTextField textOcupacion;
 	private JTextField txtEvaluacion;
 	private JTextField txtProyectos;
+	private JTextField txtCedula;
 	
 	public InfoEmpleado(Empleado empleado) {
 		setType(Type.UTILITY);
@@ -50,31 +51,31 @@ public class InfoEmpleado extends JDialog {
 			panel.setLayout(null);
 			
 			JLabel lblNombre = new JLabel("Nombre:");
-			lblNombre.setBounds(20, 47, 59, 14);
+			lblNombre.setBounds(20, 62, 59, 14);
 			lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
 			panel.add(lblNombre);
 			
 			txtNombre = new JTextField(empleado.getNombre());
 			txtNombre.setEnabled(false);
-			txtNombre.setBounds(79, 44, 143, 20);
+			txtNombre.setBounds(79, 59, 143, 20);
 			panel.add(txtNombre);
 			txtNombre.setColumns(10);
 			txtNombre.setText(empleado.getNombre());
 			
 			JLabel lbl = new JLabel("Apellido:");
-			lbl.setBounds(20, 78, 59, 14);
+			lbl.setBounds(20, 90, 59, 14);
 			lbl.setFont(new Font("Tahoma", Font.BOLD, 11));
 			panel.add(lbl);
 			
 			txtApellido = new JTextField(empleado.getApellidos());
 			txtApellido.setEnabled(false);
-			txtApellido.setBounds(79, 75, 143, 20);
+			txtApellido.setBounds(79, 87, 143, 20);
 			panel.add(txtApellido);
 			txtApellido.setColumns(10);
 			txtApellido.setText(empleado.getApellidos());
 			
 			JLabel lblSalarioHora = new JLabel("Salario/Hora:");
-			lblSalarioHora.setBounds(258, 47, 88, 14);
+			lblSalarioHora.setBounds(257, 47, 88, 14);
 			lblSalarioHora.setFont(new Font("Tahoma", Font.BOLD, 11));
 			panel.add(lblSalarioHora);
 			
@@ -143,6 +144,18 @@ public class InfoEmpleado extends JDialog {
 			panel.add(txtProyectos);
 			txtProyectos.setColumns(10);
 			txtProyectos.setText(Integer.toString(empleado.getProyectos().size()));
+			
+			JLabel lblCedula = new JLabel("Cedula:");
+			lblCedula.setFont(new Font("Tahoma", Font.BOLD, 11));
+			lblCedula.setBounds(20, 31, 59, 14);
+			panel.add(lblCedula);
+			
+			txtCedula = new JTextField();
+			txtCedula.setEditable(false);
+			txtCedula.setBounds(80, 28, 142, 20);
+			panel.add(txtCedula);
+			txtCedula.setColumns(10);
+			txtCedula.setText(empleado.getCedula());
 		}
 		{
 			JPanel buttonPane = new JPanel();

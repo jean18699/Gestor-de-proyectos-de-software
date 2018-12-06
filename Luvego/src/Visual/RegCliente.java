@@ -231,7 +231,7 @@ public class RegCliente extends JDialog {
 							txtApellido.setForeground(Color.BLACK);
 						}
 						else {
-							txtApellido.setBackground(Color.BLACK);
+							txtApellido.setBackground(Color.WHITE);
 						}
 						if(!ValidadorTelefono(tel1)) {
 							txtTelefono.setForeground(Color.RED);

@@ -16,9 +16,12 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
 import Logico.ColorTabla;
+import Logico.Disegnador;
 import Logico.Empleado;
 import Logico.Empresa;
 import Logico.Jefe;
+import Logico.Planificador;
+import Logico.Programador;
 import Logico.Proyecto;
 
 import java.awt.event.WindowEvent;
@@ -302,8 +305,7 @@ public class Principal extends JFrame {
         data.setValue("Web", Empresa.getInstance().getCantWeb());
         data.setValue("Movil",Empresa.getInstance().getCantMovil());
 
-        
-        // Creando el Grafico
+         // Creando el Grafico
         JFreeChart chart = ChartFactory.createPieChart(
          "Tipos de proyectos mas solicitados", 
          data, 

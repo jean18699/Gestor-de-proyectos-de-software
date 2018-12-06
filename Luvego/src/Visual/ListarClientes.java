@@ -59,6 +59,7 @@ public class ListarClientes extends JDialog {
 	private JTextField txtNombre;
 	private JTextField txtCedula;
 	private String select;
+	private JButton btnVerCliente;
 
 	/**
 	 * Launch the application.
@@ -156,8 +157,12 @@ public class ListarClientes extends JDialog {
 					int index = table.getSelectedRow();
 					if (index >= 0) {
 						select = table.getValueAt(index, 0).toString();
+						btnVerCliente.setEnabled(true);
 						// btnAplazar.setEnabled(true);
 
+					}else
+					{
+						btnVerCliente.setEnabled(false);
 					}
 				}
 			});
@@ -283,11 +288,27 @@ public class ListarClientes extends JDialog {
 				}
 			}
 			{
-				JLabel lblFondo = new JLabel("");
+				btnVerCliente = new JButton("Informacion");
+				btnVerCliente.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Cliente cliente = Empresa.getInstance().getClienteById(select);
+						InfoCliente info = new InfoCliente(cliente);
+						info.setLocationRelativeTo(null);
+						info.setModal(true);
+						info.setVisible(true);
+					}
+				});
+				btnVerCliente.setEnabled(false);
+				btnVerCliente.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+				btnVerCliente.setBounds(0, 164, 155, 41);
+				panel.add(btnVerCliente);
+			}
+			{
+				/*JLabel lblFondo = new JLabel("");
 				lblFondo.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clients.jpg")).getImage().getScaledInstance(1134, 391, Image.SCALE_SMOOTH)));
 				//lblFondo.setIcon(new ImageIcon(ListarClientes.class.getResource("/img/clients.jpg")));
 				lblFondo.setBounds(0, 0, 1134, 391);
-				panel.add(lblFondo);
+				panel.add(lblFondo);*/
 			}
 		}
 		cargarClientes();

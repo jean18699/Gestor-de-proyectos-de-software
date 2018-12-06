@@ -93,9 +93,6 @@ public class RegContrato extends JDialog {
 			e1.printStackTrace();
 		}
 		
-		
-		Contrato contrato = new Contrato(proyecto,fechaEntrega);
-		
 		setBounds(100, 100, 550, 338);
 		getContentPane().setLayout(null);
 		{
@@ -193,7 +190,7 @@ public class RegContrato extends JDialog {
 					});
 					//fechaEntrega = new Date(spnFecha.getValue().toString());
 					
-					/*((JSpinner.DefaultEditor)spnFecha.getEditor()).getTextField().addKeyListener(new KeyListener() {
+					((JSpinner.DefaultEditor)spnFecha.getEditor()).getTextField().addKeyListener(new KeyListener() {
 						
 						@Override
 						public void keyTyped(KeyEvent e) {
@@ -218,7 +215,7 @@ public class RegContrato extends JDialog {
 							}
 
 						}
-					});*/
+					});
 				}
 				{
 					JPanel panel_2 = new JPanel();
@@ -336,7 +333,7 @@ public class RegContrato extends JDialog {
 						public void actionPerformed(ActionEvent e) {
 							
 							fechaEntrega = (Date)spnFecha.getValue();
-							
+							Contrato contrato = new Contrato(proyecto,fechaEntrega);
 							contrato.setProyecto(null);
 							contrato.setFechaEntrega(fechaEntrega);
 							contrato.setCliente(cliente);
@@ -375,9 +372,10 @@ public class RegContrato extends JDialog {
 							confirm.setLocationRelativeTo(null);
 							confirm.setModal(true);
 							confirm.setVisible(true);
-							Empresa.getInstance().agregarProyecto(proyecto);
+						
 							if(proyecto.isRealizado())
 							{
+								Empresa.getInstance().agregarProyecto(proyecto);
 								dispose();
 							}
 							
