@@ -569,7 +569,7 @@ public class Principal extends JFrame {
 				}
 			}
 		}
-
+ 
 //=======
 //>>>>>>> branch 'master' of https://github.com/jean18699/ProyectoFinalP1.git
 
