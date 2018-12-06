@@ -76,8 +76,8 @@ public class Main {
 		//Empresa.getInstance().getProyectos().get(0).setAtrasado(true);
 		
 		System.out.println(Empresa.getInstance().getContratos().get(0).getPrecioFinal());
-		Empresa.getInstance().finalizarProyecto("1");
-		System.out.println(Empresa.getInstance().getGanancias());
+		//Empresa.getInstance().finalizarProyecto("1");
+		//System.out.println(Empresa.getInstance().getGanancias());
 		
 		
 	}

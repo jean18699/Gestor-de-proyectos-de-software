@@ -285,6 +285,7 @@ public class EstadisticaProyectos extends JDialog {
 					txtPerdidas.setColumns(10);
 					txtPerdidas.setBounds(141, 10, 92, 20);
 					panel_1.add(txtPerdidas);
+					txtPerdidas.setText(Float.toString(Empresa.getInstance().getPerdidasTotales()));
 				}
 			}
 			{

@@ -486,6 +486,7 @@ public class Empresa implements Serializable {
 
 	}
 
+	
 	public void aplazado(String idProyecto) {
 
 		Proyecto proyecto = getProyectoById(idProyecto);

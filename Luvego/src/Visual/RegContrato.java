@@ -46,14 +46,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class RegContrato extends JDialog {
-	private JTextField txtIdContrato;
 	private JTextField txtIdProyecto;
 	private JTextField txtNombreProyecto;
 	private JTextField txtIdCliente;
 	private JTextField txtNombreCliente;
 	private String patron = "dd/MM/yyyy";
 	private JSpinner spnFecha;
-	private JTextField txtPrecioContrato;
 	private Date fechaEntrega;
 	private int caretPosition;
 	/**
@@ -76,6 +74,7 @@ public class RegContrato extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegContrato(Proyecto proyecto, Cliente cliente) {
+		setResizable(false);
 		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -93,14 +92,12 @@ public class RegContrato extends JDialog {
 			e1.printStackTrace();
 		}
 		
-		Contrato contrato = new Contrato(proyecto,fechaEntrega);
-		
-		setBounds(100, 100, 677, 345);
+		setBounds(100, 100, 550, 338);
 		getContentPane().setLayout(null);
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-			panel.setBounds(0, 0, 661, 270);
+			panel.setBounds(0, 0, 546, 270);
 			getContentPane().add(panel);
 			panel.setLayout(null);
 			
@@ -111,26 +108,10 @@ public class RegContrato extends JDialog {
 				JPanel panel_1 = new JPanel();
 				panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 				panel_1.setBackground(Color.WHITE);
-				panel_1.setBounds(0, 0, 219, 270);
+				panel_1.setBounds(0, 0, 90, 270);
 				panel.add(panel_1);
 				panel_1.setLayout(null);
 				{
-					JPanel panel_2 = new JPanel();
-					panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, Color.GRAY, null, null, null));
-					panel_2.setBounds(0, 201, 219, 69);
-					panel_1.add(panel_2);
-					panel_2.setLayout(null);
-					{
-						JLabel lblFechaDeEntrega = new JLabel("Fecha de entrega");
-						lblFechaDeEntrega.setBounds(10, 11, 98, 14);
-						panel_2.add(lblFechaDeEntrega);
-						lblFechaDeEntrega.setFont(new Font("Tahoma", Font.BOLD, 11));
-					}
-					spnFecha = new JSpinner(sdm);
-					spnFecha.setBounds(121, 7, 88, 22);	
-					panel_2.add(spnFecha);
-					JSpinner.DateEditor DateEdit = new JSpinner.DateEditor(spnFecha, patron);
-					DateEdit.getTextField().setEditable(true);
 					
 					/*spnFecha.addChangeListener(new ChangeListener() {
 						int i = 0;
@@ -144,7 +125,25 @@ public class RegContrato extends JDialog {
 							txtIdContrato.setText(contrato.getId());
 				            
 				        }
-				    });*/
+				    });*/;
+				}
+				{
+					JPanel panel_2 = new JPanel();
+					panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+					panel_2.setBounds(89, 228, 456, 42);
+					panel.add(panel_2);
+					panel_2.setLayout(null);
+					{
+						JLabel lblFechaDeEntrega = new JLabel("Fecha de entrega");
+						lblFechaDeEntrega.setBounds(10, 11, 98, 14);
+						panel_2.add(lblFechaDeEntrega);
+						lblFechaDeEntrega.setFont(new Font("Tahoma", Font.BOLD, 11));
+					}
+					spnFecha = new JSpinner(sdm);
+					spnFecha.setBounds(114, 7, 88, 22);
+					panel_2.add(spnFecha);
+					JSpinner.DateEditor DateEdit = new JSpinner.DateEditor(spnFecha, patron);
+					DateEdit.getTextField().setEditable(true);
 					
 					spnFecha.setEditor(DateEdit);
 					
@@ -156,7 +155,7 @@ public class RegContrato extends JDialog {
 							// TODO Auto-generated method stub
 							caretPosition = e.getDot();				
 						}
-					});;
+					});
 					
 					
 					((JSpinner.DefaultEditor)spnFecha.getEditor()).getTextField().addKeyListener(new KeyListener() {
@@ -188,37 +187,6 @@ public class RegContrato extends JDialog {
 
 						}
 					});
-					
-					
-					JButton btnAceptarFecha = new JButton("Aceptar y obtener precio");
-					btnAceptarFecha.setBounds(20, 36, 171, 23);
-					btnAceptarFecha.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							
-							fechaEntrega = (Date) spnFecha.getValue();
-							contrato.setProyecto(proyecto);
-							contrato.setFechaEntrega(fechaEntrega);
-							txtPrecioContrato.setText(Float.toString(contrato.getPrecioFinal()));
-							txtIdContrato.setText(contrato.getId());
-						}
-					});
-					panel_2.add(btnAceptarFecha);
-					
-					JPanel panel_3 = new JPanel();
-					panel_3.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-					panel_3.setBounds(0, 0, 219, 58);
-					panel_1.add(panel_3);
-					{
-						JLabel lblIdentificadorDelContrato = new JLabel("Identificador del contrato");
-						panel_3.add(lblIdentificadorDelContrato);
-						lblIdentificadorDelContrato.setFont(new Font("Tahoma", Font.BOLD, 11));
-					}
-					{
-						txtIdContrato = new JTextField(contrato.getId());
-						panel_3.add(txtIdContrato);
-						txtIdContrato.setEnabled(false);
-						txtIdContrato.setColumns(10);
-					}
 					//fechaEntrega = new Date(spnFecha.getValue().toString());
 					
 					((JSpinner.DefaultEditor)spnFecha.getEditor()).getTextField().addKeyListener(new KeyListener() {
@@ -251,35 +219,13 @@ public class RegContrato extends JDialog {
 				{
 					JPanel panel_2 = new JPanel();
 					panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-					panel_2.setBounds(221, 228, 440, 42);
-					panel.add(panel_2);
-					panel_2.setLayout(null);
-					{
-						JLabel lblPrecioDelContrato = new JLabel("Precio del contrato:");
-						lblPrecioDelContrato.setBounds(10, 11, 99, 16);
-						panel_2.add(lblPrecioDelContrato);
-					}
-					{
-					//	Date date = new Date(spnFecha.)
-					//	Contrato con = new Contrato(proyecto,spnFecha.get)
-						txtPrecioContrato = new JTextField();
-						txtPrecioContrato.setBounds(119, 8, 137, 22);
-						panel_2.add(txtPrecioContrato);
-						txtPrecioContrato.setEditable(false);
-						txtPrecioContrato.setColumns(10);
-						//txtPrecioContrato.setText(proyecto.getS);
-					}
-				}
-				{
-					JPanel panel_2 = new JPanel();
-					panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-					panel_2.setBounds(176, 0, 485, 228);
+					panel_2.setBounds(89, 0, 456, 228);
 					panel.add(panel_2);
 					panel_2.setLayout(null);
 					{
 						JPanel panel_3 = new JPanel();
 						panel_3.setBorder(new TitledBorder(null, "Datos preliminares del proyecto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-						panel_3.setBounds(44, 11, 437, 106);
+						panel_3.setBounds(10, 11, 437, 106);
 						panel_2.add(panel_3);
 						panel_3.setLayout(null);
 						{
@@ -327,7 +273,7 @@ public class RegContrato extends JDialog {
 					{
 						JPanel panel_3 = new JPanel();
 						panel_3.setBorder(new TitledBorder(null, "Datos preliminares del cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-						panel_3.setBounds(44, 118, 437, 110);
+						panel_3.setBounds(10, 118, 437, 99);
 						panel_2.add(panel_3);
 						panel_3.setLayout(null);
 						{
@@ -370,12 +316,12 @@ public class RegContrato extends JDialog {
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-			panel.setBounds(0, 0, 661, 309);
+			panel.setBounds(0, 0, 546, 309);
 			getContentPane().add(panel);
 			panel.setLayout(null);
 			{
 				JPanel buttonPane = new JPanel();
-				buttonPane.setBounds(0, 271, 661, 37);
+				buttonPane.setBounds(0, 272, 545, 37);
 				panel.add(buttonPane);
 				buttonPane.setBackground(Color.LIGHT_GRAY);
 				buttonPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -385,26 +331,14 @@ public class RegContrato extends JDialog {
 					btnAceptar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							
-							Date fecha = new Date();
-							/*contrato.setProyecto(null);
+							fechaEntrega = (Date)spnFecha.getValue();
+							Contrato contrato = new Contrato(proyecto,fechaEntrega);
+							contrato.setProyecto(null);
 							contrato.setFechaEntrega(fechaEntrega);
-							contrato.setFechaInicio(fecha);
 							contrato.setCliente(cliente);
 							proyecto.setContrato(contrato);
-							*/
-							//System.out.println(cliente.getCedula());
-							//Empresa.getInstance().agregarProyecto(proyecto);
-							//Empresa.getInstance().getClienteById(cliente.getId()).setContrato(contrato);
-							//Empresa.getInstance().getClientes().get(Empresa.getInstance().getClienteIndex(cliente.getId())).setContrato(contrato);
-							//System.out.println(Empresa.getInstance().get);
-							
-							//Empresa.getInstance().nuevoContrato(cliente.getId(), contrato);
-							//contrato.setFechaInicio(fecha);
 							
 							
-							proyecto.setContrato(contrato);
-							contrato.setId(contrato.getId());
-							proyecto.getContrato().setCliente(cliente);
 							if(proyecto.getClasificacion().equalsIgnoreCase("Escritorio"))
 								Empresa.getInstance().setCantDesktop(Empresa.getInstance().getCantDesktop()+1);
 								

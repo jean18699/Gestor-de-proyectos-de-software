@@ -97,7 +97,7 @@ public class ListarEmpleados extends JDialog {
 
 		scrollPane = new JScrollPane();
 		scrollPane.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		scrollPane.setBounds(0, 0, 700, 230);
+		scrollPane.setBounds(0, 0, 700, 216);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		contentPanel.add(scrollPane);
 		{
@@ -125,14 +125,14 @@ public class ListarEmpleados extends JDialog {
 			{
 				panel = new JPanel();
 				panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-				panel.setBounds(699, 0, 93, 230);
+				panel.setBounds(699, 0, 93, 216);
 				contentPanel.add(panel);
 				panel.setLayout(null);
 				{
 					panel_1 = new JPanel();
 					panel_1.setBackground(Color.RED);
 					panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-					panel_1.setBounds(0, 160, 93, 70);
+					panel_1.setBounds(0, 160, 93, 59);
 					panel.add(panel_1);
 					panel_1.setLayout(null);
 					{
@@ -151,7 +151,7 @@ public class ListarEmpleados extends JDialog {
 						lblX.setForeground(Color.WHITE);
 						lblX.setHorizontalAlignment(SwingConstants.CENTER);
 						lblX.setFont(new Font("Tahoma", Font.BOLD, 48));
-						lblX.setBounds(0, 0, 93, 70);
+						lblX.setBounds(0, 0, 93, 59);
 						panel_1.add(lblX);
 					}
 				}
@@ -230,53 +230,34 @@ public class ListarEmpleados extends JDialog {
 				p.setRangeGridlinePaint(Color.red);
 
 				ChartPanel chartPanel = new ChartPanel(chart);
-				chartPanel.setBounds(0, 0, 792, 301);
+				chartPanel.setBounds(0, 35, 792, 266);
 				chartPanel.setLayout(null);
 
 				panelRegistrados = new JPanel();
 
 				panelRegistrados.setBackground(new Color(112, 128, 144));
 
-				panelRegistrados.setBounds(0, 230, 792, 365);
+				panelRegistrados.setBounds(0, 215, 792, 380);
 
 				contentPanel.add(panelRegistrados);
 				panelRegistrados.setLayout(null);
-
-				panelRegistrados.add(chartPanel);
-				{
-					panel_5 = new JPanel();
-					panel_5.setBackground(new Color(112, 128, 144));
-					panel_5.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-					panel_5.setBounds(0, 312, 263, 35);
-					panelRegistrados.add(panel_5);
-					{
-						lblEmpleadosTotales = new JLabel("Empleados totales:");
-						panel_5.add(lblEmpleadosTotales);
-						lblEmpleadosTotales.setForeground(Color.WHITE);
-						lblEmpleadosTotales.setBackground(new Color(255, 255, 255));
-						lblEmpleadosTotales.setFont(new Font("Tahoma", Font.BOLD, 11));
-					}
-					{
-						txtTotalEmpleados = new JTextField();
-						txtTotalEmpleados.setEditable(false);
-						panel_5.add(txtTotalEmpleados);
-						txtTotalEmpleados.setColumns(10);
-						txtTotalEmpleados.setText(Integer.toString(Empresa.getInstance().getEmpleados().size()));
-					}
-				}
 				{
 					panel_4 = new JPanel();
 					panel_4.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 					panel_4.setBackground(new Color(112, 128, 144));
-					panel_4.setBounds(454, 312, 338, 35);
+					panel_4.setBounds(0, 0, 241, 35);
 					panelRegistrados.add(panel_4);
+					panel_4.setLayout(null);
 					{
-						lblBuscarEmpleado = new JLabel("Buscar empleado");
+						lblBuscarEmpleado = new JLabel("Buscar empleado:");
+						lblBuscarEmpleado.setFont(new Font("Tahoma", Font.BOLD, 11));
+						lblBuscarEmpleado.setBounds(10, 10, 110, 14);
 						lblBuscarEmpleado.setForeground(Color.WHITE);
 						panel_4.add(lblBuscarEmpleado);
 					}
 					{
 						txtBuscarEmpleado = new JTextField();
+						txtBuscarEmpleado.setBounds(121, 7, 105, 20);
 						txtBuscarEmpleado.addKeyListener(new KeyListener() {
 
 							@Override
@@ -299,6 +280,29 @@ public class ListarEmpleados extends JDialog {
 						});
 						panel_4.add(txtBuscarEmpleado);
 						txtBuscarEmpleado.setColumns(10);
+					}
+				}
+
+				panelRegistrados.add(chartPanel);
+				{
+					panel_5 = new JPanel();
+					panel_5.setBackground(new Color(112, 128, 144));
+					panel_5.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+					panel_5.setBounds(0, 312, 263, 35);
+					panelRegistrados.add(panel_5);
+					{
+						lblEmpleadosTotales = new JLabel("Empleados totales:");
+						panel_5.add(lblEmpleadosTotales);
+						lblEmpleadosTotales.setForeground(Color.WHITE);
+						lblEmpleadosTotales.setBackground(new Color(255, 255, 255));
+						lblEmpleadosTotales.setFont(new Font("Tahoma", Font.BOLD, 11));
+					}
+					{
+						txtTotalEmpleados = new JTextField();
+						txtTotalEmpleados.setEditable(false);
+						panel_5.add(txtTotalEmpleados);
+						txtTotalEmpleados.setColumns(10);
+						txtTotalEmpleados.setText(Integer.toString(Empresa.getInstance().getEmpleados().size()));
 					}
 				}
 
