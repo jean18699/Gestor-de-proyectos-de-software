@@ -151,21 +151,16 @@ public class InfoEmpleado extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btnAceptar = new JButton("Aceptar");
-				btnAceptar.addActionListener(new ActionListener() {
+				JButton btnCerrar = new JButton("Cerrar");
+				btnCerrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
 						dispose();
 					}
 				});
-				btnAceptar.setActionCommand("OK");
-				buttonPane.add(btnAceptar);
-				getRootPane().setDefaultButton(btnAceptar);
-			}
-			{
-				JButton btnCancelar = new JButton("Cancelar");
-				btnCancelar.setActionCommand("Cancel");
-				buttonPane.add(btnCancelar);
+				btnCerrar.setActionCommand("OK");
+				buttonPane.add(btnCerrar);
+				getRootPane().setDefaultButton(btnCerrar);
 			}
 		}
 	}

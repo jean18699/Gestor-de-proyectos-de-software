@@ -35,6 +35,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.awt.event.ActionEvent;
@@ -486,7 +488,17 @@ public class Principal extends JFrame {
         Proyecto ultimo = Empresa.getInstance().getUltimoProyecto();
         if(ultimo !=null)
         {
+        	String patron = "dd/MM/yyyy";
+        	DateFormat df = new SimpleDateFormat(patron);
+        	
+        	txtNombreProyecto.setText(ultimo.getNombre());
+        	txtIdProyecto.setText(ultimo.getId());
         	txtIdCliente.setText(ultimo.getContrato().getCliente().getCedula());
+        	txtNombreCliente.setText(ultimo.getContrato().getCliente().getNombre());
+        	txtFechaEntrega.setText(df.format(ultimo.getContrato().getFechaEntrega()));
+        	txtFecha.setText(df.format(ultimo.getContrato().getFechaInicio()));
+        	txtPerdidas.setText(Float.toString(Empresa.getInstance().getUltimasPerdida()));
+        	txtIngresos.setText(Float.toString(Empresa.getInstance().getUltimaGanancia()));
         }
         
 	}

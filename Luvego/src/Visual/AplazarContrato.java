@@ -7,12 +7,16 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 
 import Logico.Contrato;
 import Logico.Proyecto;
 
 import java.awt.Window.Type;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Calendar;
 import java.util.Date;
 import java.awt.event.ActionEvent;
@@ -24,6 +28,7 @@ import java.awt.Font;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import javax.swing.JSpinner.DefaultEditor;
 
 public class AplazarContrato extends JDialog {
 
@@ -31,6 +36,7 @@ public class AplazarContrato extends JDialog {
 	private JTextField txtFechaAnterior;
 	private String patron = "dd/MM/yyyy";
 	private JSpinner spnFecha;
+	private int caretPosition;
 	
 	private Contrato contrato;
 	/**
@@ -83,6 +89,47 @@ public class AplazarContrato extends JDialog {
 				DateEdit.getTextField().setEditable(true);
 				
 				spnFecha.setEditor(DateEdit);
+				
+				((DefaultEditor) spnFecha.getEditor()).getTextField().setHorizontalAlignment(SwingConstants.CENTER);
+				((JSpinner.DefaultEditor)spnFecha.getEditor()).getTextField().addCaretListener(new CaretListener() {
+					
+					@Override
+					public void caretUpdate(CaretEvent e) {
+						// TODO Auto-generated method stub
+						caretPosition = e.getDot();				
+					}
+				});;
+				
+				
+				((JSpinner.DefaultEditor)spnFecha.getEditor()).getTextField().addKeyListener(new KeyListener() {
+					
+					@Override
+					public void keyTyped(KeyEvent e) {
+						// TODO Auto-generated method stub
+
+						if(e.getKeyCode() != KeyEvent.VK_RIGHT && e.getKeyCode() != KeyEvent.VK_LEFT && e.getKeyCode() != KeyEvent.VK_UP && e.getKeyCode() != KeyEvent.VK_DOWN) {
+							e.consume();
+						}
+					}
+					
+					@Override
+					public void keyReleased(KeyEvent e) {
+						// TODO Auto-generated method stub
+
+
+										
+					}
+					
+					@Override
+					public void keyPressed(KeyEvent e) {
+						// TODO Auto-generated method stub
+
+						if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
+							e.consume();
+						}
+
+					}
+				});
 				
 				
 			}

@@ -249,6 +249,11 @@ public class ListarProyectos extends JDialog {
 				panel.add(panel_1);
 				{
 					cmbCategoria = new JComboBox<String>();
+					cmbCategoria.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							cargarProyectos();
+						}
+					});
 					cmbCategoria.setModel(
 							new DefaultComboBoxModel(new String[] {"Todas", "Escritorio", "Web", "Movil"}));
 					cmbCategoria.setMaximumRowCount(15);
@@ -425,6 +430,7 @@ public class ListarProyectos extends JDialog {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		for (int i = 0; i < Empresa.getInstance().getProyectos().size(); i++) {
+			if(cmbCategoria.getSelectedIndex() != 0) {
 				if(Empresa.getInstance().getProyectos().get(i).getNombre().contains(txtNombre.getText()) && Empresa.getInstance().getProyectos().get(i).getId().contains(txtId.getText()) && Empresa.getInstance().getProyectos().get(i).getClasificacion().contains(cmbCategoria.getSelectedItem().toString())) {
 				fila[0] = Empresa.getInstance().getProyectos().get(i).getId();
 				fila[1] = Empresa.getInstance().getProyectos().get(i).getNombre();
@@ -432,13 +438,27 @@ public class ListarProyectos extends JDialog {
 				fila[3] = Empresa.getInstance().getProyectos().get(i).getEstado();
 				model.addRow(fila);
 				
-				if(Empresa.getInstance().getProyectos().get(i).getEstado().equalsIgnoreCase("Atrasado"))
-				{
-						ColorTabla.indice(i);
+					if(Empresa.getInstance().getProyectos().get(i).getEstado().equalsIgnoreCase("Atrasado")){
+							ColorTabla.indice(i);
+					}
 				}
 			}
+			else {
+				if(Empresa.getInstance().getProyectos().get(i).getNombre().contains(txtNombre.getText()) && Empresa.getInstance().getProyectos().get(i).getId().contains(txtId.getText())) {
+				fila[0] = Empresa.getInstance().getProyectos().get(i).getId();
+				fila[1] = Empresa.getInstance().getProyectos().get(i).getNombre();
+				fila[2] = Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getNombre() +" "+ Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getApellidos();
+				fila[3] = Empresa.getInstance().getProyectos().get(i).getEstado();
+				model.addRow(fila);
+				
+					if(Empresa.getInstance().getProyectos().get(i).getEstado().equalsIgnoreCase("Atrasado")){
+							ColorTabla.indice(i);
+					}
+				}
+			}
+				
 		}
-
+		
 	}
 
 	/*private void cargarProyectos() {
