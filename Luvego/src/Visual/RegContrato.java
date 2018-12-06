@@ -58,18 +58,6 @@ public class RegContrato extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			ArrayList<Empleado> grupoTrabajo = null;
-		//	Cliente cliente = new Cliente();
-		//	Proyecto proyecto = new Proyecto("jean", "nombre", grupoTrabajo, "Web");
-			RegContrato dialog = new RegContrato(null, null);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the dialog.
