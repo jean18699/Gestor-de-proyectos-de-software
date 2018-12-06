@@ -9,6 +9,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 
 import Logico.Disegnador;
 import Logico.Empleado;
@@ -25,12 +27,15 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.border.BevelBorder;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.border.LineBorder;
 import java.awt.Component;
 
@@ -416,10 +421,20 @@ public class RegEmpleado extends JDialog {
 			spnFrecuencia.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 			spnFrecuencia.setBounds(343, 45, 69, 22);
 			panel_InfoAdicional.add(spnFrecuencia);
+			
+			JSpinner spnSalario = new JSpinner();
+			
+			Float value = new Float(1.0);
+			Float step = new Float(0.1);
+			SpinnerNumberModel model = new SpinnerNumberModel(value, new Float(1), null, step);
+			//spnSalario.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+			spnSalario.setModel(model);
+			spnSalario.setBounds(95, 45, 64, 22);
+			panel_InfoAdicional.add(spnSalario);
 			{
 				txtSalarioHora = new JTextField();
 				txtSalarioHora.setBounds(95, 45, 99, 22);
-				panel_InfoAdicional.add(txtSalarioHora);
+				//panel_InfoAdicional.add(txtSalarioHora);
 				txtSalarioHora.setColumns(10);
 			}
 			{
@@ -556,7 +571,6 @@ public class RegEmpleado extends JDialog {
 								cleanFields();
 							}
 						}
-						System.out.println(Empresa.getInstance().getEmpleados().size());
 					}
 				});
 				btnRegistrar.setActionCommand("OK");

@@ -189,7 +189,7 @@ public class RegContrato extends JDialog {
 					});
 					//fechaEntrega = new Date(spnFecha.getValue().toString());
 					
-					((JSpinner.DefaultEditor)spnFecha.getEditor()).getTextField().addKeyListener(new KeyListener() {
+					/*((JSpinner.DefaultEditor)spnFecha.getEditor()).getTextField().addKeyListener(new KeyListener() {
 						
 						@Override
 						public void keyTyped(KeyEvent e) {
@@ -214,7 +214,7 @@ public class RegContrato extends JDialog {
 							}
 
 						}
-					});
+					});*/
 				}
 				{
 					JPanel panel_2 = new JPanel();
