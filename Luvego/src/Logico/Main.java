@@ -59,7 +59,7 @@ public class Main {
 		//Cliente cliente3 = new Cliente("789","george","gmail","809","276","cerro alto","Hombre");
 		
 	
-		Date fechaEntrega = new Date("12/9/2018");
+		Date fechaEntrega = new Date("12/8/2018");
 		Contrato contrato = new Contrato(proyecto,fechaEntrega);
 
 		Empresa.getInstance().nuevoCliente(cliente);
@@ -71,21 +71,13 @@ public class Main {
 		
 		//Empresa.getInstance().atrasado("1");
 		
-		Date nuevaFecha = new Date("12/10/2018");
+		Date nuevaFecha = new Date("12/12/2018");
 	
+		//Empresa.getInstance().getProyectos().get(0).setAtrasado(true);
+		
 		System.out.println(Empresa.getInstance().getContratos().get(0).getPrecioFinal());
-		System.out.println(Empresa.getInstance().getContratos().get(0).getDiasRestantes());
-		System.out.println(Empresa.getInstance().getProyectos().get(0).getSumaSalarios());
-		System.out.println("");
-		
-		
-		
-		Empresa.getInstance().getContratos().get(0).aplazar(nuevaFecha);
-		Empresa.getInstance().getProyectos().get(0).setAtrasado(true);
 		Empresa.getInstance().finalizarProyecto("1");
 		System.out.println(Empresa.getInstance().getGanancias());
-	
-		
 		
 		
 	}
