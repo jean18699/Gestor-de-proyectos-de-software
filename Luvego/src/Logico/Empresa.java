@@ -30,8 +30,10 @@ public class Empresa implements Serializable {
 	private ArrayList<Proyecto> proyectos;
 	private static Empresa empresa;
 	private float ganancias;
+	private float ultimaGanancia;
+	private float perdidasTotales;
+	private float UltimasPerdida;
 
-	
 	private Empresa() {
 		//
 		clientes = new ArrayList<>();
@@ -46,7 +48,7 @@ public class Empresa implements Serializable {
 		// loginUser.setId("Admin");
 		pass = new String("0000");
 	}
-	
+
 	public int getTotalProyectos() {
 		return totalProyectos;
 	}
@@ -91,7 +93,6 @@ public class Empresa implements Serializable {
 		return cantCSharp;
 	}
 
-
 	public Proyecto getUltimoProyecto() {
 		return ultimoProyecto;
 	}
@@ -99,8 +100,6 @@ public class Empresa implements Serializable {
 	public void setUltimoProyecto(Proyecto ultimoProyecto) {
 		this.ultimoProyecto = ultimoProyecto;
 	}
-
-	
 
 	public static String getPass() {
 		return pass;
@@ -129,52 +128,42 @@ public class Empresa implements Serializable {
 		return empresa;
 	}
 
-	public int getCantJefes()
-	{
+	public int getCantJefes() {
 		int cont = 0;
-		for(int i = 0; i < empleados.size();i++)
-		{
-			if(empleados.get(i) instanceof Jefe)
+		for (int i = 0; i < empleados.size(); i++) {
+			if (empleados.get(i) instanceof Jefe)
 				cont++;
 		}
 		return cont;
 	}
 
-	public int getCantProgramadores()
-	{
+	public int getCantProgramadores() {
 		int cont = 0;
-		for(int i = 0; i < empleados.size();i++)
-		{
-			if(empleados.get(i) instanceof Programador)
+		for (int i = 0; i < empleados.size(); i++) {
+			if (empleados.get(i) instanceof Programador)
 				cont++;
 		}
 		return cont;
 	}
-	
-	public int getCantPlanificadores()
-	{
+
+	public int getCantPlanificadores() {
 		int cont = 0;
-		for(int i = 0; i < empleados.size();i++)
-		{
-			if(empleados.get(i) instanceof Planificador)
+		for (int i = 0; i < empleados.size(); i++) {
+			if (empleados.get(i) instanceof Planificador)
 				cont++;
 		}
 		return cont;
 	}
-	
-	
-	
-	public int getCantDisegnadores()
-	{
+
+	public int getCantDisegnadores() {
 		int cont = 0;
-		for(int i = 0; i < empleados.size();i++)
-		{
-			if(empleados.get(i) instanceof Disegnador)
+		for (int i = 0; i < empleados.size(); i++) {
+			if (empleados.get(i) instanceof Disegnador)
 				cont++;
 		}
 		return cont;
 	}
-	
+
 	public void nuevoProyecto(Proyecto proyecto) {
 		proyectos.add(proyecto);
 	}
@@ -482,33 +471,59 @@ public class Empresa implements Serializable {
 	 * 
 	 * } } }
 	 */
-/*public int atrasado(String idProyecto)
-{
-	Proyecto proyecto = getProyectoById(idProyecto);
-	//for(int i = 0; i < proyecto.getContrato().getDiasRestantes())
-	Date fecha = new Date();	
+
 	
-}
-	*/
+	public void atrazado(Proyecto proyecto)
+	{
+		float perdidas = 0;
+		
+		for (int i = 0; i < proyecto.getContrato().getDiasRestantes(); i++) 
+		{
+			perdidas += Math.abs(proyecto.getContrato().getPrecioFinal() * 0.01);
+			this.perdidasTotales += perdidas;
+		}
+		this.ultimaGanancia = (float) (Math.abs((proyecto.getContrato().getPrecioFinal() - perdidas)*0.15));
+		this.ganancias += ultimaGanancia;
+		
+		System.out.println(ultimaGanancia);
+		System.out.println(perdidas);
+	}
+
+	public void aplazado(String idProyecto) {
+		
+		Proyecto proyecto = getProyectoById(idProyecto);	
+		float perdidas = Math.abs(proyecto.getContrato().getPrecioAntes() - proyecto.getContrato().getPrecioFinal());
+		//this.perdidasTotales+=perdidas;
+		float ganancia = (float) (proyecto.getContrato().getPrecioAntes()*0.15);
+		ultimaGanancia = ganancia;
+		ganancias+= ultimaGanancia;
+		perdidasTotales+= perdidas;
+		
+		System.out.println("ganancia: "+ ganancia);
+		System.out.println("perdida: "+perdidas);
+		//this.ultimaGanancia = proyecto.get
+	
+	}
+
+
 	public void finalizarProyecto(String idProyecto) {
-		
+
 		Proyecto proyecto = getProyectoById(idProyecto);
-		
-		
-	/*	if(proyecto.getEstado().equalsIgnoreCase("Finalizado") && !proyecto.isAtrasado())
+
+
+		if(proyecto.getContrato().isAplazado())
 		{
-			this.ganancias += proyecto.getContrato().getPrecioFinal() * 0.15;
-		}
-		else if(proyecto.getEstado().equalsIgnoreCase("Finalizado") && proyecto.isAtrasado())
-		{
-			
+			aplazado(proyecto.getId());
 		}
 		
-	*/	
+		if(proyecto.isAtrasado())
+		{
+			atrazado(proyecto);
+		}
+
 		
-		
-		
-		for (int i = 0; i < contratos.size(); i++) {
+		cancelarContrato(proyecto.getContrato().getId());
+		/*for (int i = 0; i < contratos.size(); i++) {
 			if (contratos.get(i).getId().equalsIgnoreCase(proyecto.getContrato().getId())) {
 				contratos.remove(i);
 			}
@@ -528,15 +543,44 @@ public class Empresa implements Serializable {
 				eliminarProyecto(proyectos.get(i).getId());
 			}
 		}
-	
-		//System.out.println(proyecto);
-		/*if (proyecto.getEstado().equalsIgnoreCase("Finalizado")) {
-			this.ganancias += proyecto.getContrato().getPrecioFinal() * 0.15;
-			ultimoProyecto = proyecto;
-		}*/
+*/
+		// System.out.println(proyecto);
+		/*
+		 * if (proyecto.getEstado().equalsIgnoreCase("Finalizado")) { this.ganancias +=
+		 * proyecto.getContrato().getPrecioFinal() * 0.15; ultimoProyecto = proyecto; }
+		 */
 
 		cantProyectosTerminados++;
 	}
+	
+	public float getUltimaGanancia() {
+		return ultimaGanancia;
+	}
+
+	public float getPerdidasTotales() {
+		return perdidasTotales;
+	}
+
+	public float getUltimasPerdida() {
+		return UltimasPerdida;
+	}
+
+	public void setGanancias(float ganancias) {
+		this.ganancias = ganancias;
+	}
+
+	public void setUltimaGanancia(float ultimaGanancia) {
+		this.ultimaGanancia = ultimaGanancia;
+	}
+
+	public void setPerdidasTotales(float perdidasTotales) {
+		this.perdidasTotales = perdidasTotales;
+	}
+
+	public void setUltimasPerdida(float ultimasPerdida) {
+		UltimasPerdida = ultimasPerdida;
+	}
+
 
 	public ArrayList<Cliente> getClientes() {
 		return clientes;

@@ -20,7 +20,9 @@ public class Contrato implements Serializable{
 	private Cliente cliente;
 	private char estado; // F = finalizado, A = Atrasado, I = iniciado 
 	private float sumaSalarios;
-	
+	private boolean aplazado;
+	private float precioAntes;
+	private int cantDias;
 	
 	public void setId(String id) {
 		this.id = id;
@@ -39,8 +41,19 @@ public class Contrato implements Serializable{
 		this.fechaInicio = new Date();
 		this.fechaEntrega = fechaEntrega;
 		sumaSalarios = proyecto.getSumaSalarios();
+		this.aplazado = false;
+		this.cantDias = getDiasRestantes();
 	}
 	
+
+	public boolean isAplazado() {
+		
+		return aplazado;
+	}
+
+	public void setAplazado(boolean aplazado) {
+		this.aplazado = aplazado;
+	}
 
 	public Cliente getCliente() {
 		return cliente;
@@ -51,6 +64,22 @@ public class Contrato implements Serializable{
 		this.proyecto = proyecto;
 	}
 */
+
+	public int getCantDias() {
+		return cantDias;
+	}
+
+	public void setCantDias(int cantDias) {
+		this.cantDias = cantDias;
+	}
+
+	public float getPrecioAntes() {
+		return precioAntes;
+	}
+
+	public void setPrecioAntes(float precioAntes) {
+		this.precioAntes = precioAntes;
+	}
 
 	public void setFechaInicio(Date fechaInicio) {
 		this.fechaInicio = fechaInicio;
@@ -63,12 +92,17 @@ public class Contrato implements Serializable{
 	
 	public int getDiasRestantes()
 	{
+		Date fecha = new Date();
+		
 		return Math.abs(fechaInicio.getDate() - fechaEntrega.getDate());
 	}
 
 	public void aplazar(Date fecha)
 	{
+		precioAntes = (8 * (cantDias) * sumaSalarios);
 		this.fechaEntrega = fecha;
+		cantDias = getDiasRestantes();
+		this.setAplazado(true);
 	}
 	
 	public String getId() {
@@ -88,9 +122,7 @@ public class Contrato implements Serializable{
 	}
 	
 	public float getPrecioFinal() {
-		
-		return (8 * (getDiasRestantes()) * sumaSalarios);//proyecto.getSumaSalarios());
-	
+			return (8 * (cantDias) * sumaSalarios);//proyecto.getSumaSalarios());
 	}
 	public void setPrecioFinal(float precioFinal) {
 		this.precioFinal = precioFinal;

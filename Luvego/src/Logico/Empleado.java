@@ -83,7 +83,6 @@ import java.util.ArrayList;
 		this.telefono1 = telefono1;
 		this.telefono1 = telefono2;
 		this.condicion = "Disponible";
-		
 	}
 
 	
