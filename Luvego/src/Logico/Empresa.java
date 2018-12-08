@@ -12,11 +12,17 @@ public class Empresa implements Serializable{
 	private static final long serialVersionUID = 6921637127266475472L;
 	private ArrayList<Cliente> clientes;
 	private static Cliente loginUser;
+	private static String pass;
 	private ArrayList<Contrato> contratos;
 	private ArrayList<Empleado> empleados;
+	public static String getPass() {
+		return pass;
+	}
+
 	private ArrayList<Proyecto> proyectos;
 	private static Empresa empresa;
 	private long ganancias;
+	
 	
 	
 	private Empresa() {
@@ -26,6 +32,9 @@ public class Empresa implements Serializable{
 		empleados = new ArrayList<>();
 		proyectos = new ArrayList<>();
 		ganancias = 0;
+		loginUser = new Cliente();
+		loginUser.setId("Admin");
+		pass = new String("0000");
 	}
 	
 	
@@ -176,6 +185,19 @@ public class Empresa implements Serializable{
 			}
 		}
 	}
+
+	public int getClienteIndex(String idCliente)
+	{
+		int index = -1;
+		for(int i =0; i < clientes.size();i++)
+		{
+			if(clientes.get(i).getId().equalsIgnoreCase(idCliente))
+			{
+				index = i;
+			}
+		}
+		return index;
+	}
 	
 	public void agregarProyecto(Proyecto proyecto)
 	{
@@ -205,6 +227,10 @@ public class Empresa implements Serializable{
 			proyectos.get(getProyectoIndex(idProyecto)).getGrupoTrabajo().get(i).setProyectosActivos(
 					proyectos.get(getProyectoIndex(idProyecto)).getGrupoTrabajo().get(i).getProyectosActivos()-1);
 		}
+		
+		clientes.get(getClienteIndex(proyectos.get(getProyectoIndex(idProyecto)).getContrato().getCliente().getId())).terminarContrato(
+				proyectos.get(getProyectoIndex(idProyecto)).getContrato());
+		
 		eliminarContrato(idProyecto);
 		proyectos.remove(getProyectoIndex(idProyecto));
 		

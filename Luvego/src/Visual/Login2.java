@@ -2,12 +2,12 @@ package Visual;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Graphics2D;
+//import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.RenderingHints;
+//import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
+//import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
 import javax.swing.ImageIcon;
@@ -21,7 +21,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Logico.Empresa;
-import Visual.Principal;
 
 public class Login2 extends JFrame {
 
@@ -31,9 +30,7 @@ public class Login2 extends JFrame {
 	private JPasswordField txtContrasena;
 	private JLabel lblFotoLlaves;
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -47,9 +44,7 @@ public class Login2 extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+
 	public Login2() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Login");
@@ -111,7 +106,7 @@ public class Login2 extends JFrame {
 		{
 			lblFotoLlaves = new JLabel("");
 			lblFotoLlaves.setLayout(new BorderLayout());
-			lblFotoLlaves.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/img/llaves.png")).getImage().getScaledInstance(432, 253, Image.SCALE_SMOOTH)));
+			lblFotoLlaves.setIcon(new ImageIcon(new javax.swing.ImageIcmage().getScalon(getClass().getResource("/img/llaves.png")).getIedInstance(432, 253, Image.SCALE_SMOOTH)));
 			lblFotoLlaves.setBounds(0, 0, 432, 253);
 			contentPanel.add(lblFotoLlaves);
 		}

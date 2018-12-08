@@ -394,6 +394,13 @@ public class ListarProyectos extends JDialog {
 			fila[2] = Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getNombre() +" "+ Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getApellidos();
 			fila[3] = Empresa.getInstance().getProyectos().get(i).getEstado();
 			model.addRow(fila);
+			
+			if(Empresa.getInstance().getProyectos().get(i).getEstado().equalsIgnoreCase("Atrasado"))
+				{
+					ColorTabla.indice(i);
+				}
+			
+		
 		}
 
 		table.getColumnModel().getColumn(0).setMinWidth(200);
@@ -488,6 +495,8 @@ public class ListarProyectos extends JDialog {
 	}
 	
 	private void cargarPorId(String id) {
+		
+		
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		for (int i = 0; i < Empresa.getInstance().getProyectos().size(); i++) {
@@ -497,6 +506,8 @@ public class ListarProyectos extends JDialog {
 				fila[2] = Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getNombre() +" "+ Empresa.getInstance().getProyectos().get(i).getJefeProyecto().getApellidos();
 				fila[3] = Empresa.getInstance().getProyectos().get(i).getEstado();
 
+				
+				
 				model.addRow(fila);
 			}
 		}

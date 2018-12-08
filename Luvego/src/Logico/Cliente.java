@@ -10,7 +10,6 @@ public class Cliente implements Serializable{
 	 */
 	private static final long serialVersionUID = 1232268027012908569L;
 	private String id;
-	
 	private String cedula;
 	private String telefono;
 	private String telefono2;
@@ -128,6 +127,17 @@ public class Cliente implements Serializable{
 		return contratos;
 	}
 
+	public void terminarContrato(Contrato contrato)
+	{
+		for(int i = 0; i < contratos.size();i++)
+		{
+			if(contrato.equals(contratos.get(i)))
+			{
+				contratos.remove(i);
+				break;
+			}
+		}
+	}
 
 	public boolean setContrato(Contrato contrato) {
 		if(contratos.size() <= 5)

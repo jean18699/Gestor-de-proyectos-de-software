@@ -79,7 +79,7 @@ public class ListarContratos extends JDialog {
 
 		fechaActual = new Date();
 		
-		setTitle("Lista de proyectos");
+		setTitle("Contratos pendientes");
 		setBounds(100, 100, 943, 359);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
@@ -280,7 +280,7 @@ public class ListarContratos extends JDialog {
 							@Override
 							public void mouseClicked(java.awt.event.MouseEvent e) {
 								//Empresa.getInstance().cancelarContrato(select);
-								cargarContratos();
+								//cargarContratos();
 							}
 						});
 						lblX.setBounds(0, 0, 87, 71);
@@ -298,10 +298,26 @@ public class ListarContratos extends JDialog {
 	}
 
 	private void cargarContratos() {
+
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
 		model.setRowCount(0);
 		fechaActual = new Date();
 		fila = new Object[model.getColumnCount()];
-		for (int i = 0; i < Empresa.getInstance().getContratos().size(); i++) {
+		
+	//	for(int i = 0; i < Empresa.getInstance().getContratos().size();i++)
+		//{
+			fila[0] = Empresa.getInstance().getContratos().get(2).getId();
+			fila[1] = Empresa.getInstance().getContratos().get(2).getCliente().getNombre();
+			fila[2] = format.format(Empresa.getInstance().getContratos().get(2).getFechaInicio());
+			
+			fila[3] = format.format(Empresa.getInstance().getContratos().get(2).getFechaEntrega());
+			fila[4] =  Empresa.getInstance().getContratos().get(2).getPrecioFinal();
+
+			model.addRow(fila);
+		//}
+		
+		/*for (int i = 0; i < Empresa.getInstance().getContratos().size(); i++) {
 			fila[0] = Empresa.getInstance().getContratos().get(i).getId();
 			fila[1] = Empresa.getInstance().getContratos().get(i).getCliente().getNombre();
 
@@ -313,14 +329,14 @@ public class ListarContratos extends JDialog {
 
 			
 			
-			if(Empresa.getInstance().getContratos().get(i).getFechaInicio().before(fechaActual))
+			/*if(Empresa.getInstance().getContratos().get(i).getFechaInicio().before(fechaActual))
 			{
 				//Empresa.getInstance().getProyectoById(Empresa.getInstance().getContratos().get(i).getProyecto().getId()).setEstado("Atrasado");
 				//ColorTabla.indice(i);
-			}
+			
 			
 			model.addRow(fila);
-		}
+		}*/
 	}
 	
 	private void cargarPorNombre(String nombre) {

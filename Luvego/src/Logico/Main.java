@@ -38,13 +38,20 @@ public class Main {
 		
 		Date fecha = new Date();
 		
+		Cliente cliente = new Cliente("123" ,"george","gmail","809","276","cerro alto","Hombre");
 		Proyecto proyecto = new Proyecto("prueba",grupo,"Movil");
+	
 		Contrato contrato = new Contrato(proyecto,fecha);
-		proyecto.setContrato(contrato);
-		Empresa.getInstance().agregarProyecto(proyecto);
-		Empresa.getInstance().agregarProyecto(proyecto);
 		
-		System.out.println(Empresa.getInstance().getContratos().get(0).getCliente());
+		proyecto.setContrato(contrato);
+		proyecto.getContrato().setCliente(cliente);
+		Empresa.getInstance().agregarProyecto(proyecto);
+		Empresa.getInstance().agregarProyecto(proyecto);
+		Empresa.getInstance().nuevoCliente(cliente);
+		
+		//System.out.println(Empresa.getInstance().getClienteIndex("1"));
+		
+		//System.out.println(Empresa.getInstance().getContratos().get(0).getCliente().getNombre());
 		
 		//System.out.println(Empresa.getInstance().getProyectos().size());
 		//System.out.println(Empresa.getInstance().getEmpleados().get(0).getProyectosActivos());

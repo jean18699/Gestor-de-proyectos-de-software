@@ -15,6 +15,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 
+import Logico.ColorTabla;
 import Logico.Empleado;
 import Logico.Empresa;
 import Logico.Proyecto;
@@ -34,6 +35,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -312,6 +314,24 @@ public class Principal extends JFrame {
 	}
 	
 	private void cargarProyectos() {
+	
+		Date fecha = new Date();
+		for(int i = 0; i < Empresa.getInstance().getProyectos().size();i++)
+		{
+			if(Empresa.getInstance().getProyectos().get(i).getContrato().getFechaEntrega().before(fecha))
+			{
+				Empresa.getInstance().getProyectos().get(i).setEstado("Atrasado");
+			}
+		}
+	
+		for(int i = 0 ; i < Empresa.getInstance().getProyectos().size();i++)
+		{
+			if(Empresa.getInstance().getProyectos().get(i).getEstado().equalsIgnoreCase("Atrasado"))
+			{
+				ColorTabla.indice(i);
+			}
+		}
+		
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		
